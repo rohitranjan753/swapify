@@ -126,14 +126,14 @@ class _HomePageState extends State<HomePage> {
                               Text(
                                 "Hello there",
                                 style: TextStyle(
-                                    fontSize: 20, color: Colors.grey[600]),
+                                    fontSize: 20, color: Colors.grey[600],fontWeight: FontWeight.bold),
                               ),
                               Text(
                                 username,
                                 // FirebaseAuth.instance.currentUser!.displayName!,
                                 // 'Username comment',
                                 style: TextStyle(
-                                    fontSize: 10,
+                                    fontSize: 15,
                                     color: Colors.grey[600],
                                     fontWeight: FontWeight.bold),
                               ),
@@ -498,7 +498,7 @@ class _HomePageState extends State<HomePage> {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'BUY',
+                                            'RENT',
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 25,
