@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({Key? key}) : super(key: key);
@@ -9,15 +10,15 @@ class CategoryScreen extends StatefulWidget {
 
 class _CategoryScreenState extends State<CategoryScreen> {
   List categoryIcon = [
-    Icons.directions_bike,
-    Icons.home_filled,
-    Icons.phone_android,
-    Icons.people,
-    Icons.mail,
-    Icons.notifications_none
+    LineIcons.book,
+    LineIcons.tShirt,
+    LineIcons.shoePrints,
+    LineIcons.pencilRuler,
+    LineIcons.laptop,
+    LineIcons.bed
   ];
 
-  List categoryName = ["Bike", "Home", "Phone", "People", "Mail","Notification"];
+  List categoryName = ["Notes", "Clothes", "Footwear", "Stationary", "Gadgets","Mattress"];
   int clicked = 0;
 
   @override

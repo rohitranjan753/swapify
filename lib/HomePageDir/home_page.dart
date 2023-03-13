@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:line_icons/line_icon.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:vbuddyproject/AddPageDir/add_page.dart';
 import 'package:vbuddyproject/BuyBuiderDirectory/buy_page.dart';
 import 'package:vbuddyproject/Components/single_item_homepage.dart';
@@ -241,12 +243,12 @@ class _HomePageState extends State<HomePage> {
                         child: Column(
                           children: [
                             Icon(
-                              Icons.car_rental,
+                              LineIcons.book,
                               size: 50,
                               color: Colors.blue,
                             ),
                             Text(
-                              "Car",
+                              "Notes",
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.normal,
@@ -262,12 +264,12 @@ class _HomePageState extends State<HomePage> {
                       child: Column(
                         children: [
                           Icon(
-                            Icons.home_filled,
+                            LineIcons.tShirt,
                             size: 50,
                             color: Colors.blue,
                           ),
                           Text(
-                            "Properties",
+                            "Clothes",
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.normal,
@@ -282,12 +284,12 @@ class _HomePageState extends State<HomePage> {
                       child: Column(
                         children: [
                           Icon(
-                            Icons.phone_android_rounded,
+                            LineIcons.shoePrints,
                             size: 50,
                             color: Colors.blue,
                           ),
                           Text(
-                            "Mobile",
+                            "Footwear",
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.normal,
@@ -302,12 +304,12 @@ class _HomePageState extends State<HomePage> {
                       child: Column(
                         children: [
                           Icon(
-                            Icons.directions_bike,
+                            LineIcons.pencilRuler,
                             size: 50,
                             color: Colors.blue,
                           ),
                           Text(
-                            "Bikes",
+                            "Stationary",
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.normal,
@@ -322,12 +324,12 @@ class _HomePageState extends State<HomePage> {
                       child: Column(
                         children: [
                           Icon(
-                            Icons.car_rental,
+                            LineIcons.laptop,
                             size: 50,
                             color: Colors.blue,
                           ),
                           Text(
-                            "Television",
+                            "Gadgets",
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.normal,
