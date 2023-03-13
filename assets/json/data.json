@@ -1,0 +1,19 @@
+[
+    {
+        "name": "Ice Caves",
+        "location": "Iceland",
+        "image": "assets/profile/buy1.jpg",
+        "price": 400,
+        "about": "Start an advanture with a 14-day jaurney in iceland and explore the caves",
+        "length" : 14
+       
+    },
+    {
+        "name": "Blue Ocean",
+        "location": "North Sea",
+        "image": "assets/profile/rent1.jpg",
+        "about": "Embark on an adventure and explore the dark depths on a 35-day voyage across the North Sea.",
+        "length" : 35
+       
+    }
+]
