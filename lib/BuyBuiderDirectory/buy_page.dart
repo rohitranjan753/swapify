@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -15,9 +16,9 @@ class _BuyPageState extends State<BuyPage> {
   // This function retrieves data from the Firebase Firestore
   Stream<QuerySnapshot> getNestedData() {
     return FirebaseFirestore.instance
-        .collection('Users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('sellsection')
+        .collection('sell_major_section')
+        // .doc(FirebaseAuth.instance.currentUser!.uid)
+        // .collection('sellsection')
         .snapshots();
   }
 
@@ -59,8 +60,7 @@ class _BuyPageState extends State<BuyPage> {
                             ListTile(
                               title: Text(document['selltitle']),
                               subtitle: Text(document['sellprice']),
-                              // subtitle: Text(document['imageUrl']['description']),
-                              // trailing: Text(document['order_details']['price']),
+                              trailing: user!.uid == document['createdby'] ? Text('YOU') : Text(document['creatorname']),
                             ),
                           ],
                         ),

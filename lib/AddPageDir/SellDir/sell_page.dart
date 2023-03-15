@@ -21,7 +21,7 @@ class _SellPageState extends State<SellPage> {
   File? _image;
 
   Future<void> _uploadToFirebase(
-    var rentImage,
+    File rentImage,
     String rentTile,
     String rentDes,
     String rentPrice,
@@ -32,8 +32,8 @@ class _SellPageState extends State<SellPage> {
     final currentUser = FirebaseAuth.instance.currentUser;
     final userData = await FirebaseFirestore.instance.collection('Users').doc(currentUser!.uid).get();
     // final currentTime = currentUser!.uid;
-    String uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
-    // String? userName = userData.get('username').toString();
+    String? uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
+    String userName = userData.get('username');
 
 
     // final DocumentSnapshot userDoc =
@@ -41,17 +41,10 @@ class _SellPageState extends State<SellPage> {
     //   String? username = userDoc.get('username').toString();
 
 
-    // Timestamp timestamp = Timestamp.now();
-    // String timestampString = timestamp.toString();
     final Reference storageRef = FirebaseStorage.instance.ref().child('images');
-    // final taskSnapshot = await storageRef.child(_image!.path).putFile(_image!);
-    final taskSnapshot =
-        await storageRef.child('${uniqueId}' + '.jpg').putFile(_image!);
+    final taskSnapshot = await storageRef.child('${uniqueId}' + '.jpg').putFile(rentImage);
     final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
-    // final CollectionReference users =
-    //     FirebaseFirestore.instance.collection('Users');
-    final DocumentReference parentDocRef =
-        FirebaseFirestore.instance.collection('Users').doc(currentUser!.uid);
+    final DocumentReference parentDocRef = FirebaseFirestore.instance.collection('Users').doc(currentUser.uid);
 
     parentDocRef.collection('sellsection').doc(uniqueId).set({
       'imageUrl': downloadUrl,
@@ -70,8 +63,8 @@ class _SellPageState extends State<SellPage> {
       'selltitle': rentTile,
       'selldescription': rentDes,
       'sellprice': rentPrice,
-      'createdby': currentUser!.uid,
-      // 'creatorname': userName,
+      'createdby': currentUser.uid,
+      'creatorname': userName,
       // 'image_url': url,
     });
 
@@ -160,7 +153,7 @@ class _SellPageState extends State<SellPage> {
     double myWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Screen'),
+        title: Text('Upload Section'),
       ),
       body: _isLoading
           ? _buildLoadingIndicator()
@@ -186,8 +179,8 @@ class _SellPageState extends State<SellPage> {
                                 fit: BoxFit.cover,
                               )
                             : DecorationImage(
-                                image: AssetImage('assets/profile/12.jpg'),
-                                fit: BoxFit.cover,
+                                image: AssetImage('assets/images/upload3.png'),
+                                fit: BoxFit.contain,
                               ),
                       ),
                       // decoration: BoxDecoration(
@@ -252,9 +245,9 @@ class _SellPageState extends State<SellPage> {
                 ElevatedButton(
                   onPressed: () {
                     _uploadToFirebase(
-                        _image, _titleText, _descriptionText, _rentalPrice);
+                        _image!, _titleText, _descriptionText, _rentalPrice);
                     setState(() {
-                      _image = null;
+                      _image=null;
                     });
                   },
                   child: Text('SUBMIT'),
