@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vbuddyproject/AddPageDir/add_page.dart';
 import 'package:vbuddyproject/HomePageDir/selected_page.dart';
 import 'package:vbuddyproject/Model/homepage_single_row_model.dart';
-import 'package:vbuddyproject/SearchPageDir/SearchPage.dart';
 
 class HomePageSingleItem extends StatelessWidget {
   final List<HomeSingleRowModel>? item;

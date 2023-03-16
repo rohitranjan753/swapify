@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:vbuddyproject/BuyBuiderDirectory/selected_buy_page.dart';
 
 class BuyPage extends StatefulWidget {
   const BuyPage({Key? key}) : super(key: key);
@@ -48,21 +49,26 @@ class _BuyPageState extends State<BuyPage> {
                   return ListView.builder(
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (BuildContext context, int index) {
-                      DocumentSnapshot document = snapshot.data!.docs[index];
+                     final DocumentSnapshot document = snapshot.data!.docs[index];
 
-                      return Card(
-                        child: Column(
-                          children: [
-                            Image(
-                                image: NetworkImage(document['imageUrl']),
-                                height: myHeight * 0.2,
-                                width: myWidth * 0.7),
-                            ListTile(
-                              title: Text(document['selltitle']),
-                              subtitle: Text(document['sellprice']),
-                              trailing: user!.uid == document['createdby'] ? Text('YOU') : Text(document['creatorname']),
-                            ),
-                          ],
+                      return GestureDetector(
+                        onTap: (){
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedBuyPage(item: document)));
+                        },
+                        child: Card(
+                          child: Column(
+                            children: [
+                              Image(
+                                  image: NetworkImage(document['imageUrl']),
+                                  height: myHeight * 0.2,
+                                  width: myWidth * 0.7),
+                              ListTile(
+                                title: Text(document['selltitle']),
+                                subtitle: Text(document['sellprice']),
+                                trailing: user!.uid == document['createdby'] ? Text('YOU') : Text(document['creatorname']),
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     },

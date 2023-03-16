@@ -5,6 +5,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:line_icons/line_icon.dart';
+
+List<String> list = <String>['One', 'Two', 'Three', 'Four'];
 
 class SellPage extends StatefulWidget {
   const SellPage({Key? key}) : super(key: key);
@@ -14,6 +17,12 @@ class SellPage extends StatefulWidget {
 }
 
 class _SellPageState extends State<SellPage> {
+  // Initial Selected Value
+  String dropdownvalue = 'Notes';
+
+  // List of items in our dropdown menu
+  var items = ['Notes','Clothes','Footwear','Stationary','Gadgets'
+  ];
   bool _isLoading = false;
   String _titleText = '';
   String _descriptionText = '';
@@ -30,21 +39,20 @@ class _SellPageState extends State<SellPage> {
       _isLoading = true;
     });
     final currentUser = FirebaseAuth.instance.currentUser;
-    final userData = await FirebaseFirestore.instance.collection('Users').doc(currentUser!.uid).get();
-    // final currentTime = currentUser!.uid;
+    final userData = await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(currentUser!.uid)
+        .get();
+
     String? uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
     String userName = userData.get('username');
 
-
-    // final DocumentSnapshot userDoc =
-    // await FirebaseFirestore.instance.collection('Users').doc(currentUser.uid).get();
-    //   String? username = userDoc.get('username').toString();
-
-
     final Reference storageRef = FirebaseStorage.instance.ref().child('images');
-    final taskSnapshot = await storageRef.child('${uniqueId}' + '.jpg').putFile(rentImage);
+    final taskSnapshot =
+        await storageRef.child('${uniqueId}' + '.jpg').putFile(rentImage);
     final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
-    final DocumentReference parentDocRef = FirebaseFirestore.instance.collection('Users').doc(currentUser.uid);
+    final DocumentReference parentDocRef =
+        FirebaseFirestore.instance.collection('Users').doc(currentUser.uid);
 
     parentDocRef.collection('sellsection').doc(uniqueId).set({
       'imageUrl': downloadUrl,
@@ -65,76 +73,12 @@ class _SellPageState extends State<SellPage> {
       'sellprice': rentPrice,
       'createdby': currentUser.uid,
       'creatorname': userName,
-      // 'image_url': url,
     });
 
     setState(() {
       _isLoading = false;
     });
-    // final DocumentReference userRef = users.doc(currentUser.uid);
-    // Map<String, dynamic> data = {
-    //   'imageUrl': downloadUrl,
-    //   'createdAt': FieldValue.serverTimestamp(),
-    // };
-
-    // Map<String, dynamic> data = {
-    //   'imageUrl': downloadUrl,
-    //   'createdAt': FieldValue.serverTimestamp(),
-    // };
-    // await userRef.update(data);
   }
-  // ) async {
-  //   print(rentImage);
-  //
-  //
-  //   User? user = FirebaseAuth.instance.currentUser;
-  //   String uid = user!.uid;
-  //
-  //   final CollectionReference userDoc =
-  //       FirebaseFirestore.instance.collection('Users');
-  //
-  //   try {
-  //     setState(() {
-  //       if (_isLoading) Center(child: CircularProgressIndicator());
-  //     });
-  //     final ref = FirebaseStorage.instance
-  //         .ref()
-  //         .child('user_image')
-  //         .child(user.uid + '.jpg');
-  //
-  //     await ref.putFile(rentImage);
-  //     final url = await ref.getDownloadURL();
-  //
-  //     Map<String, dynamic> data = {
-  //       'sell_image_url': rentImage,
-  //       'sell_title': rentTile,
-  //       'sell_description': rentDes,
-  //       'sell_price': rentPrice,
-  //     };
-  //
-  //     await userDoc.doc(uid).set(data);
-  //   } on FirebaseAuthException catch (e) {
-  //     String? message = "An error occured, Check credential";
-  //     if (e.message != null) {
-  //       message = e.message;
-  //     }
-  //
-  //     Scaffold.of(context).showSnackBar(
-  //       SnackBar(
-  //         content: Text(message!),
-  //         backgroundColor: Theme.of(context).errorColor,
-  //       ),
-  //     );
-  //     setState(() {
-  //       _isLoading = false;
-  //     });
-  //   } catch (e) {
-  //     print(e);
-  //     setState(() {
-  //       _isLoading = false;
-  //     });
-  //   }
-  // }
 
   Future<void> _getImage() async {
     final imagePicker = ImagePicker();
@@ -183,14 +127,6 @@ class _SellPageState extends State<SellPage> {
                                 fit: BoxFit.contain,
                               ),
                       ),
-                      // decoration: BoxDecoration(
-                      //     image: DecorationImage(
-                      //   image: _image != null ? DecorationImage(
-                      //     image: FileImage(_image!),
-                      //     fit: BoxFit.cover,
-                      //   ) : null,
-                      //   fit: BoxFit.cover,
-                      // ),),
                     ),
                   ),
                 ),
@@ -242,12 +178,38 @@ class _SellPageState extends State<SellPage> {
                 SizedBox(
                   height: 10,
                 ),
+                Container(
+                  width: myWidth,
+                  child: DropdownButton(
+                    // hint: Text('Select Category'),
+                    // Initial Value
+                    value: dropdownvalue,
+
+                    // Down Arrow Icon
+                    icon: const Icon(Icons.keyboard_arrow_down),
+
+                    // Array list of items
+                    items: items.map((String items) {
+                      return DropdownMenuItem(
+                        value: items,
+                        child: Text(items,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0),),
+                      );
+                    }).toList(),
+                    // After selecting the desired option,it will
+                    // change button value to selected value
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        dropdownvalue = newValue!;
+                      });
+                    },
+                  ),
+                ),
                 ElevatedButton(
                   onPressed: () {
                     _uploadToFirebase(
                         _image!, _titleText, _descriptionText, _rentalPrice);
                     setState(() {
-                      _image=null;
+                      _image = null;
                     });
                   },
                   child: Text('SUBMIT'),
