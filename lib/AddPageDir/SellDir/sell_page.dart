@@ -1,13 +1,9 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:line_icons/line_icon.dart';
-
-List<String> list = <String>['One', 'Two', 'Three', 'Four'];
 
 class SellPage extends StatefulWidget {
   const SellPage({Key? key}) : super(key: key);
@@ -17,12 +13,29 @@ class SellPage extends StatefulWidget {
 }
 
 class _SellPageState extends State<SellPage> {
+  String? _selectedFirstValue;
+  String? _selectedSecondValue;
   // Initial Selected Value
-  String dropdownvalue = 'Notes';
+  // String dropdownvalue = 'Notes';
 
   // List of items in our dropdown menu
-  var items = ['Notes','Clothes','Footwear','Stationary','Gadgets'
+  List<String> _firstDropdownOptions = [
+    'Notes',
+    'Clothes',
+    'Footwear',
+    'Stationary',
+    'Gadgets',
   ];
+
+  // Define the options for the second dropdown, based on the selected value of the first dropdown
+  Map<String, List<String>> _secondDropdownOptions = {
+    'Notes': ['DSA', 'DBMS', 'Operating System', 'Java'],
+    'Clothes': ['Formal', 'Ethnic', 'Casual'],
+    'Footwear': ['Sports', 'Formal', 'Casual'],
+    'Stationary': ['Notebook', 'Calculator', 'Pen'],
+    'Gadgets': ['Earphone', 'Charger', 'Speaker'],
+  };
+
   bool _isLoading = false;
   String _titleText = '';
   String _descriptionText = '';
@@ -34,6 +47,8 @@ class _SellPageState extends State<SellPage> {
     String rentTile,
     String rentDes,
     String rentPrice,
+    String firstDropdownValue,
+    String secondDropdownValue,
   ) async {
     setState(() {
       _isLoading = true;
@@ -60,6 +75,8 @@ class _SellPageState extends State<SellPage> {
       'selltitle': rentTile,
       'selldescription': rentDes,
       'sellprice': rentPrice,
+      'majorcategory': firstDropdownValue,
+      'subcategory': secondDropdownValue,
     });
 
     await FirebaseFirestore.instance
@@ -71,6 +88,8 @@ class _SellPageState extends State<SellPage> {
       'selltitle': rentTile,
       'selldescription': rentDes,
       'sellprice': rentPrice,
+      'majorcategory': firstDropdownValue,
+      'subcategory': secondDropdownValue,
       'createdby': currentUser.uid,
       'creatorname': userName,
     });
@@ -101,120 +120,167 @@ class _SellPageState extends State<SellPage> {
       ),
       body: _isLoading
           ? _buildLoadingIndicator()
-          : Column(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    _getImage();
-                  },
-                  child: Card(
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    elevation: 5,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Container(
-                      height: myHeight * 0.2,
-                      width: myWidth * 0.5,
-                      decoration: BoxDecoration(
-                        image: _image != null
-                            ? DecorationImage(
-                                image: FileImage(_image!),
-                                fit: BoxFit.cover,
-                              )
-                            : DecorationImage(
-                                image: AssetImage('assets/images/upload3.png'),
-                                fit: BoxFit.contain,
-                              ),
+          : SingleChildScrollView(
+              child: Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      _getImage();
+                    },
+                    child: Card(
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Container(
+                        height: myHeight * 0.2,
+                        width: myWidth * 0.5,
+                        decoration: BoxDecoration(
+                          image: _image != null
+                              ? DecorationImage(
+                                  image: FileImage(_image!),
+                                  fit: BoxFit.cover,
+                                )
+                              : DecorationImage(
+                                  image:
+                                      AssetImage('assets/images/upload3.png'),
+                                  fit: BoxFit.contain,
+                                ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  onChanged: (value) {
-                    setState(() {
-                      _titleText = value;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    hintText: 'Enter title',
+                  SizedBox(
+                    height: 10,
                   ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  onChanged: (value) {
-                    setState(() {
-                      _descriptionText = value;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    hintText: 'Enter description',
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  onChanged: (value) {
-                    setState(() {
-                      _rentalPrice = value;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    hintText: 'Enter price',
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  width: myWidth,
-                  child: DropdownButton(
-                    // hint: Text('Select Category'),
-                    // Initial Value
-                    value: dropdownvalue,
-
-                    // Down Arrow Icon
-                    icon: const Icon(Icons.keyboard_arrow_down),
-
-                    // Array list of items
-                    items: items.map((String items) {
-                      return DropdownMenuItem(
-                        value: items,
-                        child: Text(items,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0),),
-                      );
-                    }).toList(),
-                    // After selecting the desired option,it will
-                    // change button value to selected value
-                    onChanged: (String? newValue) {
+                  TextField(
+                    onChanged: (value) {
                       setState(() {
-                        dropdownvalue = newValue!;
+                        _titleText = value;
                       });
                     },
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      hintText: 'Enter title',
+                    ),
                   ),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    _uploadToFirebase(
-                        _image!, _titleText, _descriptionText, _rentalPrice);
-                    setState(() {
-                      _image = null;
-                    });
-                  },
-                  child: Text('SUBMIT'),
-                ),
-              ],
+                  SizedBox(
+                    height: 10,
+                  ),
+                  TextField(
+                    onChanged: (value) {
+                      setState(() {
+                        _descriptionText = value;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      hintText: 'Enter description',
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  TextField(
+                    onChanged: (value) {
+                      setState(() {
+                        _rentalPrice = value;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      hintText: 'Enter price',
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  // Container(
+                  //   width: myWidth,
+                  //   child: DropdownButton(
+                  //     // hint: Text('Select Category'),
+                  //     // Initial Value
+                  //     value: dropdownvalue,
+                  //
+                  //     // Down Arrow Icon
+                  //     icon: const Icon(Icons.keyboard_arrow_down),
+                  //
+                  //     // Array list of items
+                  //     items: items.map((String items) {
+                  //       return DropdownMenuItem(
+                  //         value: items,
+                  //         child: Text(items,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0),),
+                  //       );
+                  //     }).toList(),
+                  //     // After selecting the desired option,it will
+                  //     // change button value to selected value
+                  //     onChanged: (String? newValue) {
+                  //       setState(() {
+                  //         dropdownvalue = newValue!;
+                  //       });
+                  //     },
+                  //   ),
+                  // ),
+
+                  // First Dropdown
+                  DropdownButton<String>(
+                    value: _selectedFirstValue,
+                    onChanged: (newValue) {
+                      setState(() {
+                        _selectedFirstValue = newValue;
+                        // Set the selected value of the second dropdown to null, to reset it
+                        _selectedSecondValue = null;
+                      });
+                    },
+                    items: _firstDropdownOptions.map((option) {
+                      return DropdownMenuItem(
+                        child: Text(option),
+                        value: option,
+                      );
+                    }).toList(),
+                  ),
+                  SizedBox(height: 20),
+                  // Second Dropdown, only visible when first dropdown is selected
+                  if (_selectedFirstValue != null)
+                    DropdownButton<String>(
+                      value: _selectedSecondValue,
+                      onChanged: (newValue) {
+                        setState(() {
+                          _selectedSecondValue = newValue;
+                        });
+                      },
+                      items: _secondDropdownOptions[_selectedFirstValue]!
+                          .map((option) {
+                        return DropdownMenuItem(
+                          child: Text(option),
+                          value: option,
+                        );
+                      }).toList(),
+                    ),
+
+                  ElevatedButton(
+                    onPressed: () {
+                      _uploadToFirebase(
+                          _image!,
+                          _titleText,
+                          _descriptionText,
+                          _rentalPrice,
+                          _selectedFirstValue!,
+                          _selectedSecondValue!);
+                      setState(() {
+                        _image = null;
+                        _selectedFirstValue=null;
+                        _selectedSecondValue=null;
+                      });
+                    },
+                    child: Text('SUBMIT'),
+                  ),
+                ],
+              ),
             ),
     );
   }

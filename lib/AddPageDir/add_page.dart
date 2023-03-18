@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:vbuddyproject/AddPageDir/SellDir/sell_page.dart';
-import 'package:vbuddyproject/SearchPageDir/SearchPage.dart';
 
 class AddPage extends StatefulWidget {
   const AddPage({Key? key}) : super(key: key);

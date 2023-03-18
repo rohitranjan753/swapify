@@ -3,10 +3,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:vbuddyproject/AddPageDir/add_page.dart';
 import 'package:vbuddyproject/BuyBuiderDirectory/buy_page.dart';
 import 'package:vbuddyproject/Components/single_item_homepage.dart';
 import 'package:vbuddyproject/HomePageDir/category_screen.dart';
@@ -34,52 +31,19 @@ class _HomePageState extends State<HomePage> {
     });
   }
   List categoryIcon = [
-    Icons.car_rental,
-    Icons.home_filled,
-    Icons.phone_android,
-    Icons.directions_bike,
-    Icons.tv
+    LineIcons.book,
+    LineIcons.tShirt,
+    LineIcons.shoePrints,
+    LineIcons.pencilRuler,
+    LineIcons.laptop,
   ];
 
-  List categoryName = ["Car", "Home", "Phone", "Bike", "TV"];
-
-  // List category = [
-  //   "Notes",
-  //   "CLothes",
-  //   "Stationary",
-  //   "Mattress",
-  //   "Sports",
-  //   "Grocery"
-  // ];
+  List categoryName = ["Notes", "Clothes", "Footwear", "Stationary", "Gadgets"];
 
   int clicked = 0;
 
-  // String myName = '';
-
-  // String myUsername='';
-  // Future<void> _getCurrentUserName() async {
-  //   User? user = FirebaseAuth.instance.currentUser;
-  //   String uid = user!.uid;
-  //
-  //  await FirebaseFirestore.instance
-  //       .collection("Users")
-  //       .doc(uid)
-  //       .get()
-  //       .then((snapshot) {
-  //     setState(() {
-  //       // myName = (snapshot.data() as Map<String, dynamic>)['name'].toString(); // change this
-  //       myUsername = (snapshot.data() as Map<String, dynamic>)['username'].toString(); // and this
-  //       print(myUsername);
-  //     });
-  //   });
-  // }
-
   @override
   void initState() {
-    // WidgetsBinding.instance!.addPostFrameCallback((timeStamp) async {
-    //   await loadJson();
-    //
-    // });
     super.initState();
     getData();
   }
@@ -225,12 +189,20 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
 
+              // Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: ListView.builder(scrollDirection: Axis.horizontal,itemCount: categoryIcon.length, itemBuilder: (BuildContext context, int index) {
+              //     return categorySingleRow(index);
+              //   },
+              //
+              //   ),
+              // ),
               // Scroll Row(list)
               SingleChildScrollView(
-                padding: EdgeInsets.all(10),
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
+
                     GestureDetector(
                       onTap: () {
                         // Navigator.push(
@@ -259,6 +231,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
+
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 15),
                       child: Column(
@@ -279,6 +252,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                     ),
+
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 15),
                       child: Column(
@@ -299,6 +273,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                     ),
+
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 15),
                       child: Column(
@@ -319,6 +294,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                     ),
+
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 15),
                       child: Column(
@@ -612,5 +588,33 @@ class _HomePageState extends State<HomePage> {
   //     placeList = placeList;
   //   });
   // }
+
+  Widget categorySingleRow(int index) {
+    double myHeight = MediaQuery.of(context).size.height;
+    double myWidth = MediaQuery.of(context).size.width;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 15),
+        child: Column(
+          children: [
+            Icon(
+              categoryIcon[index],
+              size: 50,
+              color: Colors.blue,
+            ),
+            Text(
+              categoryName[index],
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.normal,
+                color: Colors.grey,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
 
 }
