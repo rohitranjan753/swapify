@@ -6,4 +6,5 @@ Developing a platform for students of Vellore Institute of Technology, Bhopal wh
     - Flutter
     - Firebase
 
-
+## Screenshot:
+![vBuddy_pic](https://github.com/rohitranjan753/vBuddy/blob/master/assets/images/vbuddy_pic3.png)
