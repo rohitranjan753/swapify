@@ -1,14 +1,9 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:vbuddyproject/BuyBuiderDirectory/buy_page.dart';
-import 'package:vbuddyproject/Components/single_item_homepage.dart';
 import 'package:vbuddyproject/HomePageDir/category_screen.dart';
-import 'package:vbuddyproject/HomePageDir/home_category_horizontal_row.dart';
-import 'package:vbuddyproject/Model/homepage_single_row_model.dart';
 import 'package:vbuddyproject/SearchPageDir/SearchPage.dart';
 
 class HomePage extends StatefulWidget {
