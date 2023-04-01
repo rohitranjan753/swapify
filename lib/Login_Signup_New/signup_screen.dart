@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vbuddyproject/Login_Signup_New/login_screen.dart';
 
 class SignupPage extends StatelessWidget {
   @override
@@ -75,9 +76,14 @@ class SignupPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text("Already have an account?"),
-                  Text(" Login", style: TextStyle(
-                      fontWeight: FontWeight.w600, fontSize: 18
-                  ),),
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+                    },
+                    child: Text(" Login", style: TextStyle(
+                        fontWeight: FontWeight.w600, fontSize: 18
+                    ),),
+                  ),
                 ],
               ),
             ],

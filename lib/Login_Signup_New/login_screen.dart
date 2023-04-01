@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:vbuddyproject/Login_Signup_New/signup_screen.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,15 +85,20 @@ class LoginPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text("Don't have an account?"),
-                      Text("Sign up", style: TextStyle(
-                          fontWeight: FontWeight.w600, fontSize: 18
-                      ),),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>SignupPage()));
+                        },
+                        child: Text("Sign up", style: TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 18
+                        ),),
+                      ),
                     ],
                   )
                 ],
               ),
             ),
-       Container(
+            Container(
               height: MediaQuery.of(context).size.height / 3,
               decoration: BoxDecoration(
                   image: DecorationImage(

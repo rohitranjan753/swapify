@@ -62,16 +62,25 @@ class _AuthFormState extends State<AuthForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Card(
-        margin: EdgeInsets.all(20),
-        child: SingleChildScrollView(
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_ios, size: 20, color: Colors.black,),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
           child: Padding(
             padding: EdgeInsets.all(16),
             child: Form(
               key: _formKey,
               child: Column(
-                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   // if (!_isLogin) UserImagePicker(_pickedImage),
                   TextFormField(
@@ -88,11 +97,19 @@ class _AuthFormState extends State<AuthForm> {
                       }
                     },
                     keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(labelText: "Email Address"),
+                    decoration: InputDecoration(labelText: "Email Address",
+                      contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey)
+                      ),
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey)
+                      ),),
                     onSaved: (value) {
                       _userEmail = value!;
                     },
                   ),
+                  SizedBox(height: 10,),
                   if (!_isLogin)
                     TextFormField(
                       key: ValueKey('username'),
@@ -106,11 +123,19 @@ class _AuthFormState extends State<AuthForm> {
                           return null;
                         }
                       },
-                      decoration: InputDecoration(labelText: "Username"),
+                      decoration: InputDecoration(labelText: "Username",
+                        contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey)
+                        ),
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey)
+                        ),),
                       onSaved: (value) {
                         _userName = value!;
                       },
                     ),
+                  SizedBox(height: 10,),
                   TextFormField(
                     key: ValueKey('password'),
                     validator: (value) {
@@ -120,7 +145,14 @@ class _AuthFormState extends State<AuthForm> {
                         return null;
                       }
                     },
-                    decoration: InputDecoration(labelText: "Password"),
+                    decoration: InputDecoration(labelText: "Password",
+                      contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey)
+                      ),
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey)
+                      ),),
                     obscureText: true,
                     onSaved: (value) {
                       _userPass = value!;
@@ -131,7 +163,14 @@ class _AuthFormState extends State<AuthForm> {
                   ),
                   if (widget.isLoading) CircularProgressIndicator(),
                   if (!widget.isLoading)
-                    RaisedButton(
+                    MaterialButton(
+                      minWidth: double.infinity,
+                      height: 60,
+                      color: Colors.greenAccent,
+                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50)
+                      ),
                       onPressed: _trySubmit,
                       child: Text(_isLogin ? "LOGIN" : 'SIGNUP'),
                     ),
@@ -152,7 +191,9 @@ class _AuthFormState extends State<AuthForm> {
             ),
           ),
         ),
+
       ),
+
     );
   }
 }
