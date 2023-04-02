@@ -20,7 +20,11 @@ class _LoginPageState extends State<LoginPage> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back_ios, size: 20, color: Colors.black,),
+          icon: Icon(
+            Icons.arrow_back_ios,
+            size: 20,
+            color: Colors.black,
+          ),
         ),
       ),
       body: Container(
@@ -34,21 +38,26 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Column(
-                    children: <Widget>[Text("Login", style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold
-                      ),),
-                      SizedBox(height: 20,),
-                      Text("Login to your account", style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.grey[700]
-                      ),),
+                    children: <Widget>[
+                      Text(
+                        "Login",
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        "Login to your account",
+                        style: TextStyle(fontSize: 15, color: Colors.grey[700]),
+                      ),
                     ],
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 40),
                     child: Column(
-                      children: <Widget>[makeInput(label: "Email"),
+                      children: <Widget>[
+                        makeInput(label: "Email"),
                         makeInput(label: "Password", obscureText: true),
                       ],
                     ),
@@ -64,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                             top: BorderSide(color: Colors.black),
                             left: BorderSide(color: Colors.black),
                             right: BorderSide(color: Colors.black),
-                          )
+                          ),
                       ),
                       child: MaterialButton(
                         minWidth: double.infinity,
@@ -73,25 +82,31 @@ class _LoginPageState extends State<LoginPage> {
                         color: Colors.greenAccent,
                         elevation: 0,
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50)
+                            borderRadius: BorderRadius.circular(50)),
+                        child: Text(
+                          "Login",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600, fontSize: 18),
                         ),
-                        child: Text("Login", style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18
-                        ),),
                       ),
-                  ),),
+                    ),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text("Don't have an account?"),
                       GestureDetector(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>SignupPage()));
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignupPage()));
                         },
-                        child: Text("Sign up", style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 18
-                        ),),
+                        child: Text(
+                          "Sign up",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600, fontSize: 18),
+                        ),
                       ),
                     ],
                   )
@@ -103,9 +118,7 @@ class _LoginPageState extends State<LoginPage> {
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage('assets/background.png'),
-                      fit: BoxFit.cover
-                  )
-              ),
+                      fit: BoxFit.cover)),
             )
           ],
         ),
@@ -117,25 +130,27 @@ class _LoginPageState extends State<LoginPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(label, style: TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w400,
-            color: Colors.black87
-        ),),
-        SizedBox(height: 5,),
+        Text(
+          label,
+          style: TextStyle(
+              fontSize: 15, fontWeight: FontWeight.w400, color: Colors.black87),
+        ),
+        SizedBox(
+          height: 5,
+        ),
         TextField(
           obscureText: obscureText,
           decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey)
-            ),
-            border: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey)
-            ),
+            enabledBorder:
+                OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+            border:
+                OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
           ),
         ),
-        SizedBox(height: 30,),
+        SizedBox(
+          height: 30,
+        ),
       ],
     );
   }
