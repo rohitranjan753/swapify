@@ -88,6 +88,11 @@ class _BuyPageState extends State<BuyPage> {
 
     return searchQuery;
   }
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
 }
 //
 // import 'package:cloud_firestore/cloud_firestore.dart';

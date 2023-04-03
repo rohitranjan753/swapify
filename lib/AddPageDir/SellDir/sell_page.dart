@@ -121,165 +121,199 @@ class _SellPageState extends State<SellPage> {
       body: _isLoading
           ? _buildLoadingIndicator()
           : SingleChildScrollView(
-              child: Column(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      _getImage();
-                    },
-                    child: Card(
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      elevation: 5,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Container(
-                        height: myHeight * 0.2,
-                        width: myWidth * 0.5,
-                        decoration: BoxDecoration(
-                          image: _image != null
-                              ? DecorationImage(
-                                  image: FileImage(_image!),
-                                  fit: BoxFit.cover,
-                                )
-                              : DecorationImage(
-                                  image:
-                                      AssetImage('assets/images/upload3.png'),
-                                  fit: BoxFit.contain,
-                                ),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        _getImage();
+                      },
+                      child: Card(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        elevation: 5,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Container(
+                          height: myHeight * 0.2,
+                          width: myWidth * 0.5,
+                          decoration: BoxDecoration(
+                            image: _image != null
+                                ? DecorationImage(
+                                    image: FileImage(_image!),
+                                    fit: BoxFit.cover,
+                                  )
+                                : DecorationImage(
+                                    image:
+                                        AssetImage('assets/images/upload3.png'),
+                                    fit: BoxFit.contain,
+                                  ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextField(
-                    onChanged: (value) {
-                      setState(() {
-                        _titleText = value;
-                      });
-                    },
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      hintText: 'Enter title',
+                    SizedBox(
+                      height: 20,
                     ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextField(
-                    onChanged: (value) {
-                      setState(() {
-                        _descriptionText = value;
-                      });
-                    },
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      hintText: 'Enter description',
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextField(
-                    onChanged: (value) {
-                      setState(() {
-                        _rentalPrice = value;
-                      });
-                    },
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      hintText: 'Enter price',
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  // Container(
-                  //   width: myWidth,
-                  //   child: DropdownButton(
-                  //     // hint: Text('Select Category'),
-                  //     // Initial Value
-                  //     value: dropdownvalue,
-                  //
-                  //     // Down Arrow Icon
-                  //     icon: const Icon(Icons.keyboard_arrow_down),
-                  //
-                  //     // Array list of items
-                  //     items: items.map((String items) {
-                  //       return DropdownMenuItem(
-                  //         value: items,
-                  //         child: Text(items,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0),),
-                  //       );
-                  //     }).toList(),
-                  //     // After selecting the desired option,it will
-                  //     // change button value to selected value
-                  //     onChanged: (String? newValue) {
-                  //       setState(() {
-                  //         dropdownvalue = newValue!;
-                  //       });
-                  //     },
-                  //   ),
-                  // ),
-
-                  // First Dropdown
-                  DropdownButton<String>(
-                    value: _selectedFirstValue,
-                    onChanged: (newValue) {
-                      setState(() {
-                        _selectedFirstValue = newValue;
-                        // Set the selected value of the second dropdown to null, to reset it
-                        _selectedSecondValue = null;
-                      });
-                    },
-                    items: _firstDropdownOptions.map((option) {
-                      return DropdownMenuItem(
-                        child: Text(option),
-                        value: option,
-                      );
-                    }).toList(),
-                  ),
-                  SizedBox(height: 20),
-                  // Second Dropdown, only visible when first dropdown is selected
-                  if (_selectedFirstValue != null)
-                    DropdownButton<String>(
-                      value: _selectedSecondValue,
-                      onChanged: (newValue) {
+                    TextField(
+                      onChanged: (value) {
                         setState(() {
-                          _selectedSecondValue = newValue;
+                          _titleText = value;
                         });
                       },
-                      items: _secondDropdownOptions[_selectedFirstValue]!
-                          .map((option) {
+                      decoration: InputDecoration(
+                        labelText: "Enter Title",
+                        contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                        enabledBorder:
+                        OutlineInputBorder(borderSide: BorderSide(color: Colors.grey),borderRadius: BorderRadius.circular(20)),
+                        border:
+                        OutlineInputBorder(borderSide: BorderSide(color: Colors.grey),borderRadius: BorderRadius.circular(20)),
+                        filled: true,
+                        fillColor: Colors.white,
+                        hintText: 'Title',
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextField(
+                      onChanged: (value) {
+                        setState(() {
+                          _descriptionText = value;
+                        });
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Enter Description',
+                        contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                        enabledBorder:
+                        OutlineInputBorder(borderSide: BorderSide(color: Colors.grey),borderRadius: BorderRadius.circular(20)),
+                        border:
+                        OutlineInputBorder(borderSide: BorderSide(color: Colors.grey),borderRadius: BorderRadius.circular(20)),
+                        filled: true,
+                        fillColor: Colors.white,
+                        hintText: 'Description',
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextField(
+                      onChanged: (value) {
+                        setState(() {
+                          _rentalPrice = value;
+                        });
+                      },
+                      decoration: InputDecoration(
+                        labelText: "Enter Price",
+                        contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                        enabledBorder:
+                        OutlineInputBorder(borderSide: BorderSide(color: Colors.grey),borderRadius: BorderRadius.circular(20)),
+                        border:
+                        OutlineInputBorder(borderSide: BorderSide(color: Colors.grey),borderRadius: BorderRadius.circular(20)),
+                        filled: true,
+                        fillColor: Colors.white,
+                        hintText: 'Price',
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    // Container(
+                    //   width: myWidth,
+                    //   child: DropdownButton(
+                    //     // hint: Text('Select Category'),
+                    //     // Initial Value
+                    //     value: dropdownvalue,
+                    //
+                    //     // Down Arrow Icon
+                    //     icon: const Icon(Icons.keyboard_arrow_down),
+                    //
+                    //     // Array list of items
+                    //     items: items.map((String items) {
+                    //       return DropdownMenuItem(
+                    //         value: items,
+                    //         child: Text(items,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0),),
+                    //       );
+                    //     }).toList(),
+                    //     // After selecting the desired option,it will
+                    //     // change button value to selected value
+                    //     onChanged: (String? newValue) {
+                    //       setState(() {
+                    //         dropdownvalue = newValue!;
+                    //       });
+                    //     },
+                    //   ),
+                    // ),
+
+                    SizedBox(
+                      height: 20,
+                    ),
+                    // First Dropdown
+                    DropdownButton<String>(
+                      hint: Text("Enter Category",style: TextStyle(fontSize: 20),),
+                      value: _selectedFirstValue,
+                      onChanged: (newValue) {
+                        setState(() {
+                          _selectedFirstValue = newValue;
+
+                          // Set the selected value of the second dropdown to null, to reset it
+                          _selectedSecondValue = null;
+                        });
+                      },
+                      items: _firstDropdownOptions.map((option) {
                         return DropdownMenuItem(
-                          child: Text(option),
+                          child: Text(option,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                           value: option,
                         );
                       }).toList(),
                     ),
+                    SizedBox(height: 20),
+                    // Second Dropdown, only visible when first dropdown is selected
+                    if (_selectedFirstValue != null)
+                      DropdownButton<String>(
+                        hint: Text("Enter Sub Category",style: TextStyle(fontSize: 20),),
+                        value: _selectedSecondValue,
+                        onChanged: (newValue) {
+                          setState(() {
+                            _selectedSecondValue = newValue;
+                          });
+                        },
+                        items: _secondDropdownOptions[_selectedFirstValue]!
+                            .map((option) {
+                          return DropdownMenuItem(
+                            child: Text(option,style: TextStyle(fontSize: 18,fontWeight: FontWeight.normal),),
+                            value: option,
+                          );
+                        }).toList(),
+                      ),
 
-                  ElevatedButton(
-                    onPressed: () {
-                      _uploadToFirebase(
-                          _image!,
-                          _titleText,
-                          _descriptionText,
-                          _rentalPrice,
-                          _selectedFirstValue!,
-                          _selectedSecondValue!);
-                      setState(() {
-                        _image = null;
-                        _selectedFirstValue=null;
-                        _selectedSecondValue=null;
-                      });
-                    },
-                    child: Text('SUBMIT'),
-                  ),
-                ],
+                    MaterialButton(
+                      onPressed: () {
+                        _uploadToFirebase(
+                            _image!,
+                            _titleText,
+                            _descriptionText,
+                            _rentalPrice,
+                            _selectedFirstValue!,
+                            _selectedSecondValue!);
+                        setState(() {
+                          _image = null;
+                          _selectedFirstValue=null;
+                          _selectedSecondValue=null;
+                        });
+                      },
+                      minWidth: double.infinity,
+                      height: 60,
+                      color: Colors.greenAccent,
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50)),
+                      child: Text('SUBMIT',style: TextStyle(
+                          fontWeight: FontWeight.w600, fontSize: 18),),
+                    ),
+                  ],
+                ),
               ),
             ),
     );
@@ -290,4 +324,9 @@ class _SellPageState extends State<SellPage> {
       child: CircularProgressIndicator(),
     );
   }
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
 }
