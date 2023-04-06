@@ -56,8 +56,7 @@ class _BuyPageState extends State<BuyPage> {
                    Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedBuyPage(item: data)));
                  },
                  child: Container(
-                   // height: myHeight*0.1,
-                   width: myWidth*0.5,
+                   width: myWidth*0.4,
                    child: Card(
                      elevation: 8,
                      child: Column(
@@ -70,6 +69,7 @@ class _BuyPageState extends State<BuyPage> {
                                width: myWidth * 0.7),
                          ),
                          Container(
+
                            color: Colors.cyan[100],
                            child: ListTile(
                              title: Text(data['selltitle']),

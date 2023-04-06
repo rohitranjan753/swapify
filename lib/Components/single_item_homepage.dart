@@ -143,7 +143,7 @@ class HomePageSingleItem extends StatelessWidget {
                     ),
                   )
                 ],
-              )),
+              ),),
         ),
       ),
     );
