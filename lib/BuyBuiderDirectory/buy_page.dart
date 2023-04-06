@@ -26,7 +26,7 @@ class _BuyPageState extends State<BuyPage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepPurpleAccent[100],
+        backgroundColor: Colors.cyan[400],
         title: Card(
           child: TextField(
             controller: _searchController,
@@ -56,6 +56,7 @@ class _BuyPageState extends State<BuyPage> {
                    Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedBuyPage(item: data)));
                  },
                  child: Container(
+                   padding: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
                    width: myWidth*0.4,
                    child: Card(
                      elevation: 8,

@@ -343,7 +343,7 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.all(40.0),
                         child: GestureDetector(
                           onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => BuyNewPage()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => BuyPage()));
                           },
                           child: Container(
                               height: myHeight * 0.4,

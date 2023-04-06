@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icon.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:vbuddyproject/BuyBuiderDirectory/selected_buy_page.dart';
 
 final CollectionReference usersCollection =
@@ -113,15 +114,12 @@ class _BuyPageState extends State<BuyNewPage> {
                                 ),
                                 Row(
                                   children: [
-                                    Icon(
-                                      Icons.location_on,
-                                      color: Colors.black,
-                                    ),
+                                    LineIcon(LineIcons.indianRupeeSign),
                                     SizedBox(
                                       width: myWidth * 0.02,
                                     ),
                                     Text(
-                                      "\$${data['sellprice']}",
+                                      data['sellprice'],
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 25,
@@ -135,7 +133,7 @@ class _BuyPageState extends State<BuyNewPage> {
                                 Row(
                                   children: [
                                     Text(
-                                      'Starting At',
+                                      'Uploaded By',
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 25,
@@ -154,7 +152,7 @@ class _BuyPageState extends State<BuyNewPage> {
                                             borderRadius: BorderRadius.circular(10),
                                             color: Colors.white.withOpacity(0.2)),
                                         child:
-                                          user!.uid == data['createdby'] ? Text('Uploaded By: YOU',style: TextStyle(fontWeight: FontWeight.bold),) : Text("Uploaded By: ${data['creatorname']}"),
+                                          user!.uid == data['createdby'] ? Text('YOU',style: TextStyle(fontWeight: FontWeight.bold),) : Text(data['creatorname']),
 
                                         ),
                                     ),
