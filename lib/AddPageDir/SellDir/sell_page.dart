@@ -37,7 +37,7 @@ class _SellPageState extends State<SellPage> {
     'Clothes': ['Formal', 'Ethnic', 'Casual'],
     'Footwear': ['Sports', 'Formal', 'Casual'],
     'Stationary': ['Notebook', 'Calculator', 'Pen'],
-    'Gadgets': ['Earphone', 'Charger', 'Speaker'],
+    'Gadgets': ['Earphone', 'Charger', 'Speaker','Laptop'],
   };
 
   bool _isLoading = false;
@@ -132,7 +132,15 @@ class _SellPageState extends State<SellPage> {
     double myWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.cyan[300],
+        toolbarHeight: 60,
         title: Text('Upload Section'),
+        centerTitle: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              bottomRight: Radius.circular(30),
+              bottomLeft: Radius.circular(30)),
+        ),
       ),
       body: _isLoading
           ? _buildLoadingIndicator()
@@ -149,7 +157,7 @@ class _SellPageState extends State<SellPage> {
                         },
                         child: Card(
                           clipBehavior: Clip.antiAliasWithSaveLayer,
-                          elevation: 5,
+                          elevation: 15,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -164,7 +172,7 @@ class _SellPageState extends State<SellPage> {
                                     )
                                   : DecorationImage(
                                       image: AssetImage(
-                                          'assets/images/upload3.png'),
+                                          'assets/images/upload.png'),
                                       fit: BoxFit.contain,
                                     ),
                             ),
@@ -312,7 +320,7 @@ class _SellPageState extends State<SellPage> {
                             color: Colors.deepPurpleAccent,
                           ),
                           hint: Text(
-                            "Enter Category",
+                            "Enter Item Category",
                             style: TextStyle(fontSize: 20),
                           ),
                           value: _selectedFirstValue,
@@ -373,7 +381,7 @@ class _SellPageState extends State<SellPage> {
                         onPressed: () {
                           if (_image == null) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Upload Image')),
+                              const SnackBar(content: Text('Choose Image')),
                             );
                           } else if (_selectedFirstValue == null ||
                               _selectedSecondValue == null) {
@@ -403,7 +411,7 @@ class _SellPageState extends State<SellPage> {
                         },
                         minWidth: double.infinity,
                         height: 60,
-                        color: Colors.greenAccent,
+                        color: Colors.cyan[300],
                         elevation: 10,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50)),

@@ -32,7 +32,7 @@ class _BuyPageState extends State<BuyPage> {
             controller: _searchController,
             decoration: InputDecoration(
               suffixIcon: Icon(Icons.search,color: Colors.black,),
-              hintText: 'Search...',
+              hintText: '  Search...',
             ),
             onChanged: (value) {
               setState(() {});
@@ -55,19 +55,31 @@ class _BuyPageState extends State<BuyPage> {
                  onTap: (){
                    Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedBuyPage(item: data)));
                  },
-                 child: Card(
-                   child: Column(
-                     children: [
-                       Image(
-                           image: NetworkImage(data['imageUrl']),
-                           height: myHeight * 0.2,
-                           width: myWidth * 0.7),
-                       ListTile(
-                         title: Text(data['selltitle']),
-                         subtitle: Text(data['sellprice']),
-                         trailing: user!.uid == data['createdby'] ? Text('Uploaded By: YOU',style: TextStyle(fontWeight: FontWeight.bold),) : Text("Uploaded By: ${data['creatorname']}"),
-                       ),
-                     ],
+                 child: Container(
+                   // height: myHeight*0.1,
+                   width: myWidth*0.5,
+                   child: Card(
+                     elevation: 8,
+                     child: Column(
+                       children: [
+                         Padding(
+                           padding: const EdgeInsets.symmetric(vertical: 5),
+                           child: Image(
+                               image: NetworkImage(data['imageUrl']),
+                               height: myHeight * 0.2,
+                               width: myWidth * 0.7),
+                         ),
+                         Container(
+                           color: Colors.cyan[100],
+                           child: ListTile(
+                             title: Text(data['selltitle']),
+                             subtitle: Text("\$${data['sellprice']}",
+                             style: TextStyle(fontWeight: FontWeight.bold),),
+                             trailing: user!.uid == data['createdby'] ? Text('Uploaded By: YOU',style: TextStyle(fontWeight: FontWeight.bold),) : Text("Uploaded By: ${data['creatorname']}"),
+                           ),
+                         ),
+                       ],
+                     ),
                    ),
                  ),
                );
