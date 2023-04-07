@@ -8,7 +8,7 @@ import 'package:line_icons/line_icon.dart';
 import 'package:vbuddyproject/BuyBuiderDirectory/selected_buy_page.dart';
 
 final CollectionReference usersCollection =
-FirebaseFirestore.instance.collection('sell_major_section');
+    FirebaseFirestore.instance.collection('sell_major_section');
 
 class BuyPage extends StatefulWidget {
   @override
@@ -31,7 +31,10 @@ class _BuyPageState extends State<BuyPage> {
           child: TextField(
             controller: _searchController,
             decoration: InputDecoration(
-              suffixIcon: Icon(Icons.search,color: Colors.black,),
+              suffixIcon: Icon(
+                Icons.search,
+                color: Colors.black,
+              ),
               hintText: '  Search...',
             ),
             onChanged: (value) {
@@ -51,39 +54,49 @@ class _BuyPageState extends State<BuyPage> {
               itemCount: searchResults.length,
               itemBuilder: (context, index) {
                 final DocumentSnapshot data = searchResults[index];
-               return GestureDetector(
-                 onTap: (){
-                   Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedBuyPage(item: data)));
-                 },
-                 child: Container(
-                   padding: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
-                   width: myWidth*0.4,
-                   child: Card(
-                     elevation: 8,
-                     child: Column(
-                       children: [
-                         Padding(
-                           padding: const EdgeInsets.symmetric(vertical: 5),
-                           child: Image(
-                               image: NetworkImage(data['imageUrl']),
-                               height: myHeight * 0.2,
-                               width: myWidth * 0.7),
-                         ),
-                         Container(
-
-                           color: Colors.cyan[100],
-                           child: ListTile(
-                             title: Text(data['selltitle']),
-                             subtitle: Text("\$${data['sellprice']}",
-                             style: TextStyle(fontWeight: FontWeight.bold),),
-                             trailing: user!.uid == data['createdby'] ? Text('Uploaded By: YOU',style: TextStyle(fontWeight: FontWeight.bold),) : Text("Uploaded By: ${data['creatorname']}"),
-                           ),
-                         ),
-                       ],
-                     ),
-                   ),
-                 ),
-               );
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SelectedBuyPage(item: data)));
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                    width: myWidth * 0.4,
+                    child: Card(
+                      elevation: 8,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            child: Image(
+                                image: NetworkImage(data['imageUrl']),
+                                height: myHeight * 0.2,
+                                width: myWidth * 0.7),
+                          ),
+                          Container(
+                            color: Colors.cyan[100],
+                            child: ListTile(
+                              title: Text(data['selltitle']),
+                              subtitle: Text(
+                                "\$${data['sellprice']}",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              trailing: user!.uid == data['createdby']
+                                  ? Text(
+                                      'Uploaded By: YOU',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  : Text("Uploaded By: ${data['creatorname']}"),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
               },
             );
           }
@@ -91,21 +104,23 @@ class _BuyPageState extends State<BuyPage> {
       ),
     );
   }
+
   Query _buildQuery() {
     Query searchQuery = usersCollection;
 
     if (_searchController.text.isNotEmpty) {
       String searchValue = _searchController.text;
-      searchQuery = searchQuery.where('selltitle', isGreaterThanOrEqualTo: searchValue);
+      searchQuery =
+          searchQuery.where('selltitle', isGreaterThanOrEqualTo: searchValue);
     }
 
     return searchQuery;
   }
+
   @override
   void dispose() {
     super.dispose();
   }
-
 }
 //
 // import 'package:cloud_firestore/cloud_firestore.dart';
