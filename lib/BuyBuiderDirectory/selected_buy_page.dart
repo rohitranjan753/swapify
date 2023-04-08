@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:line_icons/line_icon.dart';
 
 class SelectedBuyPage extends StatefulWidget {
   final DocumentSnapshot item;
@@ -13,20 +15,263 @@ class SelectedBuyPage extends StatefulWidget {
 class _SelectedBuyPageState extends State<SelectedBuyPage> {
   @override
   Widget build(BuildContext context) {
+    Timestamp timestamp = widget.item['createdAt'];
+    DateTime date = timestamp.toDate();
+
+// Format the DateTime object as a string using the DateFormat class from the intl package
+    String formattedDate = DateFormat('dd-MM-yyyy').format(date);
+
+    double myHeight = MediaQuery.of(context).size.height;
+    double myWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.item['creatorname']),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(widget.item['selldescription']),
-            SizedBox(height: 20),
-            Text(widget.item['sellprice']),
-            SizedBox(height: 20),
-            Text(widget.item['selltitle']),
-          ],
+      body: SingleChildScrollView(
+        child: Container(
+          height: myHeight,
+          width: myWidth,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Container(
+                  height: myHeight * 0.4,
+                  // width: myWidth * 0.3,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          blurRadius: 7,
+                          spreadRadius: 3,
+                          offset: Offset(0, 5)),
+                    ],
+                    image: DecorationImage(
+                        image: NetworkImage(widget.item['imageUrl']),
+                        fit: BoxFit.cover),
+                  ),
+                ),
+              ),
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 20,
+                      bottom: 30,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          child: Row(
+                            children: [
+                              // Icon(
+                              //   Icons.label,
+                              //   size: myWidth * 0.050,
+                              // ),
+                              Text(
+                                widget.item['selltitle'],
+                                style: TextStyle(
+                                    fontSize: 30, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: myHeight * 0.03,
+                        ),
+                        Container(
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.category,
+                                size: myWidth * 0.050,
+                              ),
+                              Text(
+                                "Category",
+                                style: TextStyle(
+                                    fontSize: 22, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 22),
+                          child: Text(
+                            widget.item['subcategory'] +
+                                "(" +
+                                widget.item['majorcategory'] +
+                                ")",
+                            style: TextStyle(
+                              fontSize: 19,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: myHeight * 0.02,
+                        ),
+                        Container(
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.description,
+                                size: myWidth * 0.050,
+                              ),
+                              Text(
+                                "Description",
+                                style: TextStyle(
+                                    fontSize: 22, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 22),
+                          child: Text(
+                            widget.item['selldescription'],
+                            style: TextStyle(
+                              fontSize: 19,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: myHeight * 0.02,
+                        ),
+                        Container(
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.person,
+                                size: myWidth * 0.050,
+                              ),
+                              Text(
+                                "Uploaded By",
+                                style: TextStyle(
+                                    fontSize: 22, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 22),
+                          child: Text(
+                            widget.item['creatorname'],
+                            style: TextStyle(
+                              fontSize: 19,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: myHeight * 0.02,
+                        ),
+                        Container(
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.access_time_filled,
+                                size: myWidth * 0.050,
+                              ),
+                              Text(
+                                "Uploaded On",
+                                style: TextStyle(
+                                    fontSize: 22, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 22),
+                          child: Text(
+                            formattedDate,
+                            style: TextStyle(
+                              fontSize: 19,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: myHeight * 0.02,
+                        ),
+                        Container(
+                          child: Row(
+                            children: [
+                              LineIcon.indianRupeeSign(
+                                size: myWidth * 0.050,
+                              ),
+                              Text(
+                                "Price",
+                                style: TextStyle(
+                                    fontSize: 22, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 22),
+                          child: Text(
+                            widget.item['sellprice'],
+                            style: TextStyle(
+                              fontSize: 19,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+
+              // Row(
+              //   children: [
+              //     Padding(
+              //       padding: const EdgeInsets.symmetric(
+              //         horizontal: 20,
+              //       ),
+              //       child: Container(
+              //         width: myWidth * 0.6,
+              //         child: Stack(
+              //           children: [
+              //             profileItem('assets/profile/14.jpg'),
+              //             Positioned(
+              //               left: myWidth * 0.1,
+              //               child: profileItem('assets/profile/13.jpg'),
+              //             ),
+              //             Positioned(
+              //               left: myWidth * 0.2,
+              //               child: profileItem('assets/profile/14.jpg'),
+              //             ),
+              //             Positioned(
+              //               left: myWidth * 0.3,
+              //               child: profileItem('assets/profile/13.jpg'),
+              //             ),
+              //             Positioned(
+              //               left: myWidth * 0.4,
+              //               child: moreItem(),
+              //             ),
+              //           ],
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              MaterialButton(
+                onPressed: () {},
+                minWidth: myWidth*0.5,
+                height: 60,
+                color: Colors.cyan,
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50)),
+                child: Text(
+                  "Book Now",
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
