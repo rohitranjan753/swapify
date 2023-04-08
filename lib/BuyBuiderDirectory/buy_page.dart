@@ -27,19 +27,38 @@ class _BuyPageState extends State<BuyPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.cyan[400],
-        title: Card(
-          child: TextField(
-            controller: _searchController,
-            decoration: InputDecoration(
-              suffixIcon: Icon(
-                Icons.search,
-                color: Colors.black,
-              ),
-              hintText: '  Search...',
+        title: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border.all(
+              color: Colors.white,
             ),
-            onChanged: (value) {
-              setState(() {});
-            },
+            borderRadius: BorderRadius.circular(40)
+          ),
+          height: myHeight*0.05,
+          width: myWidth*0.6,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 8),
+            child: TextField(
+              style: TextStyle(
+                fontSize: 15
+              ),
+              controller: _searchController,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                // border: OutlineInputBorder(
+                //   borderRadius: BorderRadius.circular(20)
+                // ),
+                suffixIcon: Icon(
+                  Icons.search,
+                  color: Colors.black,
+                ),
+                hintText: '  Search...',
+              ),
+              onChanged: (value) {
+                setState(() {});
+              },
+            ),
           ),
         ),
       ),

@@ -26,10 +26,12 @@ class _SelectedBuyPageState extends State<SelectedBuyPage> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.cyan[300],
         title: Text(widget.item['creatorname']),
       ),
       body: SingleChildScrollView(
         child: Container(
+          // color: Color.fromRGBO(255, 248, 238, 10),
           height: myHeight,
           width: myWidth,
           child: Column(
@@ -91,16 +93,19 @@ class _SelectedBuyPageState extends State<SelectedBuyPage> {
                                 Icons.category,
                                 size: myWidth * 0.050,
                               ),
-                              Text(
-                                "Category",
-                                style: TextStyle(
-                                    fontSize: 22, fontWeight: FontWeight.bold),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 5),
+                                child: Text(
+                                  "Category",
+                                  style: TextStyle(
+                                      fontSize: 22, fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ],
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 22),
+                          padding: const EdgeInsets.only(left: 30),
                           child: Text(
                             widget.item['subcategory'] +
                                 "(" +
@@ -121,16 +126,19 @@ class _SelectedBuyPageState extends State<SelectedBuyPage> {
                                 Icons.description,
                                 size: myWidth * 0.050,
                               ),
-                              Text(
-                                "Description",
-                                style: TextStyle(
-                                    fontSize: 22, fontWeight: FontWeight.bold),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 5),
+                                child: Text(
+                                  "Description",
+                                  style: TextStyle(
+                                      fontSize: 22, fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ],
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 22),
+                          padding: const EdgeInsets.only(left: 30),
                           child: Text(
                             widget.item['selldescription'],
                             style: TextStyle(
@@ -148,16 +156,19 @@ class _SelectedBuyPageState extends State<SelectedBuyPage> {
                                 Icons.person,
                                 size: myWidth * 0.050,
                               ),
-                              Text(
-                                "Uploaded By",
-                                style: TextStyle(
-                                    fontSize: 22, fontWeight: FontWeight.bold),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 5),
+                                child: Text(
+                                  "Uploaded By",
+                                  style: TextStyle(
+                                      fontSize: 22, fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ],
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 22),
+                          padding: const EdgeInsets.only(left: 30),
                           child: Text(
                             widget.item['creatorname'],
                             style: TextStyle(
@@ -175,16 +186,19 @@ class _SelectedBuyPageState extends State<SelectedBuyPage> {
                                 Icons.access_time_filled,
                                 size: myWidth * 0.050,
                               ),
-                              Text(
-                                "Uploaded On",
-                                style: TextStyle(
-                                    fontSize: 22, fontWeight: FontWeight.bold),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 5),
+                                child: Text(
+                                  "Uploaded On",
+                                  style: TextStyle(
+                                      fontSize: 22, fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ],
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 22),
+                          padding: const EdgeInsets.only(left: 30),
                           child: Text(
                             formattedDate,
                             style: TextStyle(
@@ -201,16 +215,19 @@ class _SelectedBuyPageState extends State<SelectedBuyPage> {
                               LineIcon.indianRupeeSign(
                                 size: myWidth * 0.050,
                               ),
-                              Text(
-                                "Price",
-                                style: TextStyle(
-                                    fontSize: 22, fontWeight: FontWeight.bold),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 5),
+                                child: Text(
+                                  "Price",
+                                  style: TextStyle(
+                                      fontSize: 22, fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ],
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 22),
+                          padding: const EdgeInsets.only(left: 30),
                           child: Text(
                             widget.item['sellprice'],
                             style: TextStyle(
