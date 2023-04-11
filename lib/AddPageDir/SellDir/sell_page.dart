@@ -19,8 +19,6 @@ class _SellPageState extends State<SellPage> {
   final _formKey = GlobalKey<FormState>();
   String? _selectedFirstValue;
   String? _selectedSecondValue;
-  // Initial Selected Value
-  // String dropdownvalue = 'Notes';
 
   // List of items in our dropdown menu
   List<String> _firstDropdownOptions = [
@@ -125,8 +123,6 @@ class _SellPageState extends State<SellPage> {
   @override
   Widget build(BuildContext context) {
     TextEditingController _desController = TextEditingController();
-
-    // Check if the text form field is empty
 
     double myHeight = MediaQuery.of(context).size.height;
     double myWidth = MediaQuery.of(context).size.width;

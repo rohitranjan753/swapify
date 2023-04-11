@@ -79,13 +79,14 @@ class _AddPageState extends State<AddPage> {
                     ),
                     elevation: 5,
                     child: Container(
-                      height: myHeight * 0.3,
+                      height: myHeight * 0.32,
                       width: myWidth,
                       child: Column(children: [
                         Padding(
                           padding: const EdgeInsets.all(4.0),
                           child: Image.asset(
                             'assets/images/rent2.jpg',
+
                             width: myWidth * 0.5,
                           ),
                         ),

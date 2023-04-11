@@ -12,17 +12,19 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          SizedBox(height: 60,),
-          ElevatedButton(onPressed: (){
-            FirebaseAuth.instance.signOut();
-          }, child: Text('LOGOUT'),),
-          Center(
-            child:
-            Text('Profile PAGE'),
-          ),
-        ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            SizedBox(height: 60,),
+            ElevatedButton(onPressed: (){
+              FirebaseAuth.instance.signOut();
+            }, child: Text('LOGOUT'),),
+            Center(
+              child:
+              Text('Profile PAGE'),
+            ),
+          ],
+        ),
       ),
     );
   }

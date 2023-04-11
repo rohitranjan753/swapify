@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:vbuddyproject/AddPageDir/RentDir/rent_page.dart';
 import 'package:vbuddyproject/BuyBuiderDirectory/buy_page.dart';
 import 'package:vbuddyproject/BuyBuiderDirectory/buy_page_new.dart';
 import 'package:vbuddyproject/HomePageDir/category_screen.dart';
@@ -416,7 +417,7 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.all(25.0),
                         child: GestureDetector(
                           onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => SearchPage()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => RentPage()));
                           },
                           child: Container(
                               height: myHeight * 0.4,
