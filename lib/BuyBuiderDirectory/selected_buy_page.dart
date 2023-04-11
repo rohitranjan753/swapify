@@ -274,6 +274,7 @@ class _SelectedBuyPageState extends State<SelectedBuyPage> {
               //     ),
               //   ],
               // ),
+
               MaterialButton(
                 onPressed: () {},
                 minWidth: myWidth*0.5,
