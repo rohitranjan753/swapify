@@ -218,7 +218,7 @@ class _SelectedRentPageState extends State<SelectedRentPage> {
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 5),
                                 child: Text(
-                                  "Price",
+                                  "Price/12Hrs",
                                   style: TextStyle(
                                       fontSize: 22, fontWeight: FontWeight.bold),
                                 ),

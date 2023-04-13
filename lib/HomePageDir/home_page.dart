@@ -6,6 +6,7 @@ import 'package:vbuddyproject/AddPageDir/RentDir/rent_page.dart';
 import 'package:vbuddyproject/BuyBuiderDirectory/buy_page.dart';
 import 'package:vbuddyproject/BuyBuiderDirectory/buy_page_new.dart';
 import 'package:vbuddyproject/HomePageDir/category_screen.dart';
+import 'package:vbuddyproject/RentSectionDirectory/rent_home_screen.dart';
 import 'package:vbuddyproject/SearchPageDir/SearchPage.dart';
 
 class HomePage extends StatefulWidget {
@@ -417,7 +418,7 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.all(25.0),
                         child: GestureDetector(
                           onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => RentPage()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => RentHomeScreen()));
                           },
                           child: Container(
                               height: myHeight * 0.4,
