@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:vbuddyproject/RentSectionDirectory/selected_rent_page.dart';
 
 final CollectionReference usersCollection =
 FirebaseFirestore.instance.collection('rent_major_section');
@@ -74,7 +75,7 @@ class _RentHomeScreenState extends State<RentHomeScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => SelectedBuyPage(item: data)));
+                            builder: (context) => SelectedRentPage(item: data)));
                   },
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
