@@ -78,27 +78,27 @@ class _RentPageState extends State<RentPage> {
     final DocumentReference parentDocRef =
     FirebaseFirestore.instance.collection('Users').doc(currentUser.uid);
 
-    parentDocRef.collection('sellsection').doc(uniqueId).set({
+    parentDocRef.collection('rentsection').doc(uniqueId).set({
       'imageUrl': downloadUrl,
       'createdAt': FieldValue.serverTimestamp(),
-      'selltitle': rentTile,
-      'selldescription': rentDes,
-      'sellprice': rentPrice,
-      'majorcategory': firstDropdownValue,
-      'subcategory': secondDropdownValue,
+      'renttitle': rentTile,
+      'rentdescription': rentDes,
+      'rentprice': rentPrice,
+      'rentmajorcategory': firstDropdownValue,
+      'rentsubcategory': secondDropdownValue,
     });
 
     await FirebaseFirestore.instance
-        .collection('sell_major_section')
+        .collection('rent_major_section')
         .doc(uniqueId)
         .set({
       'imageUrl': downloadUrl,
       'createdAt': FieldValue.serverTimestamp(),
-      'selltitle': rentTile,
-      'selldescription': rentDes,
-      'sellprice': rentPrice,
-      'majorcategory': firstDropdownValue,
-      'subcategory': secondDropdownValue,
+      'renttitle': rentTile,
+      'rentdescription': rentDes,
+      'rentprice': rentPrice,
+      'rentmajorcategory': firstDropdownValue,
+      'rentsubcategory': secondDropdownValue,
       'createdby': currentUser.uid,
       'creatorname': userName,
     });
@@ -187,7 +187,7 @@ class _RentPageState extends State<RentPage> {
                     });
                   },
                   decoration: InputDecoration(
-                    labelText: "Enter Title",
+                    labelText: "Title",
                     contentPadding:
                     EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                     enabledBorder: OutlineInputBorder(
@@ -198,7 +198,7 @@ class _RentPageState extends State<RentPage> {
                         borderRadius: BorderRadius.circular(20)),
                     filled: true,
                     fillColor: Colors.white,
-                    hintText: 'Title',
+                    hintText: 'Enter Title',
                   ),
                   validator: (value) {
                     if (value!.isEmpty || value == null) {
@@ -218,7 +218,7 @@ class _RentPageState extends State<RentPage> {
                     });
                   },
                   decoration: InputDecoration(
-                    labelText: 'Enter Description',
+                    labelText: 'Description',
                     contentPadding:
                     EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                     enabledBorder: OutlineInputBorder(
@@ -229,11 +229,11 @@ class _RentPageState extends State<RentPage> {
                         borderRadius: BorderRadius.circular(20)),
                     filled: true,
                     fillColor: Colors.white,
-                    hintText: 'Description',
+                    hintText: 'Enter Description',
                   ),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Please Description';
+                      return 'Description can\'t be empty';
                     }
                     return null;
                   },
@@ -248,7 +248,7 @@ class _RentPageState extends State<RentPage> {
                     });
                   },
                   decoration: InputDecoration(
-                    labelText: "Enter Price",
+                    labelText: "Rent Price",
                     contentPadding:
                     EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                     enabledBorder: OutlineInputBorder(
@@ -259,11 +259,11 @@ class _RentPageState extends State<RentPage> {
                         borderRadius: BorderRadius.circular(20)),
                     filled: true,
                     fillColor: Colors.white,
-                    hintText: 'Price',
+                    hintText: 'Enter Price per 12 Hrs',
                   ),
                   validator: (value) {
                     if (value!.isEmpty || value == null) {
-                      return 'Pleas Price';
+                      return 'Price feild can\'t be empty';
                     } else {
                       return null;
                     }
@@ -272,32 +272,6 @@ class _RentPageState extends State<RentPage> {
                 SizedBox(
                   height: 10,
                 ),
-                // Container(
-                //   width: myWidth,
-                //   child: DropdownButton(
-                //     // hint: Text('Select Category'),
-                //     // Initial Value
-                //     value: dropdownvalue,
-                //
-                //     // Down Arrow Icon
-                //     icon: const Icon(Icons.keyboard_arrow_down),
-                //
-                //     // Array list of items
-                //     items: items.map((String items) {
-                //       return DropdownMenuItem(
-                //         value: items,
-                //         child: Text(items,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0),),
-                //       );
-                //     }).toList(),
-                //     // After selecting the desired option,it will
-                //     // change button value to selected value
-                //     onChanged: (String? newValue) {
-                //       setState(() {
-                //         dropdownvalue = newValue!;
-                //       });
-                //     },
-                //   ),
-                // ),
 
                 SizedBox(
                   height: 20,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vbuddyproject/AddPageDir/RentDir/rent_page.dart';
 import 'package:vbuddyproject/AddPageDir/SellDir/sell_page.dart';
 
 class AddPage extends StatefulWidget {
@@ -69,37 +70,43 @@ class _AddPageState extends State<AddPage> {
                 ),
 
                 //rent
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Card(
-                    color: Colors.grey[100],
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    elevation: 5,
-                    child: Container(
-                      height: myHeight * 0.32,
-                      width: myWidth,
-                      child: Column(children: [
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Image.asset(
-                            'assets/images/rent2.jpg',
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (context) => RentPage()));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Card(
+                      color: Colors.grey[100],
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      elevation: 5,
+                      child: Container(
+                        height: myHeight * 0.32,
+                        width: myWidth,
+                        child: Column(children: [
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Image.asset(
+                              'assets/images/rent2.jpg',
 
-                            width: myWidth * 0.5,
+                              width: myWidth * 0.5,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 1,
-                        ),
-                        Text(
-                          'Rent',
-                          style: TextStyle(
-                            fontSize: 35,
+                          SizedBox(
+                            height: 1,
                           ),
-                        ),
-                      ]),
+                          Text(
+                            'Rent',
+                            style: TextStyle(
+                              fontSize: 35,
+                            ),
+                          ),
+                        ]),
+                      ),
                     ),
                   ),
                 )
