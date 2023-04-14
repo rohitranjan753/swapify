@@ -103,6 +103,21 @@ class _RentPageState extends State<RentPage> {
       'creatorname': userName,
     });
 
+    await FirebaseFirestore.instance
+        .collection('all_section')
+        .doc(uniqueId)
+        .set({
+      'imageUrl': downloadUrl,
+      'createdAt': FieldValue.serverTimestamp(),
+      'renttitle': rentTile,
+      'rentdescription': rentDes,
+      'rentprice': rentPrice,
+      'rentmajorcategory': firstDropdownValue,
+      'rentsubcategory': secondDropdownValue,
+      'createdby': currentUser.uid,
+      'creatorname': userName,
+    });
+
     setState(() {
       _isLoading = false;
     });

@@ -104,6 +104,21 @@ class _SellPageState extends State<SellPage> {
       'creatorname': userName,
     });
 
+    await FirebaseFirestore.instance
+        .collection('all_section')
+        .doc(uniqueId)
+        .set({
+      'imageUrl': downloadUrl,
+      'createdAt': FieldValue.serverTimestamp(),
+      'selltitle': rentTile,
+      'selldescription': rentDes,
+      'sellprice': rentPrice,
+      'majorcategory': firstDropdownValue,
+      'subcategory': secondDropdownValue,
+      'createdby': currentUser.uid,
+      'creatorname': userName,
+    });
+
     setState(() {
       _isLoading = false;
     });
