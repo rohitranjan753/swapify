@@ -5,6 +5,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:vbuddyproject/AddPageDir/RentDir/rent_page.dart';
 import 'package:vbuddyproject/BuyBuiderDirectory/buy_page.dart';
 import 'package:vbuddyproject/BuyBuiderDirectory/buy_page_new.dart';
+import 'package:vbuddyproject/BuyBuiderDirectory/selected_buy_page.dart';
 import 'package:vbuddyproject/HomePageDir/category_screen.dart';
 import 'package:vbuddyproject/RentSectionDirectory/rent_home_screen.dart';
 import 'package:vbuddyproject/SearchPageDir/SearchPage.dart';
@@ -114,7 +115,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-
               Container(
                 height: myHeight * 0.1,
                 width: myWidth,
@@ -189,21 +189,16 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-
               Container(
-                height: myHeight *0.1,
+                height: myHeight * 0.1,
                 width: myWidth,
                 child: ListView.builder(
-                  itemCount: categoryIcon.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return categorySingleRow(index);
-
-                }),
+                    itemCount: categoryIcon.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return categorySingleRow(index);
+                    }),
               ),
-
-
-
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Row(
@@ -226,8 +221,8 @@ class _HomePageState extends State<HomePage> {
               ),
               Expanded(
                   child: SingleChildScrollView(
-                   child: Column(
-                    children: [
+                child: Column(
+                  children: [
                     Padding(
                       padding: const EdgeInsets.all(40.0),
                       child: GestureDetector(
@@ -385,7 +380,6 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ))
-
             ],
           ),
         ),
@@ -393,30 +387,37 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-
   Widget categorySingleRow(int index) {
     double myHeight = MediaQuery.of(context).size.height;
     double myWidth = MediaQuery.of(context).size.width;
-    return Padding(
-      padding: const EdgeInsets.symmetric(),
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          children: [
-            Icon(
-              categoryIcon[index],
-              size: 50,
-              color: Colors.blue,
-            ),
-            Text(
-              categoryName[index],
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.normal,
-                color: Colors.grey,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SelectedBuyPage(item: categoryName[index])));
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(),
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 15),
+          child: Column(
+            children: [
+              Icon(
+                categoryIcon[index],
+                size: 50,
+                color: Colors.blue,
               ),
-            )
-          ],
+              Text(
+                categoryName[index],
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.grey,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
