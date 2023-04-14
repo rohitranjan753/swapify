@@ -9,6 +9,7 @@ import 'package:vbuddyproject/BuyBuiderDirectory/selected_buy_page.dart';
 import 'package:vbuddyproject/HomePageDir/category_screen.dart';
 import 'package:vbuddyproject/RentSectionDirectory/rent_home_screen.dart';
 import 'package:vbuddyproject/SearchPageDir/SearchPage.dart';
+import 'package:vbuddyproject/SearchPageDir/selected_search_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -195,8 +196,17 @@ class _HomePageState extends State<HomePage> {
                 child: ListView.builder(
                     itemCount: categoryIcon.length,
                     scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return categorySingleRow(index);
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SelectedSearchPage(
+                                          index: index, categoryName: categoryName,
+                                        )));
+                          },
+                          child: categorySingleRow(index));
                     }),
               ),
               Padding(
@@ -391,33 +401,24 @@ class _HomePageState extends State<HomePage> {
     double myHeight = MediaQuery.of(context).size.height;
     double myWidth = MediaQuery.of(context).size.width;
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => SelectedBuyPage(item: categoryName[index])));
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(),
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 15),
-          child: Column(
-            children: [
-              Icon(
-                categoryIcon[index],
-                size: 50,
-                color: Colors.blue,
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 15),
+        child: Column(
+          children: [
+            Icon(
+              categoryIcon[index],
+              size: 50,
+              color: Colors.blue,
+            ),
+            Text(
+              categoryName[index],
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.normal,
+                color: Colors.grey,
               ),
-              Text(
-                categoryName[index],
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.normal,
-                  color: Colors.grey,
-                ),
-              )
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );
