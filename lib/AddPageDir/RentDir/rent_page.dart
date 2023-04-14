@@ -109,13 +109,14 @@ class _RentPageState extends State<RentPage> {
         .set({
       'imageUrl': downloadUrl,
       'createdAt': FieldValue.serverTimestamp(),
-      'renttitle': rentTile,
-      'rentdescription': rentDes,
+      'title': rentTile,
+      'description': rentDes,
       'rentprice': rentPrice,
-      'rentmajorcategory': firstDropdownValue,
-      'rentsubcategory': secondDropdownValue,
+      'majorcategory': firstDropdownValue,
+      'subcategory': secondDropdownValue,
       'createdby': currentUser.uid,
       'creatorname': userName,
+      'category': "rent",
     });
 
     setState(() {

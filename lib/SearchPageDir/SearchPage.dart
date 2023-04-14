@@ -5,10 +5,8 @@ import 'package:flutter/material.dart';
 import '../BuyBuiderDirectory/selected_buy_page.dart';
 
 final CollectionReference sellsection =
-FirebaseFirestore.instance.collection('sell_major_section');
+FirebaseFirestore.instance.collection('all_section');
 
-final CollectionReference rentsection =
-FirebaseFirestore.instance.collection('rent_major_section');
 
 class SearchPage extends StatefulWidget {
 
@@ -98,9 +96,12 @@ class _SearchPageState extends State<SearchPage> {
                           Container(
                             color: Colors.cyan[100],
                             child: ListTile(
-                              title: Text(data['selltitle']),
-                              subtitle: Text(
+                              title: Text(data['title']),
+                              subtitle: data['category'].toString() == "sell" ?Text(
                                 "\$${data['sellprice']}",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ) : Text(
+                                "\$${data['rentprice']} / 12Hrs",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                               trailing: user!.uid == data['createdby']

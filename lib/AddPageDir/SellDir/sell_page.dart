@@ -110,13 +110,14 @@ class _SellPageState extends State<SellPage> {
         .set({
       'imageUrl': downloadUrl,
       'createdAt': FieldValue.serverTimestamp(),
-      'selltitle': rentTile,
-      'selldescription': rentDes,
+      'title': rentTile,
+      'description': rentDes,
       'sellprice': rentPrice,
       'majorcategory': firstDropdownValue,
       'subcategory': secondDropdownValue,
       'createdby': currentUser.uid,
       'creatorname': userName,
+      'category': "sell",
     });
 
     setState(() {
