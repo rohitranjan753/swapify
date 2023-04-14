@@ -1,21 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:vbuddyproject/SearchPageDir/selected_search_page.dart';
 
-import '../BuyBuiderDirectory/selected_buy_page.dart';
 
 final CollectionReference sellsection =
 FirebaseFirestore.instance.collection('all_section');
 
+class BrowseCategoryScreen extends StatefulWidget {
+  final int index;
+  final List categoryName;
 
-class SearchPage extends StatefulWidget {
+  BrowseCategoryScreen({required this.index, required this.categoryName});
 
   @override
-  State<SearchPage> createState() => _SearchPageState();
+  State<BrowseCategoryScreen> createState() => _BrowseCategoryScreenState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
   TextEditingController _searchController = TextEditingController();
 
   @override
@@ -23,6 +26,8 @@ class _SearchPageState extends State<SearchPage> {
     double myHeight = MediaQuery.of(context).size.height;
     double myWidth = MediaQuery.of(context).size.width;
     final User? user = FirebaseAuth.instance.currentUser;
+
+    String getVal = widget.categoryName[widget.index].toString();
 
     return Scaffold(
       appBar: AppBar(
@@ -35,16 +40,13 @@ class _SearchPageState extends State<SearchPage> {
                 border: Border.all(
                   color: Colors.white,
                 ),
-                borderRadius: BorderRadius.circular(40)
-            ),
-            height: myHeight*0.05,
-            width: myWidth*0.6,
+                borderRadius: BorderRadius.circular(40)),
+            height: myHeight * 0.05,
+            width: myWidth * 0.6,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
               child: TextField(
-                style: TextStyle(
-                    fontSize: 15
-                ),
+                style: TextStyle(fontSize: 15),
                 controller: _searchController,
                 decoration: InputDecoration(
                   border: InputBorder.none,
@@ -62,7 +64,7 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ),
       ),
-      body: StreamBuilder<QuerySnapshot>(
+      body:  StreamBuilder<QuerySnapshot>(
         stream: _buildQuery().snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -73,7 +75,7 @@ class _SearchPageState extends State<SearchPage> {
               itemCount: searchResults.length,
               itemBuilder: (context, index) {
                 final DocumentSnapshot data = searchResults[index];
-                return GestureDetector(
+                return data['majorcategory'].toString() == getVal ? GestureDetector(
                   onTap: () {
                     Navigator.push(
                         context,
@@ -98,12 +100,16 @@ class _SearchPageState extends State<SearchPage> {
                             color: Colors.cyan[100],
                             child: ListTile(
                               title: Text(data['title']),
-                              subtitle: data['category'].toString() == "sell" ?Text(
+                              subtitle: data['category'].toString() == "sell"
+                                  ? Text(
                                 "\$${data['sellprice']}",
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ) : Text(
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold),
+                              )
+                                  : Text(
                                 "\$${data['rentprice']} / 12Hrs",
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold),
                               ),
                               trailing: user!.uid == data['createdby']
                                   ? Text(
@@ -118,7 +124,10 @@ class _SearchPageState extends State<SearchPage> {
                       ),
                     ),
                   ),
-                );
+                ) : Padding(padding: EdgeInsets.all(0));
+
+
+
               },
             );
           }

@@ -6,6 +6,7 @@ import 'package:vbuddyproject/AddPageDir/RentDir/rent_page.dart';
 import 'package:vbuddyproject/BuyBuiderDirectory/buy_page.dart';
 import 'package:vbuddyproject/BuyBuiderDirectory/buy_page_new.dart';
 import 'package:vbuddyproject/BuyBuiderDirectory/selected_buy_page.dart';
+import 'package:vbuddyproject/HomePageDir/browse_category_screen.dart';
 import 'package:vbuddyproject/HomePageDir/category_screen.dart';
 import 'package:vbuddyproject/RentSectionDirectory/rent_home_screen.dart';
 import 'package:vbuddyproject/SearchPageDir/SearchPage.dart';
@@ -202,7 +203,7 @@ class _HomePageState extends State<HomePage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => SelectedSearchPage(
+                                    builder: (context) => BrowseCategoryScreen(
                                           index: index, categoryName: categoryName,
                                         )));
                           },
