@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                               borderRadius: BorderRadius.circular(20),
                               image: DecorationImage(
                                   image:
-                                      AssetImage('assets/images/proctor3.jpg'),
+                                      AssetImage('assets/profile/user.png'),
                                   fit: BoxFit.cover),
                             ),
                           ),

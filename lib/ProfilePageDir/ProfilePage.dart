@@ -1,5 +1,12 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:line_icons/line_icon.dart';
+import 'package:vbuddyproject/ProfilePageDir/editprofile_screen.dart';
+import 'package:vbuddyproject/ProfilePageDir/setting_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -9,42 +16,93 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  File? _image;
+  Future<void> _getImage() async {
+    final imagePicker = ImagePicker();
+    final pickedFile = await imagePicker.getImage(
+        source: ImageSource.gallery, imageQuality: 50);
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      }
+    });
+  }
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+  String username = '';
+  String email='';
+  String  userImage = '';
+  void getData() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    String uid = user!.uid;
+
+    final DocumentSnapshot userDoc =
+    await FirebaseFirestore.instance.collection('Users').doc(uid).get();
+    setState(() {
+      username = userDoc.get('username');
+      email = userDoc.get('email');
+      userImage = userDoc.get('userimage');
+    });
+  }
+  
   final double coverHeight = 240;
   final double profileHeight = 144;
   @override
   Widget build(BuildContext context) {
+
+
+    double myHeight = MediaQuery.of(context).size.height;
+    double myWidth = MediaQuery.of(context).size.width;
+
     final top = coverHeight - profileHeight / 2;
     return Scaffold(
       body: SafeArea(
-        child: Stack(
-          clipBehavior: Clip.none,
-          alignment: Alignment.center,
+        child: Column(
           children: [
-            buildCoverImage(),
-            Positioned(
-              top: top,
-              child: buildProfileImage(),
+            Container(
+              child: Stack(
+                clipBehavior: Clip.none,
+                alignment: Alignment.center,
+                children: [
+                  buildCoverImage(),
+                  Positioned(
+                    top: top,
+                    child: buildProfileImage(),
+                  ),
+                ],
+              ),
             ),
+            SizedBox(height: 80,),
+            Text(username,style: TextStyle(fontSize: 35,fontWeight: FontWeight.bold),),
+            SizedBox(height: 10,),
+            Text(email,style: TextStyle(fontSize: 25,color: Colors.grey),),
+            SizedBox(height: 40,),
+            MaterialButton(onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>EditprofileScreen()));
+            },
+              elevation: 20,
+              minWidth: myWidth*0.5,
+              height: myHeight*0.06,
+              color: Colors.amber[300],
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50)),
+              child: Text(
+                'EDIT PROFILE',
+                style: TextStyle(
+                    fontWeight: FontWeight.w500, fontSize: 18),
+              ),
+            ),
+            SizedBox(height: 30,),
+            ProfileMenuWidget()
+
           ],
         ),
       ),
     );
-    // return Scaffold(
-    //   body: SafeArea(
-    //     child: Column(
-    //       children: [
-    //         SizedBox(height: 60,),
-    //         ElevatedButton(onPressed: (){
-    //           FirebaseAuth.instance.signOut();
-    //         }, child: Text('LOGOUT'),),
-    //         Center(
-    //           child:
-    //           Text('Profile PAGE'),
-    //         ),
-    //       ],
-    //     ),
-    //   ),
-    // );
+
   }
 
   Widget buildCoverImage() => Container(
@@ -60,8 +118,47 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget buildProfileImage() => CircleAvatar(
         radius: profileHeight / 2,
         backgroundColor: Colors.grey.shade800,
-        backgroundImage: AssetImage(
-            'assets/profile/user.png'),
+        backgroundImage:  NetworkImage(userImage),
       );
 
+}
+
+class ProfileMenuWidget extends StatelessWidget {
+  const ProfileMenuWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 300,
+      child: ListTile(
+        leading: Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(100),
+            color: Colors.deepPurpleAccent.withOpacity(0.2),
+
+          ),
+          child: Icon(Icons.settings,color: Colors.indigoAccent,),
+        ),
+        title: Text("Setting",style: TextStyle(fontSize: 20,),),
+        trailing: GestureDetector(
+          onTap: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>SettingsScreen()));
+          },
+          child: Container(
+            width: 30,
+            height: 30,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              color: Colors.grey.withOpacity(0.2),
+            ),
+            child: Icon(Icons.arrow_forward_ios_outlined),
+          ),
+        ),
+      ),
+    );
+  }
 }

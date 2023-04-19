@@ -14,6 +14,7 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   final _auth = FirebaseAuth.instance;
   var _isLoading = false;
+  final String defaultImageLogo = 'https://firebasestorage.googleapis.com/v0/b/vbuddyproject-99a8a.appspot.com/o/images%2Fuser_logo.png?alt=media&token=debafca9-68fc-499d-b2a1-5e12f2e2f665';
 
   void _submitAuthForm(String email, String password, String username, bool isLogin, BuildContext ctx) async {
     UserCredential authResult;
@@ -44,6 +45,7 @@ class _AuthScreenState extends State<AuthScreen> {
             .set({
           'username': username,
           'email': email,
+          'userimage': defaultImageLogo
           // 'image_url': url,
         });
       }

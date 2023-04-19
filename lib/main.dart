@@ -22,12 +22,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+
       debugShowCheckedModeBanner: false,
 
       title: 'Flutter Demo',
       theme: ThemeData(
+        primarySwatch: Colors.cyan,
         textTheme: GoogleFonts.robotoSerifTextTheme(),
-        primarySwatch: Colors.blue,
       ),
       // home: HomeScreenNew(),
       home: StreamBuilder(
