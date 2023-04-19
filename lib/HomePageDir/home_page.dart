@@ -24,6 +24,7 @@ class _HomePageState extends State<HomePage> {
         await FirebaseFirestore.instance.collection('Users').doc(uid).get();
     setState(() {
       username = userDoc.get('username').toString();
+      userImage = userDoc.get('userimage');
       print(username);
     });
   }
@@ -67,14 +68,13 @@ class _HomePageState extends State<HomePage> {
                       Row(
                         children: [
                           Container(
-                            height: myHeight * 0.06,
-                            width: myWidth * 0.12,
+                            height: myHeight * 0.08,
+                            width: myWidth * 0.13,
                             decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 203, 172, 76),
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(100),
                               image: DecorationImage(
                                   image:
-                                      AssetImage('assets/profile/user.png'),
+                                      NetworkImage(userImage),
                                   fit: BoxFit.cover),
                             ),
                           ),
