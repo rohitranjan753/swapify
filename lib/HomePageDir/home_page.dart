@@ -6,6 +6,7 @@ import 'package:vbuddyproject/BuyBuiderDirectory/buy_page.dart';
 import 'package:vbuddyproject/HomePageDir/browse_category_screen.dart';
 import 'package:vbuddyproject/HomePageDir/category_screen.dart';
 import 'package:vbuddyproject/RentSectionDirectory/rent_home_screen.dart';
+import 'package:vbuddyproject/SearchPageDir/SearchPage.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -105,9 +106,20 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ],
                       ),
-                      Icon(
-                        Icons.notifications_none_rounded,
-                        color: Colors.blue[300],
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SearchPage(
+
+                                  )));
+                        },
+                        child: Icon(
+                          Icons.search,
+                          color: Colors.blue[300],
+                          size: 30,
+                        ),
                       )
                     ],
                   ),

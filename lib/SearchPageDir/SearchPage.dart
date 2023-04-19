@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:vbuddyproject/SearchPageDir/selected_search_page.dart';
 
 import '../BuyBuiderDirectory/selected_buy_page.dart';
+import '../Model/item_model.dart';
+import '../Model/item_widget.dart';
 
 final CollectionReference sellsection =
 FirebaseFirestore.instance.collection('all_section');
@@ -62,68 +64,65 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ),
       ),
+      // body: StreamBuilder<QuerySnapshot>(
+      //   stream: FirebaseFirestore.instance.collection('all_section').snapshots(),
+      //   builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+      //     if (snapshot.hasError) {
+      //       return Text('Something went wrong');
+      //     }
+      //
+      //     if (snapshot.connectionState == ConnectionState.waiting) {
+      //       return Text('Loading');
+      //     }
+      //
+      //     return GridView.builder(
+      //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      //         crossAxisCount: 2,
+      //         crossAxisSpacing: 10.0,
+      //         mainAxisSpacing: 10.0,
+      //       ),
+      //       itemCount: snapshot.data!.docs.length,
+      //       itemBuilder: (BuildContext context, int index) {
+      //         DocumentSnapshot document = snapshot.data!.docs[index];
+      //         return Container(
+      //           child: Column(
+      //             children: [
+      //               Container(
+      //                   color: Colors.tealAccent,
+      //                   child: Image(image: NetworkImage(document['imageUrl']),height: 100,width: 100,)),
+      //               Text(document['title']),
+      //               Text(document['description']),
+      //               Text(document['majorcategory']),
+      //             ],
+      //           ),
+      //
+      //         );
+      //       },
+      //     );
+      //   },
+      // )
       body: StreamBuilder<QuerySnapshot>(
-        stream: _buildQuery().snapshots(),
+        stream: FirebaseFirestore.instance.collection('all_section').snapshots(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Center(child: CircularProgressIndicator());
-          } else {
-            List<DocumentSnapshot> searchResults = snapshot.data!.docs;
-            return ListView.builder(
-              itemCount: searchResults.length,
-              itemBuilder: (context, index) {
-                final DocumentSnapshot data = searchResults[index];
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SelectedSearchPage(item: data)));
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                    width: myWidth * 0.4,
-                    child: Card(
-                      elevation: 8,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 5),
-                            child: Image(
-                                image: NetworkImage(data['imageUrl']),
-                                height: myHeight * 0.2,
-                                width: myWidth * 0.7),
-                          ),
-                          Container(
-                            color: Colors.cyan[100],
-                            child: ListTile(
-                              title: Text(data['title']),
-                              subtitle: data['category'].toString() == "sell" ?Text(
-                                "\$${data['sellprice']}",
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ) : Text(
-                                "\$${data['rentprice']} / 12Hrs",
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              trailing: user!.uid == data['createdby']
-                                  ? Text(
-                                'Uploaded By: YOU',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold),
-                              )
-                                  : Text("Uploaded By: ${data['creatorname']}"),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              },
-            );
-          }
+          if (!snapshot.hasData) return CircularProgressIndicator();
+          return GridView.builder(
+            itemCount: snapshot.data!.docs.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+            ),
+            itemBuilder: (context, index) {
+              DocumentSnapshot data = snapshot.data!.docs[index];
+              Item item = Item(
+                id: data.id,
+                title: data['title'],
+                imageUrl: data['imageUrl'],
+              );
+              return ItemWidget(item: item);
+            },
+          );
         },
       ),
+
     );
   }
 
@@ -138,4 +137,6 @@ class _SearchPageState extends State<SearchPage> {
 
     return searchQuery;
   }
+
+
 }
