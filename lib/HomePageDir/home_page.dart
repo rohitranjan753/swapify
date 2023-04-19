@@ -403,26 +403,24 @@ class _HomePageState extends State<HomePage> {
   Widget categorySingleRow(int index) {
     double myHeight = MediaQuery.of(context).size.height;
     double myWidth = MediaQuery.of(context).size.width;
-    return GestureDetector(
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          children: [
-            Icon(
-              categoryIcon[index],
-              size: 50,
-              color: Colors.blue,
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 15),
+      child: Column(
+        children: [
+          Icon(
+            categoryIcon[index],
+            size: 50,
+            color: Colors.blue,
+          ),
+          Text(
+            categoryName[index],
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.normal,
+              color: Colors.grey,
             ),
-            Text(
-              categoryName[index],
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.normal,
-                color: Colors.grey,
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }

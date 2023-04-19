@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
+import 'browse_category_screen.dart';
+
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({Key? key}) : super(key: key);
 
@@ -42,7 +44,17 @@ class _CategoryScreenState extends State<CategoryScreen> {
             itemCount: categoryIcon.length,
             scrollDirection: Axis.vertical,
             itemBuilder: (context, index) {
-              return categorySingleRow(index);
+              return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => BrowseCategoryScreen(
+                              index: index,
+                              categoryName: categoryName,
+                            )));
+                  },
+                  child: categorySingleRow(index));
             },
           ),
         ),
@@ -55,45 +67,33 @@ class _CategoryScreenState extends State<CategoryScreen> {
     double myWidth = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5),
-      child: GestureDetector(
-        onTap: () {
-          if(index == 0){
-            // Navigator.push(context, MaterialPageRoute(builder: (context) => RegistrationScreen()));
-          }
-          else if(index ==1) {
-            // Navigator.push(context,
-            //     MaterialPageRoute(builder: (context) => LoginScreen()));
-          };
-        },
-        child: Container(
-          height: myHeight*0.15,
-          margin: EdgeInsets.symmetric(vertical: 5),
-          padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [Colors.blueAccent, Colors.lightBlueAccent]),
-          ),
-          child: Center(
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(categoryIcon[index],size: 50,),
-                  ),
-                  Text(
-                    categoryName[index],
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        // color: clicked == index ? Colors.white : Colors.blueAccent,
-                        fontSize: 25),
-                  ),
-                ],
-              )),
+      child: Container(
+        height: myHeight*0.15,
+        margin: EdgeInsets.symmetric(vertical: 5),
+        padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.blueAccent, Colors.tealAccent]),
         ),
-
+        child: Center(
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(categoryIcon[index],size: 50,),
+                ),
+                Text(
+                  categoryName[index],
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      // color: clicked == index ? Colors.white : Colors.blueAccent,
+                      fontSize: 25),
+                ),
+              ],
+            )),
       ),
     );
   }
