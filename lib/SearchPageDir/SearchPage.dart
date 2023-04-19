@@ -64,43 +64,6 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ),
       ),
-      // body: StreamBuilder<QuerySnapshot>(
-      //   stream: FirebaseFirestore.instance.collection('all_section').snapshots(),
-      //   builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-      //     if (snapshot.hasError) {
-      //       return Text('Something went wrong');
-      //     }
-      //
-      //     if (snapshot.connectionState == ConnectionState.waiting) {
-      //       return Text('Loading');
-      //     }
-      //
-      //     return GridView.builder(
-      //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      //         crossAxisCount: 2,
-      //         crossAxisSpacing: 10.0,
-      //         mainAxisSpacing: 10.0,
-      //       ),
-      //       itemCount: snapshot.data!.docs.length,
-      //       itemBuilder: (BuildContext context, int index) {
-      //         DocumentSnapshot document = snapshot.data!.docs[index];
-      //         return Container(
-      //           child: Column(
-      //             children: [
-      //               Container(
-      //                   color: Colors.tealAccent,
-      //                   child: Image(image: NetworkImage(document['imageUrl']),height: 100,width: 100,)),
-      //               Text(document['title']),
-      //               Text(document['description']),
-      //               Text(document['majorcategory']),
-      //             ],
-      //           ),
-      //
-      //         );
-      //       },
-      //     );
-      //   },
-      // )
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('all_section').snapshots(),
         builder: (context, snapshot) {
@@ -116,6 +79,11 @@ class _SearchPageState extends State<SearchPage> {
                 id: data.id,
                 title: data['title'],
                 imageUrl: data['imageUrl'],
+                creatorName:data['creatorname'],
+                createdby:data['createdby'],
+                // rentprice: data['rentprice'],
+                // sellprice: data['sellprice'],
+                category: data['category'],
               );
               return GestureDetector(
                   onTap: () {
