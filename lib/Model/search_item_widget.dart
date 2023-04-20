@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'item_model.dart';
+import 'search_item_model.dart';
 
 class ItemWidget extends StatelessWidget {
   final User? user = FirebaseAuth.instance.currentUser;
@@ -36,11 +36,11 @@ class ItemWidget extends StatelessWidget {
 
           item.category.toString() == "sell"
               ? Text(
-                  "\$${item.sellprice}",
+                  "\$${item.price}",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 )
               : Text(
-                  "\$${item.rentprice} / 12Hrs",
+                  "\$${item.price} / 12Hrs",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
         ],

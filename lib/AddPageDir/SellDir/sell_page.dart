@@ -112,7 +112,7 @@ class _SellPageState extends State<SellPage> {
       'createdAt': FieldValue.serverTimestamp(),
       'title': rentTile,
       'description': rentDes,
-      'sellprice': rentPrice,
+      'price': rentPrice,
       'majorcategory': firstDropdownValue,
       'subcategory': secondDropdownValue,
       'createdby': currentUser.uid,

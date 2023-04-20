@@ -38,6 +38,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Align(
               alignment: Alignment.center,
               child: MaterialButton(onPressed: (){
+                Navigator.pop(context);
                 FirebaseAuth.instance.signOut();
               },
                 elevation: 20,

@@ -111,7 +111,7 @@ class _RentPageState extends State<RentPage> {
       'createdAt': FieldValue.serverTimestamp(),
       'title': rentTile,
       'description': rentDes,
-      'rentprice': rentPrice,
+      'price': rentPrice,
       'majorcategory': firstDropdownValue,
       'subcategory': secondDropdownValue,
       'createdby': currentUser.uid,

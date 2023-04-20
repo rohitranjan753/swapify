@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:vbuddyproject/SearchPageDir/selected_search_page.dart';
 
 import '../BuyBuiderDirectory/selected_buy_page.dart';
-import '../Model/item_model.dart';
-import '../Model/item_widget.dart';
+import '../Model/search_item_model.dart';
+import '../Model/search_item_widget.dart';
 
 final CollectionReference sellsection =
 FirebaseFirestore.instance.collection('all_section');
@@ -81,8 +81,7 @@ class _SearchPageState extends State<SearchPage> {
                 imageUrl: data['imageUrl'],
                 creatorName:data['creatorname'],
                 createdby:data['createdby'],
-                // rentprice: data['rentprice'],
-                // sellprice: data['sellprice'],
+                price: data['price'],
                 category: data['category'],
               );
               return GestureDetector(
