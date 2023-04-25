@@ -7,7 +7,7 @@ import '../BuyBuiderDirectory/selected_buy_page.dart';
 import '../Model/search_item_model.dart';
 import '../Model/search_item_widget.dart';
 
-final CollectionReference sellsection =
+final CollectionReference allsection =
 FirebaseFirestore.instance.collection('all_section');
 
 
@@ -19,97 +19,81 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   TextEditingController _searchController = TextEditingController();
-
+  String searchText = '';
   @override
   Widget build(BuildContext context) {
-    double myHeight = MediaQuery.of(context).size.height;
-    double myWidth = MediaQuery.of(context).size.width;
-    final User? user = FirebaseAuth.instance.currentUser;
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.cyan[400],
-        title: Align(
-          alignment: Alignment.center,
-          child: Container(
-            decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(
-                  color: Colors.white,
-                ),
-                borderRadius: BorderRadius.circular(40)
-            ),
-            height: myHeight*0.05,
-            width: myWidth*0.6,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 8),
-              child: TextField(
-                style: TextStyle(
-                    fontSize: 15
-                ),
-                controller: _searchController,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  suffixIcon: Icon(
-                    Icons.search,
-                    color: Colors.black,
-                  ),
-                  hintText: '  Search...',
-                ),
-                onChanged: (value) {
-                  setState(() {});
-                },
-              ),
-            ),
+        title: TextField(
+          onChanged: (value) {
+            setState(() {
+              searchText = value;
+            });
+          },
+          decoration: InputDecoration(
+            hintText: 'Search...',
           ),
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('all_section').snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection('all_section')
+            .snapshots(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) return CircularProgressIndicator();
+          if (!snapshot.hasData) {
+            return CircularProgressIndicator();
+          }
+          final documents = snapshot.data!.docs.where((doc) =>
+              doc['title'].toString().toLowerCase().contains(searchText.toLowerCase()));
           return GridView.builder(
-            itemCount: snapshot.data!.docs.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              childAspectRatio: 0.75,
             ),
+            itemCount: documents.length,
             itemBuilder: (context, index) {
-              DocumentSnapshot data = snapshot.data!.docs[index];
-              Item item = Item(
-                id: data.id,
-                title: data['title'],
-                imageUrl: data['imageUrl'],
-                creatorName:data['creatorname'],
-                createdby:data['createdby'],
-                price: data['price'],
-                category: data['category'],
+              final data = documents.elementAt(index);
+              return Card(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(
+                      child: Image.network(
+                        data['imageUrl'],
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        data['title'],
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(
+                        data['description'],
+                        style: TextStyle(
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               );
-              return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SelectedSearchPage(item: data)));
-                  },
-                  child: ItemWidget(item: item));
             },
           );
         },
       ),
-
     );
-  }
 
-  Query _buildQuery() {
-    Query searchQuery = sellsection;
-
-    if (_searchController.text.isNotEmpty) {
-      String searchValue = _searchController.text;
-      searchQuery =
-          searchQuery.where('selltitle', isGreaterThanOrEqualTo: searchValue);
-    }
-
-    return searchQuery;
   }
 
 

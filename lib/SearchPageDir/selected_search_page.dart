@@ -223,7 +223,7 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 5),
                                 child: Text(
-                                  "Price/12Hrs",
+                                  "Price",
                                   style: TextStyle(
                                       fontSize: 22, fontWeight: FontWeight.bold),
                                 ),
@@ -234,10 +234,10 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
                         Padding(
                           padding: const EdgeInsets.only(left: 30),
                           child: widget.item['category'].toString() == "sell" ?Text(
-                            "\$${widget.item['sellprice']}",
+                            "\$${widget.item['price']}",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ) : Text(
-                            "\$${widget.item['rentprice']} / 12Hrs",
+                            "\$${widget.item['price']} / 12Hrs",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),

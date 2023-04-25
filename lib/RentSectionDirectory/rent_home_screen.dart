@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:vbuddyproject/Model/rent_item_widget.dart';
 import 'package:vbuddyproject/RentSectionDirectory/selected_rent_page.dart';
+
+import '../Model/rent_item_model.dart';
 
 final CollectionReference usersCollection =
 FirebaseFirestore.instance.collection('rent_major_section');
@@ -62,60 +65,32 @@ class _RentHomeScreenState extends State<RentHomeScreen> {
       body: StreamBuilder<QuerySnapshot>(
         stream: _buildQuery().snapshots(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Center(child: CircularProgressIndicator());
-          } else {
-            List<DocumentSnapshot> searchResults = snapshot.data!.docs;
-            return ListView.builder(
-              itemCount: searchResults.length,
-              itemBuilder: (context, index) {
-                final DocumentSnapshot data = searchResults[index];
-                return GestureDetector(
+          if (!snapshot.hasData) return CircularProgressIndicator();
+          return GridView.builder(
+            itemCount: snapshot.data!.docs.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+            ),
+            itemBuilder: (context, index) {
+              DocumentSnapshot data = snapshot.data!.docs[index];
+              RentItemModel item = RentItemModel(
+                id: data.id,
+                title: data['renttitle'],
+                imageUrl: data['imageUrl'],
+                creatorName:data['creatorname'],
+                createdby:data['createdby'],
+                price: data['rentprice'],
+              );
+              return GestureDetector(
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => SelectedRentPage(item: data)));
                   },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                    width: myWidth * 0.4,
-                    child: Card(
-                      elevation: 8,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 5),
-                            child: Image(
-                                image: NetworkImage(data['imageUrl']),
-                                height: myHeight * 0.2,
-                                width: myWidth * 0.7),
-                          ),
-                          Container(
-                            color: Colors.cyan[100],
-                            child: ListTile(
-                              title: Text(data['renttitle']),
-                              subtitle: Text(
-                                "\$${data['rentprice']}",
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              trailing: user!.uid == data['createdby']
-                                  ? Text(
-                                'Uploaded By: YOU',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold),
-                              )
-                                  : Text("Uploaded By: ${data['creatorname']}"),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              },
-            );
-          }
+                  child: RentItemWidget(item: item));
+            },
+          );
         },
       ),
     );

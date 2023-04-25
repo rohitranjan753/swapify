@@ -138,7 +138,6 @@ class _RentPageState extends State<RentPage> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _desController = TextEditingController();
 
     double myHeight = MediaQuery.of(context).size.height;
     double myWidth = MediaQuery.of(context).size.width;
