@@ -18,21 +18,46 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  TextEditingController _searchController = TextEditingController();
   String searchText = '';
   @override
   Widget build(BuildContext context) {
-
+    double myHeight = MediaQuery.of(context).size.height;
+    double myWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: TextField(
-          onChanged: (value) {
-            setState(() {
-              searchText = value;
-            });
-          },
-          decoration: InputDecoration(
-            hintText: 'Search...',
+        title: Align(
+          alignment: Alignment.center,
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(
+                  color: Colors.white,
+                ),
+                borderRadius: BorderRadius.circular(25)
+            ),
+            height: myHeight*0.05,
+            width: myWidth*0.6,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: TextField(
+                style: TextStyle(
+                    fontSize: 18
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    searchText = value;
+                  });
+                },
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  suffixIcon: Icon(
+                    Icons.search,
+                    color: Colors.cyan,
+                  ),
+                  hintText: 'Search...',
+                ),
+              ),
+            ),
           ),
         ),
       ),
