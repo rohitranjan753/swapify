@@ -18,6 +18,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  final User? user = FirebaseAuth.instance.currentUser;
   String searchText = '';
   @override
   Widget build(BuildContext context) {
@@ -33,10 +34,10 @@ class _SearchPageState extends State<SearchPage> {
                 border: Border.all(
                   color: Colors.white,
                 ),
-                borderRadius: BorderRadius.circular(25)
+                borderRadius: BorderRadius.circular(15)
             ),
             height: myHeight*0.05,
-            width: myWidth*0.6,
+            width: myWidth*0.7,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: TextField(
@@ -74,25 +75,29 @@ class _SearchPageState extends State<SearchPage> {
           return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
+              crossAxisSpacing: 5,
+              mainAxisSpacing: 5,
               childAspectRatio: 0.75,
             ),
             itemCount: documents.length,
             itemBuilder: (context, index) {
               final data = documents.elementAt(index);
               return Card(
+                elevation: 2,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Expanded(
-                      child: Image.network(
-                        data['imageUrl'],
-                        fit: BoxFit.cover,
+                      child: Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Image.network(
+                          data['imageUrl'],
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
                       child: Text(
                         data['title'],
                         style: TextStyle(
@@ -101,15 +106,39 @@ class _SearchPageState extends State<SearchPage> {
                         ),
                       ),
                     ),
+                    user!.uid == data["createdby"] ?
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
                       child: Text(
-                        data['description'],
+                        'Uploaded By: YOU',
+                        style: TextStyle(
+                          fontSize: 12,fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ): Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
+                      child: Text(
+                        "Uploaded By: ${data["creatorname"]}",
                         style: TextStyle(
                           fontSize: 12,
                         ),
                       ),
                     ),
+                    data["category"].toString() == "sell"
+                        ? Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                      "₹${data["price"]}",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                        )
+                        : Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                      "₹ ${data["price"]} /12Hrs",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                        ),
                   ],
                 ),
               );
@@ -118,10 +147,7 @@ class _SearchPageState extends State<SearchPage> {
         },
       ),
     );
-
   }
-
-
 }
 
 // import 'package:cloud_firestore/cloud_firestore.dart';
