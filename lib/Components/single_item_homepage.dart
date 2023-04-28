@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vbuddyproject/HomePageDir/selected_page.dart';
+
 import 'package:vbuddyproject/Model/homepage_single_row_model.dart';
 
 class HomePageSingleItem extends StatelessWidget {
@@ -25,7 +25,7 @@ class HomePageSingleItem extends StatelessWidget {
             // else{
             //   Navigator.push(context, MaterialPageRoute(builder: (context) => AddPage()));
             // }
-            Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedPage(selectPlace: item![index],)));
+            // Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedPage(selectPlace: item![index],)));
           },
           child: Container(
               height: myHeight * 0.4,

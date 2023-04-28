@@ -32,8 +32,7 @@ class _SelectedRentPageState extends State<SelectedRentPage> {
       body: SingleChildScrollView(
         child: Container(
           // color: Color.fromRGBO(255, 248, 238, 10),
-          height: myHeight,
-          width: myWidth,
+
           child: Column(
             children: [
               Padding(
@@ -240,20 +239,20 @@ class _SelectedRentPageState extends State<SelectedRentPage> {
                   )
                 ],
               ),
-
-
-
-              MaterialButton(
-                onPressed: () {},
-                minWidth: myWidth*0.5,
-                height: 60,
-                color: Colors.cyan,
-                elevation: 5,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50)),
-                child: Text(
-                  "Book Now",
-                  style: TextStyle(fontSize: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: MaterialButton(
+                  onPressed: () {},
+                  minWidth: myWidth*0.5,
+                  height: 60,
+                  color: Colors.cyan,
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50)),
+                  child: Text(
+                    "Book Now",
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ),
               ),
             ],

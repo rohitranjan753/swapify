@@ -82,64 +82,84 @@ class _SearchPageState extends State<SearchPage> {
             itemCount: documents.length,
             itemBuilder: (context, index) {
               final data = documents.elementAt(index);
-              return Card(
-                elevation: 2,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: Image.network(
-                          data['imageUrl'],
-                          fit: BoxFit.cover,
+              return GestureDetector(
+                onTap: (){
+                  Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SelectedSearchPage(item: data)));
+                },
+                child: Card(
+                  elevation: 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: Image.network(
+                            data['imageUrl'],
+                            fit: BoxFit.cover,
+                            loadingBuilder: (BuildContext context, Widget child,
+                                ImageChunkEvent? loadingProgress) {
+                              if (loadingProgress == null) return child;
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  value: loadingProgress.expectedTotalBytes != null
+                                      ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
+                                      : null,
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
-                      child: Text(
-                        data['title'],
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
+                        child: Text(
+                          data['title'],
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
                         ),
                       ),
-                    ),
-                    user!.uid == data["createdby"] ?
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
-                      child: Text(
-                        'Uploaded By: YOU',
-                        style: TextStyle(
-                          fontSize: 12,fontWeight: FontWeight.bold
+                      user!.uid == data["createdby"] ?
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
+                        child: Text(
+                          'Uploaded By: YOU',
+                          style: TextStyle(
+                            fontSize: 12,fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      ): Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
+                        child: Text(
+                          "Uploaded By: ${data["creatorname"]}",
+                          style: TextStyle(
+                            fontSize: 12,
+                          ),
                         ),
                       ),
-                    ): Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
-                      child: Text(
-                        "Uploaded By: ${data["creatorname"]}",
-                        style: TextStyle(
-                          fontSize: 12,
-                        ),
+                      data["category"].toString() == "sell"
+                          ? Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Text(
+                        "₹${data["price"]}",
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                    ),
-                    data["category"].toString() == "sell"
-                        ? Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text(
-                      "₹${data["price"]}",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                        )
-                        : Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text(
-                      "₹ ${data["price"]} /12Hrs",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                        ),
-                  ],
+                          )
+                          : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Text(
+                        "₹ ${data["price"]} /12Hrs",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                          ),
+                    ],
+                  ),
                 ),
               );
             },
@@ -147,6 +167,11 @@ class _SearchPageState extends State<SearchPage> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }
 

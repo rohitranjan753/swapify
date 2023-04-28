@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:vbuddyproject/SearchPageDir/SearchPage.dart';
 import 'package:vbuddyproject/SearchPageDir/selected_search_page.dart';
 
+import '../BuyBuiderDirectory/selected_buy_page.dart';
 import '../Model/search_item_model.dart';
 import '../Model/search_item_widget.dart';
 
@@ -32,14 +33,11 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
   Widget build(BuildContext context) {
     double myHeight = MediaQuery.of(context).size.height;
     double myWidth = MediaQuery.of(context).size.width;
-
+    final User? user = FirebaseAuth.instance.currentUser;
+    String searchText = '';
     getVal = widget.categoryName[widget.index].toString();
-
-
-
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.cyan[400],
         title: Align(
           alignment: Alignment.center,
           child: Container(
@@ -48,76 +46,139 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
                 border: Border.all(
                   color: Colors.white,
                 ),
-                borderRadius: BorderRadius.circular(40)),
-            height: myHeight * 0.05,
-            width: myWidth * 0.6,
+                borderRadius: BorderRadius.circular(15)
+            ),
+            height: myHeight*0.05,
+            width: myWidth*0.7,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: TextField(
-                style: TextStyle(fontSize: 15),
-                controller: _searchController,
+                style: TextStyle(
+                    fontSize: 18
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    searchText = value;
+                  });
+                },
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   suffixIcon: Icon(
                     Icons.search,
-                    color: Colors.black,
+                    color: Colors.cyan,
                   ),
-                  hintText: '  Search...',
+                  hintText: 'Search...',
                 ),
-                onChanged: (value) {
-                  setState(() {});
-                },
               ),
             ),
           ),
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
-          stream: _buildQuery().snapshots(),
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) return CircularProgressIndicator();
-            return GridView.builder(
-              itemCount: snapshot.data!.docs.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-              ),
-              itemBuilder: (context, index) {
-                DocumentSnapshot data = snapshot.data!.docs[index];
-                Item item = Item(
-                  id: data.id,
-                  title: data['title'],
-                  imageUrl: data['imageUrl'],
-                  creatorName: data['creatorname'],
-                  createdby: data['createdby'],
-                  price: data['price'],
-                  category: data['category'],
-                );
-
-                return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  SelectedSearchPage(item: data)));
-                    },
-                    child: ItemWidget(item: item));
-              },
-            );
-          }),
+        stream: FirebaseFirestore.instance
+            .collection('all_section').where('majorcategory', isEqualTo: getVal)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return CircularProgressIndicator();
+          }
+          final documents = snapshot.data!.docs.where((doc) =>
+              doc['title'].toString().toLowerCase().contains(searchText.toLowerCase()));
+          return GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 5,
+              mainAxisSpacing: 5,
+              childAspectRatio: 0.75,
+            ),
+            itemCount: documents.length,
+            itemBuilder: (context, index) {
+              final data = documents.elementAt(index);
+              return GestureDetector(
+                onTap: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SelectedBuyPage(item: data)));
+                },
+                child: Card(
+                  elevation: 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child:  Image.network(
+                            data['imageUrl'],
+                            fit: BoxFit.cover,
+                            loadingBuilder: (BuildContext context, Widget child,
+                                ImageChunkEvent? loadingProgress) {
+                              if (loadingProgress == null) return child;
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  value: loadingProgress.expectedTotalBytes != null
+                                      ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
+                                      : null,
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
+                        child: Text(
+                          data['title'],
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                      user!.uid == data["createdby"] ?
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
+                        child: Text(
+                          'Uploaded By: YOU',
+                          style: TextStyle(
+                              fontSize: 12,fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      ): Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
+                        child: Text(
+                          "Uploaded By: ${data["creatorname"]}",
+                          style: TextStyle(
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                      data["category"].toString() == "sell"
+                          ? Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(
+                          "₹${data["price"]}",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      )
+                          : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(
+                          "₹ ${data["price"]} /12Hrs",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        },
+      ),
     );
-  }
-
-  Query _buildQuery() {
-    Query searchQuery = allsection;
-
-    if (_searchController.text.isNotEmpty) {
-      String searchValue = _searchController.text;
-      searchQuery =
-          searchQuery.where('title', isGreaterThanOrEqualTo: searchValue);
-    }
-
-    return searchQuery;
   }
 }
 

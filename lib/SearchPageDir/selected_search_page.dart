@@ -247,8 +247,6 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
                 ],
               ),
 
-
-
               MaterialButton(
                 onPressed: () {},
                 minWidth: myWidth*0.5,
