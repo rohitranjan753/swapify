@@ -56,7 +56,8 @@ class _RentHomeScreenState extends State<RentHomeScreen> {
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
-            .collection('all_section').where('category', isEqualTo: 'rent')
+            .collection('all_section')
+            .where('category', isEqualTo: 'rent')
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -81,7 +82,8 @@ class _RentHomeScreenState extends State<RentHomeScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => SelectedSearchPage(item: data)));
+                          builder: (context) =>
+                              SelectedSearchPage(item: data)));
                 },
                 child: Card(
                   elevation: 2,
@@ -99,9 +101,10 @@ class _RentHomeScreenState extends State<RentHomeScreen> {
                               if (loadingProgress == null) return child;
                               return Center(
                                 child: CircularProgressIndicator(
-                                  value: loadingProgress.expectedTotalBytes != null
+                                  value: loadingProgress.expectedTotalBytes !=
+                                          null
                                       ? loadingProgress.cumulativeBytesLoaded /
-                                      loadingProgress.expectedTotalBytes!
+                                          loadingProgress.expectedTotalBytes!
                                       : null,
                                 ),
                               );
@@ -141,7 +144,8 @@ class _RentHomeScreenState extends State<RentHomeScreen> {
                               ),
                             ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 1),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 1),
                         child: Text(
                           "₹${data["price"]} /12hrs",
                           style: TextStyle(fontWeight: FontWeight.bold),
@@ -157,95 +161,6 @@ class _RentHomeScreenState extends State<RentHomeScreen> {
       ),
     );
   }
-  // @override
-  // Widget build(BuildContext context) {
-  //   double myHeight = MediaQuery.of(context).size.height;
-  //   double myWidth = MediaQuery.of(context).size.width;
-  //   final User? user = FirebaseAuth.instance.currentUser;
-  //
-  //   return Scaffold(
-  //     appBar: AppBar(
-  //       backgroundColor: Colors.cyan[400],
-  //       title: Container(
-  //         decoration: BoxDecoration(
-  //             color: Colors.white,
-  //             border: Border.all(
-  //               color: Colors.white,
-  //             ),
-  //             borderRadius: BorderRadius.circular(40)
-  //         ),
-  //         height: myHeight*0.05,
-  //         width: myWidth*0.6,
-  //         child: Padding(
-  //           padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 8),
-  //           child: TextField(
-  //             style: TextStyle(
-  //                 fontSize: 15
-  //             ),
-  //             controller: _searchController,
-  //             decoration: InputDecoration(
-  //               border: InputBorder.none,
-  //               // border: OutlineInputBorder(
-  //               //   borderRadius: BorderRadius.circular(20)
-  //               // ),
-  //               suffixIcon: Icon(
-  //                 Icons.search,
-  //                 color: Colors.black,
-  //               ),
-  //               hintText: '  Search...',
-  //             ),
-  //             onChanged: (value) {
-  //               setState(() {});
-  //             },
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //     body: StreamBuilder<QuerySnapshot>(
-  //       stream: _buildQuery().snapshots(),
-  //       builder: (context, snapshot) {
-  //         if (!snapshot.hasData) return CircularProgressIndicator();
-  //         return GridView.builder(
-  //           itemCount: snapshot.data!.docs.length,
-  //           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-  //             crossAxisCount: 2,
-  //           ),
-  //           itemBuilder: (context, index) {
-  //             DocumentSnapshot data = snapshot.data!.docs[index];
-  //             RentItemModel item = RentItemModel(
-  //               id: data.id,
-  //               title: data['renttitle'],
-  //               imageUrl: data['imageUrl'],
-  //               creatorName:data['creatorname'],
-  //               createdby:data['createdby'],
-  //               price: data['rentprice'],
-  //             );
-  //             return GestureDetector(
-  //                 onTap: () {
-  //                   Navigator.push(
-  //                       context,
-  //                       MaterialPageRoute(
-  //                           builder: (context) => SelectedRentPage(item: data)));
-  //                 },
-  //                 child: RentItemWidget(item: item));
-  //           },
-  //         );
-  //       },
-  //     ),
-  //   );
-  // }
-  //
-  // Query _buildQuery() {
-  //   Query searchQuery = usersCollection;
-  //
-  //   if (_searchController.text.isNotEmpty) {
-  //     String searchValue = _searchController.text;
-  //     searchQuery =
-  //         searchQuery.where('renttitle', isGreaterThanOrEqualTo: searchValue);
-  //   }
-  //
-  //   return searchQuery;
-  // }
 
   @override
   void dispose() {

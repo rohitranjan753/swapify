@@ -282,7 +282,7 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
               ),
               _auth.currentUser!.uid == widget.item['createdby'] ? Padding(padding: EdgeInsets.all(0)):
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
+                padding: const EdgeInsets.symmetric(vertical: 5),
                 child: MaterialButton(
                   onPressed: _sendEmail,
                   minWidth: myWidth*0.5,
