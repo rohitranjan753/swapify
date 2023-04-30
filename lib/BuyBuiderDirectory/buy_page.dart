@@ -28,16 +28,13 @@ class _BuyPageState extends State<BuyPage> {
                 border: Border.all(
                   color: Colors.white,
                 ),
-                borderRadius: BorderRadius.circular(15)
-            ),
-            height: myHeight*0.05,
-            width: myWidth*0.7,
+                borderRadius: BorderRadius.circular(15)),
+            height: myHeight * 0.05,
+            width: myWidth * 0.7,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: TextField(
-                style: TextStyle(
-                    fontSize: 18
-                ),
+                style: TextStyle(fontSize: 18),
                 onChanged: (value) {
                   setState(() {
                     searchText = value;
@@ -58,14 +55,17 @@ class _BuyPageState extends State<BuyPage> {
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
-            .collection('all_section').where('category', isEqualTo: 'sell')
+            .collection('all_section')
+            .where('category', isEqualTo: 'sell')
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return CircularProgressIndicator();
           }
-          final documents = snapshot.data!.docs.where((doc) =>
-              doc['title'].toString().toLowerCase().contains(searchText.toLowerCase()));
+          final documents = snapshot.data!.docs.where((doc) => doc['title']
+              .toString()
+              .toLowerCase()
+              .contains(searchText.toLowerCase()));
           return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
@@ -77,11 +77,12 @@ class _BuyPageState extends State<BuyPage> {
             itemBuilder: (context, index) {
               final data = documents.elementAt(index);
               return GestureDetector(
-                onTap: (){
+                onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => SelectedSearchPage(item: data)));
+                          builder: (context) =>
+                              SelectedSearchPage(item: data)));
                 },
                 child: Card(
                   elevation: 2,
@@ -91,7 +92,7 @@ class _BuyPageState extends State<BuyPage> {
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.all(2.0),
-                          child:  Image.network(
+                          child: Image.network(
                             data['imageUrl'],
                             fit: BoxFit.cover,
                             loadingBuilder: (BuildContext context, Widget child,
@@ -99,9 +100,10 @@ class _BuyPageState extends State<BuyPage> {
                               if (loadingProgress == null) return child;
                               return Center(
                                 child: CircularProgressIndicator(
-                                  value: loadingProgress.expectedTotalBytes != null
+                                  value: loadingProgress.expectedTotalBytes !=
+                                          null
                                       ? loadingProgress.cumulativeBytesLoaded /
-                                      loadingProgress.expectedTotalBytes!
+                                          loadingProgress.expectedTotalBytes!
                                       : null,
                                 ),
                               );
@@ -110,7 +112,8 @@ class _BuyPageState extends State<BuyPage> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 1),
                         child: Text(
                           data['title'],
                           style: TextStyle(
@@ -119,24 +122,26 @@ class _BuyPageState extends State<BuyPage> {
                           ),
                         ),
                       ),
-                      user!.uid == data["createdby"] ?
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
-                        child: Text(
-                          'Uploaded By: YOU',
-                          style: TextStyle(
-                              fontSize: 12,fontWeight: FontWeight.bold
-                          ),
-                        ),
-                      ): Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
-                        child: Text(
-                          "Uploaded By: ${data["creatorname"]}",
-                          style: TextStyle(
-                            fontSize: 12,
-                          ),
-                        ),
-                      ),
+                      user!.uid == data["createdby"]
+                          ? Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0, vertical: 1),
+                              child: Text(
+                                'Uploaded By: YOU',
+                                style: TextStyle(
+                                    fontSize: 12, fontWeight: FontWeight.bold),
+                              ),
+                            )
+                          : Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0, vertical: 1),
+                              child: Text(
+                                "Uploaded By: ${data["creatorname"]}",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Text(
@@ -160,12 +165,6 @@ class _BuyPageState extends State<BuyPage> {
     super.dispose();
   }
 }
-
-
-
-
-
-
 
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_auth/firebase_auth.dart';

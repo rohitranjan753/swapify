@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vbuddyproject/RentSectionDirectory/selected_rent_page.dart';
+import 'package:vbuddyproject/SearchPageDir/selected_search_page.dart';
 
 class RentHomeScreen extends StatefulWidget {
   const RentHomeScreen({Key? key}) : super(key: key);
@@ -55,13 +56,13 @@ class _RentHomeScreenState extends State<RentHomeScreen> {
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
-            .collection('rent_major_section')
+            .collection('all_section').where('category', isEqualTo: 'rent')
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return CircularProgressIndicator();
           }
-          final documents = snapshot.data!.docs.where((doc) => doc['renttitle']
+          final documents = snapshot.data!.docs.where((doc) => doc['title']
               .toString()
               .toLowerCase()
               .contains(searchText.toLowerCase()));
@@ -80,7 +81,7 @@ class _RentHomeScreenState extends State<RentHomeScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => SelectedRentPage(item: data)));
+                          builder: (context) => SelectedSearchPage(item: data)));
                 },
                 child: Card(
                   elevation: 2,
@@ -112,7 +113,7 @@ class _RentHomeScreenState extends State<RentHomeScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8.0, vertical: 1),
                         child: Text(
-                          data['renttitle'],
+                          data['title'],
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
@@ -139,9 +140,12 @@ class _RentHomeScreenState extends State<RentHomeScreen> {
                                 ),
                               ),
                             ),
-                      Text(
-                        "₹${data["rentprice"]}",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 1),
+                        child: Text(
+                          "₹${data["price"]} /12hrs",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ],
                   ),
