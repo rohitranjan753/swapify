@@ -35,7 +35,7 @@ class _SellPageState extends State<SellPage> {
     'Clothes': ['Formal', 'Ethnic', 'Casual'],
     'Footwear': ['Sports', 'Formal', 'Casual'],
     'Stationary': ['Notebook', 'Calculator', 'Pen'],
-    'Gadgets': ['Earphone', 'Charger', 'Speaker','Laptop'],
+    'Gadgets': ['Earphone', 'Charger', 'Speaker','Laptop','Keyboard'],
   };
 
   bool _isLoading = false;
@@ -71,6 +71,7 @@ class _SellPageState extends State<SellPage> {
 
     String? uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
     String userName = userData.get('username');
+    String userEmail = userData.get('email');
 
     final Reference storageRef = FirebaseStorage.instance.ref().child('images');
     final taskSnapshot =
@@ -102,6 +103,7 @@ class _SellPageState extends State<SellPage> {
       'subcategory': secondDropdownValue,
       'createdby': currentUser.uid,
       'creatorname': userName,
+      'creatormail': userEmail,
     });
 
     await FirebaseFirestore.instance
@@ -118,6 +120,7 @@ class _SellPageState extends State<SellPage> {
       'createdby': currentUser.uid,
       'creatorname': userName,
       'category': "sell",
+      'creatormail': userEmail,
     });
 
     setState(() {

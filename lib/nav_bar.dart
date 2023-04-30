@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:vbuddyproject/AddPageDir/add_page.dart';
+import 'package:vbuddyproject/Chat/chat_main_screen.dart';
 import 'package:vbuddyproject/HomePageDir/home_page.dart';
 import 'package:vbuddyproject/ProfilePageDir/ProfilePage.dart';
 import 'package:vbuddyproject/SearchPageDir/SearchPage.dart';
@@ -19,6 +20,7 @@ class _NavBarState extends State<NavBar> {
   TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   static List<Widget> pages = [
     HomePage(),
+    ChatMainScreen(),
     AddPage(),
     SearchPage(),
     ProfilePage(),
@@ -64,10 +66,10 @@ class _NavBarState extends State<NavBar> {
             child: GNav(
               rippleColor: Colors.grey[300]!,
               hoverColor: Colors.grey[800]!,
-              gap: 8,
+              gap: 2,
               activeColor: Colors.black,
               iconSize: 24,
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              padding: EdgeInsets.symmetric(horizontal: 6, vertical: 12),
               duration: Duration(milliseconds: 400),
               tabBackgroundColor: Colors.grey[100]!,
               color: Colors.black,
@@ -75,6 +77,10 @@ class _NavBarState extends State<NavBar> {
                 GButton(
                   icon: LineIcons.home,
                   text: 'Home',
+                ),
+                GButton(
+                  icon: LineIcons.rocketChat,
+                  text: 'Chat',
                 ),
                 GButton(
                   icon: LineIcons.plus,

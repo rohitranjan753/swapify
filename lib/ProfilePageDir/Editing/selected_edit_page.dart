@@ -3,36 +3,24 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:line_icons/line_icon.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:vbuddyproject/ProfilePageDir/Editing/edit_listing.dart';
 
-class SelectedRentPage extends StatefulWidget {
+
+class SelectedEditPage extends StatefulWidget {
   final DocumentSnapshot item;
 
-  SelectedRentPage({required this.item});
+  const SelectedEditPage({required this.item});
 
   @override
-  State<SelectedRentPage> createState() => _SelectedRentPageState();
+  State<SelectedEditPage> createState() => _SelectedEditPageState();
 }
 
-class _SelectedRentPageState extends State<SelectedRentPage>{
+class _SelectedEditPageState extends State<SelectedEditPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  void _sendEmail() async {
-    final Uri params = Uri(
-      scheme: 'mailto',
-      path: widget.item['creatormail'],
-      query: 'subject=Hey%20I%20am%20interested&body=Let''\s%20us%20connect%20',
-    );
-    String url = params.toString();
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
+
 
   @override
   Widget build(BuildContext context) {
-
     Timestamp timestamp = widget.item['createdAt'];
     DateTime date = timestamp.toDate();
 
@@ -46,11 +34,54 @@ class _SelectedRentPageState extends State<SelectedRentPage>{
       appBar: AppBar(
         backgroundColor: Colors.cyan[300],
         title: Text(widget.item['creatorname']),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.menu),
+            tooltip: 'Menu',
+            onPressed: () {
+              showMenu(
+                context: context,
+                position: RelativeRect.fromLTRB(1000.0, 80.0, 0.0, 0.0),
+                items: [
+                  PopupMenuItem(
+                    child: Row(
+                      children: [
+                        Icon(Icons.edit),
+                        Text('Edit'),
+                      ],
+                    ),
+                    value: 1,
+                  ),
+                  PopupMenuItem(
+                    child: Row(
+                      children: [
+                        Icon(Icons.delete),
+                        Text('Delete'),
+                      ],
+                    ),
+                    value: 2,
+                  ),
+                ],
+              ).then((value) {
+                switch (value) {
+                  case 1:
+                    break;
+                  case 2:
+                    Navigator.pushNamed(context, '/screen2');
+                    break;
+                  default:
+                    break;
+                }
+              });
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Container(
           // color: Color.fromRGBO(255, 248, 238, 10),
-
+          height: myHeight,
+          width: myWidth,
           child: Column(
             children: [
               Padding(
@@ -79,7 +110,7 @@ class _SelectedRentPageState extends State<SelectedRentPage>{
                   Padding(
                     padding: const EdgeInsets.only(
                       left: 20,
-                      bottom: 30,
+                      bottom: 10,
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -93,7 +124,7 @@ class _SelectedRentPageState extends State<SelectedRentPage>{
                               //   size: myWidth * 0.050,
                               // ),
                               Text(
-                                widget.item['renttitle'],
+                                widget.item['title'],
                                 style: TextStyle(
                                     fontSize: 30, fontWeight: FontWeight.bold),
                               ),
@@ -124,9 +155,9 @@ class _SelectedRentPageState extends State<SelectedRentPage>{
                         Padding(
                           padding: const EdgeInsets.only(left: 30),
                           child: Text(
-                            widget.item['rentsubcategory'] +
+                            widget.item['subcategory'] +
                                 "(" +
-                                widget.item['rentmajorcategory'] +
+                                widget.item['majorcategory'] +
                                 ")",
                             style: TextStyle(
                               fontSize: 19,
@@ -157,7 +188,7 @@ class _SelectedRentPageState extends State<SelectedRentPage>{
                         Padding(
                           padding: const EdgeInsets.only(left: 30),
                           child: Text(
-                            widget.item['rentdescription'],
+                            widget.item['description'],
                             style: TextStyle(
                               fontSize: 19,
                             ),
@@ -235,7 +266,7 @@ class _SelectedRentPageState extends State<SelectedRentPage>{
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 5),
                                 child: Text(
-                                  "Price/12Hrs",
+                                  "Price",
                                   style: TextStyle(
                                       fontSize: 22, fontWeight: FontWeight.bold),
                                 ),
@@ -245,11 +276,12 @@ class _SelectedRentPageState extends State<SelectedRentPage>{
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 30),
-                          child: Text(
-                            "₹${widget.item['rentprice']}",
-                            style: TextStyle(
-                              fontSize: 19,
-                            ),
+                          child: widget.item['category'].toString() == "sell" ?Text(
+                            "₹${widget.item['price']}",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ) : Text(
+                            "₹${widget.item['price']} / 12Hrs",
+                            style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],
@@ -257,27 +289,87 @@ class _SelectedRentPageState extends State<SelectedRentPage>{
                   )
                 ],
               ),
-              _auth.currentUser!.uid == widget.item['createdby'] ? Padding(padding: EdgeInsets.all(0)):
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: MaterialButton(
-                  onPressed: _sendEmail,
-                  minWidth: myWidth*0.5,
-                  height: 60,
-                  color: Colors.cyan,
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50)),
-                  child: Text(
-                    "SEND EMAIL",
-                    style: TextStyle(fontSize: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: MaterialButton(
+                      onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>EditListing(item: widget.item,)));
+                      },
+                      minWidth: myWidth*0.4,
+                      height: 50,
+                      color: Colors.cyan,
+                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Text(
+                        "EDIT",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: MaterialButton(
+                      onPressed: (){
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text('Delete Listing'),
+                            content: Text('Are you sure you want to delete?'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context, 'No');
+                                },
+                                child: Text('No'),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  deleteDocument(widget.item.id);
+                                  Navigator.pop(context, 'Yes');
+                                  Navigator.pop(context);
+                                },
+                                child: Text('Yes'),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                      minWidth: myWidth*0.4,
+                      height: 50,
+                      color: Colors.red[400],
+                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Text(
+                        "DELETE",
+                        style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  void deleteDocument(documentId) {
+    FirebaseFirestore.instance
+        .collection('all_section')
+        .doc(documentId)
+        .delete()
+        .then((value) => print("Document deleted"))
+        .catchError((error) => print("Failed to delete document: $error"));
   }
 }

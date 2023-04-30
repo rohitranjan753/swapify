@@ -125,53 +125,53 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              Container(
-                height: myHeight * 0.1,
-                width: myWidth,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      height: myHeight * 0.05,
-                      width: myWidth * 0.75,
-                      decoration: BoxDecoration(
-                          color: Colors.blue.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(40)),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Search For Product...',
-                          hintStyle: TextStyle(color: Colors.grey),
-                          icon: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Icon(
-                              Icons.search,
-                              color: Color.fromARGB(255, 54, 54, 54),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: myHeight * 0.05,
-                      width: myWidth * 0.1,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [Colors.red, Colors.yellowAccent]),
-                      ),
-                      child: Center(
-                        child: Image.asset(
-                          'assets/images/proctor3.jpg',
-                          height: myHeight * 0.025,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
+              // Container(
+              //   height: myHeight * 0.1,
+              //   width: myWidth,
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //     children: [
+              //       Container(
+              //         height: myHeight * 0.05,
+              //         width: myWidth * 0.75,
+              //         decoration: BoxDecoration(
+              //             color: Colors.blue.withOpacity(0.1),
+              //             borderRadius: BorderRadius.circular(40)),
+              //         child: TextFormField(
+              //           decoration: InputDecoration(
+              //             border: InputBorder.none,
+              //             hintText: 'Search For Product...',
+              //             hintStyle: TextStyle(color: Colors.grey),
+              //             icon: Padding(
+              //               padding: const EdgeInsets.all(8.0),
+              //               child: Icon(
+              //                 Icons.search,
+              //                 color: Color.fromARGB(255, 54, 54, 54),
+              //               ),
+              //             ),
+              //           ),
+              //         ),
+              //       ),
+              //       Container(
+              //         height: myHeight * 0.05,
+              //         width: myWidth * 0.1,
+              //         decoration: BoxDecoration(
+              //           borderRadius: BorderRadius.circular(5),
+              //           gradient: LinearGradient(
+              //               begin: Alignment.topLeft,
+              //               end: Alignment.bottomRight,
+              //               colors: [Colors.red, Colors.yellowAccent]),
+              //         ),
+              //         child: Center(
+              //           child: Image.asset(
+              //             'assets/images/proctor3.jpg',
+              //             height: myHeight * 0.025,
+              //           ),
+              //         ),
+              //       )
+              //     ],
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Row(

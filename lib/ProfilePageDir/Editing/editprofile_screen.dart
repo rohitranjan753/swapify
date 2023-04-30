@@ -21,11 +21,6 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
   String _userimage='';
   File? _image;
 
-
-
-
-
-
   Future<void> _uploadToFirebase(
       File userImage,
       String userName,

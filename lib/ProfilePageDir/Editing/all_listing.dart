@@ -1,41 +1,25 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:vbuddyproject/SearchPageDir/SearchPage.dart';
-import 'package:vbuddyproject/SearchPageDir/selected_search_page.dart';
+import 'package:vbuddyproject/ProfilePageDir/Editing/selected_edit_page.dart';
 
-import '../BuyBuiderDirectory/selected_buy_page.dart';
-import '../Model/search_item_model.dart';
-import '../Model/search_item_widget.dart';
+import '../../SearchPageDir/selected_search_page.dart';
 
-String getVal='';
-final CollectionReference allsection = FirebaseFirestore.instance
-    .collection('all_section')
-    .where('majorcategory', isEqualTo: getVal) as CollectionReference<Object?>;
-
-class BrowseCategoryScreen extends StatefulWidget {
-  final int index;
-  final List categoryName;
-
-  BrowseCategoryScreen({required this.index, required this.categoryName});
+class AllListing extends StatefulWidget {
+  const AllListing({Key? key}) : super(key: key);
 
   @override
-  State<BrowseCategoryScreen> createState() => _BrowseCategoryScreenState();
+  State<AllListing> createState() => _AllListingState();
 }
 
-class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
-  TextEditingController _searchController = TextEditingController();
-
+class _AllListingState extends State<AllListing> {
+  final currentUser = FirebaseAuth.instance.currentUser;
+  final User? user = FirebaseAuth.instance.currentUser;
+  String searchText = '';
   @override
   Widget build(BuildContext context) {
     double myHeight = MediaQuery.of(context).size.height;
     double myWidth = MediaQuery.of(context).size.width;
-    final User? user = FirebaseAuth.instance.currentUser;
-    String searchText = '';
-    getVal = widget.categoryName[widget.index].toString();
     return Scaffold(
       appBar: AppBar(
         title: Align(
@@ -76,7 +60,7 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
-            .collection('all_section').where('majorcategory', isEqualTo: getVal)
+            .collection('all_section').where('createdby', isEqualTo: currentUser!.uid)
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -99,7 +83,7 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => SelectedBuyPage(item: data)));
+                          builder: (context) => SelectedEditPage(item: data)));
                 },
                 child: Card(
                   elevation: 2,
@@ -109,7 +93,7 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.all(2.0),
-                          child:  Image.network(
+                          child: Image.network(
                             data['imageUrl'],
                             fit: BoxFit.cover,
                             loadingBuilder: (BuildContext context, Widget child,
@@ -137,39 +121,21 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
                           ),
                         ),
                       ),
-                      user!.uid == data["createdby"] ?
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
-                        child: Text(
-                          'Uploaded By: YOU',
-                          style: TextStyle(
-                              fontSize: 12,fontWeight: FontWeight.bold
-                          ),
-                        ),
-                      ): Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
-                        child: Text(
-                          "Uploaded By: ${data["creatorname"]}",
-                          style: TextStyle(
-                            fontSize: 12,
-                          ),
-                        ),
-                      ),
-                      data["category"].toString() == "sell"
-                          ? Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text(
-                          "₹${data["price"]}",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      )
-                          : Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text(
-                          "₹ ${data["price"]} /12Hrs",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
+                      // data["category"].toString() == "sell"
+                      //     ? Padding(
+                      //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      //   child: Text(
+                      //     "₹${data["price"]}",
+                      //     style: TextStyle(fontWeight: FontWeight.bold),
+                      //   ),
+                      // )
+                      //     : Padding(
+                      //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      //   child: Text(
+                      //     "₹ ${data["price"]} /12Hrs",
+                      //     style: TextStyle(fontWeight: FontWeight.bold),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
@@ -179,5 +145,10 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

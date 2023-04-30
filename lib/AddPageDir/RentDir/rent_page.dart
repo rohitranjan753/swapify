@@ -34,7 +34,7 @@ class _RentPageState extends State<RentPage> {
     'Clothes': ['Formal', 'Ethnic', 'Casual'],
     'Footwear': ['Sports', 'Formal', 'Casual'],
     'Stationary': ['Notebook', 'Calculator', 'Pen'],
-    'Gadgets': ['Earphone', 'Charger', 'Speaker','Laptop'],
+    'Gadgets': ['Earphone', 'Charger', 'Speaker','Laptop','Keyboard'],
   };
 
   bool _isLoading = false;
@@ -70,6 +70,7 @@ class _RentPageState extends State<RentPage> {
 
     String? uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
     String userName = userData.get('username');
+    String userEmail = userData.get('email');
 
     final Reference storageRef = FirebaseStorage.instance.ref().child('images');
     final taskSnapshot =
@@ -101,6 +102,7 @@ class _RentPageState extends State<RentPage> {
       'rentsubcategory': secondDropdownValue,
       'createdby': currentUser.uid,
       'creatorname': userName,
+      'creatormail': userEmail,
     });
 
     await FirebaseFirestore.instance
@@ -117,6 +119,7 @@ class _RentPageState extends State<RentPage> {
       'createdby': currentUser.uid,
       'creatorname': userName,
       'category': "rent",
+      'creatormail': userEmail,
     });
 
     setState(() {

@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:line_icons/line_icon.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SelectedBuyPage extends StatefulWidget {
   final DocumentSnapshot item;
@@ -13,6 +15,21 @@ class SelectedBuyPage extends StatefulWidget {
 }
 
 class _SelectedBuyPageState extends State<SelectedBuyPage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  void _sendEmail() async {
+    final Uri params = Uri(
+      scheme: 'mailto',
+      path: widget.item['creatormail'],
+      query: 'subject=Hey%20I%20am%20interested&body=Let''\s%20us%20connect%20',
+    );
+    String url = params.toString();
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Timestamp timestamp = widget.item['createdAt'];
@@ -229,7 +246,7 @@ class _SelectedBuyPageState extends State<SelectedBuyPage> {
                         Padding(
                           padding: const EdgeInsets.only(left: 30),
                           child: Text(
-                            widget.item['sellprice'],
+                            "₹${widget.item['sellprice']}",
                             style: TextStyle(
                               fontSize: 19,
                             ),
@@ -241,51 +258,21 @@ class _SelectedBuyPageState extends State<SelectedBuyPage> {
                 ],
               ),
 
-              // Row(
-              //   children: [
-              //     Padding(
-              //       padding: const EdgeInsets.symmetric(
-              //         horizontal: 20,
-              //       ),
-              //       child: Container(
-              //         width: myWidth * 0.6,
-              //         child: Stack(
-              //           children: [
-              //             profileItem('assets/profile/14.jpg'),
-              //             Positioned(
-              //               left: myWidth * 0.1,
-              //               child: profileItem('assets/profile/13.jpg'),
-              //             ),
-              //             Positioned(
-              //               left: myWidth * 0.2,
-              //               child: profileItem('assets/profile/14.jpg'),
-              //             ),
-              //             Positioned(
-              //               left: myWidth * 0.3,
-              //               child: profileItem('assets/profile/13.jpg'),
-              //             ),
-              //             Positioned(
-              //               left: myWidth * 0.4,
-              //               child: moreItem(),
-              //             ),
-              //           ],
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // ),
-
-              MaterialButton(
-                onPressed: () {},
-                minWidth: myWidth*0.5,
-                height: 60,
-                color: Colors.cyan,
-                elevation: 5,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50)),
-                child: Text(
-                  "Book Now",
-                  style: TextStyle(fontSize: 20),
+              _auth.currentUser!.uid == widget.item['createdby'] ? Padding(padding: EdgeInsets.all(0)):
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: MaterialButton(
+                  onPressed: _sendEmail,
+                  minWidth: myWidth*0.5,
+                  height: 60,
+                  color: Colors.cyan,
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50)),
+                  child: Text(
+                    "SEND EMAIL",
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ),
               ),
             ],

@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:intl/intl.dart';
 import 'package:line_icons/line_icon.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:vbuddyproject/Chat/ChatScreen.dart';
 import '../BuyBuiderDirectory/selected_buy_page.dart';
 
 
@@ -16,7 +19,38 @@ class SelectedSearchPage extends StatefulWidget {
 }
 
 class _SelectedSearchPageState extends State<SelectedSearchPage> {
-  TextEditingController _searchController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+
+  //   String chatRoomId(String user1,String user2) {
+  //   if (user1[0]
+  //       .toLowerCase()
+  //       .codeUnits[0] > user2
+  //       .toLowerCase()
+  //       .codeUnits[0]) {
+  //     return "$user1$user2";
+  //   }
+  //   else {
+  //     return "$user2$user1";
+  //   }
+  // }
+
+
+  void _sendEmail() async {
+    final Uri params = Uri(
+      scheme: 'mailto',
+      path: widget.item['creatormail'],
+      query: 'subject=Hey%20I%20am%20interested&body=Let''\s%20us%20connect%20',
+    );
+    String url = params.toString();
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -234,10 +268,10 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
                         Padding(
                           padding: const EdgeInsets.only(left: 30),
                           child: widget.item['category'].toString() == "sell" ?Text(
-                            "\$${widget.item['price']}",
+                            "₹${widget.item['price']}",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ) : Text(
-                            "\$${widget.item['price']} / 12Hrs",
+                            "₹${widget.item['price']} / 12Hrs",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -246,20 +280,24 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
                   )
                 ],
               ),
-
-              MaterialButton(
-                onPressed: () {},
-                minWidth: myWidth*0.5,
-                height: 60,
-                color: Colors.cyan,
-                elevation: 5,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50)),
-                child: Text(
-                  "Book Now",
-                  style: TextStyle(fontSize: 20),
+              _auth.currentUser!.uid == widget.item['createdby'] ? Padding(padding: EdgeInsets.all(0)):
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: MaterialButton(
+                  onPressed: _sendEmail,
+                  minWidth: myWidth*0.5,
+                  height: 60,
+                  color: Colors.cyan,
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50)),
+                  child: Text(
+                    "SEND EMAIL",
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ),
               ),
+
             ],
           ),
         ),
