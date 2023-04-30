@@ -269,10 +269,10 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
                           padding: const EdgeInsets.only(left: 30),
                           child: widget.item['category'].toString() == "sell" ?Text(
                             "₹${widget.item['price']}",
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 19),
                           ) : Text(
                             "₹${widget.item['price']} / 12Hrs",
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 19),
                           ),
                         ),
                       ],

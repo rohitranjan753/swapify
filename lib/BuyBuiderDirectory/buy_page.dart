@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vbuddyproject/BuyBuiderDirectory/selected_buy_page.dart';
+import 'package:vbuddyproject/SearchPageDir/selected_search_page.dart';
 
 class BuyPage extends StatefulWidget {
   @override
@@ -57,14 +58,14 @@ class _BuyPageState extends State<BuyPage> {
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
-            .collection('sell_major_section')
+            .collection('all_section').where('category', isEqualTo: 'sell')
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return CircularProgressIndicator();
           }
           final documents = snapshot.data!.docs.where((doc) =>
-              doc['selltitle'].toString().toLowerCase().contains(searchText.toLowerCase()));
+              doc['title'].toString().toLowerCase().contains(searchText.toLowerCase()));
           return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
@@ -80,7 +81,7 @@ class _BuyPageState extends State<BuyPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => SelectedBuyPage(item: data)));
+                          builder: (context) => SelectedSearchPage(item: data)));
                 },
                 child: Card(
                   elevation: 2,
@@ -111,7 +112,7 @@ class _BuyPageState extends State<BuyPage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
                         child: Text(
-                          data['selltitle'],
+                          data['title'],
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
@@ -139,7 +140,7 @@ class _BuyPageState extends State<BuyPage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Text(
-                          "₹${data["sellprice"]}",
+                          "₹${data["price"]}",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
