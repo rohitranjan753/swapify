@@ -7,7 +7,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:vbuddyproject/SearchPageDir/SearchPage.dart';
 import 'package:vbuddyproject/SearchPageDir/selected_search_page.dart';
 
-import '../BuyBuiderDirectory/selected_buy_page.dart';
 import '../Model/search_item_model.dart';
 import '../Model/search_item_widget.dart';
 
@@ -99,7 +98,7 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => SelectedBuyPage(item: data)));
+                          builder: (context) => SelectedSearchPage(item: data)));
                 },
                 child: Card(
                   elevation: 2,

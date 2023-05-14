@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vbuddyproject/BuyBuiderDirectory/selected_buy_page.dart';
 import 'package:vbuddyproject/SearchPageDir/selected_search_page.dart';
 
 class BuyPage extends StatefulWidget {

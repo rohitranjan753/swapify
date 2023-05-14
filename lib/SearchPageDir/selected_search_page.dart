@@ -5,8 +5,7 @@ import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:intl/intl.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:vbuddyproject/Chat/ChatScreen.dart';
-import '../BuyBuiderDirectory/selected_buy_page.dart';
+
 
 
 class SelectedSearchPage extends StatefulWidget {

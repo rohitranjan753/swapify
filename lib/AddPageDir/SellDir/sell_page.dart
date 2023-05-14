@@ -198,6 +198,7 @@ class _SellPageState extends State<SellPage> {
                         height: 20,
                       ),
                       TextFormField(
+                        textCapitalization: TextCapitalization.sentences,
                         onChanged: (value) {
                           setState(() {
                             _titleText = value;
@@ -229,6 +230,10 @@ class _SellPageState extends State<SellPage> {
                         height: 20,
                       ),
                       TextFormField(
+                        maxLength: 50,
+                        maxLines: null,
+                        keyboardType: TextInputType.multiline,
+                        textCapitalization: TextCapitalization.sentences,
                         onChanged: (value) {
                           setState(() {
                             _descriptionText = value;
@@ -259,6 +264,7 @@ class _SellPageState extends State<SellPage> {
                         height: 20,
                       ),
                       TextFormField(
+                        keyboardType: TextInputType.number,
                         onChanged: (value) {
                           setState(() {
                             _rentalPrice = value;
@@ -289,32 +295,7 @@ class _SellPageState extends State<SellPage> {
                       SizedBox(
                         height: 10,
                       ),
-                      // Container(
-                      //   width: myWidth,
-                      //   child: DropdownButton(
-                      //     // hint: Text('Select Category'),
-                      //     // Initial Value
-                      //     value: dropdownvalue,
-                      //
-                      //     // Down Arrow Icon
-                      //     icon: const Icon(Icons.keyboard_arrow_down),
-                      //
-                      //     // Array list of items
-                      //     items: items.map((String items) {
-                      //       return DropdownMenuItem(
-                      //         value: items,
-                      //         child: Text(items,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0),),
-                      //       );
-                      //     }).toList(),
-                      //     // After selecting the desired option,it will
-                      //     // change button value to selected value
-                      //     onChanged: (String? newValue) {
-                      //       setState(() {
-                      //         dropdownvalue = newValue!;
-                      //       });
-                      //     },
-                      //   ),
-                      // ),
+
 
                       SizedBox(
                         height: 20,

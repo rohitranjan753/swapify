@@ -20,7 +20,6 @@ class _NavBarState extends State<NavBar> {
   TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   static List<Widget> pages = [
     HomePage(),
-    ChatMainScreen(),
     AddPage(),
     SearchPage(),
     ProfilePage(),
@@ -66,10 +65,10 @@ class _NavBarState extends State<NavBar> {
             child: GNav(
               rippleColor: Colors.grey[300]!,
               hoverColor: Colors.grey[800]!,
-              gap: 2,
+              gap: 8,
               activeColor: Colors.black,
               iconSize: 24,
-              padding: EdgeInsets.symmetric(horizontal: 6, vertical: 12),
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               duration: Duration(milliseconds: 400),
               tabBackgroundColor: Colors.grey[100]!,
               color: Colors.black,
@@ -78,10 +77,7 @@ class _NavBarState extends State<NavBar> {
                   icon: LineIcons.home,
                   text: 'Home',
                 ),
-                GButton(
-                  icon: LineIcons.rocketChat,
-                  text: 'Chat',
-                ),
+
                 GButton(
                   icon: LineIcons.plus,
                   text: 'Add',

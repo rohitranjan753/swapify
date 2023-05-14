@@ -51,6 +51,8 @@ class _RentPageState extends State<RentPage> {
       String firstDropdownValue,
       String secondDropdownValue,
       ) async {
+    rentDes = rentDes.trim();
+    rentTile = rentTile.trim();
     FocusScope.of(context).unfocus();
     if (rentImage == null) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -198,6 +200,8 @@ class _RentPageState extends State<RentPage> {
                   height: 20,
                 ),
                 TextFormField(
+                  textCapitalization: TextCapitalization.sentences,
+
                   onChanged: (value) {
                     setState(() {
                       _titleText = value;
@@ -229,6 +233,10 @@ class _RentPageState extends State<RentPage> {
                   height: 20,
                 ),
                 TextFormField(
+                  maxLength: 50,
+                  maxLines: null,
+                  keyboardType: TextInputType.multiline,
+                  textCapitalization: TextCapitalization.sentences,
                   onChanged: (value) {
                     setState(() {
                       _descriptionText = value;
@@ -237,7 +245,7 @@ class _RentPageState extends State<RentPage> {
                   decoration: InputDecoration(
                     labelText: 'Description',
                     contentPadding:
-                    EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                    EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.grey),
                         borderRadius: BorderRadius.circular(20)),
@@ -259,6 +267,8 @@ class _RentPageState extends State<RentPage> {
                   height: 20,
                 ),
                 TextFormField(
+
+                  keyboardType: TextInputType.number,
                   onChanged: (value) {
                     setState(() {
                       _rentalPrice = value;
