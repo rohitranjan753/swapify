@@ -178,12 +178,20 @@ class _HomePageState extends State<HomePage> {
                       style:
                           TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     ),
-                    Text(
-                      "See All",
-                      style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.grey[600]),
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SearchPage()));
+                      },
+                      child: Text(
+                        "See All",
+                        style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.grey[600]),
+                      ),
                     ),
                   ],
                 ),
