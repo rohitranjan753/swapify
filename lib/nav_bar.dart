@@ -63,14 +63,14 @@ class _NavBarState extends State<NavBar> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
             child: GNav(
-              rippleColor: Colors.grey[300]!,
-              hoverColor: Colors.grey[800]!,
+              rippleColor: Color(0x333f71fa),
+              hoverColor: Color(0x333f71fa),
               gap: 8,
               activeColor: Colors.black,
               iconSize: 24,
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               duration: Duration(milliseconds: 400),
-              tabBackgroundColor: Colors.grey[100]!,
+              tabBackgroundColor: Color(0x333f71fa),
               color: Colors.black,
               tabs: [
                 GButton(

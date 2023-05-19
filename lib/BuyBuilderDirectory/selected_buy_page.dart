@@ -43,6 +43,13 @@ class _SelectedBuyPageState extends State<SelectedBuyPage> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            // Do something when the menu icon is pressed
+            Navigator.pop(context);
+          },
+        ),
         backgroundColor: Colors.cyan[300],
         title: Text(widget.item['creatorname']),
       ),
@@ -64,8 +71,8 @@ class _SelectedBuyPageState extends State<SelectedBuyPage> {
                     boxShadow: [
                       BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
-                          blurRadius: 7,
-                          spreadRadius: 3,
+                          blurRadius: 20,
+                          spreadRadius: 20,
                           offset: Offset(0, 5)),
                     ],
                     image: DecorationImage(

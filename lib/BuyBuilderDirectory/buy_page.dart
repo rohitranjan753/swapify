@@ -19,6 +19,13 @@ class _BuyPageState extends State<BuyPage> {
     double myWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            // Do something when the menu icon is pressed
+            Navigator.pop(context);
+          },
+        ),
         title: Align(
           alignment: Alignment.center,
           child: Container(
@@ -31,7 +38,7 @@ class _BuyPageState extends State<BuyPage> {
             height: myHeight * 0.05,
             width: myWidth * 0.7,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
                 style: TextStyle(fontSize: 18),
                 onChanged: (value) {
@@ -84,7 +91,7 @@ class _BuyPageState extends State<BuyPage> {
                               SelectedSearchPage(item: data)));
                 },
                 child: Card(
-                  elevation: 2,
+                  elevation: 10,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [

@@ -16,7 +16,7 @@ class CategoryHorizontalRow extends StatelessWidget {
             Icon(
               LineIcons.book,
               size: 50,
-              color: Colors.blue,
+              color: Color(0xfffddff9),
             ),
             Text(
               "Notes",

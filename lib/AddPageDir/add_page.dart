@@ -32,7 +32,7 @@ class _AddPageState extends State<AddPage> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Card(
-                      color: Colors.grey[100],
+                      color: Colors.white,
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -78,7 +78,7 @@ class _AddPageState extends State<AddPage> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Card(
-                      color: Colors.grey[100],
+                      color: Colors.white,
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),

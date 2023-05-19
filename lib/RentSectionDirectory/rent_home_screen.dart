@@ -21,6 +21,13 @@ class _RentHomeScreenState extends State<RentHomeScreen> {
     double myWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            // Do something when the menu icon is pressed
+            Navigator.pop(context);
+          },
+        ),
         title: Align(
           alignment: Alignment.center,
           child: Container(
@@ -86,7 +93,7 @@ class _RentHomeScreenState extends State<RentHomeScreen> {
                               SelectedSearchPage(item: data)));
                 },
                 child: Card(
-                  elevation: 2,
+                  elevation: 10,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [

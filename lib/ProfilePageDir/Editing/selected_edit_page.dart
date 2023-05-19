@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:line_icons/line_icon.dart';
@@ -32,6 +33,13 @@ class _SelectedEditPageState extends State<SelectedEditPage> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            // Do something when the menu icon is pressed
+            Navigator.pop(context);
+          },
+        ),
         backgroundColor: Colors.cyan[300],
         title: Text(widget.item['creatorname']),
         actions: [
@@ -292,6 +300,7 @@ class _SelectedEditPageState extends State<SelectedEditPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  //EDIT
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     child: MaterialButton(
@@ -304,12 +313,20 @@ class _SelectedEditPageState extends State<SelectedEditPage> {
                       elevation: 5,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
-                      child: Text(
-                        "EDIT",
-                        style: TextStyle(fontSize: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Icon(Icons.edit),
+                          Text(
+                            "EDIT",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ],
                       ),
                     ),
                   ),
+
+                  //DELETE
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     child: MaterialButton(
@@ -344,9 +361,15 @@ class _SelectedEditPageState extends State<SelectedEditPage> {
                       elevation: 5,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
-                      child: Text(
-                        "DELETE",
-                        style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Icon(Icons.delete),
+                          Text(
+                            "DELETE",
+                            style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                          ),
+                        ],
                       ),
                     ),
                   ),

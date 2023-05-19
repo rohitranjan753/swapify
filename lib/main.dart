@@ -21,13 +21,25 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    Color myAppBarColor = Color(0xfff3c04b);
     return MaterialApp(
 
       debugShowCheckedModeBanner: false,
 
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.cyan,
+        primarySwatch: MaterialColor(myAppBarColor.value,<int, Color>{
+          50: myAppBarColor, // You can adjust the shades as per your preference
+          100: myAppBarColor,
+          200: myAppBarColor,
+          300: myAppBarColor,
+          400: myAppBarColor,
+          500: myAppBarColor,
+          600: myAppBarColor,
+          700: myAppBarColor,
+          800: myAppBarColor,
+          900: myAppBarColor,
+        }),
         textTheme: GoogleFonts.robotoSerifTextTheme(),
       ),
       // home: HomeScreenNew(),

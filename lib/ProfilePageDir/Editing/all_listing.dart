@@ -22,6 +22,13 @@ class _AllListingState extends State<AllListing> {
     double myWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            // Do something when the menu icon is pressed
+            Navigator.pop(context);
+          },
+        ),
         title: Align(
           alignment: Alignment.center,
           child: Container(

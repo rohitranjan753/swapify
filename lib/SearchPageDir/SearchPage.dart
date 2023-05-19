@@ -86,7 +86,7 @@ class _SearchPageState extends State<SearchPage> {
                             builder: (context) => SelectedSearchPage(item: data)));
                 },
                 child: Card(
-                  elevation: 2,
+                  elevation: 10,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [

@@ -102,6 +102,13 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
     double myWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            // Do something when the menu icon is pressed
+            Navigator.pop(context);
+          },
+        ),
         backgroundColor: Colors.cyan[300],
         toolbarHeight: 60,
         title: Text('Edit Profile'),

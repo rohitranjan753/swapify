@@ -64,8 +64,15 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            // Do something when the menu icon is pressed
+            Navigator.pop(context);
+          },
+        ),
         backgroundColor: Colors.cyan[300],
-        title: Text(widget.item['creatorname']),
+        // title: Text(widget.item['creatorname']),
       ),
       body: SingleChildScrollView(
         child: Container(

@@ -200,6 +200,7 @@ class _HomePageState extends State<HomePage> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
+                      //BUY
                       Padding(
                         padding: const EdgeInsets.all(40.0),
                         child: GestureDetector(
@@ -224,7 +225,7 @@ class _HomePageState extends State<HomePage> {
                                 ],
                                 image: DecorationImage(
                                     image:
-                                        AssetImage('assets/profile/buy1.jpg'),
+                                        AssetImage('assets/images/buy_new.jpg'),
                                     fit: BoxFit.cover),
                               ),
                               child: Stack(
@@ -258,6 +259,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
 
+                      //RENT
                       Padding(
                         padding: const EdgeInsets.all(40.0),
                         child: GestureDetector(
@@ -281,7 +283,7 @@ class _HomePageState extends State<HomePage> {
                                     offset: Offset(0, 5)),
                               ],
                               image: DecorationImage(
-                                  image: AssetImage('assets/profile/rent1.jpg'),
+                                  image: AssetImage('assets/images/rent_new.jpg'),
                                   fit: BoxFit.cover),
                             ),
                             child: Stack(
@@ -335,7 +337,7 @@ class _HomePageState extends State<HomePage> {
           Icon(
             categoryIcon[index],
             size: 50,
-            color: Colors.blue,
+            color: Color(0xeee99453),
           ),
           Text(
             categoryName[index],
