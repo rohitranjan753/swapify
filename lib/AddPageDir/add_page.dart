@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vbuddyproject/AddPageDir/RentDir/rent_page.dart';
 import 'package:vbuddyproject/AddPageDir/SellDir/sell_page.dart';
+import 'package:vbuddyproject/constant.dart';
 
 class AddPage extends StatefulWidget {
   const AddPage({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class _AddPageState extends State<AddPage> {
     double myWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -39,13 +41,13 @@ class _AddPageState extends State<AddPage> {
                       ),
                       elevation: 5,
                       child: Container(
-                        height: myHeight * 0.3,
+                        height: myHeight * 0.32,
                         width: myWidth,
                         child: Column(children: [
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(4.0),
                             child: Image.asset(
-                              'assets/images/buy2.jpg',
+                              'assets/images/rent2.jpg',
                               width: myWidth * 0.5,
                             ),
                           ),
@@ -91,7 +93,7 @@ class _AddPageState extends State<AddPage> {
                           Padding(
                             padding: const EdgeInsets.all(4.0),
                             child: Image.asset(
-                              'assets/images/rent2.jpg',
+                              'assets/images/buy2.jpg',
 
                               width: myWidth * 0.5,
                             ),

@@ -2,9 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:vbuddyproject/HomePageDir/home_page.dart';
-import 'package:vbuddyproject/Login_Signup_New/welcome_page.dart';
-import 'package:vbuddyproject/authMainScreen/auth_form.dart';
 import 'package:vbuddyproject/authMainScreen/auth_screen.dart';
 import 'package:vbuddyproject/nav_bar.dart';
 
@@ -28,18 +25,8 @@ class MyApp extends StatelessWidget {
 
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: MaterialColor(myAppBarColor.value,<int, Color>{
-          50: myAppBarColor, // You can adjust the shades as per your preference
-          100: myAppBarColor,
-          200: myAppBarColor,
-          300: myAppBarColor,
-          400: myAppBarColor,
-          500: myAppBarColor,
-          600: myAppBarColor,
-          700: myAppBarColor,
-          800: myAppBarColor,
-          900: myAppBarColor,
-        }),
+        primarySwatch: Colors.cyan,
+
         textTheme: GoogleFonts.robotoSerifTextTheme(),
       ),
       // home: HomeScreenNew(),

@@ -26,6 +26,12 @@ class _BuyPageState extends State<BuyPage> {
             Navigator.pop(context);
           },
         ),
+        toolbarHeight: 60,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              bottomRight: Radius.circular(30),
+              bottomLeft: Radius.circular(30)),
+        ),
         title: Align(
           alignment: Alignment.center,
           child: Container(

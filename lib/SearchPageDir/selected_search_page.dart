@@ -5,6 +5,8 @@ import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:intl/intl.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:vbuddyproject/Chat/ChatScreen.dart';
+import 'package:vbuddyproject/Chat/yourchatScreen.dart';
 
 
 
@@ -33,6 +35,46 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
   //     return "$user2$user1";
   //   }
   // }
+  // checkChatStatus(){
+  //   if()
+  // }
+  void checkChatAndOpenScreen(String currentUser, String otherUser) {
+    FirebaseFirestore.instance
+        .collection('chats')
+        .where('Users', arrayContainsAny: [currentUser, otherUser])
+        .get()
+        .then((querySnapshot) {
+      if (querySnapshot.docs.isNotEmpty) {
+        // Chat exists, open chat screen
+        String chatId = querySnapshot.docs[0].id;
+        openChatScreen(chatId);
+      } else {
+        // Chat doesn't exist, create a new chat ID and store it in Firestore
+        createChatAndOpenScreen(currentUser, otherUser);
+      }
+    });
+  }
+
+  void createChatAndOpenScreen(String currentUser, String otherUser) {
+    FirebaseFirestore.instance
+        .collection('chats')
+        .add({
+      'users': [currentUser, otherUser]
+    })
+        .then((docRef) {
+      String chatId = docRef.id;
+      // Store the chat ID in Firestore
+      // (You can also store additional chat details if needed)
+
+      // Open the chat screen and pass the chat ID
+      openChatScreen(chatId);
+    });
+  }
+
+
+  void openChatScreen(String chatId) {
+    Navigator.push(context, MaterialPageRoute(builder: (contetx)=>YourChatScreen(chatId: chatId)));
+  }
 
 
   void _sendEmail() async {
@@ -72,6 +114,11 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
           },
         ),
         backgroundColor: Colors.cyan[300],
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              bottomRight: Radius.circular(30),
+              bottomLeft: Radius.circular(30)),
+        ),
         // title: Text(widget.item['creatorname']),
       ),
       body: SingleChildScrollView(
@@ -290,7 +337,7 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5),
                 child: MaterialButton(
-                  onPressed: _sendEmail,
+                  onPressed: (){checkChatAndOpenScreen(_auth.currentUser!.uid,widget.item['createdby']);},
                   minWidth: myWidth*0.5,
                   height: 60,
                   color: Colors.cyan,
@@ -308,6 +355,9 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
           ),
         ),
       ),
+
     );
   }
 }
+
+

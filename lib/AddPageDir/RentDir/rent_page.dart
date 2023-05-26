@@ -150,8 +150,8 @@ class _RentPageState extends State<RentPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.cyan[300],
-        toolbarHeight: 60,
         title: Text('Rent Upload Section'),
+        toolbarHeight: 60,
         centerTitle: true,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
