@@ -3,10 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:vbuddyproject/BuyBuilderDirectory/buy_page.dart';
+import 'package:vbuddyproject/Chat/chatpage.dart';
 import 'package:vbuddyproject/HomePageDir/browse_category_screen.dart';
 import 'package:vbuddyproject/HomePageDir/category_screen.dart';
 import 'package:vbuddyproject/RentSectionDirectory/rent_home_screen.dart';
 import 'package:vbuddyproject/SearchPageDir/SearchPage.dart';
+import 'package:vbuddyproject/constant.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -109,11 +111,11 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => SearchPage()));
+                                  builder: (context) => ChatPage()));
                         },
                         child: Icon(
-                          Icons.search,
-                          color: Colors.blue[300],
+                          Icons.chat_outlined,
+                          color: AppColors.appbarColor,
                           size: 30,
                         ),
                       )

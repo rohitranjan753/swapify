@@ -41,7 +41,7 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
   void checkChatAndOpenScreen(String currentUser, String otherUser) {
     FirebaseFirestore.instance
         .collection('chats')
-        .where('Users', arrayContainsAny: [currentUser, otherUser])
+        .where('users', arrayContainsAny: [currentUser, otherUser])
         .get()
         .then((querySnapshot) {
       if (querySnapshot.docs.isNotEmpty) {

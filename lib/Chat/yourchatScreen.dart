@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class YourChatScreen extends StatelessWidget {
@@ -8,7 +9,7 @@ class YourChatScreen extends StatelessWidget {
 
   // Controller for the message input field
   final TextEditingController _messageController = TextEditingController();
-
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   // Function to send a message
   void sendMessage(String message) {
     FirebaseFirestore.instance
@@ -18,6 +19,7 @@ class YourChatScreen extends StatelessWidget {
         .add({
       'message': message,
       'timestamp': FieldValue.serverTimestamp(),
+      'sender': _auth.currentUser!.uid, // Add sender information
     });
   }
 
@@ -52,8 +54,45 @@ class YourChatScreen extends StatelessWidget {
                 return ListView(
                   reverse: true,
                   children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                    return ListTile(
-                      title: Text(document['message']),
+                    String message = document['message'];
+                    String sender = document['sender'];
+
+                    // Determine if the message is from the current user
+                    bool isCurrentUser = sender == _auth.currentUser!.uid;
+
+                    // Set the alignment and background color based on the message sender
+                    CrossAxisAlignment alignment =
+                    isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start;
+                    Color backgroundColor =
+                    isCurrentUser ? Colors.blue : Colors.grey[300]!;
+
+                    // Set the text color based on the message sender
+                    Color textColor = isCurrentUser ? Colors.white : Colors.black;
+
+                    return Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                      child: Column(
+                        crossAxisAlignment: alignment,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: backgroundColor,
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              message,
+                              style: TextStyle(color: textColor),
+                            ),
+                          ),
+                          SizedBox(height: 4.0),
+                          if (isCurrentUser)
+                            Text(
+                              'You', // Display 'You' for current user's messages
+                              style: TextStyle(fontSize: 12.0),
+                            ),
+                        ],
+                      ),
                     );
                   }).toList(),
                 );
@@ -91,3 +130,4 @@ class YourChatScreen extends StatelessWidget {
     );
   }
 }
+
