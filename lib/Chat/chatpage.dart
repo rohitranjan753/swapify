@@ -2,24 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vbuddyproject/Chat/yourchatScreen.dart';
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class ChatPage extends StatelessWidget {
-
-
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  Future<String?> getUsername(String userId) async {
-    DocumentSnapshot snapshot =
-        await FirebaseFirestore.instance.collection('Users').doc(userId).get();
-
-    if (snapshot.exists) {
-      Map<String, dynamic> userData = snapshot.data() as Map<String, dynamic>;
-      String? username = userData['username'];
-      print("User name $username");
-      return username;
-    }
-    return null;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,27 +30,25 @@ class ChatPage extends StatelessWidget {
               String chatId = document.id;
               List<dynamic> users = document['users'];
 
-              // Determine the other user's ID and Name
-              String otherUsername = '';
-              String otherUserId =
-                  users.firstWhere((userId) => userId != _auth.currentUser!.uid);
-
-              String userId = otherUserId; // Replace with the desired user ID
-
-              print("Other user Id $userId");
-
-              void fetchUsername() async {
-                String? username = await getUsername(userId);
-                if (username != null) {
-                  print('Username: $username');
-                } else {
-                  print('User not found or username is null');
-                }
-              }
+              // Determine the other user's ID
+              String otherUserId = users.firstWhere((userId) => userId != getCurrentUserId());
 
               return Card(
                 child: ListTile(
-                  title: Text('Chat with $otherUsername'),
+                  title: FutureBuilder<String?>(
+                    future: getUsername(otherUserId),
+                    builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return CircularProgressIndicator(
+                        );
+                      }
+                      if (snapshot.hasError || !snapshot.hasData || snapshot.data == null) {
+                        return Text('User not found');
+                      }
+                      // Display the chat item with the other user's username
+                      return Text('Chat with ${snapshot.data}');
+                    },
+                  ),
                   onTap: () {
                     navigateToChatScreen(context, chatId);
                   },
@@ -78,6 +61,10 @@ class ChatPage extends StatelessWidget {
     );
   }
 
+  // Function to get the current user ID (replace with your own logic)
+  String getCurrentUserId() {
+    return _auth.currentUser!.uid;
+  }
 
   // Function to navigate to the chat screen with the provided chat ID
   void navigateToChatScreen(BuildContext context, String chatId) {
@@ -86,4 +73,18 @@ class ChatPage extends StatelessWidget {
       MaterialPageRoute(builder: (context) => YourChatScreen(chatId: chatId)),
     );
   }
+
+  // Function to fetch the username for a given user ID from Firestore
+  Future<String?> getUsername(String userId) async {
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection('Users').doc(userId).get();
+
+    if (snapshot.exists) {
+      Map<String, dynamic> userData = snapshot.data() as Map<String, dynamic>;
+      String? username = userData['username'];
+      return username;
+    }
+
+    return null;
+  }
 }
+
