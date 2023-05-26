@@ -41,9 +41,9 @@ class YourChatScreen extends StatelessWidget {
                   .orderBy('timestamp', descending: true)
                   .snapshots(),
               builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
-                }
+                // if (snapshot.connectionState == ConnectionState.waiting) {
+                //   return CircularProgressIndicator();
+                // }
                 if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
                 }
@@ -66,23 +66,35 @@ class YourChatScreen extends StatelessWidget {
                     Color backgroundColor =
                     isCurrentUser ? Colors.blue : Colors.grey[300]!;
 
+                    BorderRadius borderradius = isCurrentUser ? BorderRadius.only(
+                      topLeft: Radius.circular(12),
+                      topRight: Radius.circular(12),
+                      bottomLeft: Radius.circular(12),
+                      bottomRight: Radius.circular(0),
+                    ):BorderRadius.only(
+                      topLeft: Radius.circular(12),
+                      topRight: Radius.circular(12),
+                      bottomLeft: Radius.circular(0),
+                      bottomRight: Radius.circular(12),
+                    );
+
                     // Set the text color based on the message sender
                     Color textColor = isCurrentUser ? Colors.white : Colors.black;
 
                     return Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                      padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
                       child: Column(
                         crossAxisAlignment: alignment,
                         children: [
                           Container(
                             decoration: BoxDecoration(
                               color: backgroundColor,
-                              borderRadius: BorderRadius.circular(8.0),
+                              borderRadius: borderradius,
                             ),
-                            padding: EdgeInsets.all(8.0),
+                            padding: EdgeInsets.symmetric(horizontal: 10,vertical: 13),
                             child: Text(
                               message,
-                              style: TextStyle(color: textColor),
+                              style: TextStyle(color: textColor,fontSize: 17),
                             ),
                           ),
                           SizedBox(height: 4.0),
@@ -106,7 +118,8 @@ class YourChatScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: TextField(
-
+                    style: TextStyle(fontSize: 20),
+                    maxLines: null,
                     keyboardType: TextInputType.multiline,
                     textCapitalization: TextCapitalization.sentences,
                     autocorrect: true,
@@ -122,6 +135,7 @@ class YourChatScreen extends StatelessWidget {
                 ),
                 IconButton(
                   icon: Icon(Icons.send),
+                  color: Colors.cyan,
                   onPressed: () {
                     String message = _messageController.text.trim();
                     if (message.isNotEmpty) {

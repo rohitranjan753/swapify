@@ -46,7 +46,9 @@ class ChatPage extends StatelessWidget {
                         return Text('User not found');
                       }
                       // Display the chat item with the other user's username
-                      return Text('Chat with ${snapshot.data}');
+                      return Text(' ${snapshot.data}',style: TextStyle(
+                        fontSize: 25
+                      ),);
                     },
                   ),
                   onTap: () {
