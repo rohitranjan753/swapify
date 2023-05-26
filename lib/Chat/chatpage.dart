@@ -1,26 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vbuddyproject/Chat/yourchatScreen.dart';
 
 class ChatPage extends StatelessWidget {
 
-  Future<String> getOtherUserName(String otherUserId) async {
-    String currentUserId = otherUserId; // Replace with your logic to get the current user ID
 
-    DocumentSnapshot snapshot = await FirebaseFirestore.instance
-        .collection('Users')
-        .doc(currentUserId)
-        .get();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  Future<String?> getUsername(String userId) async {
+    DocumentSnapshot snapshot =
+        await FirebaseFirestore.instance.collection('Users').doc(userId).get();
 
     if (snapshot.exists) {
       Map<String, dynamic> userData = snapshot.data() as Map<String, dynamic>;
-      String userName = userData['username'];
-      return userName;
+      String? username = userData['username'];
+      print("User name $username");
+      return username;
     }
-
-    return '';
+    return null;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -47,16 +45,23 @@ class ChatPage extends StatelessWidget {
               String chatId = document.id;
               List<dynamic> users = document['users'];
 
-              // Determine the other user's ID
-              String otherUsername='';
-              String otherUserId = users.firstWhere((userId) => userId != getCurrentUserId());
+              // Determine the other user's ID and Name
+              String otherUsername = '';
+              String otherUserId =
+                  users.firstWhere((userId) => userId != _auth.currentUser!.uid);
 
-              void fetchCurrentUserName() async {
-                otherUsername = await getOtherUserName(otherUserId);
-                print('Other user name: $otherUsername');
+              String userId = otherUserId; // Replace with the desired user ID
+
+              print("Other user Id $userId");
+
+              void fetchUsername() async {
+                String? username = await getUsername(userId);
+                if (username != null) {
+                  print('Username: $username');
+                } else {
+                  print('User not found or username is null');
+                }
               }
-
-
 
               return Card(
                 child: ListTile(
@@ -73,10 +78,6 @@ class ChatPage extends StatelessWidget {
     );
   }
 
-  // Function to get the current user ID (replace with your own logic)
-  String getCurrentUserId() {
-    return 'current_user_id';
-  }
 
   // Function to navigate to the chat screen with the provided chat ID
   void navigateToChatScreen(BuildContext context, String chatId) {

@@ -106,9 +106,17 @@ class YourChatScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: TextField(
+
+                    keyboardType: TextInputType.multiline,
+                    textCapitalization: TextCapitalization.sentences,
+                    autocorrect: true,
+                    enableSuggestions: true,
                     controller: _messageController,
                     decoration: InputDecoration(
                       hintText: 'Type your message...',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        )
                     ),
                   ),
                 ),
