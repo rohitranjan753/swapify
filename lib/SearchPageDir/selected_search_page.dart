@@ -73,7 +73,7 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
 
 
   void openChatScreen(String chatId) {
-    Navigator.push(context, MaterialPageRoute(builder: (contetx)=>YourChatScreen(chatId: chatId)));
+    Navigator.push(context, MaterialPageRoute(builder: (contetx)=>ChatScreen(chatId: chatId)));
   }
 
 
