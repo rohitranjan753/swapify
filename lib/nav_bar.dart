@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:vbuddyproject/AddPageDir/add_page.dart';
-import 'package:vbuddyproject/Chat/chat_main_screen.dart';
 import 'package:vbuddyproject/HomePageDir/home_page.dart';
 import 'package:vbuddyproject/ProfilePageDir/ProfilePage.dart';
 import 'package:vbuddyproject/SearchPageDir/SearchPage.dart';
