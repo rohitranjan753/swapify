@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:vbuddyproject/Chat/chatScreenOld.dart';
-import 'package:vbuddyproject/Chat/yourchatScreen.dart';
+import 'package:vbuddyproject/Chat/chat_screen.dart';
 
 
 
