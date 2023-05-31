@@ -27,6 +27,13 @@ class YourChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            // Do something when the menu icon is pressed
+            Navigator.pop(context);
+          },
+        ),
         title: Text('Chat Screen'),
       ),
       body: Column(
@@ -41,9 +48,9 @@ class YourChatScreen extends StatelessWidget {
                   .orderBy('timestamp', descending: true)
                   .snapshots(),
               builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                // if (snapshot.connectionState == ConnectionState.waiting) {
-                //   return CircularProgressIndicator();
-                // }
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return CircularProgressIndicator();
+                }
                 if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
                 }

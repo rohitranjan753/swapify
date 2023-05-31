@@ -391,7 +391,14 @@ class _RentPageState extends State<RentPage> {
                       // If the form is valid, display a snackbar. In the real world,
                       // you'd often call a server or save the information in a database.
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Processing Data')),
+                        const SnackBar(content: Text('Uploading! Please wait',style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16.0,
+                        ),),
+                          backgroundColor: Colors.blue,
+                          behavior: SnackBarBehavior.floating,
+                          elevation: 4.0,
+                        ),
                       );
 
                       _uploadToFirebase(

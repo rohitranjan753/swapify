@@ -26,6 +26,16 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
       String userName,
 
       ) async {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Uploading! Please wait',style: TextStyle(
+        color: Colors.white,
+        fontSize: 16.0,
+      ),),
+        backgroundColor: Colors.blue,
+        behavior: SnackBarBehavior.floating,
+        elevation: 4.0,
+      ),
+    );
     FocusScope.of(context).unfocus();
     // if (userImage == null) {
     //   ScaffoldMessenger.of(context).showSnackBar(

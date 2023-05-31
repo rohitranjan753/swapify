@@ -8,3 +8,7 @@ class AppColors {
   static const Color backgroundColor = Color(0xFFF6F1F1);
 // Define more colors here if needed
 }
+
+
+
+

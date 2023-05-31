@@ -9,7 +9,14 @@ class ChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chat Page'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            // Do something when the menu icon is pressed
+            Navigator.pop(context);
+          },
+        ),
+        title: Text('Chat'),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('chats').snapshots(),
@@ -39,7 +46,7 @@ class ChatPage extends StatelessWidget {
                     future: getUsername(otherUserId),
                     builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return CircularProgressIndicator(
+                        return LinearProgressIndicator(
                         );
                       }
                       if (snapshot.hasError || !snapshot.hasData || snapshot.data == null) {
