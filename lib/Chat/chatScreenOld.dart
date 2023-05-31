@@ -166,10 +166,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 final FirebaseAuth _auth = FirebaseAuth.instance;
-class ChatScreen extends StatelessWidget {
+class ChatScreenOld extends StatelessWidget {
   final String chatRoomId;
 
-  ChatScreen({required this.chatRoomId});
+  ChatScreenOld({required this.chatRoomId});
 
 
 
