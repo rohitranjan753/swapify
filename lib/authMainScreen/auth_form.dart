@@ -18,6 +18,7 @@ class AuthForm extends StatefulWidget {
 }
 
 class _AuthFormState extends State<AuthForm> {
+  bool passwordVisible=true;
   final _formKey = GlobalKey<FormState>();
   var _isLogin = true;
   var _userEmail = '';
@@ -120,6 +121,9 @@ class _AuthFormState extends State<AuthForm> {
                       },
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
+
+                        prefixIcon: Icon(Icons.email),
+
                         hintText: "abc@gmail.com",
                         labelText: "Email Address",
                         contentPadding:
@@ -151,6 +155,7 @@ class _AuthFormState extends State<AuthForm> {
                           }
                         },
                         decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.person),
                           labelText: "Username",
                           contentPadding: EdgeInsets.symmetric(
                               vertical: 0, horizontal: 10),
@@ -177,6 +182,20 @@ class _AuthFormState extends State<AuthForm> {
                         }
                       },
                       decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.lock),
+                        suffixIcon: IconButton(
+                          icon: Icon(passwordVisible
+                              ? Icons.visibility_off
+                              : Icons.visibility),
+                          onPressed: () {
+                            setState(
+                                  () {
+                                passwordVisible = !passwordVisible;
+                              },
+                            );
+                          },
+                        ),
+
                         hintText: "Greater than 7",
                         labelText: "Password",
                         contentPadding:
@@ -186,7 +205,7 @@ class _AuthFormState extends State<AuthForm> {
                         border: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.grey)),
                       ),
-                      obscureText: true,
+                      obscureText: passwordVisible,
                       onSaved: (value) {
                         _userPass = value!;
                       },
@@ -253,4 +272,6 @@ class _AuthFormState extends State<AuthForm> {
       ),
     );
   }
+
+
 }
