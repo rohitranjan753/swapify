@@ -9,6 +9,25 @@ class AppColors {
 // Define more colors here if needed
 }
 
+class categoryList{
+  List majorCategoryName = ["Notes", "Clothes", "Footwear", "Stationary", "Gadgets"];
 
+  List<String> firstDropdownOptions = [
+    'Notes',
+    'Clothes',
+    'Footwear',
+    'Stationary',
+    'Gadgets',
+  ];
+
+  // Define the options for the second dropdown, based on the selected value of the first dropdown
+  Map<String, List<String>> secondDropdownOptions = {
+    'Notes': ['DSA', 'DBMS', 'Operating System', 'Java'],
+    'Clothes': ['Formal', 'Ethnic', 'Casual'],
+    'Footwear': ['Sports', 'Formal', 'Casual'],
+    'Stationary': ['Notebook', 'Calculator', 'Pen'],
+    'Gadgets': ['Earphone', 'Charger', 'Speaker','Laptop','Keyboard'],
+  };
+}
 
 

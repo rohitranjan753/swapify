@@ -150,7 +150,7 @@ class _RentPageState extends State<RentPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.cyan[300],
-        title: Text('Rent Upload Section'),
+        title: Text('RENT UPLOAD SECTION'),
         toolbarHeight: 60,
         centerTitle: true,
         shape: const RoundedRectangleBorder(
@@ -286,7 +286,7 @@ class _RentPageState extends State<RentPage> {
                         borderRadius: BorderRadius.circular(20)),
                     filled: true,
                     fillColor: Colors.white,
-                    hintText: 'Enter Price per 12 Hrs',
+                    hintText: 'Enter Price per 6 Hrs',
                   ),
                   validator: (value) {
                     if (value!.isEmpty || value == null) {
@@ -387,7 +387,13 @@ class _RentPageState extends State<RentPage> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Choose Category')),
                       );
-                    } else if (_formKey.currentState!.validate()) {
+                    }
+                    else if(!isNumber(_rentalPrice)){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Invalid Price')),
+                      );
+                    }
+                    else if (_formKey.currentState!.validate()) {
                       // If the form is valid, display a snackbar. In the real world,
                       // you'd often call a server or save the information in a database.
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -444,5 +450,12 @@ class _RentPageState extends State<RentPage> {
   @override
   void dispose() {
     super.dispose();
+  }
+
+  bool isNumber(String value) {
+    if(value == null) {
+      return false;
+    }
+    return double.tryParse(value) != null;
   }
 }

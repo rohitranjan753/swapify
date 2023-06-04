@@ -41,7 +41,7 @@ class _SellPageState extends State<SellPage> {
   bool _isLoading = false;
   String _titleText = '';
   String _descriptionText = '';
-  String _rentalPrice = '';
+  String _sellPrice = '';
   File? _image;
 
   Future<void> _uploadToFirebase(
@@ -149,7 +149,7 @@ class _SellPageState extends State<SellPage> {
       appBar: AppBar(
         backgroundColor: Colors.cyan[300],
         toolbarHeight: 60,
-        title: Text('Upload Section'),
+        title: Text('SELL UPLOAD SECTION'),
         centerTitle: true,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -242,7 +242,7 @@ class _SellPageState extends State<SellPage> {
                         decoration: InputDecoration(
                           labelText: 'Enter Description',
                           contentPadding:
-                              EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                              EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.grey),
                               borderRadius: BorderRadius.circular(20)),
@@ -267,7 +267,7 @@ class _SellPageState extends State<SellPage> {
                         keyboardType: TextInputType.number,
                         onChanged: (value) {
                           setState(() {
-                            _rentalPrice = value;
+                            _sellPrice = value;
                           });
                         },
                         decoration: InputDecoration(
@@ -384,7 +384,13 @@ class _SellPageState extends State<SellPage> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Choose Category')),
                             );
-                          } else if (_formKey.currentState!.validate()) {
+                          }
+                          else if(!isNumber(_sellPrice)){
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Invalid Price')),
+                            );
+                          }
+                          else if (_formKey.currentState!.validate()) {
                             // If the form is valid, display a snackbar. In the real world,
                             // you'd often call a server or save the information in a database.
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -402,7 +408,7 @@ class _SellPageState extends State<SellPage> {
                                 _image!,
                                 _titleText,
                                 _descriptionText,
-                                _rentalPrice,
+                                _sellPrice,
                                 _selectedFirstValue!,
                                 _selectedSecondValue!);
                             setState(() {
@@ -441,5 +447,11 @@ class _SellPageState extends State<SellPage> {
   @override
   void dispose() {
     super.dispose();
+  }
+  bool isNumber(String value) {
+    if(value == null) {
+      return false;
+    }
+    return double.tryParse(value) != null;
   }
 }

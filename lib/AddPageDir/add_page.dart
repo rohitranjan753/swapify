@@ -17,6 +17,17 @@ class _AddPageState extends State<AddPage> {
     double myWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text("ADD LISTING"),
+        centerTitle: true,
+        backgroundColor: Colors.cyan[300],
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              bottomRight: Radius.circular(30),
+              bottomLeft: Radius.circular(30)),
+        ),
+        // title: Text(widget.item['creatorname']),
+      ),
       backgroundColor: AppColors.backgroundColor,
       body: Center(
         child: Padding(
