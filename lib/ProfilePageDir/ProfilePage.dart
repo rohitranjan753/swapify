@@ -60,6 +60,9 @@ class _ProfilePageState extends State<ProfilePage> {
 
     final top = coverHeight - profileHeight / 2;
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 0,
+      ),
       body: SafeArea(
         child: Column(
           children: [

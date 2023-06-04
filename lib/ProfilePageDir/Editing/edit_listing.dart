@@ -141,11 +141,11 @@ class _EditListingState extends State<EditListing> {
                   clipBehavior: Clip.antiAliasWithSaveLayer,
                   elevation: 15,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(100),
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   child: Container(
-                    height: myHeight * 0.15,
-                    width: myWidth * 0.31,
+                    height: myHeight * 0.2,
+                    width: myWidth * 0.5,
                     decoration: BoxDecoration(
                       image: _image != null
                           ? DecorationImage(

@@ -42,48 +42,48 @@ class _SelectedEditPageState extends State<SelectedEditPage> {
         ),
         backgroundColor: Colors.cyan[300],
         title: Text(widget.item['creatorname']),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.menu),
-            tooltip: 'Menu',
-            onPressed: () {
-              showMenu(
-                context: context,
-                position: RelativeRect.fromLTRB(1000.0, 80.0, 0.0, 0.0),
-                items: [
-                  PopupMenuItem(
-                    child: Row(
-                      children: [
-                        Icon(Icons.edit),
-                        Text('Edit'),
-                      ],
-                    ),
-                    value: 1,
-                  ),
-                  PopupMenuItem(
-                    child: Row(
-                      children: [
-                        Icon(Icons.delete),
-                        Text('Delete'),
-                      ],
-                    ),
-                    value: 2,
-                  ),
-                ],
-              ).then((value) {
-                switch (value) {
-                  case 1:
-                    break;
-                  case 2:
-                    Navigator.pushNamed(context, '/screen2');
-                    break;
-                  default:
-                    break;
-                }
-              });
-            },
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     icon: Icon(Icons.menu),
+        //     tooltip: 'Menu',
+        //     onPressed: () {
+        //       showMenu(
+        //         context: context,
+        //         position: RelativeRect.fromLTRB(1000.0, 80.0, 0.0, 0.0),
+        //         items: [
+        //           PopupMenuItem(
+        //             child: Row(
+        //               children: [
+        //                 Icon(Icons.edit),
+        //                 Text('Edit'),
+        //               ],
+        //             ),
+        //             value: 1,
+        //           ),
+        //           PopupMenuItem(
+        //             child: Row(
+        //               children: [
+        //                 Icon(Icons.delete),
+        //                 Text('Delete'),
+        //               ],
+        //             ),
+        //             value: 2,
+        //           ),
+        //         ],
+        //       ).then((value) {
+        //         switch (value) {
+        //           case 1:
+        //             break;
+        //           case 2:
+        //             Navigator.pushNamed(context, '/screen2');
+        //             break;
+        //           default:
+        //             break;
+        //         }
+        //       });
+        //     },
+        //   ),
+        // ],
       ),
       body: SingleChildScrollView(
         child: Container(

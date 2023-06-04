@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:vbuddyproject/HomePageDir/category_screen.dart';
 import 'package:vbuddyproject/SearchPageDir/selected_search_page.dart';
 
 final CollectionReference allsection =
@@ -22,6 +23,40 @@ class _SearchPageState extends State<SearchPage> {
     double myWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: Icon(Icons.menu_sharp,color: Colors.black54,),
+            tooltip: 'Menu',
+            onPressed: () {
+              showMenu(
+                context: context,
+                position: RelativeRect.fromLTRB(1000.0, 80.0, 0.0, 0.0),
+                items: [
+                  PopupMenuItem(
+                    child: Row(
+                      children: [
+                        Icon(Icons.category_rounded),
+                        Text('All Category'),
+                      ],
+                    ),
+                    value: 1,
+                  ),
+                ],
+              ).then((value) {
+                switch (value) {
+                  case 1:
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>CategoryScreen()));
+                    break;
+                  case 2:
+                    Navigator.pushNamed(context, '/screen2');
+                    break;
+                  default:
+                    break;
+                }
+              });
+            },
+          ),
+        ],
         title: Align(
           alignment: Alignment.center,
           child: Container(
@@ -121,24 +156,24 @@ class _SearchPageState extends State<SearchPage> {
                           ),
                         ),
                       ),
-                      user!.uid == data["createdby"] ?
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
-                        child: Text(
-                          'Uploaded By: YOU',
-                          style: TextStyle(
-                            fontSize: 12,fontWeight: FontWeight.bold
-                          ),
-                        ),
-                      ): Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
-                        child: Text(
-                          "Uploaded By: ${data["creatorname"]}",
-                          style: TextStyle(
-                            fontSize: 12,
-                          ),
-                        ),
-                      ),
+                      // user!.uid == data["createdby"] ?
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
+                      //   child: Text(
+                      //     'Uploaded By: YOU',
+                      //     style: TextStyle(
+                      //       fontSize: 12,fontWeight: FontWeight.bold
+                      //     ),
+                      //   ),
+                      // ): Padding(
+                      //   padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
+                      //   child: Text(
+                      //     "Uploaded By: ${data["creatorname"]}",
+                      //     style: TextStyle(
+                      //       fontSize: 12,
+                      //     ),
+                      //   ),
+                      // ),
                       data["category"].toString() == "sell"
                           ? Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -150,7 +185,7 @@ class _SearchPageState extends State<SearchPage> {
                           : Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                             child: Text(
-                        "₹ ${data["price"]} /12Hrs",
+                        "₹ ${data["price"]} /6Hrs",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                           ),
