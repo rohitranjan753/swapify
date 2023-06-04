@@ -658,7 +658,7 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
                             "₹${widget.item['price']}",
                             style: TextStyle(fontSize: 19),
                           ) : Text(
-                            "₹${widget.item['price']} / 12Hrs",
+                            "₹${widget.item['price']} / 6Hrs",
                             style: TextStyle(fontSize: 19),
                           ),
                         ),
@@ -679,7 +679,7 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50)),
                   child: Text(
-                    "SEND EMAIL",
+                    "CHAT",
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
