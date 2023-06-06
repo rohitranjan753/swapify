@@ -134,31 +134,31 @@ class _BuyPageState extends State<BuyPage> {
                           ),
                         ),
                       ),
-                      user!.uid == data["createdby"]
-                          ? Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8.0, vertical: 1),
-                              child: Text(
-                                'Uploaded By: YOU',
-                                style: TextStyle(
-                                    fontSize: 12, fontWeight: FontWeight.bold),
-                              ),
-                            )
-                          : Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8.0, vertical: 1),
-                              child: Text(
-                                "Uploaded By: ${data["creatorname"]}",
-                                style: TextStyle(
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ),
+                      // user!.uid == data["createdby"]
+                      //     ? Padding(
+                      //         padding: const EdgeInsets.symmetric(
+                      //             horizontal: 8.0, vertical: 1),
+                      //         child: Text(
+                      //           'Uploaded By: YOU',
+                      //           style: TextStyle(
+                      //               fontSize: 12, fontWeight: FontWeight.bold),
+                      //         ),
+                      //       )
+                      //     : Padding(
+                      //         padding: const EdgeInsets.symmetric(
+                      //             horizontal: 8.0, vertical: 1),
+                      //         child: Text(
+                      //           "Uploaded By: ${data["creatorname"]}",
+                      //           style: TextStyle(
+                      //             fontSize: 12,
+                      //           ),
+                      //         ),
+                      //       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 2),
                         child: Text(
                           "₹${data["price"]}",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),
                         ),
                       ),
                     ],

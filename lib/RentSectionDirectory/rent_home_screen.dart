@@ -136,32 +136,13 @@ class _RentHomeScreenState extends State<RentHomeScreen> {
                           ),
                         ),
                       ),
-                      user!.uid == data["createdby"]
-                          ? Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8.0, vertical: 1),
-                              child: Text(
-                                'Uploaded By: YOU',
-                                style: TextStyle(
-                                    fontSize: 12, fontWeight: FontWeight.bold),
-                              ),
-                            )
-                          : Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8.0, vertical: 1),
-                              child: Text(
-                                "Uploaded By: ${data["creatorname"]}",
-                                style: TextStyle(
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ),
+
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8, vertical: 1),
                         child: Text(
-                          "₹${data["price"]} /12hrs",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          "₹${data["price"]} /6hrs",
+                          style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),
                         ),
                       ),
                     ],

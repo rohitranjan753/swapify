@@ -5,6 +5,7 @@ import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:intl/intl.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:pinch_zoom/pinch_zoom.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:vbuddyproject/Chat/chatScreenOld.dart';
 import 'package:vbuddyproject/Chat/chat_screen.dart';
@@ -352,24 +353,21 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
         .where('users', arrayContainsAny: [currentUser, otherUser])
         .get()
         .then((querySnapshot) {
-      if (querySnapshot.docs.isNotEmpty) {
-        // Chat exists, open chat screen
-        String chatId = querySnapshot.docs[0].id;
-        openChatScreen(chatId);
-      } else {
-        // Chat doesn't exist, create a new chat ID and store it in Firestore
-        createChatAndOpenScreen(currentUser, otherUser);
-      }
-    });
+          if (querySnapshot.docs.isNotEmpty) {
+            // Chat exists, open chat screen
+            String chatId = querySnapshot.docs[0].id;
+            openChatScreen(chatId);
+          } else {
+            // Chat doesn't exist, create a new chat ID and store it in Firestore
+            createChatAndOpenScreen(currentUser, otherUser);
+          }
+        });
   }
 
   void createChatAndOpenScreen(String currentUser, String otherUser) {
-    FirebaseFirestore.instance
-        .collection('chats')
-        .add({
+    FirebaseFirestore.instance.collection('chats').add({
       'users': [currentUser, otherUser]
-    })
-        .then((docRef) {
+    }).then((docRef) {
       String chatId = docRef.id;
       // Store the chat ID in Firestore
       // (You can also store additional chat details if needed)
@@ -379,17 +377,17 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
     });
   }
 
-
   void openChatScreen(String chatId) {
-    Navigator.push(context, MaterialPageRoute(builder: (contetx)=>ChatScreen(chatId: chatId)));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (contetx) => ChatScreen(chatId: chatId)));
   }
-
 
   void _sendEmail() async {
     final Uri params = Uri(
       scheme: 'mailto',
       path: widget.item['creatormail'],
-      query: 'subject=Hey%20I%20am%20interested&body=Let''\s%20us%20connect%20',
+      query:
+          'subject=Hey%20I%20am%20interested&body=Let' '\s%20us%20connect%20',
     );
     String url = params.toString();
     if (await canLaunch(url)) {
@@ -399,10 +397,9 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
     }
   }
 
-
-
   @override
   Widget build(BuildContext context) {
+    final User? user = FirebaseAuth.instance.currentUser;
     Timestamp timestamp = widget.item['createdAt'];
     DateTime date = timestamp.toDate();
     double myScale = 1.0;
@@ -434,55 +431,51 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
       body: SingleChildScrollView(
         child: Container(
           // color: Color.fromRGBO(255, 248, 238, 10),
-          height: myHeight,
+
           width: myWidth,
           child: Column(
             children: [
               Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: GestureDetector(
-                  onScaleStart: (ScaleStartDetails details) {
-                    setState(() {
-                      previousScale = myScale;
-                    });
-                  },
-                  onScaleUpdate: (ScaleUpdateDetails details) {
-                    setState(() {
-                      myScale = previousScale * details.scale;
-                    });
-                  },
-                  onScaleEnd: (ScaleEndDetails details) {
-                    setState(() {
-                      myScale = 1.0;
-                    });
-                  },
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: Container(
-                      height: myHeight * 0.4,
-                      // width: myWidth * 0.3,
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            blurRadius: 7,
-                            spreadRadius: 3,
-                            offset: Offset(0, 5),
-                          ),
-                        ],
-                      ),
-                      child: Transform.scale(
-                        scale: myScale,
-                        child: Image.network(
-                          widget.item['imageUrl'],
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+                child: Card(
+
+                  elevation: 10,
+                  child: Container(
+
+                    height: myHeight * 0.4,
+                    child: PinchZoom(
+                      child: Image.network(widget.item['imageUrl']),
+                      resetDuration: const Duration(milliseconds: 100),
+                      maxScale: 5,
+                      onZoomStart: () {
+                        print('Start zooming');
+                      },
+                      onZoomEnd: () {
+                        print('Stop zooming');
+                      },
                     ),
                   ),
                 ),
               ),
+              // Padding(
+              //   padding: const EdgeInsets.all(20.0),
+              //   child: Container(
+              //
+              //     height: myHeight * 0.4,
+              //     child: PinchZoom(
+              //       child: Image.network(widget.item['imageUrl']),
+              //       resetDuration: const Duration(milliseconds: 100),
+              //       maxScale: 5,
+              //       onZoomStart: () {
+              //         print('Start zooming');
+              //       },
+              //       onZoomEnd: () {
+              //         print('Stop zooming');
+              //       },
+              //     ),
+              //   ),
+              // ),
+
               Column(
                 children: [
                   Padding(
@@ -520,11 +513,13 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
                                 size: myWidth * 0.050,
                               ),
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 5),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5),
                                 child: Text(
                                   "Category",
                                   style: TextStyle(
-                                      fontSize: 22, fontWeight: FontWeight.bold),
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ],
@@ -553,11 +548,13 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
                                 size: myWidth * 0.050,
                               ),
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 5),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5),
                                 child: Text(
                                   "Description",
                                   style: TextStyle(
-                                      fontSize: 22, fontWeight: FontWeight.bold),
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ],
@@ -583,25 +580,35 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
                                 size: myWidth * 0.050,
                               ),
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 5),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5),
                                 child: Text(
                                   "Uploaded By",
                                   style: TextStyle(
-                                      fontSize: 22, fontWeight: FontWeight.bold),
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 30),
-                          child: Text(
-                            widget.item['creatorname'],
-                            style: TextStyle(
-                              fontSize: 19,
-                            ),
-                          ),
-                        ),
+                        user!.uid == widget.item["createdby"]
+                            ? Padding(
+                                padding: const EdgeInsets.only(left: 30),
+                                child: Text(
+                                  'You',
+                                  style: TextStyle(fontSize: 19),
+                                ),
+                              )
+                            : Padding(
+                                padding: const EdgeInsets.only(left: 30),
+                                child: Text(
+                                 widget.item["creatorname"],
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                  ),
+                                ),
+                              ),
                         SizedBox(
                           height: myHeight * 0.02,
                         ),
@@ -613,11 +620,13 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
                                 size: myWidth * 0.050,
                               ),
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 5),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5),
                                 child: Text(
                                   "Uploaded On",
                                   style: TextStyle(
-                                      fontSize: 22, fontWeight: FontWeight.bold),
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ],
@@ -642,11 +651,13 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
                                 size: myWidth * 0.050,
                               ),
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 5),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5),
                                 child: Text(
                                   "Price",
                                   style: TextStyle(
-                                      fontSize: 22, fontWeight: FontWeight.bold),
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ],
@@ -654,42 +665,46 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 30),
-                          child: widget.item['category'].toString() == "sell" ?Text(
-                            "₹${widget.item['price']}",
-                            style: TextStyle(fontSize: 19),
-                          ) : Text(
-                            "₹${widget.item['price']} / 6Hrs",
-                            style: TextStyle(fontSize: 19),
-                          ),
+                          child: widget.item['category'].toString() == "sell"
+                              ? Text(
+                                  "₹${widget.item['price']}",
+                                  style: TextStyle(fontSize: 19),
+                                )
+                              : Text(
+                                  "₹${widget.item['price']} / 6Hrs",
+                                  style: TextStyle(fontSize: 19),
+                                ),
                         ),
                       ],
                     ),
                   )
                 ],
               ),
-              _auth.currentUser!.uid == widget.item['createdby'] ? Padding(padding: EdgeInsets.all(0)):
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                child: MaterialButton(
-                  onPressed: (){checkChatAndOpenScreen(_auth.currentUser!.uid,widget.item['createdby']);},
-                  minWidth: myWidth*0.5,
-                  height: 60,
-                  color: Colors.cyan,
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50)),
-                  child: Text(
-                    "CHAT",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-              ),
-
+              _auth.currentUser!.uid == widget.item['createdby']
+                  ? Padding(padding: EdgeInsets.all(0))
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      child: MaterialButton(
+                        onPressed: () {
+                          checkChatAndOpenScreen(
+                              _auth.currentUser!.uid, widget.item['createdby']);
+                        },
+                        minWidth: myWidth * 0.5,
+                        height: 60,
+                        color: Colors.cyan,
+                        elevation: 5,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50)),
+                        child: Text(
+                          "CHAT",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
+                    ),
             ],
           ),
         ),
       ),
-
     );
   }
 }

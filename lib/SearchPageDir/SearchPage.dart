@@ -176,17 +176,17 @@ class _SearchPageState extends State<SearchPage> {
                       // ),
                       data["category"].toString() == "sell"
                           ? Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 2),
                             child: Text(
                         "₹${data["price"]}",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),
                       ),
                           )
                           : Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 2),
                             child: Text(
                         "₹ ${data["price"]} /6Hrs",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),
                       ),
                           ),
                     ],
