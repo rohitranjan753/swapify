@@ -344,6 +344,7 @@ class SelectedSearchPage extends StatefulWidget {
 //   }
 // }
 
+//Updated One final
 class _SelectedSearchPageState extends State<SelectedSearchPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -708,6 +709,8 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
   }
 }
 
+
+
 // class _SelectedSearchPageState extends State<SelectedSearchPage> {
 //   bool _isImageZoomed = false;
 //   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -1070,3 +1073,4 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
 //     );
 //   }
 // }
+
