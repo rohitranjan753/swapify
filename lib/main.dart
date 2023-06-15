@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vbuddyproject/authMainScreen/auth_screen.dart';
 import 'package:vbuddyproject/nav_bar.dart';
+import 'package:vbuddyproject/welcome_screen.dart';
 
 
 void main() async {
@@ -37,7 +38,8 @@ class MyApp extends StatelessWidget {
           //   return SplashScreen();
           // }
           if (snapshot.hasData) {
-            return NavBar();
+            // return NavBar();
+            return WelcomeScreen();
           } else {
             return AuthScreen();
           }
