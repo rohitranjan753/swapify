@@ -8,7 +8,7 @@ import 'package:vbuddyproject/HomePageDir/browse_category_screen.dart';
 import 'package:vbuddyproject/HomePageDir/category_screen.dart';
 import 'package:vbuddyproject/RentSectionDirectory/rent_home_screen.dart';
 import 'package:vbuddyproject/SearchPageDir/SearchPage.dart';
-import 'package:vbuddyproject/constant.dart';
+import 'package:vbuddyproject/Constants/constant.dart';
 
 class HomePage extends StatefulWidget {
   @override
