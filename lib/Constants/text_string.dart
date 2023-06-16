@@ -20,3 +20,7 @@ const priceText = "Price";
 //Button Text
 const submitBtn = "SUBMIT";
 const chatBtn = "CHAT";
+
+
+// Seach Menu
+const categoryMenu = "All Category";
