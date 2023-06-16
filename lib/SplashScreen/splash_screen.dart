@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:vbuddyproject/Constants/sizes.dart';
 import 'package:vbuddyproject/widget/animation_widget.dart';
+import 'package:vbuddyproject/widget/fade_in_animation_model.dart';
 import 'package:vbuddyproject/widget/fade_in_controller.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -15,14 +16,24 @@ class SplashScreen extends StatelessWidget {
       body: Stack(
         children: [
           TFadeInAnimation(
+            animate: TAnimatedPosition(topAfter: 0,
+            topBefore: -30,
+            leftAfter: 0,
+            leftBefore: -30
+            ),
             durationInMs: 1600,
             child: const Image(
               image: AssetImage("assets/splash/trade.png"),
             ),
           ),
-          Positioned(
-            top: 80,
-            left: tDefaultSize,
+
+          TFadeInAnimation(
+            animate: TAnimatedPosition(topAfter: 80,
+            topBefore: 80,
+            leftAfter: tDefaultSize,
+            leftBefore: -80
+            ),
+            durationInMs: 2000,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -37,20 +48,35 @@ class SplashScreen extends StatelessWidget {
                 ),
               ],
             ),
+        
           ),
-          Positioned(
-            bottom: 100,
-            child: Image(
+
+          TFadeInAnimation(
+            animate: TAnimatedPosition(bottomAfter: 100,
+              bottomBefore: 0,
+            ),
+            durationInMs: 1600,
+            child: const Image(
               image: AssetImage("assets/splash/splash.png"),
             ),
           ),
-          Positioned(
-            bottom: 40,
-            right: tDefaultSize,
-            child: Image(
+
+
+          TFadeInAnimation(
+            animate: TAnimatedPosition(
+              bottomAfter: 60,
+              bottomBefore: 0,
+              rightBefore: tDefaultSize,
+              rightAfter: tDefaultSize
+            ),
+            durationInMs: 1600,
+            child: const Image(
               image: AssetImage("assets/splash/cart.png"),
             ),
           ),
+        
+
+
         ],
       ),
     );
