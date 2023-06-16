@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:vbuddyproject/Constants/sizes.dart';
+import 'package:vbuddyproject/widget/animation_widget.dart';
+import 'package:vbuddyproject/widget/fade_in_controller.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(FadeInAnimationController());
+    controller.startAnimation();
+
     return Scaffold(
       body: Stack(
         children: [
-          Positioned(
-            top: 0,
-            left: 0,
-            child: Image(
+          TFadeInAnimation(
+            durationInMs: 1600,
+            child: const Image(
               image: AssetImage("assets/splash/trade.png"),
             ),
           ),
@@ -32,14 +38,13 @@ class SplashScreen extends StatelessWidget {
               ],
             ),
           ),
-          const Positioned(
+          Positioned(
             bottom: 100,
             child: Image(
               image: AssetImage("assets/splash/splash.png"),
             ),
           ),
-
-          const Positioned(
+          Positioned(
             bottom: 40,
             right: tDefaultSize,
             child: Image(
