@@ -19,20 +19,33 @@ class SplashScreen extends StatelessWidget {
             left: tDefaultSize,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Welcome to vBuddy",
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                      Text(
-                        "Sell your belongings",
-                        style: Theme.of(context).textTheme.bodyText1,
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-            )
+              children: [
+                Text(
+                  "Welcome to vBuddy",
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+                Text(
+                  "Sell your belongings",
+                  style: Theme.of(context).textTheme.bodyText1,
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+          const Positioned(
+            bottom: 100,
+            child: Image(
+              image: AssetImage("assets/splash/splash.png"),
+            ),
           ),
 
+          const Positioned(
+            bottom: 40,
+            right: tDefaultSize,
+            child: Image(
+              image: AssetImage("assets/splash/cart.png"),
+            ),
+          ),
         ],
       ),
     );
