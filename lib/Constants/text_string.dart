@@ -1,2 +1,7 @@
 const titleHint = "Enter Title";
-const DescriptionHint = "Enter Description";
+const descriptionHint = "Enter Description";
+const sellPriceHint = "Enter Price";
+const rentPriceHint = "Enter Price / 6Hrs";
+
+
+
