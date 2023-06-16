@@ -1,10 +1,17 @@
-//Add page String
+//Add page hint String
 const titleHint = "Enter Title";
 const descriptionHint = "Enter Description";
 const sellPriceHint = "Enter Price";
 const rentPriceHint = "Enter Price / 6Hrs";
 const itemCategoryHint = "Enter Item Category";
 const itemSubCategoryHint = "Enter Sub Category";
+
+//Add page text String
+const titleText = "Title";
+const sellPrice = "Sell Price";
+const rentPrice = "Renr Price";
+
+
 
 
 
