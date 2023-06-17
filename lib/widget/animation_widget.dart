@@ -21,15 +21,18 @@ class TFadeInAnimation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-        ()=>AnimatedPositioned(child: AnimatedOpacity(
+        ()=>AnimatedPositioned(
           duration: Duration(milliseconds: durationInMs),
-          opacity: fadeController.animate.value? 1: 0,
-          child: child,
-        ), duration: const Duration(milliseconds: 1600),
-        top: fadeController.animate.value ? animate!.topAfter : animate!.topBefore,
+          top: fadeController.animate.value ? animate!.topAfter : animate!.topBefore,
           left: fadeController.animate.value ? animate!.leftAfter : animate!.leftBefore,
           bottom: fadeController.animate.value ? animate!.bottomAfter : animate!.bottomAfter,
           right: fadeController.animate.value ? animate!.rightAfter : animate!.rightBefore,
+          child: AnimatedOpacity(
+          duration: Duration(milliseconds: durationInMs),
+          opacity: fadeController.animate.value? 1: 0,
+          child: child,
+        ),
+
         ),
     );
   }

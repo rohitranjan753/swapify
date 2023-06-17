@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:vbuddyproject/SplashScreen/splash_screen.dart';
 import 'package:vbuddyproject/authMainScreen/auth_screen.dart';
 import 'package:vbuddyproject/nav_bar.dart';
 import 'package:vbuddyproject/welcome_screen.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
           // }
           if (snapshot.hasData) {
             // return NavBar();
-            return WelcomeScreen();
+              return SplashScreen();
           } else {
             return AuthScreen();
           }
