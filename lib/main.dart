@@ -32,21 +32,21 @@ class MyApp extends StatelessWidget {
 
         textTheme: GoogleFonts.robotoSerifTextTheme(),
       ),
-      // home: HomeScreenNew(),
-      home: StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (BuildContext context, snapshot) {
-          // if (snapshot.connectionState == ConnectionState.waiting) {
-          //   return SplashScreen();
-          // }
-          if (snapshot.hasData) {
-            // return NavBar();
-              return NavBar();
-          } else {
-            return AuthScreen();
-          }
-        },
-      ),
+      home: SplashScreen(),
+      // home: StreamBuilder(
+      //   stream: FirebaseAuth.instance.authStateChanges(),
+      //   builder: (BuildContext context, snapshot) {
+      //     // if (snapshot.connectionState == ConnectionState.waiting) {
+      //     //   return SplashScreen();
+      //     // }
+      //     if (snapshot.hasData) {
+      //       // return NavBar();
+      //         return NavBar();
+      //     } else {
+      //       return AuthScreen();
+      //     }
+      //   },
+      // ),
     );
   }
 }

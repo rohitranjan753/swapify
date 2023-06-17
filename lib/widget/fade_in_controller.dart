@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vbuddyproject/authMainScreen/auth_screen.dart';
+import 'package:vbuddyproject/nav_bar.dart';
 import 'package:vbuddyproject/welcome_screen.dart';
 
 class FadeInAnimationController extends GetxController{
@@ -19,8 +22,23 @@ class FadeInAnimationController extends GetxController{
     await Future.delayed(const Duration(milliseconds: 3000));
     animate.value = false;
     await Future.delayed(const Duration(milliseconds: 2000));
-    Get.offAll(()=> const WelcomeScreen());
-
+    // checkUserLoggedIn();
+    if (FirebaseAuth.instance.currentUser != null) {
+      Get.offAll(() => NavBar());
+    } else {
+      Get.offAll(() => AuthScreen());
+    }
   }
+  //
+  // void checkUserLoggedIn() {
+  //   FirebaseAuth auth = FirebaseAuth.instance;
+  //   User? user = auth.currentUser;
+  //
+  //   if (user != null) {
+  //     Get.offAll(() => NavBar());
+  //   } else {
+  //     Get.offAll(() => AuthScreen());
+  //   }
+  // }
 
 }

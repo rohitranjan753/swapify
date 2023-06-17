@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:vbuddyproject/authMainScreen/auth_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -40,6 +43,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: MaterialButton(onPressed: (){
                 Navigator.pop(context);
                 FirebaseAuth.instance.signOut();
+                Get.offAll(() => AuthScreen());
               },
                 elevation: 20,
                 minWidth: myWidth*0.6,
