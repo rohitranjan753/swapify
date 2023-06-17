@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
           // }
           if (snapshot.hasData) {
             // return NavBar();
-              return SplashScreen();
+              return NavBar();
           } else {
             return AuthScreen();
           }

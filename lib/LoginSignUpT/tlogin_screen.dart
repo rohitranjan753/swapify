@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vbuddyproject/Constants/sizes.dart';
+import 'package:vbuddyproject/LoginSignUpT/tsignup_screen.dart';
 
 class TLoginScreen extends StatelessWidget {
   const TLoginScreen({Key? key}) : super(key: key);
@@ -56,7 +57,9 @@ class LoginFooterWidget extends StatelessWidget {
           height: 10,
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>TSignUpScreen()));
+          },
           child: Text.rich(
             TextSpan(
                 text: "Don't have an Account?",
@@ -119,7 +122,7 @@ class LoginForm extends StatelessWidget {
           children: [
             TextFormField(
               decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.person_outline_outlined),
+                  prefixIcon: Icon(Icons.email_outlined),
                   labelText: "Email",
                   hintText: "Email Hint",
                   border: OutlineInputBorder()),

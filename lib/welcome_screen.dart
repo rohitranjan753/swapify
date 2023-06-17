@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:vbuddyproject/Constants/constant.dart';
 import 'package:vbuddyproject/LoginSignUpT/tlogin_screen.dart';
+import 'package:vbuddyproject/LoginSignUpT/tsignup_screen.dart';
 import 'package:vbuddyproject/widget/animation_widget.dart';
 import 'package:vbuddyproject/widget/fade_in_animation_model.dart';
 import 'package:vbuddyproject/widget/fade_in_controller.dart';
@@ -71,7 +72,7 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                       Expanded(
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () => Get.to(() => const TSignUpScreen()),
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
                             shape: RoundedRectangleBorder(),
