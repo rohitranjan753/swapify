@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:vbuddyproject/Constants/constant.dart';
+import 'package:vbuddyproject/LoginSignUpT/tlogin_screen.dart';
 import 'package:vbuddyproject/widget/animation_widget.dart';
 import 'package:vbuddyproject/widget/fade_in_animation_model.dart';
 import 'package:vbuddyproject/widget/fade_in_controller.dart';
@@ -17,18 +18,18 @@ class WelcomeScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-
           TFadeInAnimation(
             durationInMs: 1200,
             animate: TAnimatedPosition(
-              topBefore:0,
+              topBefore: 0,
               bottomBefore: -100,
               leftBefore: 0,
-              rightBefore:0,
-              topAfter:0,
-              bottomAfter:0,
-              leftAfter:0,
-              rightAfter:0,),
+              rightBefore: 0,
+              topAfter: 0,
+              bottomAfter: 0,
+              leftAfter: 0,
+              rightAfter: 0,
+            ),
             child: Container(
               padding: EdgeInsets.all(30),
               child: Column(
@@ -61,7 +62,7 @@ class WelcomeScreen extends StatelessWidget {
                             side: BorderSide(color: AppColors.tSecondaryColour),
                             padding: EdgeInsets.symmetric(vertical: 15),
                           ),
-                          onPressed: () {},
+        onPressed: () => Get.to(() => const TLoginScreen()),
                           child: Text("LOGIN"),
                         ),
                       ),
@@ -70,7 +71,6 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                       Expanded(
                         child: ElevatedButton(
-
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
                             elevation: 0,

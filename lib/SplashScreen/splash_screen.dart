@@ -7,20 +7,15 @@ import 'package:vbuddyproject/widget/animation_widget.dart';
 import 'package:vbuddyproject/widget/fade_in_animation_model.dart';
 import 'package:vbuddyproject/widget/fade_in_controller.dart';
 
-
 class SplashScreen extends StatelessWidget {
   SplashScreen({Key? key}) : super(key: key);
 
   bool animate = false;
   @override
   Widget build(BuildContext context) {
-
-
+    final size = MediaQuery.of(context).size;
     final controller = Get.put(FadeInAnimationController());
     controller.startSplashAnimation();
-
-
-
 
     return Scaffold(
       body: Stack(
@@ -66,19 +61,15 @@ class SplashScreen extends StatelessWidget {
           TFadeInAnimation(
             animate: TAnimatedPosition(bottomBefore: 0, bottomAfter: 100),
             durationInMs: 2400,
-            child: Container(
-              height: 300,
-              width: 300,
-              child: Image(
-                image: AssetImage("assets/splash/splash.png"),
-              ),
+            child: Image(
+              image: AssetImage("assets/splash/splash.png"),
+              height: size.height*0.3,
             ),
           ),
           TFadeInAnimation(
             animate: TAnimatedPosition(
                 bottomBefore: 0,
                 bottomAfter: 60,
-
                 rightBefore: -30,
                 rightAfter: 30),
             durationInMs: 2400,
@@ -93,9 +84,5 @@ class SplashScreen extends StatelessWidget {
         ],
       ),
     );
-
-
   }
-
-
 }

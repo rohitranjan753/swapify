@@ -25,7 +25,7 @@ class TFadeInAnimation extends StatelessWidget {
           duration: Duration(milliseconds: durationInMs),
           top: fadeController.animate.value ? animate!.topAfter : animate!.topBefore,
           left: fadeController.animate.value ? animate!.leftAfter : animate!.leftBefore,
-          bottom: fadeController.animate.value ? animate!.bottomAfter : animate!.bottomAfter,
+          bottom: fadeController.animate.value ? animate!.bottomAfter : animate!.bottomBefore,
           right: fadeController.animate.value ? animate!.rightAfter : animate!.rightBefore,
           child: AnimatedOpacity(
           duration: Duration(milliseconds: durationInMs),

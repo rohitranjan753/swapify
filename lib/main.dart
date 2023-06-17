@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vbuddyproject/SplashScreen/splash_screen.dart';
 import 'package:vbuddyproject/authMainScreen/auth_screen.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color myAppBarColor = Color(0xfff3c04b);
-    return MaterialApp(
+    return GetMaterialApp(
 
       debugShowCheckedModeBanner: false,
 
