@@ -1,5 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:vbuddyproject/Constants/sizes.dart';
+import 'package:vbuddyproject/nav_bar.dart';
 
 class AuthForm extends StatefulWidget {
   AuthForm(this.submitFn, this.isLoading);
@@ -19,6 +25,11 @@ class AuthForm extends StatefulWidget {
 }
 
 class _AuthFormState extends State<AuthForm> {
+
+  final String defaultImageLogo = 'https://firebasestorage.googleapis.com/v0/b/vbuddyproject-99a8a.appspot.com/o/images%2Fuser_logo.png?alt=media&token=debafca9-68fc-499d-b2a1-5e12f2e2f665';
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
   bool passwordVisible = true;
   final _formKey = GlobalKey<FormState>();
   var _isLogin = true;
@@ -237,7 +248,21 @@ class _AuthFormState extends State<AuthForm> {
                               SizedBox(
                                 width: double.infinity,
                                 child: OutlinedButton.icon(
-                                  onPressed: () {},
+                                  onPressed: () async {
+                                    UserCredential? userCredential = await _signInWithGoogle();
+                                    if (userCredential != null) {
+                                      // Google Sign-In successful, navigate to the next screen
+                                      Get.offAll(() => NavBar());
+                                    } else {
+                                      // Google Sign-In failed
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text('Failed to sign in with Google.'),
+                                          backgroundColor: Theme.of(context).errorColor,
+                                        ),
+                                      );
+                                    }
+                                  },
                                   icon: Image(
                                     image: AssetImage("assets/googlelogo.png"),
                                     width: 20.0,
@@ -297,6 +322,37 @@ class _AuthFormState extends State<AuthForm> {
       ),
     );
   }
+  Future<UserCredential?> _signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      if (googleUser != null) {
+        final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
+
+        final OAuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+
+        final UserCredential userCredential =
+        await _firebaseAuth.signInWithCredential(credential);
+        // Store user's email and name in Firebase Firestore
+        await FirebaseFirestore.instance
+            .collection('Users')
+            .doc(userCredential.user!.uid)
+            .set({
+          'email': userCredential.user!.email,
+          'username': userCredential.user!.displayName,
+          'userimage': defaultImageLogo,
+        });
+        return userCredential;
+      }
+    } catch (e) {
+      print('Error signing in with Google: $e');
+    }
+    return null;
+  }
+
 }
 
 //
