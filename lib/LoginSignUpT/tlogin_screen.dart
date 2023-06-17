@@ -17,18 +17,59 @@ class TLoginScreen extends StatelessWidget {
               children: [
                 LoginHeaderWidget(size: size),
                 const LoginForm(),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text("OR"),
-                    OutlinedButton.icon(onPressed: (){}, icon: Image(image: AssetImage("assets/googlelogo.png"),), label: Text("Sign-In with Google"),)
-                  ],
-                )
+                const LoginFooterWidget()
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class LoginFooterWidget extends StatelessWidget {
+  const LoginFooterWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const Text("OR"),
+        const SizedBox(
+          height: 10,
+        ),
+        SizedBox(
+          width: double.infinity,
+          child: OutlinedButton.icon(
+            onPressed: () {},
+            icon: Image(
+              image: AssetImage("assets/googlelogo.png"),
+              width: 20.0,
+            ),
+            label: Text("Sign-In with Google"),
+          ),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        TextButton(
+          onPressed: () {},
+          child: Text.rich(
+            TextSpan(
+                text: "Don't have an Account?",
+                style: Theme.of(context).textTheme.bodyText1,
+                children: const [
+                  TextSpan(
+                    text: " SignUp",
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                ]),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -98,11 +139,14 @@ class LoginForm extends StatelessWidget {
                   )),
             ),
             const SizedBox(
-              height: 10,
+              height: 20,
             ),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text("LOGIN"),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text("LOGIN"),
+              ),
             )
           ],
         ),
