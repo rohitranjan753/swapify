@@ -115,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                         },
                         child: Icon(
                           Icons.chat_outlined,
-                          color: AppColors.appbarColor,
+                          color: AppColors.tSecondaryColour,
                           size: 30,
                         ),
                       )
@@ -339,7 +339,7 @@ class _HomePageState extends State<HomePage> {
           Icon(
             categoryIcon[index],
             size: 50,
-            color: Color(0xeee99453),
+            color: AppColors.tSecondaryColour,
           ),
           Text(
             categoryName[index],

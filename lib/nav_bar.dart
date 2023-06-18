@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:vbuddyproject/AddPageDir/add_page.dart';
+import 'package:vbuddyproject/Constants/constant.dart';
 import 'package:vbuddyproject/HomePageDir/home_page.dart';
 import 'package:vbuddyproject/ProfilePageDir/ProfilePage.dart';
 import 'package:vbuddyproject/SearchPageDir/SearchPage.dart';
@@ -62,14 +63,14 @@ class _NavBarState extends State<NavBar> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
             child: GNav(
-              rippleColor: Color(0x333f71fa),
+              rippleColor: Colors.white,
               hoverColor: Color(0x333f71fa),
               gap: 8,
               activeColor: Colors.black,
               iconSize: 24,
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               duration: Duration(milliseconds: 400),
-              tabBackgroundColor: Color(0x333f71fa),
+              tabBackgroundColor: AppColors.navBarBackgroundColour,
               color: Colors.black,
               tabs: [
                 GButton(
