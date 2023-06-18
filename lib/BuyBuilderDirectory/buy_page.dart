@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vbuddyproject/SearchPageDir/selected_search_page.dart';
+import 'package:vbuddyproject/widget/back_btn_design.dart';
 
 class BuyPage extends StatefulWidget {
   @override
@@ -19,13 +20,7 @@ class _BuyPageState extends State<BuyPage> {
     double myWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            // Do something when the menu icon is pressed
-            Navigator.pop(context);
-          },
-        ),
+        leading: backiconButtonDesign(),
         toolbarHeight: 60,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -178,3 +173,5 @@ class _BuyPageState extends State<BuyPage> {
     super.dispose();
   }
 }
+
+

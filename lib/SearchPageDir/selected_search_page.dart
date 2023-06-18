@@ -9,6 +9,7 @@ import 'package:pinch_zoom/pinch_zoom.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:vbuddyproject/Chat/chatScreenOld.dart';
 import 'package:vbuddyproject/Chat/chat_screen.dart';
+import 'package:vbuddyproject/widget/back_btn_design.dart';
 
 class SelectedSearchPage extends StatefulWidget {
   final DocumentSnapshot item;
@@ -414,14 +415,8 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            // Do something when the menu icon is pressed
-            Navigator.pop(context);
-          },
-        ),
-        backgroundColor: Colors.cyan[300],
+        leading: const backiconButtonDesign(),
+
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               bottomRight: Radius.circular(30),
