@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:lottie/lottie.dart';
+import 'package:vbuddyproject/Constants/constant.dart';
 import 'package:vbuddyproject/Constants/sizes.dart';
 import 'package:vbuddyproject/nav_bar.dart';
 
@@ -25,8 +27,9 @@ class AuthForm extends StatefulWidget {
 }
 
 class _AuthFormState extends State<AuthForm> {
-
-  final String defaultImageLogo = 'https://firebasestorage.googleapis.com/v0/b/vbuddyproject-99a8a.appspot.com/o/images%2Fuser_logo.png?alt=media&token=debafca9-68fc-499d-b2a1-5e12f2e2f665';
+  bool isLoadingIndicator = false;
+  final String defaultImageLogo =
+      'https://firebasestorage.googleapis.com/v0/b/vbuddyproject-99a8a.appspot.com/o/images%2Fuser_logo.png?alt=media&token=debafca9-68fc-499d-b2a1-5e12f2e2f665';
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
@@ -87,7 +90,7 @@ class _AuthFormState extends State<AuthForm> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Image(
-                            image: AssetImage("assets/splash/splash.png"),
+                            image: AssetImage("assets/hello_pic-removebg-preview.png"),
                             height: size.height * 0.2,
                           ),
                           Text(
@@ -107,6 +110,8 @@ class _AuthFormState extends State<AuthForm> {
                             image: AssetImage("assets/splash/splash.png"),
                             height: size.height * 0.2,
                           ),
+
+
                           Text(
                             "Get On Board",
                             style: Theme.of(context).textTheme.headline4,
@@ -126,7 +131,7 @@ class _AuthFormState extends State<AuthForm> {
                       children: [
                         // if (!_isLogin) UserImagePicker(_pickedImage),
                         if (!_isLogin)
-                        //username
+                          //username
                           TextFormField(
                             style: TextStyle(fontSize: 20),
                             key: ValueKey('username'),
@@ -152,11 +157,13 @@ class _AuthFormState extends State<AuthForm> {
                               _userName = value!;
                             },
                           ),
-                        SizedBox(height: tDefaultSize-10,),
+                        SizedBox(
+                          height: tDefaultSize - 10,
+                        ),
 
                         //Email
                         TextFormField(
-                          style: TextStyle(fontSize: 20),
+
                           key: ValueKey('email'),
                           autocorrect: false,
                           textCapitalization: TextCapitalization.none,
@@ -173,22 +180,19 @@ class _AuthFormState extends State<AuthForm> {
                             prefixIcon: Icon(Icons.email_outlined),
                             hintText: "abc@gmail.com",
                             labelText: "Email",
-                            contentPadding: EdgeInsets.symmetric(
-                                vertical: 0, horizontal: 10),
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey)),
+
+                            border: OutlineInputBorder(),
                           ),
                           onSaved: (value) {
                             _userEmail = value!;
                           },
                         ),
                         SizedBox(
-                          height: tDefaultSize-10,
+                          height: tDefaultSize - 10,
                         ),
 
                         //Password
                         TextFormField(
-                          style: TextStyle(fontSize: 20),
                           key: ValueKey('password'),
                           validator: (value) {
                             if (value!.isEmpty || value.length < 7) {
@@ -213,10 +217,7 @@ class _AuthFormState extends State<AuthForm> {
                             ),
                             hintText: "Greater than 7",
                             labelText: "Password",
-                            contentPadding: EdgeInsets.symmetric(
-                                vertical: 0, horizontal: 10),
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey)),
+                            border: OutlineInputBorder(),
                           ),
                           obscureText: passwordVisible,
                           onSaved: (value) {
@@ -224,7 +225,7 @@ class _AuthFormState extends State<AuthForm> {
                           },
                         ),
                         SizedBox(
-                          height: tDefaultSize-10,
+                          height: tDefaultSize - 10,
                         ),
                         if (widget.isLoading) CircularProgressIndicator(),
 
@@ -233,32 +234,61 @@ class _AuthFormState extends State<AuthForm> {
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                elevation: 0,
+                                shape: RoundedRectangleBorder(),
+                                onPrimary: Colors.white,
+                                primary: AppColors.tSecondaryColour,
+                                side: BorderSide(color: AppColors.tSecondaryColour),
+                                padding: EdgeInsets.symmetric(vertical: 15),
+                              ),
                               onPressed: _trySubmit,
                               child: Text(_isLogin ? "LOGIN" : 'SIGNUP'),
                             ),
                           ),
+                        SizedBox(height: 10,),
                         if (!widget.isLoading)
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              const Text("OR"),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Divider(height: 20,
+                                    thickness: 5,
+                                    indent: 20,
+                                    endIndent: 0,
+                                    color: Colors.black,),
+                                  const Text("OR"),
+                                  const Divider(height: 20,
+                                    thickness: 5,
+                                    indent: 20,
+                                    endIndent: 0,
+                                    color: Colors.black,),
+                                ],
+                              ),
                               const SizedBox(
                                 height: 10,
                               ),
                               SizedBox(
+
                                 width: double.infinity,
                                 child: OutlinedButton.icon(
                                   onPressed: () async {
-                                    UserCredential? userCredential = await _signInWithGoogle();
+                                    UserCredential? userCredential =
+                                        await _signInWithGoogle();
                                     if (userCredential != null) {
                                       // Google Sign-In successful, navigate to the next screen
                                       Get.offAll(() => NavBar());
                                     } else {
                                       // Google Sign-In failed
-                                      ScaffoldMessenger.of(context).showSnackBar(
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
                                         SnackBar(
-                                          content: Text('Failed to sign in with Google.'),
-                                          backgroundColor: Theme.of(context).errorColor,
+                                          content: Text(
+                                              'Failed to sign in with Google.'),
+                                          backgroundColor:
+                                              Theme.of(context).errorColor,
                                         ),
                                       );
                                     }
@@ -267,7 +297,7 @@ class _AuthFormState extends State<AuthForm> {
                                     image: AssetImage("assets/googlelogo.png"),
                                     width: 20.0,
                                   ),
-                                  label: Text("Sign-In with Google"),
+                                  label: const Text("Sign-In with Google",style: TextStyle(color: Colors.blue),),
                                 ),
                               ),
                               const SizedBox(
@@ -290,25 +320,28 @@ class _AuthFormState extends State<AuthForm> {
                                               TextSpan(
                                                 text: " SignUp",
                                                 style: TextStyle(
-                                                    color: Colors.blue),
+                                                    color: Colors.deepPurple,fontWeight: FontWeight.bold),
                                               ),
                                             ]),
                                       )
                                     : Text.rich(
                                         TextSpan(
-                                            text: "Already have an Account?",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1,
-                                            children: const [
-                                              TextSpan(
-                                                text: " SignIn",
-                                                style: TextStyle(
-                                                    color: Colors.blue),
-                                              ),
-                                            ]),
+                                          text: "Already have an Account?",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1,
+                                          children: const [
+                                            TextSpan(
+                                              text: " SignIn",
+                                              style:
+                                                  TextStyle(color: Colors.blue),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                               ),
+                              if (isLoadingIndicator) // Add this condition to show the circular progress indicator
+                                const CircularProgressIndicator(),
                             ],
                           ),
                       ],
@@ -322,12 +355,16 @@ class _AuthFormState extends State<AuthForm> {
       ),
     );
   }
+
   Future<UserCredential?> _signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser != null) {
+        // Show circular progress indicator while signing in
+        showCircularProgressIndicator();
+
         final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
+            await googleUser.authentication;
 
         final OAuthCredential credential = GoogleAuthProvider.credential(
           accessToken: googleAuth.accessToken,
@@ -335,24 +372,52 @@ class _AuthFormState extends State<AuthForm> {
         );
 
         final UserCredential userCredential =
-        await _firebaseAuth.signInWithCredential(credential);
-        // Store user's email and name in Firebase Firestore
-        await FirebaseFirestore.instance
+            await _firebaseAuth.signInWithCredential(credential);
+
+        final userRef = FirebaseFirestore.instance
             .collection('Users')
-            .doc(userCredential.user!.uid)
-            .set({
-          'email': userCredential.user!.email,
-          'username': userCredential.user!.displayName,
-          'userimage': defaultImageLogo,
-        });
+            .doc(userCredential.user!.uid);
+
+        final userDoc = await userRef.get();
+        if (!userDoc.exists) {
+          // User document doesn't exist, add the data to Firestore
+          await userRef.set({
+            'email': userCredential.user!.email,
+            'username': userCredential.user!.displayName,
+            'userimage': defaultImageLogo,
+          });
+        }
+
+        // Hide the circular progress indicator
+        hideCircularProgressIndicator();
+
         return userCredential;
       }
     } catch (e) {
       print('Error signing in with Google: $e');
     }
+
+    // Hide the circular progress indicator if an error occurs
+    hideCircularProgressIndicator();
+
     return null;
   }
 
+  void showCircularProgressIndicator() {
+    // Update the UI to show the circular progress indicator
+    // For example, you can set a boolean flag to control its visibility
+    setState(() {
+      isLoadingIndicator = true;
+    });
+  }
+
+  void hideCircularProgressIndicator() {
+    // Update the UI to hide the circular progress indicator
+    // For example, you can set a boolean flag to control its visibility
+    setState(() {
+      isLoadingIndicator = false;
+    });
+  }
 }
 
 //
@@ -633,4 +698,3 @@ class _AuthFormState extends State<AuthForm> {
 //
 //
 // }
-

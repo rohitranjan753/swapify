@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:vbuddyproject/LoginSignUpT/tlogin_screen.dart';
 import 'package:vbuddyproject/SplashScreen/splash_screen.dart';
 import 'package:vbuddyproject/authMainScreen/auth_screen.dart';
 import 'package:vbuddyproject/nav_bar.dart';
@@ -21,14 +22,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    Color myAppBarColor = Color(0xfff3c04b);
+    Color myAppBarColor = Color(0x76000000);
     return GetMaterialApp(
 
       debugShowCheckedModeBanner: false,
 
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.cyan,
+        primarySwatch: Colors.deepPurple,
 
         textTheme: GoogleFonts.robotoSerifTextTheme(),
       ),
