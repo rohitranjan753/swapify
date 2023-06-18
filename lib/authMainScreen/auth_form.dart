@@ -104,10 +104,10 @@ class _AuthFormState extends State<AuthForm> {
                         ],
                       )
                     : Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Image(
-                            image: AssetImage("assets/splash/splash.png"),
+                            image: AssetImage("assets/signup_boy.png"),
                             height: size.height * 0.2,
                           ),
 
@@ -133,7 +133,6 @@ class _AuthFormState extends State<AuthForm> {
                         if (!_isLogin)
                           //username
                           TextFormField(
-                            style: TextStyle(fontSize: 20),
                             key: ValueKey('username'),
                             autocorrect: true,
                             textCapitalization: TextCapitalization.words,
@@ -148,10 +147,9 @@ class _AuthFormState extends State<AuthForm> {
                             decoration: InputDecoration(
                               prefixIcon: Icon(Icons.person),
                               labelText: "Username",
-                              contentPadding: EdgeInsets.symmetric(
-                                  vertical: 0, horizontal: 10),
+
                               border: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey)),
+                                  ),
                             ),
                             onSaved: (value) {
                               _userName = value!;
@@ -246,32 +244,39 @@ class _AuthFormState extends State<AuthForm> {
                               child: Text(_isLogin ? "LOGIN" : 'SIGNUP'),
                             ),
                           ),
-                        SizedBox(height: 10,),
+                        SizedBox(height: 20,),
                         if (!widget.isLoading)
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Divider(height: 20,
-                                    thickness: 5,
-                                    indent: 20,
-                                    endIndent: 0,
-                                    color: Colors.black,),
-                                  const Text("OR"),
-                                  const Divider(height: 20,
-                                    thickness: 5,
-                                    indent: 20,
-                                    endIndent: 0,
-                                    color: Colors.black,),
-                                ],
+
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 60),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Expanded(
+                                      child: const Divider(
+                                        thickness: 1,
+                                        color: Colors.grey,),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                                      child: Text("OR",style: TextStyle(color: Colors.grey,fontWeight: FontWeight.bold),),
+                                    ),
+
+                                    Expanded(
+                                      child: const Divider(
+                                        thickness: 1,
+                                        color: Colors.grey,),
+                                    ),
+                                  ],
+                                ),
                               ),
                               const SizedBox(
-                                height: 10,
+                                height: 20,
                               ),
                               SizedBox(
-
                                 width: double.infinity,
                                 child: OutlinedButton.icon(
                                   onPressed: () async {
@@ -293,15 +298,18 @@ class _AuthFormState extends State<AuthForm> {
                                       );
                                     }
                                   },
-                                  icon: Image(
-                                    image: AssetImage("assets/googlelogo.png"),
-                                    width: 20.0,
+                                  icon: Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                                    child: Image(
+                                      image: AssetImage("assets/googlelogo.png"),
+                                      width: 28.0,
+                                    ),
                                   ),
                                   label: const Text("Sign-In with Google",style: TextStyle(color: Colors.blue),),
                                 ),
                               ),
                               const SizedBox(
-                                height: 10,
+                                height: 20,
                               ),
                               TextButton(
                                 onPressed: () {
@@ -333,8 +341,8 @@ class _AuthFormState extends State<AuthForm> {
                                           children: const [
                                             TextSpan(
                                               text: " SignIn",
-                                              style:
-                                                  TextStyle(color: Colors.blue),
+                                              style: TextStyle(
+                                                  color: Colors.deepPurple,fontWeight: FontWeight.bold),
                                             ),
                                           ],
                                         ),
