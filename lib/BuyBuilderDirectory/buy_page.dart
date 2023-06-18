@@ -32,34 +32,31 @@ class _BuyPageState extends State<BuyPage> {
               bottomRight: Radius.circular(30),
               bottomLeft: Radius.circular(30)),
         ),
-        title: Align(
-          alignment: Alignment.center,
-          child: Container(
-            decoration: BoxDecoration(
+        title: Container(
+          decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(
                 color: Colors.white,
-                border: Border.all(
-                  color: Colors.white,
+              ),
+              borderRadius: BorderRadius.circular(15)),
+          height: myHeight * 0.05,
+          width: myWidth * 0.7,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: TextField(
+              style: TextStyle(fontSize: 18),
+              onChanged: (value) {
+                setState(() {
+                  searchText = value;
+                });
+              },
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                suffixIcon: Icon(
+                  Icons.search,
+
                 ),
-                borderRadius: BorderRadius.circular(15)),
-            height: myHeight * 0.05,
-            width: myWidth * 0.7,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: TextField(
-                style: TextStyle(fontSize: 18),
-                onChanged: (value) {
-                  setState(() {
-                    searchText = value;
-                  });
-                },
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  suffixIcon: Icon(
-                    Icons.search,
-                    color: Colors.cyan,
-                  ),
-                  hintText: 'Search...',
-                ),
+                hintText: 'Search...',
               ),
             ),
           ),
