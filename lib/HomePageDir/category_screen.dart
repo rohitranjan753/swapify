@@ -99,6 +99,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:vbuddyproject/Constants/constant.dart';
 
 import 'browse_category_screen.dart';
 
@@ -183,8 +184,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
   Widget categorySingleRow(int index) {
     return Card(
-      color: Colors.teal[100],
-      elevation: 10,
+      color: Colors.grey[100],
+      elevation: 15,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -192,7 +193,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             padding: const EdgeInsets.all(8.0),
             child: Icon(
               categoryIcon[index],
-              color: Colors.purple[400],
+              color: AppColors.tSecondaryColour,
               size: 100,
             ),
           ),

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vbuddyproject/RentSectionDirectory/selected_rent_page.dart';
 import 'package:vbuddyproject/SearchPageDir/selected_search_page.dart';
+import 'package:vbuddyproject/widget/back_btn_design.dart';
 
 class RentHomeScreen extends StatefulWidget {
   const RentHomeScreen({Key? key}) : super(key: key);
@@ -27,13 +28,7 @@ class _RentHomeScreenState extends State<RentHomeScreen> {
               bottomRight: Radius.circular(30),
               bottomLeft: Radius.circular(30)),
         ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            // Do something when the menu icon is pressed
-            Navigator.pop(context);
-          },
-        ),
+        leading: const backiconButtonDesign(),
         title: Container(
           decoration: BoxDecoration(
               color: Colors.white,
@@ -56,7 +51,7 @@ class _RentHomeScreenState extends State<RentHomeScreen> {
                 border: InputBorder.none,
                 suffixIcon: Icon(
                   Icons.search,
-                  color: Colors.cyan,
+
                 ),
                 hintText: 'Search...',
               ),

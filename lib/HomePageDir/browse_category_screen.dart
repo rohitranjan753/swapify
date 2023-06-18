@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:vbuddyproject/SearchPageDir/SearchPage.dart';
 import 'package:vbuddyproject/SearchPageDir/selected_search_page.dart';
+import 'package:vbuddyproject/widget/back_btn_design.dart';
 
 import '../Model/search_item_model.dart';
 import '../Model/search_item_widget.dart';
@@ -37,37 +38,41 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
     getVal = widget.categoryName[widget.index].toString();
     return Scaffold(
       appBar: AppBar(
-        title: Align(
-          alignment: Alignment.center,
-          child: Container(
-            decoration: BoxDecoration(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              bottomRight: Radius.circular(30),
+              bottomLeft: Radius.circular(30)),
+        ),
+        toolbarHeight: 60,
+        leading: const backiconButtonDesign(),
+        title: Container(
+          decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(
                 color: Colors.white,
-                border: Border.all(
-                  color: Colors.white,
+              ),
+              borderRadius: BorderRadius.circular(15)
+          ),
+          height: myHeight*0.05,
+          width: myWidth*0.7,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: TextField(
+              style: TextStyle(
+                  fontSize: 18
+              ),
+              onChanged: (value) {
+                setState(() {
+                  searchText = value;
+                });
+              },
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                suffixIcon: Icon(
+                  Icons.search,
+
                 ),
-                borderRadius: BorderRadius.circular(15)
-            ),
-            height: myHeight*0.05,
-            width: myWidth*0.7,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: TextField(
-                style: TextStyle(
-                    fontSize: 18
-                ),
-                onChanged: (value) {
-                  setState(() {
-                    searchText = value;
-                  });
-                },
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  suffixIcon: Icon(
-                    Icons.search,
-                    color: Colors.cyan,
-                  ),
-                  hintText: 'Search...',
-                ),
+                hintText: 'Search...',
               ),
             ),
           ),
@@ -136,24 +141,24 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
                           ),
                         ),
                       ),
-                      user!.uid == data["createdby"] ?
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
-                        child: Text(
-                          'Uploaded By: YOU',
-                          style: TextStyle(
-                              fontSize: 12,fontWeight: FontWeight.bold
-                          ),
-                        ),
-                      ): Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
-                        child: Text(
-                          "Uploaded By: ${data["creatorname"]}",
-                          style: TextStyle(
-                            fontSize: 12,
-                          ),
-                        ),
-                      ),
+                      // user!.uid == data["createdby"] ?
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
+                      //   child: Text(
+                      //     'Uploaded By: YOU',
+                      //     style: TextStyle(
+                      //         fontSize: 12,fontWeight: FontWeight.bold
+                      //     ),
+                      //   ),
+                      // ): Padding(
+                      //   padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
+                      //   child: Text(
+                      //     "Uploaded By: ${data["creatorname"]}",
+                      //     style: TextStyle(
+                      //       fontSize: 12,
+                      //     ),
+                      //   ),
+                      // ),
                       data["category"].toString() == "sell"
                           ? Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
