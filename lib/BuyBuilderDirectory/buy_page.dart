@@ -32,35 +32,7 @@ class _BuyPageState extends State<BuyPage> {
               bottomRight: Radius.circular(30),
               bottomLeft: Radius.circular(30)),
         ),
-        title: Container(
-          decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(
-                color: Colors.white,
-              ),
-              borderRadius: BorderRadius.circular(15)),
-          height: myHeight * 0.05,
-          width: myWidth * 0.7,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: TextField(
-              style: TextStyle(fontSize: 18),
-              onChanged: (value) {
-                setState(() {
-                  searchText = value;
-                });
-              },
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                suffixIcon: Icon(
-                  Icons.search,
-
-                ),
-                hintText: 'Search...',
-              ),
-            ),
-          ),
-        ),
+        title: searchContainerDesign(myHeight, myWidth),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
@@ -167,6 +139,38 @@ class _BuyPageState extends State<BuyPage> {
         },
       ),
     );
+  }
+
+  Container searchContainerDesign(double myHeight, double myWidth) {
+    return Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border.all(
+              color: Colors.white,
+            ),
+            borderRadius: BorderRadius.circular(15)),
+        height: myHeight * 0.05,
+        width: myWidth * 0.7,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: TextField(
+            style: TextStyle(fontSize: 18),
+            onChanged: (value) {
+              setState(() {
+                searchText = value;
+              });
+            },
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              suffixIcon: Icon(
+                Icons.search,
+
+              ),
+              hintText: 'Search...',
+            ),
+          ),
+        ),
+      );
   }
 
   @override
