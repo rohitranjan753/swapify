@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:vbuddyproject/widget/back_btn_design.dart';
 
 class EditprofileScreen extends StatefulWidget {
   const EditprofileScreen({Key? key}) : super(key: key);
@@ -112,14 +113,7 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
     double myWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            // Do something when the menu icon is pressed
-            Navigator.pop(context);
-          },
-        ),
-        backgroundColor: Colors.cyan[300],
+        leading: backiconButtonDesign(),
         toolbarHeight: 60,
         title: Text('Edit Profile'),
         centerTitle: true,

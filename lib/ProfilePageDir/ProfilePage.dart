@@ -96,27 +96,35 @@ class _ProfilePageState extends State<ProfilePage> {
             SizedBox(
               height: 40,
             ),
-            MaterialButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => EditprofileScreen()));
+            // MaterialButton(
+            //   onPressed: () {
+            //     Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => EditprofileScreen()));
+            //   },
+            //   elevation: 20,
+            //   minWidth: myWidth * 0.5,
+            //   height: myHeight * 0.06,
+            //   color: Colors.amber[300],
+            //   shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(50)),
+            //   child: Text(
+            //     'EDIT PROFILE',
+            //     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+            //   ),
+            // ),
+            ProfileMenuWidget(
+              title: "Edit Profile",
+              icon: Icons.person,
+              onPress: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>EditprofileScreen()));
               },
-              elevation: 20,
-              minWidth: myWidth * 0.5,
-              height: myHeight * 0.06,
-              color: Colors.amber[300],
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50)),
-              child: Text(
-                'EDIT PROFILE',
-                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
-              ),
+              textColor: Colors.black,
             ),
-            SizedBox(
-              height: 30,
-            ),
+            // SizedBox(
+            //   height: 30,
+            // ),
             ProfileMenuWidget(
               title: "Edit Listing",
               icon: Icons.edit,
