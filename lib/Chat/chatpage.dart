@@ -215,10 +215,14 @@ class ChatPage extends StatelessWidget {
                       child: Container(
                         height: size.height * 0.09,
                         child: Row(
+
                           children: [
-                            CircleAvatar(
-                              radius: 30,
-                              backgroundImage: NetworkImage(imageUrl),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 10),
+                              child: CircleAvatar(
+                                radius: 30,
+                                backgroundImage: NetworkImage(imageUrl),
+                              ),
                             ),
                             Text(
                               username,
