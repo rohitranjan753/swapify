@@ -349,22 +349,43 @@ class SelectedSearchPage extends StatefulWidget {
 class _SelectedSearchPageState extends State<SelectedSearchPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  // void checkChatAndOpenScreen(String currentUser, String otherUser) {
+  //   FirebaseFirestore.instance
+  //       .collection('chats')
+  //       .where('users', arrayContains: [currentUser, otherUser])
+  //       .get()
+  //       .then((querySnapshot) {
+  //         if (querySnapshot.docs.isNotEmpty) {
+  //           // Chat exists, open chat screen
+  //           String chatId = querySnapshot.docs[0].id;
+  //           openChatScreen(chatId,currentUser,otherUser);
+  //         } else {
+  //           // Chat doesn't exist, create a new chat ID and store it in Firestore
+  //           createChatAndOpenScreen(currentUser, otherUser);
+  //         }
+  //       });
+  // }
   void checkChatAndOpenScreen(String currentUser, String otherUser) {
     FirebaseFirestore.instance
         .collection('chats')
-        .where('users', arrayContainsAny: [currentUser, otherUser])
+        .where('users', arrayContains: currentUser)
         .get()
         .then((querySnapshot) {
-          if (querySnapshot.docs.isNotEmpty) {
-            // Chat exists, open chat screen
-            String chatId = querySnapshot.docs[0].id;
-            openChatScreen(chatId);
-          } else {
-            // Chat doesn't exist, create a new chat ID and store it in Firestore
-            createChatAndOpenScreen(currentUser, otherUser);
-          }
-        });
+      final List<DocumentSnapshot> matchingChats = querySnapshot.docs
+          .where((doc) => doc.data()['users'].contains(otherUser))
+          .toList();
+
+      if (matchingChats.isNotEmpty) {
+        // Chat exists, open chat screen
+        String chatId = matchingChats[0].id;
+        openChatScreen(chatId, currentUser, otherUser);
+      } else {
+        // Chat doesn't exist, create a new chat ID and store it in Firestore
+        createChatAndOpenScreen(currentUser, otherUser);
+      }
+    });
   }
+
 
   void createChatAndOpenScreen(String currentUser, String otherUser) {
     FirebaseFirestore.instance.collection('chats').add({
@@ -375,11 +396,11 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
       // (You can also store additional chat details if needed)
 
       // Open the chat screen and pass the chat ID
-      openChatScreen(chatId);
+      openChatScreen(chatId,currentUser,otherUser);
     });
   }
 
-  void openChatScreen(String chatId) {
+  void openChatScreen(String chatId,String currentUser,String otherUser) {
     Navigator.push(context,
         MaterialPageRoute(builder: (contetx) => ChatScreen(chatId: chatId)));
   }
@@ -397,6 +418,13 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
     } else {
       throw 'Could not launch $url';
     }
+  }
+  String getOtherUserId(String currentUserId, Map<String, dynamic> chatData) {
+    String createdById = chatData['createdby'];
+    String joinedById = chatData['joinedby'];
+
+    // Return the ID of the user that is not the current user
+    return currentUserId == createdById ? joinedById : createdById;
   }
 
   @override
@@ -681,6 +709,7 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
                       padding: const EdgeInsets.symmetric(vertical: 15),
                       child: MaterialButton(
                         onPressed: () {
+                          // String otherUserId = getOtherUserId(_auth.currentUser!.uid, widget.item['createdby']);
                           checkChatAndOpenScreen(
                               _auth.currentUser!.uid, widget.item['createdby']);
                         },

@@ -165,6 +165,9 @@ import 'package:intl/intl.dart';
 
 class ChatScreen extends StatelessWidget {
   final String chatId;
+  // final String currentUserId;
+  // final String otherUserId;
+
 
   ChatScreen({required this.chatId});
 
@@ -183,6 +186,7 @@ class ChatScreen extends StatelessWidget {
       'sender': _auth.currentUser!.uid, // Add sender information
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -250,10 +254,12 @@ class ChatScreen extends StatelessWidget {
                     Color textColor = isCurrentUser ? Colors.white : Colors.black;
 
                     // Retrieve timestamp from document and format it
-                    Timestamp timestamp = document['timestamp'];
-                    DateTime dateTime = timestamp.toDate();
+                    // Retrieve timestamp from document and format it
+                    Timestamp? timestamp = document['timestamp'] as Timestamp?;
+                    DateTime? dateTime = timestamp?.toDate();
                     // String formattedDateTime = DateFormat('MMM d, h:mm a').format(dateTime);
-                    String formattedTime = DateFormat.MMMd().format(dateTime); // Format as 'h:mm a'// Format as 'h:mm a'
+                    String formattedTime = dateTime != null ? DateFormat.MMMd().format(dateTime) : '';
+                    // Format as 'h:mm a'// Format as 'h:mm a'
 
                     return Padding(
                       padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),

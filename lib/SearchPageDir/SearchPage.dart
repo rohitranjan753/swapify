@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vbuddyproject/HomePageDir/category_screen.dart';
 import 'package:vbuddyproject/SearchPageDir/selected_search_page.dart';
+import 'package:vbuddyproject/widget/back_btn_design.dart';
 
 final CollectionReference allsection =
 FirebaseFirestore.instance.collection('all_section');
@@ -57,6 +58,12 @@ class _SearchPageState extends State<SearchPage> {
             },
           ),
         ],
+        toolbarHeight: 60,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              bottomRight: Radius.circular(30),
+              bottomLeft: Radius.circular(30)),
+        ),
         title: Align(
           alignment: Alignment.center,
           child: Container(
@@ -84,7 +91,6 @@ class _SearchPageState extends State<SearchPage> {
                   border: InputBorder.none,
                   suffixIcon: Icon(
                     Icons.search,
-                    color: Colors.cyan,
                   ),
                   hintText: 'Search...',
                 ),

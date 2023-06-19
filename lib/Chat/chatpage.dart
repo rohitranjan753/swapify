@@ -202,6 +202,7 @@ class ChatPage extends StatelessWidget {
 
   // Function to navigate to the chat screen with the provided chat ID
   void navigateToChatScreen(BuildContext context, String chatId) {
+    // final String curUser = getCurrentUserId();
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => ChatScreen(chatId: chatId)),
