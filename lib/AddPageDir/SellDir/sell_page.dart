@@ -188,7 +188,7 @@ class _SellPageState extends State<SellPage> {
                                     )
                                   : DecorationImage(
                                       image: AssetImage(
-                                          'assets/images/upload.png'),
+                                          'assets/upload_icon.png'),
                                       fit: BoxFit.contain,
                                     ),
                             ),
