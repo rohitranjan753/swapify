@@ -169,6 +169,7 @@ class _EditListingState extends State<EditListing> {
                   child: Text("Title",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)),
               SizedBox(height: 3,),
               TextFormField(
+                textCapitalization: TextCapitalization.sentences,
                 controller: _itemTitleController,
                 // initialValue: _itemTitle,
                 onChanged: (value) {
