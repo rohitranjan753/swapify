@@ -20,7 +20,6 @@ class _AddPageState extends State<AddPage> {
       appBar: AppBar(
         title: Text("ADD LISTING"),
         centerTitle: true,
-        backgroundColor: Colors.cyan[300],
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               bottomRight: Radius.circular(30),
