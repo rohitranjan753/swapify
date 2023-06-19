@@ -172,12 +172,8 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
                 decoration: InputDecoration(
                   contentPadding:
                   EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(20)),
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(20)),
+                  icon: Icon(Icons.person),
+                  border: OutlineInputBorder(),
                   filled: true,
                   fillColor: Colors.white,
                 ),
@@ -216,14 +212,14 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
                 },
                 minWidth: double.infinity,
                 height: 60,
-                color: Colors.cyan[300],
+                color: Colors.deepPurple,
                 elevation: 10,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50)),
                 child: Text(
                   'SUBMIT',
                   style: TextStyle(
-                      fontWeight: FontWeight.w600, fontSize: 18),
+                      fontWeight: FontWeight.w600, fontSize: 18,color: Colors.white),
                 ),
               ),
             ],
