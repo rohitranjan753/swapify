@@ -188,7 +188,7 @@ class _SellPageState extends State<SellPage> {
                                     )
                                   : DecorationImage(
                                       image: AssetImage(
-                                          'assets/upload_icon.png'),
+                                          'assets/upload_icon-removebg-preview.png'),
                                       fit: BoxFit.contain,
                                     ),
                             ),
@@ -209,12 +209,8 @@ class _SellPageState extends State<SellPage> {
                           labelText: "Enter Title",
                           contentPadding:
                               EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(20)),
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(20)),
+
+                          border: OutlineInputBorder(),
                           filled: true,
                           fillColor: Colors.white,
                           hintText: 'Title',
@@ -244,12 +240,13 @@ class _SellPageState extends State<SellPage> {
                           labelText: 'Enter Description',
                           contentPadding:
                               EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(20)),
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(20)),
+                          border: OutlineInputBorder(),
+                          // enabledBorder: OutlineInputBorder(
+                          //     borderSide: BorderSide(color: Colors.grey),
+                          //     borderRadius: BorderRadius.circular(20)),
+                          // border: OutlineInputBorder(
+                          //     borderSide: BorderSide(color: Colors.grey),
+                          //     borderRadius: BorderRadius.circular(20)),
                           filled: true,
                           fillColor: Colors.white,
                           hintText: 'Description',
@@ -275,12 +272,7 @@ class _SellPageState extends State<SellPage> {
                           labelText: "Enter Price",
                           contentPadding:
                               EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(20)),
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(20)),
+                          border: OutlineInputBorder(),
                           filled: true,
                           fillColor: Colors.white,
                           hintText: 'Price',
@@ -373,7 +365,7 @@ class _SellPageState extends State<SellPage> {
                             );
                           }).toList(),
                         ),
-
+                      SizedBox(height: 20,),
                       MaterialButton(
                         onPressed: () {
                           if (_image == null) {
@@ -421,14 +413,14 @@ class _SellPageState extends State<SellPage> {
                         },
                         minWidth: double.infinity,
                         height: 60,
-                        color: Colors.cyan[300],
+                        color: Colors.deepPurple,
                         elevation: 10,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50)),
                         child: Text(
                           'SUBMIT',
                           style: TextStyle(
-                              fontWeight: FontWeight.w600, fontSize: 18),
+                              fontWeight: FontWeight.w600, fontSize: 18,color: Colors.white),
                         ),
                       ),
                     ],
