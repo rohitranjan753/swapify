@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:vbuddyproject/ProfilePageDir/Editing/edit_listing.dart';
+import 'package:vbuddyproject/widget/back_btn_design.dart';
 
 
 class SelectedEditPage extends StatefulWidget {
@@ -33,14 +34,13 @@ class _SelectedEditPageState extends State<SelectedEditPage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            // Do something when the menu icon is pressed
-            Navigator.pop(context);
-          },
+        leading: backiconButtonDesign(),
+        toolbarHeight: 60,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              bottomRight: Radius.circular(30),
+              bottomLeft: Radius.circular(30)),
         ),
-        backgroundColor: Colors.cyan[300],
         title: Text(widget.item['creatorname']),
         // actions: [
         //   IconButton(
