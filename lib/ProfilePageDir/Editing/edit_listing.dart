@@ -178,14 +178,7 @@ class _EditListingState extends State<EditListing> {
                 },
                 decoration: InputDecoration(
                   hintText: "Enter Title",
-                  contentPadding:
-                  EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(10)),
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(10)),
+                  border: OutlineInputBorder(),
                   filled: true,
                   fillColor: Colors.white,
                 ),
@@ -211,14 +204,8 @@ class _EditListingState extends State<EditListing> {
                 },
                 decoration: InputDecoration(
                   hintText: "Enter Title",
-                  contentPadding:
-                  EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(10)),
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(10)),
+
+                  border: OutlineInputBorder(),
                   filled: true,
                   fillColor: Colors.white,
                 ),
@@ -243,15 +230,8 @@ class _EditListingState extends State<EditListing> {
                   });
                 },
                 decoration: InputDecoration(
-                  hintText: "Enter Title",
-                  contentPadding:
-                  EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(10)),
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(10)),
+                  hintText: "Enter Price",
+                  border: OutlineInputBorder(),
                   filled: true,
                   fillColor: Colors.white,
                 ),

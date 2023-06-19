@@ -88,8 +88,8 @@ class _SelectedEditPageState extends State<SelectedEditPage> {
       body: SingleChildScrollView(
         child: Container(
           // color: Color.fromRGBO(255, 248, 238, 10),
-          height: myHeight,
-          width: myWidth,
+          // height: myHeight,
+          // width: myWidth,
           child: Column(
             children: [
               Padding(
@@ -297,6 +297,7 @@ class _SelectedEditPageState extends State<SelectedEditPage> {
                   )
                 ],
               ),
+              SizedBox(height: 10,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -368,7 +369,7 @@ class _SelectedEditPageState extends State<SelectedEditPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 20,),
+              SizedBox(height: 10,),
             ],
           ),
         ),
