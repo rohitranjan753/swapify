@@ -91,7 +91,7 @@ class _AllListingState extends State<AllListing> {
                           builder: (context) => SelectedEditPage(item: data)));
                 },
                 child: Card(
-                  elevation: 2,
+                  elevation: 6,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
