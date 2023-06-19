@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:vbuddyproject/widget/back_btn_design.dart';
 
 class EditListing extends StatefulWidget {
   final DocumentSnapshot item;
@@ -109,14 +110,8 @@ class _EditListingState extends State<EditListing> {
     double myWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            // Do something when the menu icon is pressed
-            Navigator.pop(context);
-          },
-        ),
-        backgroundColor: Colors.cyan[300],
+        leading: backiconButtonDesign(),
+
         toolbarHeight: 60,
         title: Text('Edit Listing'),
         centerTitle: true,
@@ -227,6 +222,7 @@ class _EditListingState extends State<EditListing> {
                   alignment: Alignment.topLeft,
                   child: Text("Price",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)),
               TextFormField(
+                keyboardType: TextInputType.number,
                 controller: _itemPriceController,
                 // initialValue: _itemTitle,
                 onChanged: (value) {

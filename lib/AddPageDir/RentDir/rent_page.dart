@@ -260,7 +260,6 @@ class _RentPageState extends State<RentPage> {
                   height: 20,
                 ),
                 TextFormField(
-
                   keyboardType: TextInputType.number,
                   onChanged: (value) {
                     setState(() {
