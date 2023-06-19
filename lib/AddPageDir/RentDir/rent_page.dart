@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:vbuddyproject/widget/back_btn_design.dart';
 
 class RentPage extends StatefulWidget {
   const RentPage({Key? key}) : super(key: key);
@@ -149,7 +150,7 @@ class _RentPageState extends State<RentPage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.cyan[300],
+        leading: const backiconButtonDesign(),
         title: Text('RENT UPLOAD SECTION'),
         toolbarHeight: 60,
         centerTitle: true,
@@ -189,7 +190,7 @@ class _RentPageState extends State<RentPage> {
                         )
                             : DecorationImage(
                           image: AssetImage(
-                              'assets/images/upload.png'),
+                              'assets/upload_icon-removebg-preview.png'),
                           fit: BoxFit.contain,
                         ),
                       ),
@@ -211,12 +212,8 @@ class _RentPageState extends State<RentPage> {
                     labelText: "Title",
                     contentPadding:
                     EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(20)),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(20)),
+
+                    border: OutlineInputBorder(),
                     filled: true,
                     fillColor: Colors.white,
                     hintText: 'Enter Title',
