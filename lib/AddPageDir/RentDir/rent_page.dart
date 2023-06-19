@@ -418,7 +418,7 @@ class _RentPageState extends State<RentPage> {
                   child: Text(
                     'SUBMIT',
                     style: TextStyle(
-                        fontWeight: FontWeight.w600, fontSize: 18),
+                        fontWeight: FontWeight.w600, fontSize: 18,color: Colors.white),
                   ),
                 ),
               ],
