@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vbuddyproject/ProfilePageDir/Editing/selected_edit_page.dart';
+import 'package:vbuddyproject/widget/back_btn_design.dart';
 
 import '../../SearchPageDir/selected_search_page.dart';
 
@@ -22,13 +23,13 @@ class _AllListingState extends State<AllListing> {
     double myWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            // Do something when the menu icon is pressed
-            Navigator.pop(context);
-          },
-        ),
+        toolbarHeight: 60,
+        shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+      bottomRight: Radius.circular(30),
+        bottomLeft: Radius.circular(30)),
+    ),
+        leading: backiconButtonDesign(),
         title: Container(
           decoration: BoxDecoration(
               color: Colors.white,
@@ -54,7 +55,7 @@ class _AllListingState extends State<AllListing> {
                 border: InputBorder.none,
                 suffixIcon: Icon(
                   Icons.search,
-                  color: Colors.cyan,
+
                 ),
                 hintText: 'Search...',
               ),
