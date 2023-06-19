@@ -206,14 +206,14 @@ class _SellPageState extends State<SellPage> {
                           });
                         },
                         decoration: InputDecoration(
-                          labelText: "Enter Title",
+                          hintText: "Enter Title",
                           contentPadding:
                               EdgeInsets.symmetric(vertical: 0, horizontal: 10),
 
                           border: OutlineInputBorder(),
                           filled: true,
                           fillColor: Colors.white,
-                          hintText: 'Title',
+                          labelText: 'Title',
                         ),
                         validator: (value) {
                           if (value!.isEmpty || value == null) {
@@ -237,7 +237,7 @@ class _SellPageState extends State<SellPage> {
                           });
                         },
                         decoration: InputDecoration(
-                          labelText: 'Enter Description',
+                          hintText: 'Enter Description',
                           contentPadding:
                               EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                           border: OutlineInputBorder(),
@@ -249,7 +249,7 @@ class _SellPageState extends State<SellPage> {
                           //     borderRadius: BorderRadius.circular(20)),
                           filled: true,
                           fillColor: Colors.white,
-                          hintText: 'Description',
+                          labelText: 'Description',
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -269,13 +269,13 @@ class _SellPageState extends State<SellPage> {
                           });
                         },
                         decoration: InputDecoration(
-                          labelText: "Enter Price",
+                          hintText: "Enter Price",
                           contentPadding:
                               EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                           border: OutlineInputBorder(),
                           filled: true,
                           fillColor: Colors.white,
-                          hintText: 'Price',
+                          labelText: 'Price',
                         ),
                         validator: (value) {
                           if (value!.isEmpty || value == null) {
