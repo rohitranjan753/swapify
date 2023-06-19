@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:vbuddyproject/widget/back_btn_design.dart';
 
 class SellPage extends StatefulWidget {
   const SellPage({Key? key}) : super(key: key);
@@ -147,8 +148,8 @@ class _SellPageState extends State<SellPage> {
     double myWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.cyan[300],
         toolbarHeight: 60,
+        leading: backiconButtonDesign(),
         title: Text('SELL UPLOAD SECTION'),
         centerTitle: true,
         shape: const RoundedRectangleBorder(
