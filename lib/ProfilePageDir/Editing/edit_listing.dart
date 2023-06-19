@@ -274,7 +274,7 @@ class _EditListingState extends State<EditListing> {
                 },
                 minWidth: double.infinity,
                 height: 60,
-                color: Colors.cyan[300],
+                color: Colors.deepPurple,
                 elevation: 10,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50)),
