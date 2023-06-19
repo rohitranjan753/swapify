@@ -102,6 +102,7 @@ import 'package:vbuddyproject/Chat/chat_screen.dart';
 class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -114,16 +115,36 @@ class ChatPage extends StatelessWidget {
         title: Text('Chat'),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('chats').snapshots(),
+        stream: FirebaseFirestore.instance.collection('chats').where('users', arrayContains: getCurrentUserId()).snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           }
+
           if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           }
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return Text('No chats found');
+            return Align(
+              alignment: Alignment.center,
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)
+                ),
+                elevation: 20,
+                child: Container(
+                  height: size.height * 0.45,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image(image: AssetImage("assets/chat_error-removebg-preview.png",),width: size.height*0.3,),
+                      SizedBox(height: size.height * 0.02,),
+                      Text('No chats found',style: TextStyle(fontSize: 30),),
+                    ],
+                  ),
+                ),
+              ),
+            );
           }
           // Render the chat list UI with all the chats
           return ListView(
