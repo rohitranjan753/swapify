@@ -173,17 +173,21 @@ class ChatPage extends StatelessWidget {
 
                   // Display the chat item with the user image and username
                   return Card(
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: NetworkImage(imageUrl),
+                    elevation: 5,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: NetworkImage(imageUrl),
+                        ),
+                        title: Text(
+                          username,
+                          style: TextStyle(fontSize: 25),
+                        ),
+                        onTap: () {
+                          navigateToChatScreen(context, chatId);
+                        },
                       ),
-                      title: Text(
-                        username,
-                        style: TextStyle(fontSize: 25),
-                      ),
-                      onTap: () {
-                        navigateToChatScreen(context, chatId);
-                      },
                     ),
                   );
                 },
