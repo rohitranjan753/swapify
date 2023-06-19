@@ -195,6 +195,10 @@ class _EditListingState extends State<EditListing> {
                   alignment: Alignment.topLeft,
                   child: Text("Description",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)),
               TextFormField(
+                maxLength: 50,
+                maxLines: null,
+                keyboardType: TextInputType.multiline,
+                textCapitalization: TextCapitalization.sentences,
                 controller: _itemDescriptionController,
                 // initialValue: _itemTitle,
                 onChanged: (value) {
@@ -203,7 +207,7 @@ class _EditListingState extends State<EditListing> {
                   });
                 },
                 decoration: InputDecoration(
-                  hintText: "Enter Title",
+                  hintText: "Enter Description",
 
                   border: OutlineInputBorder(),
                   filled: true,
