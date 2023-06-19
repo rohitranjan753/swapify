@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vbuddyproject/Chat/chat_screen.dart';
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
 //
 // class ChatPage extends StatelessWidget {
 //   @override
@@ -98,7 +99,6 @@ import 'package:vbuddyproject/Chat/chat_screen.dart';
 // }
 //
 
-
 class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -115,7 +115,10 @@ class ChatPage extends StatelessWidget {
         title: Text('Chat'),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('chats').where('users', arrayContains: getCurrentUserId()).snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection('chats')
+            .where('users', arrayContains: getCurrentUserId())
+            .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -129,17 +132,26 @@ class ChatPage extends StatelessWidget {
               alignment: Alignment.center,
               child: Card(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)
-                ),
+                    borderRadius: BorderRadius.circular(20)),
                 elevation: 20,
                 child: Container(
                   height: size.height * 0.45,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image(image: AssetImage("assets/chat_error-removebg-preview.png",),width: size.height*0.3,),
-                      SizedBox(height: size.height * 0.02,),
-                      Text('No chats found',style: TextStyle(fontSize: 30),),
+                      Image(
+                        image: AssetImage(
+                          "assets/chat_error-removebg-preview.png",
+                        ),
+                        width: size.height * 0.3,
+                      ),
+                      SizedBox(
+                        height: size.height * 0.02,
+                      ),
+                      Text(
+                        'No chats found',
+                        style: TextStyle(fontSize: 30),
+                      ),
                     ],
                   ),
                 ),
@@ -154,15 +166,19 @@ class ChatPage extends StatelessWidget {
               List<dynamic> users = document['users'];
 
               // Determine the other user's ID
-              String otherUserId = users.firstWhere((userId) => userId != getCurrentUserId());
+              String otherUserId =
+                  users.firstWhere((userId) => userId != getCurrentUserId());
 
               return FutureBuilder<List<String>?>(
                 future: getUserData(otherUserId),
-                builder: (BuildContext context, AsyncSnapshot<List<String>?> snapshot) {
+                builder: (BuildContext context,
+                    AsyncSnapshot<List<String>?> snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return LinearProgressIndicator();
                   }
-                  if (snapshot.hasError || !snapshot.hasData || snapshot.data == null) {
+                  if (snapshot.hasError ||
+                      !snapshot.hasData ||
+                      snapshot.data == null) {
                     return Text('User not found');
                   }
 
@@ -172,21 +188,44 @@ class ChatPage extends StatelessWidget {
                   String username = userData[1];
 
                   // Display the chat item with the user image and username
-                  return Card(
-                    elevation: 5,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: NetworkImage(imageUrl),
+                  // return Card(
+                  //   elevation: 5,
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.all(8.0),
+                  //     child: ListTile(
+                  //       leading: CircleAvatar(
+                  //         backgroundImage: NetworkImage(imageUrl),
+                  //       ),
+                  //       title: Text(
+                  //         username,
+                  //         style: TextStyle(fontSize: 25),
+                  //       ),
+                  //       onTap: () {
+                  //         navigateToChatScreen(context, chatId);
+                  //       },
+                  //     ),
+                  //   ),
+                  // );
+                  return GestureDetector(
+                    onTap: () {
+                      navigateToChatScreen(context, chatId);
+                    },
+                    child: Card(
+                      elevation: 5,
+                      child: Container(
+                        height: size.height * 0.09,
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 30,
+                              backgroundImage: NetworkImage(imageUrl),
+                            ),
+                            Text(
+                              username,
+                              style: TextStyle(fontSize: 25),
+                            ),
+                          ],
                         ),
-                        title: Text(
-                          username,
-                          style: TextStyle(fontSize: 25),
-                        ),
-                        onTap: () {
-                          navigateToChatScreen(context, chatId);
-                        },
                       ),
                     ),
                   );
@@ -215,7 +254,8 @@ class ChatPage extends StatelessWidget {
 
   // Function to fetch the user image URL and username for a given user ID from Firestore
   Future<List<String>?> getUserData(String userId) async {
-    DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection('Users').doc(userId).get();
+    DocumentSnapshot snapshot =
+        await FirebaseFirestore.instance.collection('Users').doc(userId).get();
 
     if (snapshot.exists) {
       Map<String, dynamic> userData = snapshot.data() as Map<String, dynamic>;
@@ -227,4 +267,3 @@ class ChatPage extends StatelessWidget {
     return null;
   }
 }
-
