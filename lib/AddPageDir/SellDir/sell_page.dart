@@ -279,7 +279,7 @@ class _SellPageState extends State<SellPage> {
                         ),
                         validator: (value) {
                           if (value!.isEmpty || value == null) {
-                            return 'Pleas Price';
+                            return 'Please enter price';
                           } else {
                             return null;
                           }

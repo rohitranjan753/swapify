@@ -243,12 +243,8 @@ class _RentPageState extends State<RentPage> {
                     labelText: 'Description',
                     contentPadding:
                     EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(20)),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(20)),
+
+                    border: OutlineInputBorder(),
                     filled: true,
                     fillColor: Colors.white,
                     hintText: 'Enter Description',
@@ -275,12 +271,7 @@ class _RentPageState extends State<RentPage> {
                     labelText: "Rent Price",
                     contentPadding:
                     EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(20)),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(20)),
+                    border: OutlineInputBorder(),
                     filled: true,
                     fillColor: Colors.white,
                     hintText: 'Enter Price per 6 Hrs',
