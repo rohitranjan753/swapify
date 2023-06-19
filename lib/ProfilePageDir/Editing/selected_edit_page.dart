@@ -301,80 +301,74 @@ class _SelectedEditPageState extends State<SelectedEditPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   //EDIT
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20),
-                    child: MaterialButton(
-                      onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>EditListing(item: widget.item,)));
-                      },
-                      minWidth: myWidth*0.4,
-                      height: 50,
-                      color: Colors.cyan,
-                      elevation: 5,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Icon(Icons.edit),
-                          Text(
-                            "EDIT",
-                            style: TextStyle(fontSize: 20),
-                          ),
-                        ],
-                      ),
+                  MaterialButton(
+                    onPressed: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>EditListing(item: widget.item,)));
+                    },
+                    minWidth: myWidth*0.4,
+                    height: 50,
+                    color: Colors.cyan,
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Icon(Icons.edit),
+                        Text(
+                          "EDIT",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ],
                     ),
                   ),
-
                   //DELETE
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20),
-                    child: MaterialButton(
-                      onPressed: (){
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            title: Text('Delete Listing'),
-                            content: Text('Are you sure you want to delete?'),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context, 'No');
-                                },
-                                child: Text('No'),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  deleteDocument(widget.item.id);
-                                  Navigator.pop(context, 'Yes');
-                                  Navigator.pop(context);
-                                },
-                                child: Text('Yes'),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                      minWidth: myWidth*0.4,
-                      height: 50,
-                      color: Colors.red[400],
-                      elevation: 5,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Icon(Icons.delete),
-                          Text(
-                            "DELETE",
-                            style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
+                  MaterialButton(
+                    onPressed: (){
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text('Delete Listing'),
+                          content: Text('Are you sure you want to delete?'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context, 'No');
+                              },
+                              child: Text('No'),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                deleteDocument(widget.item.id);
+                                Navigator.pop(context, 'Yes');
+                                Navigator.pop(context);
+                              },
+                              child: Text('Yes'),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    minWidth: myWidth*0.4,
+                    height: 50,
+                    color: Colors.red[400],
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(Icons.delete),
+                        Text(
+                          "DELETE",
+                          style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
+              SizedBox(height: 20,),
             ],
           ),
         ),
