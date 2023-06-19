@@ -29,37 +29,34 @@ class _AllListingState extends State<AllListing> {
             Navigator.pop(context);
           },
         ),
-        title: Align(
-          alignment: Alignment.center,
-          child: Container(
-            decoration: BoxDecoration(
+        title: Container(
+          decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(
                 color: Colors.white,
-                border: Border.all(
-                  color: Colors.white,
+              ),
+              borderRadius: BorderRadius.circular(15)
+          ),
+          height: myHeight*0.05,
+          width: myWidth*0.7,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: TextField(
+              style: TextStyle(
+                  fontSize: 18
+              ),
+              onChanged: (value) {
+                setState(() {
+                  searchText = value;
+                });
+              },
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                suffixIcon: Icon(
+                  Icons.search,
+                  color: Colors.cyan,
                 ),
-                borderRadius: BorderRadius.circular(15)
-            ),
-            height: myHeight*0.05,
-            width: myWidth*0.7,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: TextField(
-                style: TextStyle(
-                    fontSize: 18
-                ),
-                onChanged: (value) {
-                  setState(() {
-                    searchText = value;
-                  });
-                },
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  suffixIcon: Icon(
-                    Icons.search,
-                    color: Colors.cyan,
-                  ),
-                  hintText: 'Search...',
-                ),
+                hintText: 'Search...',
               ),
             ),
           ),
