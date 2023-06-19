@@ -41,7 +41,7 @@ class _SelectedEditPageState extends State<SelectedEditPage> {
               bottomRight: Radius.circular(30),
               bottomLeft: Radius.circular(30)),
         ),
-        title: Text(widget.item['creatorname']),
+        // title: Text(widget.item['creatorname']),
         // actions: [
         //   IconButton(
         //     icon: Icon(Icons.menu),
