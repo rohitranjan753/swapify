@@ -111,7 +111,6 @@ class _EditListingState extends State<EditListing> {
     return Scaffold(
       appBar: AppBar(
         leading: backiconButtonDesign(),
-
         toolbarHeight: 60,
         title: Text('Edit Listing'),
         centerTitle: true,
@@ -281,7 +280,7 @@ class _EditListingState extends State<EditListing> {
                 child: Text(
                   'SUBMIT',
                   style: TextStyle(
-                      fontWeight: FontWeight.w600, fontSize: 18),
+                      fontWeight: FontWeight.w600, fontSize: 18,color: Colors.white),
                 ),
               ),
             ],
