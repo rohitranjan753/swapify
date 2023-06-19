@@ -27,7 +27,7 @@ class _AddPageState extends State<AddPage> {
         ),
         // title: Text(widget.item['creatorname']),
       ),
-      backgroundColor: AppColors.backgroundColor,
+
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
