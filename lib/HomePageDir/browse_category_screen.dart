@@ -87,7 +87,35 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
             return CircularProgressIndicator();
           }
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return Text('No Item found');
+            return Align(
+              alignment: Alignment.center,
+              child: Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                elevation: 20,
+                child: Container(
+                  height: myHeight * 0.3,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image(
+                        image: AssetImage(
+                          "assets/error_not_found-removebg-preview.png",
+                        ),
+                        width: myWidth * 0.3,
+                      ),
+                      SizedBox(
+                        height: myHeight * 0.02,
+                      ),
+                      Text(
+                        'No item found',
+                        style: TextStyle(fontSize: 30),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
           }
           final documents = snapshot.data!.docs.where((doc) =>
               doc['title'].toString().toLowerCase().contains(searchText.toLowerCase()));
