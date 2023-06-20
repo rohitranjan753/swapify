@@ -86,6 +86,9 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
           if (!snapshot.hasData) {
             return CircularProgressIndicator();
           }
+          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            return Text('No Item found');
+          }
           final documents = snapshot.data!.docs.where((doc) =>
               doc['title'].toString().toLowerCase().contains(searchText.toLowerCase()));
           return GridView.builder(

@@ -145,6 +145,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             Navigator.pop(context);
           },
         ),
+        centerTitle: true,
         title: Text(
           'Categories',
           style: TextStyle(

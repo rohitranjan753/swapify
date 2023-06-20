@@ -36,7 +36,8 @@ class _SearchPageState extends State<SearchPage> {
                   PopupMenuItem(
                     child: Row(
                       children: [
-                        Icon(Icons.category_rounded),
+                        Icon(Icons.category_rounded,color: Colors.deepPurple,),
+                        SizedBox(width: 4,),
                         Text('All Category'),
                       ],
                     ),
