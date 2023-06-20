@@ -38,12 +38,6 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
       ),
     );
     FocusScope.of(context).unfocus();
-    // if (userImage == null) {
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     const SnackBar(content: Text('Upload Image')),
-    //   );
-    //   return;
-    // }
 
     setState(() {
       _isLoading = true;
@@ -62,12 +56,25 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
     await storageRef.child('${uniqueId}' + '.jpg').putFile(userImage);
     final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
 
+    // await FirebaseFirestore.instance
+    //     .collection('Users')
+    //     .doc(currentUser.uid)
+    //     .update({
+    //   'username': userName,
+    //   'userimage':downloadUrl,
+    // });
+    await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(currentUser.uid)
+        .update({
+      'userimage':downloadUrl,
+    });
+
     await FirebaseFirestore.instance
         .collection('Users')
         .doc(currentUser.uid)
         .update({
       'username': userName,
-      'userimage':downloadUrl,
     });
 
     setState(() {
@@ -214,7 +221,7 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
                   } else {
                     _uploadToFirebase(
                       _image!,
-                      _username,
+                      _usernameController.text,
                     );
                   }
 
