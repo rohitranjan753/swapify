@@ -193,24 +193,31 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
 
               MaterialButton(
                 onPressed: () {
-                  if ( _usernameController.value == null) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Name field is empty!')),
+                  if (_usernameController.text.isEmpty) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Error'),
+                          content: Text('Username field is empty.'),
+                          actions: [
+                            TextButton(
+                              child: Text('OK'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  } else {
+                    _uploadToFirebase(
+                      _image!,
+                      _username,
                     );
                   }
-                  _uploadToFirebase(
-                    _image!,
-                    _username,
-                  );
-                  // if (_formKey.currentState!.validate()) {
-                  //   // If the form is valid, display a snackbar. In the real world,
-                  //   // you'd often call a server or save the information in a database.
-                  //   ScaffoldMessenger.of(context).showSnackBar(
-                  //     const SnackBar(content: Text('Processing Data')),
-                  //   );
-                  //
-                  //
-                  // }
+
                 },
                 minWidth: double.infinity,
                 height: 60,
