@@ -27,7 +27,6 @@ class _AddPageState extends State<AddPage> {
         ),
         // title: Text(widget.item['creatorname']),
       ),
-
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -38,8 +37,8 @@ class _AddPageState extends State<AddPage> {
                 //sell
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (context) => SellPage()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => SellPage()));
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -76,16 +75,36 @@ class _AddPageState extends State<AddPage> {
                   ),
                 ),
 
-                Text(
-                  'OR',
-                  style: TextStyle(fontSize: 30),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: Divider(
+                        thickness: 2,
+                        color: Colors.grey,
+                      )),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Text(
+                          'OR',
+                          style: TextStyle(fontSize: 30,color: Colors.grey),
+                        ),
+                      ),
+                      Expanded(
+                          child: Divider(
+                        thickness: 2,
+                        color: Colors.grey,
+                      )),
+                    ],
+                  ),
                 ),
 
                 //rent
                 GestureDetector(
-                  onTap: (){
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (context) => RentPage()));
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => RentPage()));
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -104,7 +123,6 @@ class _AddPageState extends State<AddPage> {
                             padding: const EdgeInsets.all(4.0),
                             child: Image.asset(
                               'assets/rent_new.png',
-
                               width: myWidth * 0.5,
                             ),
                           ),
@@ -112,7 +130,7 @@ class _AddPageState extends State<AddPage> {
                             height: 1,
                           ),
                           Text(
-                            'Rent',
+                            'RENT',
                             style: TextStyle(
                               fontSize: 35,
                             ),
