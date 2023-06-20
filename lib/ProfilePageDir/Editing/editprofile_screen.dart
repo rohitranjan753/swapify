@@ -28,10 +28,14 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
 
       ) async {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Uploading! Please wait',style: TextStyle(
-        color: Colors.white,
-        fontSize: 16.0,
-      ),),
+      const SnackBar(
+        content: Text(
+          'Uploading! Please wait',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 16.0,
+          ),
+        ),
         backgroundColor: Colors.blue,
         behavior: SnackBarBehavior.floating,
         elevation: 4.0,
@@ -42,33 +46,29 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
     setState(() {
       _isLoading = true;
     });
-    final currentUser = FirebaseAuth.instance.currentUser;
 
+    final currentUser = FirebaseAuth.instance.currentUser;
     final userExistingData = await FirebaseFirestore.instance
         .collection('Users')
         .doc(currentUser!.uid)
         .get();
 
-    String? uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
+    if (userImage != null) {
+      String? uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
 
-    final Reference storageRef = FirebaseStorage.instance.ref().child('images');
-    final taskSnapshot =
-    await storageRef.child('${uniqueId}' + '.jpg').putFile(userImage);
-    final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+      final Reference storageRef =
+      FirebaseStorage.instance.ref().child('images');
+      final taskSnapshot =
+      await storageRef.child('${uniqueId}' + '.jpg').putFile(userImage);
+      final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
 
-    // await FirebaseFirestore.instance
-    //     .collection('Users')
-    //     .doc(currentUser.uid)
-    //     .update({
-    //   'username': userName,
-    //   'userimage':downloadUrl,
-    // });
-    await FirebaseFirestore.instance
-        .collection('Users')
-        .doc(currentUser.uid)
-        .update({
-      'userimage':downloadUrl,
-    });
+      await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(currentUser.uid)
+          .update({
+        'userimage': downloadUrl,
+      });
+    }
 
     await FirebaseFirestore.instance
         .collection('Users')
@@ -80,7 +80,31 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
     setState(() {
       _isLoading = false;
     });
+
+    // Show a snackbar or any other notification to indicate successful update
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text(
+          'Profile updated successfully!',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 16.0,
+          ),
+        ),
+        backgroundColor: Colors.green,
+        behavior: SnackBarBehavior.floating,
+        elevation: 4.0,
+      ),
+    );
+
+    // Update the text field with the new username
+    setState(() {
+      _username = userName;
+      _usernameController.text = _username;
+    });
   }
+
+
 
   Future<void> _getImage() async {
     final imagePicker = ImagePicker();
