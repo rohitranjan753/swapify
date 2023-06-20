@@ -115,7 +115,7 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
       appBar: AppBar(
         leading: backiconButtonDesign(),
         toolbarHeight: 60,
-        title: Text('Edit Profile'),
+        title: Text('EDIT PROFILE'),
         centerTitle: true,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -186,16 +186,18 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
                 },
               ),
               SizedBox(
-                height: 20,
+                height: 40,
               ),
 
-              SizedBox(
-                height: 20,
-              ),
-              // First Dropdown
+
 
               MaterialButton(
                 onPressed: () {
+                  if ( _usernameController.value == null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Name field is empty!')),
+                    );
+                  }
                   _uploadToFirebase(
                     _image!,
                     _username,
