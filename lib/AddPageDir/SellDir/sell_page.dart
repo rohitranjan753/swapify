@@ -389,7 +389,7 @@ class _SellPageState extends State<SellPage> {
                             // you'd often call a server or save the information in a database.
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Uploading! Please wait',style: TextStyle(
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontSize: 16.0,
                               ),),
                                 backgroundColor: AppColors.navBarBackgroundColour,
