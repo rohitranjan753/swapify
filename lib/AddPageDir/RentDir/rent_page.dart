@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:vbuddyproject/Constants/constant.dart';
 import 'package:vbuddyproject/widget/back_btn_design.dart';
 
 class RentPage extends StatefulWidget {
@@ -388,7 +389,7 @@ class _RentPageState extends State<RentPage> {
                           color: Colors.white,
                           fontSize: 16.0,
                         ),),
-                          backgroundColor: Colors.blue,
+                          backgroundColor: AppColors.navBarBackgroundColour,
                           behavior: SnackBarBehavior.floating,
                           elevation: 4.0,
                         ),
