@@ -57,7 +57,7 @@ class _AddPageState extends State<AddPage> {
                           Padding(
                             padding: const EdgeInsets.all(4.0),
                             child: Image.asset(
-                              'assets/images/rent2.jpg',
+                              'assets/sell_new.png',
                               width: myWidth * 0.5,
                             ),
                           ),
@@ -65,7 +65,7 @@ class _AddPageState extends State<AddPage> {
                             height: 10,
                           ),
                           Text(
-                            'Sell',
+                            'SELL',
                             style: TextStyle(
                               fontSize: 40,
                             ),
@@ -103,7 +103,7 @@ class _AddPageState extends State<AddPage> {
                           Padding(
                             padding: const EdgeInsets.all(4.0),
                             child: Image.asset(
-                              'assets/images/buy2.jpg',
+                              'assets/rent_new.png',
 
                               width: myWidth * 0.5,
                             ),
