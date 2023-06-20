@@ -48,7 +48,7 @@ class _AddPageState extends State<AddPage> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      elevation: 5,
+                      elevation: 10,
                       child: Container(
                         height: myHeight * 0.32,
                         width: myWidth,
@@ -114,7 +114,7 @@ class _AddPageState extends State<AddPage> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      elevation: 5,
+                      elevation: 10,
                       child: Container(
                         height: myHeight * 0.32,
                         width: myWidth,
