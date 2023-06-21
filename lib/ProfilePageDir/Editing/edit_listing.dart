@@ -117,6 +117,21 @@ class _EditListingState extends State<EditListing> {
         elevation: 4.0,
       ),
     );
+    // Update the text field with the new username
+    setState(() {
+      _itemTitle = itemTitle;
+      _itemTitleController.text = _itemTitle;
+    });
+    setState(() {
+      _itemDescription = itemDescription;
+      _itemDescriptionController.text = _itemDescription;
+    });
+
+    setState(() {
+      _itemTitle = itemTitle;
+      _itemTitleController.text = _itemTitle;
+    });
+
   }
 
   Future<void> _getImage() async {
