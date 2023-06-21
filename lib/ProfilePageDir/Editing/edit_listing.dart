@@ -329,12 +329,13 @@ class _EditListingState extends State<EditListing> {
                           );
                         } else {
                           // Check if any fields have been changed
+
                           bool isTitleChanged =
-                              (_itemTitle != _itemTitleController.text);
+                          (_itemTitle != _itemTitleController.text.trim());
                           bool isDescriptionChanged = (_itemDescription !=
-                              _itemDescriptionController.text);
+                              _itemDescriptionController.text.trim());
                           bool isPriceChanged =
-                              (_itemPrice != _itemPriceController.text);
+                          (_itemPrice != _itemPriceController.text.trim());
                           bool isImageChanged = (_image != null);
 
                           if (isTitleChanged ||
@@ -343,9 +344,9 @@ class _EditListingState extends State<EditListing> {
                               isImageChanged) {
                             _uploadToFirebase(
                               _image!,
-                              _itemTitleController.text,
-                              _itemDescriptionController.text,
-                              _itemPriceController.text,
+                              _itemTitleController.text.trim(),
+                              _itemDescriptionController.text.trim(),
+                              _itemPriceController.text.trim(),
                             );
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -394,6 +395,9 @@ class _EditListingState extends State<EditListing> {
 
   @override
   void dispose() {
+    _itemTitleController.dispose();
+    _itemDescriptionController.dispose();
+    _itemPriceController.dispose();
     super.dispose();
   }
 }
