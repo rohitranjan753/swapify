@@ -317,12 +317,33 @@ class _EditListingState extends State<EditListing> {
 
               MaterialButton(
                 onPressed: () {
-                  _uploadToFirebase(
-                    _image!,
-                    _itemTitleController.text,
-                    _itemDescriptionController.text,
-                    _itemPriceController.text,
-                  );
+                  if (_itemTitleController.text.isEmpty || _itemDescriptionController.text.isEmpty || _itemPriceController.text.isEmpty) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Error'),
+                          content: Text('Field is empty.'),
+                          actions: [
+                            TextButton(
+                              child: Text('OK'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                  else{
+                    _uploadToFirebase(
+                      _image!,
+                      _itemTitleController.text,
+                      _itemDescriptionController.text,
+                      _itemPriceController.text,
+                    );
+                  }
 
                 },
                 minWidth: double.infinity,
