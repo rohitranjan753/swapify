@@ -64,84 +64,86 @@ class _ProfilePageState extends State<ProfilePage> {
         toolbarHeight: 0,
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            Container(
-              child: Stack(
-                clipBehavior: Clip.none,
-                alignment: Alignment.center,
-                children: [
-                  buildCoverImage(),
-                  Positioned(
-                    top: top,
-                    child: buildProfileImage(),
-                  ),
-                ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  alignment: Alignment.center,
+                  children: [
+                    buildCoverImage(),
+                    Positioned(
+                      top: top,
+                      child: buildProfileImage(),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(
-              height: 80,
-            ),
-            Text(
-              username,
-              style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              email,
-              style: TextStyle(fontSize: 25, color: Colors.grey),
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            // MaterialButton(
-            //   onPressed: () {
-            //     Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //             builder: (context) => EditprofileScreen()));
-            //   },
-            //   elevation: 20,
-            //   minWidth: myWidth * 0.5,
-            //   height: myHeight * 0.06,
-            //   color: Colors.amber[300],
-            //   shape: RoundedRectangleBorder(
-            //       borderRadius: BorderRadius.circular(50)),
-            //   child: Text(
-            //     'EDIT PROFILE',
-            //     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
-            //   ),
-            // ),
-            ProfileMenuWidget(
-              title: "Edit Profile",
-              icon: Icons.person,
-              onPress: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>EditprofileScreen()));
-              },
-              textColor: Colors.black,
-            ),
-            // SizedBox(
-            //   height: 30,
-            // ),
-            ProfileMenuWidget(
-              title: "Edit Listing",
-              icon: Icons.edit,
-              onPress: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>AllListing()));
-              },
-              textColor: Colors.black,
-            ),
-            ProfileMenuWidget(
-              title: "Settings",
-              icon: Icons.settings,
-              onPress: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>SettingsScreen()));
-              }, textColor: Colors.black,
-            ),
+              SizedBox(
+                height: 80,
+              ),
+              Text(
+                username,
+                style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                email,
+                style: TextStyle(fontSize: 25, color: Colors.grey),
+              ),
+              SizedBox(
+                height: 40,
+              ),
+              // MaterialButton(
+              //   onPressed: () {
+              //     Navigator.push(
+              //         context,
+              //         MaterialPageRoute(
+              //             builder: (context) => EditprofileScreen()));
+              //   },
+              //   elevation: 20,
+              //   minWidth: myWidth * 0.5,
+              //   height: myHeight * 0.06,
+              //   color: Colors.amber[300],
+              //   shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(50)),
+              //   child: Text(
+              //     'EDIT PROFILE',
+              //     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+              //   ),
+              // ),
+              ProfileMenuWidget(
+                title: "Edit Profile",
+                icon: Icons.person,
+                onPress: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>EditprofileScreen()));
+                },
+                textColor: Colors.black,
+              ),
+              // SizedBox(
+              //   height: 30,
+              // ),
+              ProfileMenuWidget(
+                title: "Edit Listing",
+                icon: Icons.edit,
+                onPress: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>AllListing()));
+                },
+                textColor: Colors.black,
+              ),
+              ProfileMenuWidget(
+                title: "Settings",
+                icon: Icons.settings,
+                onPress: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>SettingsScreen()));
+                }, textColor: Colors.black,
+              ),
 
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -150,7 +152,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget buildCoverImage() => Container(
         color: Colors.grey,
         child: Image.asset(
-          'assets/profile/12.jpg',
+          'assets/profile_background.jpg',
           width: double.infinity,
           height: coverHeight,
           fit: BoxFit.cover,
