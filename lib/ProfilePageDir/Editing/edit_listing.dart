@@ -77,27 +77,22 @@ class _EditListingState extends State<EditListing> {
           .update({
 
         'imageUrl':downloadUrl,
+        'title': itemTitle,
+        'description': itemDescription,
+        'price': itemPrice,
+      });
+    }
+    else{
+      await FirebaseFirestore.instance
+          .collection('all_section')
+          .doc(widget.item.id)
+          .update({
+        'title': itemTitle,
+        'description': itemDescription,
+        'price': itemPrice,
       });
     }
 
-    await FirebaseFirestore.instance
-        .collection('all_section')
-        .doc(widget.item.id)
-        .update({
-      'title': itemTitle,
-    });
-    await FirebaseFirestore.instance
-        .collection('all_section')
-        .doc(widget.item.id)
-        .update({
-      'description': itemDescription,
-    });
-    await FirebaseFirestore.instance
-        .collection('all_section')
-        .doc(widget.item.id)
-        .update({
-      'price': itemPrice,
-    });
 
     setState(() {
       _isLoading = false;
@@ -117,20 +112,7 @@ class _EditListingState extends State<EditListing> {
         elevation: 4.0,
       ),
     );
-    // Update the text field with the new username
-    setState(() {
-      _itemTitle = itemTitle;
-      _itemTitleController.text = _itemTitle;
-    });
-    setState(() {
-      _itemDescription = itemDescription;
-      _itemDescriptionController.text = _itemDescription;
-    });
 
-    setState(() {
-      _itemTitle = itemTitle;
-      _itemTitleController.text = _itemTitle;
-    });
 
   }
 
@@ -317,7 +299,9 @@ class _EditListingState extends State<EditListing> {
 
               MaterialButton(
                 onPressed: () {
-                  if (_itemTitleController.text.isEmpty || _itemDescriptionController.text.isEmpty || _itemPriceController.text.isEmpty) {
+                  if (_itemTitleController.text.isEmpty ||
+                      _itemDescriptionController.text.isEmpty ||
+                      _itemPriceController.text.isEmpty) {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
@@ -335,17 +319,24 @@ class _EditListingState extends State<EditListing> {
                         );
                       },
                     );
-                  }
-                  else{
-                    _uploadToFirebase(
-                      _image!,
-                      _itemTitleController.text,
-                      _itemDescriptionController.text,
-                      _itemPriceController.text,
-                    );
-                  }
+                  } else {
+                    // Check if any fields have been changed
+                    bool isTitleChanged = (_itemTitle != _itemTitleController.text);
+                    bool isDescriptionChanged = (_itemDescription != _itemDescriptionController.text);
+                    bool isPriceChanged = (_itemPrice != _itemPriceController.text);
+                    bool isImageChanged = (_image != null);
 
+                    if (isTitleChanged || isDescriptionChanged || isPriceChanged || isImageChanged) {
+                      _uploadToFirebase(
+                        _image!,
+                        _itemTitleController.text,
+                        _itemDescriptionController.text,
+                        _itemPriceController.text,
+                      );
+                    }
+                  }
                 },
+
                 minWidth: double.infinity,
                 height: 60,
                 color: Colors.deepPurple,
