@@ -715,13 +715,13 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
                         },
                         minWidth: myWidth * 0.5,
                         height: 60,
-                        color: Colors.cyan,
+                        color: Colors.deepPurple,
                         elevation: 5,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50)),
                         child: Text(
                           "CHAT",
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(fontSize: 20,color: Colors.white),
                         ),
                       ),
                     ),
