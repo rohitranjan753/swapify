@@ -26,7 +26,7 @@ class _EditListingState extends State<EditListing> {
   String _itemDescription = '';
   String _itemPrice = '';
   String _userimage = '';
-  File? _image;
+  File? _image=null;
 
   Future<void> _uploadToFirebase(
     File userImage,
@@ -307,9 +307,9 @@ class _EditListingState extends State<EditListing> {
 
                     MaterialButton(
                       onPressed: () {
-                        if (_itemTitleController.text.isEmpty ||
-                            _itemDescriptionController.text.isEmpty ||
-                            _itemPriceController.text.isEmpty) {
+                        if (_itemTitleController.text.trim().isEmpty ||
+                            _itemDescriptionController.text.trim().isEmpty ||
+                            _itemPriceController.text.trim().isEmpty) {
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {
@@ -329,7 +329,6 @@ class _EditListingState extends State<EditListing> {
                           );
                         } else {
                           // Check if any fields have been changed
-
                           bool isTitleChanged =
                           (_itemTitle != _itemTitleController.text.trim());
                           bool isDescriptionChanged = (_itemDescription !=
@@ -371,15 +370,18 @@ class _EditListingState extends State<EditListing> {
                       color: Colors.deepPurple,
                       elevation: 10,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50)),
+                        borderRadius: BorderRadius.circular(50),
+                      ),
                       child: Text(
                         'SUBMIT',
                         style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
-                            color: Colors.white),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
+
                   ],
                 ),
               ),
