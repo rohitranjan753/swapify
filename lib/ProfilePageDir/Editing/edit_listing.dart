@@ -57,41 +57,34 @@ class _EditListingState extends State<EditListing> {
     });
 
     final currentUser = FirebaseAuth.instance.currentUser;
-    final existingData = widget.item.data() as Map<String, dynamic>; // Existing data from widget
 
-    bool hasChanges = false; // Flag to track changes
+    if (userImage != null) {
+      String uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
 
-    // Check if image has changed
-    if (userImage != null && userImage.path != existingData['imageUrl']) {
-      String? uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
-      final Reference storageRef = FirebaseStorage.instance.ref().child('images');
-      final taskSnapshot = await storageRef.child('${uniqueId}' + '.jpg').putFile(userImage);
+      final Reference storageRef =
+      FirebaseStorage.instance.ref().child('images');
+      final taskSnapshot =
+      await storageRef.child('${uniqueId}.jpg').putFile(userImage);
       final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
-      existingData['imageUrl'] = downloadUrl; // Update image URL
-      hasChanges = true;
+
+      await FirebaseFirestore.instance
+          .collection('all_section')
+          .doc(widget.item.id)
+          .update({
+        'imageUrl': downloadUrl,
+      });
     }
 
-    // Check if item title has changed
-    if (itemTitle != existingData['title']) {
-      existingData['title'] = itemTitle; // Update item title
-      hasChanges = true;
-    }
+    await Future.delayed(Duration(seconds: 2)); // Adding a 2-second delay
 
-    // Check if item description has changed
-    if (itemDescription != existingData['description']) {
-      existingData['description'] = itemDescription; // Update item description
-      hasChanges = true;
-    }
-
-    // Check if item price has changed
-    if (itemPrice != existingData['price']) {
-      existingData['price'] = itemPrice; // Update item price
-      hasChanges = true;
-    }
-
-    if (hasChanges) {
-      await FirebaseFirestore.instance.collection('all_section').doc(widget.item.id).update(existingData);
-    }
+    await FirebaseFirestore.instance
+        .collection('all_section')
+        .doc(widget.item.id)
+        .update({
+      'title': itemTitle,
+      'description': itemDescription,
+      'price': itemPrice,
+    });
 
     setState(() {
       _isLoading = false;
@@ -111,8 +104,23 @@ class _EditListingState extends State<EditListing> {
         elevation: 4.0,
       ),
     );
-  }
 
+    // Update the text fields with the new values
+    setState(() {
+      _itemTitle = itemTitle;
+      _itemTitleController.text = _itemTitle;
+    });
+
+    setState(() {
+      _itemDescription = itemDescription;
+      _itemDescriptionController.text = _itemDescription;
+    });
+
+    setState(() {
+      _itemPrice = itemPrice;
+      _itemPriceController.text = _itemPrice;
+    });
+  }
 
 
   Future<void> _getImage() async {
@@ -127,17 +135,16 @@ class _EditListingState extends State<EditListing> {
   }
   void getData() async {
     setState(() {
-      _itemTitle = widget.item['title']?.toString() ?? '';
-      _itemTitleController.text = _itemTitle;
+      _itemTitle = widget.item['title'].toString();
+      _itemTitleController.text  =_itemTitle;
 
-      _itemDescription = widget.item['description']?.toString() ?? '';
-      _itemDescriptionController.text = _itemDescription;
+      _itemDescription = widget.item['description'].toString();
+      _itemDescriptionController.text  =_itemDescription;
 
-      _itemPrice = widget.item['price']?.toString() ?? '';
-      _itemPriceController.text = _itemPrice;
+      _itemPrice = widget.item['price'].toString();
+      _itemPriceController.text  =_itemPrice;
     });
   }
-
 
   @override
   void initState() {
@@ -299,7 +306,9 @@ class _EditListingState extends State<EditListing> {
 
               MaterialButton(
                 onPressed: () {
-                  if (_itemTitleController.text.isEmpty || _itemDescriptionController.text.isEmpty || _itemPriceController.text.isEmpty) {
+                  if (_itemTitleController.text.isEmpty ||
+                      _itemDescriptionController.text.isEmpty ||
+                      _itemPriceController.text.isEmpty) {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
@@ -317,29 +326,42 @@ class _EditListingState extends State<EditListing> {
                         );
                       },
                     );
+                  } else {
+                    if (_image != null) {
+                      _uploadToFirebase(
+                        _image!,
+                        _itemTitleController.text,
+                        _itemDescriptionController.text,
+                        _itemPriceController.text,
+                      );
+                    } else {
+                      // Handle the case when the image is not changed
+                      _uploadToFirebase(
+                        null, // Pass null if image is not changed
+                        _itemTitleController.text,
+                        _itemDescriptionController.text,
+                        _itemPriceController.text,
+                      );
+                    }
                   }
-                  else{
-                    _uploadToFirebase(
-                      _image!,
-                      _itemTitleController.text,
-                      _itemDescriptionController.text,
-                      _itemPriceController.text,
-                    );
-                  }
-
                 },
                 minWidth: double.infinity,
                 height: 60,
                 color: Colors.deepPurple,
                 elevation: 10,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50)),
+                  borderRadius: BorderRadius.circular(50),
+                ),
                 child: Text(
                   'SUBMIT',
                   style: TextStyle(
-                      fontWeight: FontWeight.w600, fontSize: 18,color: Colors.white),
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                    color: Colors.white,
+                  ),
                 ),
               ),
+
             ],
           ),
         ),
