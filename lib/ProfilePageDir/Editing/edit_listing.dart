@@ -12,32 +12,28 @@ class EditListing extends StatefulWidget {
 
   const EditListing({required this.item});
 
-
   @override
   State<EditListing> createState() => _EditListingState();
 }
 
 class _EditListingState extends State<EditListing> {
-  TextEditingController _itemTitleController  = TextEditingController();
-  TextEditingController _itemDescriptionController  = TextEditingController();
-  TextEditingController _itemPriceController  = TextEditingController();
-
+  TextEditingController _itemTitleController = TextEditingController();
+  TextEditingController _itemDescriptionController = TextEditingController();
+  TextEditingController _itemPriceController = TextEditingController();
 
   bool _isLoading = false;
   String _itemTitle = '';
   String _itemDescription = '';
   String _itemPrice = '';
-  String _userimage='';
+  String _userimage = '';
   File? _image;
 
   Future<void> _uploadToFirebase(
-      File userImage,
-      String itemTitle,
-      String itemDescription,
-      String itemPrice,
-
-
-      ) async {
+    File userImage,
+    String itemTitle,
+    String itemDescription,
+    String itemPrice,
+  ) async {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text(
@@ -63,26 +59,25 @@ class _EditListingState extends State<EditListing> {
     //     .collection('all_section')
     //     .doc(widget.item.id)
     //     .get();
-    if(userImage != null){
+    if (userImage != null) {
       String? uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
 
-      final Reference storageRef = FirebaseStorage.instance.ref().child('images');
+      final Reference storageRef =
+          FirebaseStorage.instance.ref().child('images');
       final taskSnapshot =
-      await storageRef.child('${uniqueId}' + '.jpg').putFile(userImage);
+          await storageRef.child('${uniqueId}' + '.jpg').putFile(userImage);
       final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
 
       await FirebaseFirestore.instance
           .collection('all_section')
           .doc(widget.item.id)
           .update({
-
-        'imageUrl':downloadUrl,
+        'imageUrl': downloadUrl,
         'title': itemTitle,
         'description': itemDescription,
         'price': itemPrice,
       });
-    }
-    else{
+    } else {
       await FirebaseFirestore.instance
           .collection('all_section')
           .doc(widget.item.id)
@@ -92,7 +87,6 @@ class _EditListingState extends State<EditListing> {
         'price': itemPrice,
       });
     }
-
 
     setState(() {
       _isLoading = false;
@@ -112,8 +106,6 @@ class _EditListingState extends State<EditListing> {
         elevation: 4.0,
       ),
     );
-
-
   }
 
   Future<void> _getImage() async {
@@ -126,16 +118,17 @@ class _EditListingState extends State<EditListing> {
       }
     });
   }
+
   void getData() async {
     setState(() {
       _itemTitle = widget.item['title'].toString();
-      _itemTitleController.text  =_itemTitle;
+      _itemTitleController.text = _itemTitle;
 
       _itemDescription = widget.item['description'].toString();
-      _itemDescriptionController.text  =_itemDescription;
+      _itemDescriptionController.text = _itemDescription;
 
       _itemPrice = widget.item['price'].toString();
-      _itemPriceController.text  =_itemPrice;
+      _itemPriceController.text = _itemPrice;
     });
   }
 
@@ -145,11 +138,8 @@ class _EditListingState extends State<EditListing> {
     getData();
   }
 
-
   @override
   Widget build(BuildContext context) {
-
-
     double myHeight = MediaQuery.of(context).size.height;
     double myWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -167,192 +157,232 @@ class _EditListingState extends State<EditListing> {
       body: _isLoading
           ? _buildLoadingIndicator()
           : SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  _getImage();
-                },
-                child: Card(
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  elevation: 15,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Container(
-                    height: myHeight * 0.2,
-                    width: myWidth * 0.5,
-                    decoration: BoxDecoration(
-                      image: _image != null
-                          ? DecorationImage(
-                        image: FileImage(_image!),
-                        fit: BoxFit.cover,
-                      )
-                          : DecorationImage(
-                        image: NetworkImage(widget.item['imageUrl']),
-                        fit: BoxFit.cover,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        _getImage();
+                      },
+                      child: Card(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        elevation: 15,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Container(
+                          height: myHeight * 0.2,
+                          width: myWidth * 0.5,
+                          decoration: BoxDecoration(
+                            image: _image != null
+                                ? DecorationImage(
+                                    image: FileImage(_image!),
+                                    fit: BoxFit.cover,
+                                  )
+                                : DecorationImage(
+                                    image:
+                                        NetworkImage(widget.item['imageUrl']),
+                                    fit: BoxFit.cover,
+                                  ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
+                    SizedBox(
+                      height: 20,
+                    ),
 
-              Align(
-                alignment: Alignment.topLeft,
-                  child: Text("Title",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)),
-              SizedBox(height: 3,),
-              TextFormField(
-                textCapitalization: TextCapitalization.sentences,
-                controller: _itemTitleController,
-                // initialValue: _itemTitle,
-                onChanged: (value) {
-                  setState(() {
-                    _itemTitle = value;
-                  });
-                },
-                decoration: InputDecoration(
-                  hintText: "Enter Title",
-                  border: OutlineInputBorder(),
-                  filled: true,
-                  fillColor: Colors.white,
-                ),
-                validator: (value) {
-                  if (value!.isEmpty || value == null) {
-                    return 'Username field is empty';
-                  } else {
-                    return null;
-                  }
-                },
-              ),
-              SizedBox(height: 20,),
-              Align(
-                  alignment: Alignment.topLeft,
-                  child: Text("Description",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)),
-              TextFormField(
-                maxLength: 50,
-                maxLines: null,
-                keyboardType: TextInputType.multiline,
-                textCapitalization: TextCapitalization.sentences,
-                controller: _itemDescriptionController,
-                // initialValue: _itemTitle,
-                onChanged: (value) {
-                  setState(() {
-                    _itemDescription = value;
-                  });
-                },
-                decoration: InputDecoration(
-                  hintText: "Enter Description",
-
-                  border: OutlineInputBorder(),
-                  filled: true,
-                  fillColor: Colors.white,
-                ),
-                validator: (value) {
-                  if (value!.isEmpty || value == null) {
-                    return 'Username field is empty';
-                  } else {
-                    return null;
-                  }
-                },
-              ),
-              SizedBox(height: 20,),
-              Align(
-                  alignment: Alignment.topLeft,
-                  child: Text("Price",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)),
-              TextFormField(
-                keyboardType: TextInputType.number,
-                controller: _itemPriceController,
-                // initialValue: _itemTitle,
-                onChanged: (value) {
-                  setState(() {
-                    _itemPrice = value;
-                  });
-                },
-                decoration: InputDecoration(
-                  hintText: "Enter Price",
-                  border: OutlineInputBorder(),
-                  filled: true,
-                  fillColor: Colors.white,
-                ),
-                validator: (value) {
-                  if (value!.isEmpty || value == null) {
-                    return 'Username field is empty';
-                  } else {
-                    return null;
-                  }
-                },
-              ),
-              SizedBox(
-                height: 20,
-              ),
-
-              SizedBox(
-                height: 20,
-              ),
-
-              // First Dropdown
-
-              MaterialButton(
-                onPressed: () {
-                  if (_itemTitleController.text.isEmpty ||
-                      _itemDescriptionController.text.isEmpty ||
-                      _itemPriceController.text.isEmpty) {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text('Error'),
-                          content: Text('Field is empty.'),
-                          actions: [
-                            TextButton(
-                              child: Text('OK'),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ],
-                        );
+                    Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Title",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        )),
+                    SizedBox(
+                      height: 3,
+                    ),
+                    TextFormField(
+                      textCapitalization: TextCapitalization.sentences,
+                      controller: _itemTitleController,
+                      // initialValue: _itemTitle,
+                      onChanged: (value) {
+                        setState(() {
+                          _itemTitle = value;
+                        });
                       },
-                    );
-                  } else {
-                    // Check if any fields have been changed
-                    bool isTitleChanged = (_itemTitle != _itemTitleController.text);
-                    bool isDescriptionChanged = (_itemDescription != _itemDescriptionController.text);
-                    bool isPriceChanged = (_itemPrice != _itemPriceController.text);
-                    bool isImageChanged = (_image != null);
+                      decoration: InputDecoration(
+                        hintText: "Enter Title",
+                        border: OutlineInputBorder(),
+                        filled: true,
+                        fillColor: Colors.white,
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty || value == null) {
+                          return 'Username field is empty';
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Description",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        )),
+                    TextFormField(
+                      maxLength: 50,
+                      maxLines: null,
+                      keyboardType: TextInputType.multiline,
+                      textCapitalization: TextCapitalization.sentences,
+                      controller: _itemDescriptionController,
+                      // initialValue: _itemTitle,
+                      onChanged: (value) {
+                        setState(() {
+                          _itemDescription = value;
+                        });
+                      },
+                      decoration: InputDecoration(
+                        hintText: "Enter Description",
+                        border: OutlineInputBorder(),
+                        filled: true,
+                        fillColor: Colors.white,
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty || value == null) {
+                          return 'Username field is empty';
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Price",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        )),
+                    TextFormField(
+                      keyboardType: TextInputType.number,
+                      controller: _itemPriceController,
+                      // initialValue: _itemTitle,
+                      onChanged: (value) {
+                        setState(() {
+                          _itemPrice = value;
+                        });
+                      },
+                      decoration: InputDecoration(
+                        hintText: "Enter Price",
+                        border: OutlineInputBorder(),
+                        filled: true,
+                        fillColor: Colors.white,
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty || value == null) {
+                          return 'Username field is empty';
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
 
-                    if (isTitleChanged || isDescriptionChanged || isPriceChanged || isImageChanged) {
-                      _uploadToFirebase(
-                        _image!,
-                        _itemTitleController.text,
-                        _itemDescriptionController.text,
-                        _itemPriceController.text,
-                      );
-                    }
-                  }
-                },
+                    SizedBox(
+                      height: 20,
+                    ),
 
-                minWidth: double.infinity,
-                height: 60,
-                color: Colors.deepPurple,
-                elevation: 10,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50)),
-                child: Text(
-                  'SUBMIT',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600, fontSize: 18,color: Colors.white),
+                    // First Dropdown
+
+                    MaterialButton(
+                      onPressed: () {
+                        if (_itemTitleController.text.isEmpty ||
+                            _itemDescriptionController.text.isEmpty ||
+                            _itemPriceController.text.isEmpty) {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text('Error'),
+                                content: Text('Field is empty.'),
+                                actions: [
+                                  TextButton(
+                                    child: Text('OK'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        } else {
+                          // Check if any fields have been changed
+                          bool isTitleChanged =
+                              (_itemTitle != _itemTitleController.text);
+                          bool isDescriptionChanged = (_itemDescription !=
+                              _itemDescriptionController.text);
+                          bool isPriceChanged =
+                              (_itemPrice != _itemPriceController.text);
+                          bool isImageChanged = (_image != null);
+
+                          if (isTitleChanged ||
+                              isDescriptionChanged ||
+                              isPriceChanged ||
+                              isImageChanged) {
+                            _uploadToFirebase(
+                              _image!,
+                              _itemTitleController.text,
+                              _itemDescriptionController.text,
+                              _itemPriceController.text,
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                  'No changes detected.',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                backgroundColor: Colors.orange,
+                                behavior: SnackBarBehavior.floating,
+                                elevation: 4.0,
+                              ),
+                            );
+                          }
+                        }
+                      },
+                      minWidth: double.infinity,
+                      height: 60,
+                      color: Colors.deepPurple,
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50)),
+                      child: Text(
+                        'SUBMIT',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                            color: Colors.white),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 
@@ -361,6 +391,7 @@ class _EditListingState extends State<EditListing> {
       child: CircularProgressIndicator(),
     );
   }
+
   @override
   void dispose() {
     super.dispose();
