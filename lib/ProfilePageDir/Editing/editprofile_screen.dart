@@ -70,6 +70,8 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
       });
     }
 
+    await Future.delayed(Duration(seconds: 2)); // Simulating a delay
+
     await FirebaseFirestore.instance
         .collection('Users')
         .doc(currentUser!.uid)
