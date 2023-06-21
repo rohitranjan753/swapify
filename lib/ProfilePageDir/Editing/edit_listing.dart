@@ -38,6 +38,20 @@ class _EditListingState extends State<EditListing> {
 
 
       ) async {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text(
+          'Updating! Please wait',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 16.0,
+          ),
+        ),
+        backgroundColor: Colors.blue,
+        behavior: SnackBarBehavior.floating,
+        elevation: 4.0,
+      ),
+    );
     FocusScope.of(context).unfocus();
 
     setState(() {
@@ -49,27 +63,60 @@ class _EditListingState extends State<EditListing> {
     //     .collection('all_section')
     //     .doc(widget.item.id)
     //     .get();
+    if(userImage != null){
+      String? uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
 
-    String? uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
+      final Reference storageRef = FirebaseStorage.instance.ref().child('images');
+      final taskSnapshot =
+      await storageRef.child('${uniqueId}' + '.jpg').putFile(userImage);
+      final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
 
-    final Reference storageRef = FirebaseStorage.instance.ref().child('images');
-    final taskSnapshot =
-    await storageRef.child('${uniqueId}' + '.jpg').putFile(userImage);
-    final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+      await FirebaseFirestore.instance
+          .collection('all_section')
+          .doc(widget.item.id)
+          .update({
+
+        'imageUrl':downloadUrl,
+      });
+    }
 
     await FirebaseFirestore.instance
         .collection('all_section')
         .doc(widget.item.id)
         .update({
       'title': itemTitle,
+    });
+    await FirebaseFirestore.instance
+        .collection('all_section')
+        .doc(widget.item.id)
+        .update({
       'description': itemDescription,
+    });
+    await FirebaseFirestore.instance
+        .collection('all_section')
+        .doc(widget.item.id)
+        .update({
       'price': itemPrice,
-      'imageUrl':downloadUrl,
     });
 
     setState(() {
       _isLoading = false;
     });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text(
+          'Information updated successfully!',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 16.0,
+          ),
+        ),
+        backgroundColor: Colors.green,
+        behavior: SnackBarBehavior.floating,
+        elevation: 4.0,
+      ),
+    );
   }
 
   Future<void> _getImage() async {
@@ -257,19 +304,11 @@ class _EditListingState extends State<EditListing> {
                 onPressed: () {
                   _uploadToFirebase(
                     _image!,
-                    _itemTitle,
-                    _itemDescription,
-                    _itemPrice,
+                    _itemTitleController.text,
+                    _itemDescriptionController.text,
+                    _itemPriceController.text,
                   );
-                  // if (_formKey.currentState!.validate()) {
-                  //   // If the form is valid, display a snackbar. In the real world,
-                  //   // you'd often call a server or save the information in a database.
-                  //   ScaffoldMessenger.of(context).showSnackBar(
-                  //     const SnackBar(content: Text('Processing Data')),
-                  //   );
-                  //
-                  //
-                  // }
+
                 },
                 minWidth: double.infinity,
                 height: 60,

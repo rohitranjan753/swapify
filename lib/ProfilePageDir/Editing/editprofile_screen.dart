@@ -30,7 +30,7 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text(
-          'Uploading! Please wait',
+          'Updating! Please wait',
           style: TextStyle(
             color: Colors.white,
             fontSize: 16.0,
@@ -48,10 +48,10 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
     });
 
     final currentUser = FirebaseAuth.instance.currentUser;
-    final userExistingData = await FirebaseFirestore.instance
-        .collection('Users')
-        .doc(currentUser!.uid)
-        .get();
+    // final userExistingData = await FirebaseFirestore.instance
+    //     .collection('Users')
+    //     .doc(currentUser!.uid)
+    //     .get();
 
     if (userImage != null) {
       String? uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
@@ -64,7 +64,7 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
 
       await FirebaseFirestore.instance
           .collection('Users')
-          .doc(currentUser.uid)
+          .doc(currentUser!.uid)
           .update({
         'userimage': downloadUrl,
       });
@@ -72,7 +72,7 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
 
     await FirebaseFirestore.instance
         .collection('Users')
-        .doc(currentUser.uid)
+        .doc(currentUser!.uid)
         .update({
       'username': userName,
     });

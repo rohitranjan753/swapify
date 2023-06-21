@@ -128,6 +128,7 @@ class _SellPageState extends State<SellPage> {
     setState(() {
       _isLoading = false;
     });
+
   }
 
   Future<void> _getImage() async {
