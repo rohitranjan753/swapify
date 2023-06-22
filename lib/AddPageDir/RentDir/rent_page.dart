@@ -369,7 +369,6 @@ class _RentPageState extends State<RentPage> {
                       // Second Dropdown, only visible when first dropdown is selected
                       if (_selectedFirstValue != null)
                         DropdownButton<String>(
-
                           icon: Icon(Icons.keyboard_arrow_down_rounded),
                           underline: Container(
                             height: 2,
@@ -405,7 +404,10 @@ class _RentPageState extends State<RentPage> {
                         onPressed: () {
                           if (_image == null) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Choose Image'),backgroundColor: Colors.red,),
+                              const SnackBar(
+                                content: Text('Choose Image'),
+                                backgroundColor: Colors.red,
+                              ),
                             );
                           } else if (_selectedFirstValue == null ||
                               _selectedSecondValue == null) {
@@ -418,7 +420,12 @@ class _RentPageState extends State<RentPage> {
                           //     const SnackBar(content: Text('Invalid Price')),
                           //   );
                           // }
-                          else if (_formKey.currentState!.validate()) {
+                          else if (validatePriceandHour(
+                              _rentalPrice, _perHrsValue)) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Invalid Price')),
+                            );
+                          } else if (_formKey.currentState!.validate()) {
                             // If the form is valid, display a snackbar. In the real world,
                             // you'd often call a server or save the information in a database.
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -492,5 +499,14 @@ class _RentPageState extends State<RentPage> {
       return false;
     }
     return double.tryParse(value) != null;
+  }
+
+  bool validatePriceandHour(String rentalPrice, String perHrsValue) {
+    if (!isNumberAndPositive(_rentalPrice) &&
+        (double.parse(_perHrsValue)) > 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
