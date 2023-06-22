@@ -30,7 +30,9 @@ class _RentPageState extends State<RentPage> {
     'Gadgets',
   ];
 
-  List<String> _perHrValueList = [];
+  List<String> _perHrValueList = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+    '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
+    '21', '22', '23', '24'];
 
 
 
@@ -149,9 +151,7 @@ class _RentPageState extends State<RentPage> {
 
   @override
   Widget build(BuildContext context) {
-    for (int i = 1; i <= 24; i++) {
-      _perHrValueList.add(i.toString());
-    }
+
     double myHeight = MediaQuery.of(context).size.height;
     double myWidth = MediaQuery.of(context).size.width;
 
@@ -448,17 +448,24 @@ class _RentPageState extends State<RentPage> {
                                 backgroundColor: Colors.red,
                               ),
                             );
-                          } else if (_selectedFirstValue == null ||
+                          }
+                          else if (_selectedFirstValue == null ||
                               _selectedSecondValue == null) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Choose Category')),
                             );
                           }
-                          // else if (!isNumberAndPositive(_rentalPrice) && (double.parse(_perHrsValue))>0) {
-                          //   ScaffoldMessenger.of(context).showSnackBar(
-                          //     const SnackBar(content: Text('Invalid Price')),
-                          //   );
-                          // }
+
+                          else if (!isNumberAndPositive(_rentalPrice)) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Invalid Price')),
+                            );
+                          }
+                          else if (_perHrValue==null) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Choose per hr')),
+                            );
+                          }
                           else if (_formKey.currentState!.validate()) {
                             // If the form is valid, display a snackbar. In the real world,
                             // you'd often call a server or save the information in a database.
