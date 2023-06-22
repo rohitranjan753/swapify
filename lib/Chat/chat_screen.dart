@@ -324,8 +324,10 @@ class ChatScreen extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.send),
-                  color: Colors.cyan,
+                  icon: Image(
+                    image: AssetImage('assets/send_chat1.png'),
+                  ),
+
                   onPressed: () {
                     String message = _messageController.text.trim();
                     if (message.isNotEmpty) {
