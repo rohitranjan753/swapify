@@ -233,7 +233,7 @@ class _RentPageState extends State<RentPage> {
                         ),
                         validator: (value) {
                           if (value!.isEmpty || value == null) {
-                            return 'Pleas enter valid email address';
+                            return 'Pleas enter title!';
                           } else {
                             return null;
                           }
