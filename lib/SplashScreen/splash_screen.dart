@@ -48,11 +48,11 @@ class SplashScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Welcome to vBuddy",
+                  "Welcome to Swapify",
                   style: Theme.of(context).textTheme.headline4,
                 ),
                 Text(
-                  "Sell your belongings",
+                  "where second-hand becomes first choice",
                   style: Theme.of(context).textTheme.bodyText1,
                   textAlign: TextAlign.center,
                 ),
