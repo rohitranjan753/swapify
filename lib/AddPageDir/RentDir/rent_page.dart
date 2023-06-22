@@ -201,6 +201,7 @@ class _RentPageState extends State<RentPage> {
                       ),
                       TextFormField(
                         key: ValueKey('_titleText'),
+                        autocorrect: true,
                         textCapitalization: TextCapitalization.sentences,
                         onChanged: (value) {
                           setState(() {
@@ -410,15 +411,11 @@ class _RentPageState extends State<RentPage> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Choose Category')),
                             );
-                          } else if (!isNumberAndPositive(_rentalPrice)) {
+                          } else if (!isNumberAndPositive(_rentalPrice) && (double.parse(_perHrsValue))>0) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Invalid Price')),
                             );
-                          } else if (!isNumberAndPositive(_perHrsValue)) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Invalid Price')),
-                            );
-                          } else if (_formKey.currentState!.validate()) {
+                          }  else if (_formKey.currentState!.validate()) {
                             // If the form is valid, display a snackbar. In the real world,
                             // you'd often call a server or save the information in a database.
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -485,9 +482,9 @@ class _RentPageState extends State<RentPage> {
   }
 
   bool isNumberAndPositive(String value) {
-    if (double.tryParse(value)! > 0) {
-      return false;
-    }
+    // if (double.tryParse(value)! > 0) {
+    //   return false;
+    // }
     if (value == null) {
       return false;
     }
