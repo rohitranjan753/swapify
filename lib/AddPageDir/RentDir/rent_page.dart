@@ -59,9 +59,12 @@ class _RentPageState extends State<RentPage> {
     String rentPrice,
     String firstDropdownValue,
     String secondDropdownValue,
+      String perHourDropdownValue,
   ) async {
     rentDes = rentDes.trim();
     rentTile = rentTile.trim();
+    rentPrice = rentPrice.trim();
+
     FocusScope.of(context).unfocus();
     if (rentImage == null) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -98,6 +101,7 @@ class _RentPageState extends State<RentPage> {
       'rentprice': rentPrice,
       'rentmajorcategory': firstDropdownValue,
       'rentsubcategory': secondDropdownValue,
+      'perhourvalue':perHourDropdownValue,
     });
 
     await FirebaseFirestore.instance
@@ -114,6 +118,7 @@ class _RentPageState extends State<RentPage> {
       'createdby': currentUser.uid,
       'creatorname': userName,
       'creatormail': userEmail,
+      'perhourvalue':perHourDropdownValue,
     });
 
     await FirebaseFirestore.instance
@@ -131,6 +136,7 @@ class _RentPageState extends State<RentPage> {
       'creatorname': userName,
       'category': "rent",
       'creatormail': userEmail,
+      'perhourvalue':perHourDropdownValue,
     });
 
     setState(() {
@@ -491,7 +497,8 @@ class _RentPageState extends State<RentPage> {
                                 _descriptionText,
                                 _rentalPrice,
                                 _selectedFirstValue!,
-                                _selectedSecondValue!);
+                                _selectedSecondValue!,
+                            _perHrValue!);
                             setState(() {
                               _image = null;
                               _selectedFirstValue = null;
