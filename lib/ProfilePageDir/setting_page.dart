@@ -50,13 +50,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 elevation: 20,
                 minWidth: myWidth*0.6,
                 height: myHeight*0.06,
-                color: Colors.amber[300],
+                color: Colors.deepPurple,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50)),
                 child: Text(
                   'LOGOUT',
                   style: TextStyle(
-                      fontWeight: FontWeight.w500, fontSize: 18),
+                      fontWeight: FontWeight.w500, fontSize: 18,color: Colors.white),
                 ),
               ),
             ),

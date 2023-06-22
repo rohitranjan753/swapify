@@ -680,7 +680,7 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
                                 child: Text(
                                   "Price",
                                   style: TextStyle(
-                                      fontSize: 22),
+                                      fontSize: 22,fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ],
