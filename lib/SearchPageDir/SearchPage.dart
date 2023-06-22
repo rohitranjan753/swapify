@@ -192,7 +192,7 @@ class _SearchPageState extends State<SearchPage> {
                           : Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 2),
                             child: Text(
-                        "₹ ${data["price"]} /6Hrs",
+                        "₹ ${data["price"]} /${data['perhourvalue']} hrs",
                         style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),
                       ),
                           ),
