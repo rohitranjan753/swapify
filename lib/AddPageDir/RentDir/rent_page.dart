@@ -19,6 +19,7 @@ class _RentPageState extends State<RentPage> {
   final _formKey = GlobalKey<FormState>();
   String? _selectedFirstValue;
   String? _selectedSecondValue;
+  String? _perHrValue;
 
   // List of items in our dropdown menu
   List<String> _firstDropdownOptions = [
@@ -28,6 +29,10 @@ class _RentPageState extends State<RentPage> {
     'Stationary',
     'Gadgets',
   ];
+
+  List<String> _perHrValueList = [];
+
+
 
   // Define the options for the second dropdown, based on the selected value of the first dropdown
   Map<String, List<String>> _secondDropdownOptions = {
@@ -42,7 +47,7 @@ class _RentPageState extends State<RentPage> {
   String _titleText = '';
   String _descriptionText = '';
   String _rentalPrice = '';
-  String _perHrsValue = '';
+
   File? _image;
 
   Future<void> _uploadToFirebase(
@@ -144,6 +149,9 @@ class _RentPageState extends State<RentPage> {
 
   @override
   Widget build(BuildContext context) {
+    for (int i = 1; i <= 24; i++) {
+      _perHrValueList.add(i.toString());
+    }
     double myHeight = MediaQuery.of(context).size.height;
     double myWidth = MediaQuery.of(context).size.width;
 
@@ -289,31 +297,62 @@ class _RentPageState extends State<RentPage> {
                           SizedBox(
                             width: 10,
                           ),
+                          // Expanded(
+                          //   flex: 1,
+                          //   child: TextFormField(
+                          //     keyboardType: TextInputType.number,
+                          //     onChanged: (value) {
+                          //       setState(() {
+                          //         _perHrsValue = value;
+                          //       });
+                          //     },
+                          //     decoration: InputDecoration(
+                          //       labelText: "Per Hr Price",
+                          //       contentPadding: EdgeInsets.symmetric(
+                          //           vertical: 0, horizontal: 10),
+                          //       border: OutlineInputBorder(),
+                          //       filled: true,
+                          //       fillColor: Colors.white,
+                          //       hintText: 'Enter hrs',
+                          //     ),
+                          //     validator: (value) {
+                          //       if (value!.isEmpty || value == null) {
+                          //         return 'Field empty';
+                          //       } else {
+                          //         return null;
+                          //       }
+                          //     },
+                          //   ),
+                          // ),
                           Expanded(
                             flex: 1,
-                            child: TextFormField(
-                              keyboardType: TextInputType.number,
-                              onChanged: (value) {
+                            child: DropdownButton<String>(
+                              icon: Icon(Icons.keyboard_arrow_down_rounded),
+                              underline: Container(
+                                height: 2,
+                                color: Colors.deepPurpleAccent,
+                              ),
+                              hint: Text(
+                                "Enter Item Category",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              value: _perHrValue,
+                              onChanged: (newValue) {
                                 setState(() {
-                                  _perHrsValue = value;
+                                  _perHrValue = newValue;
+
                                 });
                               },
-                              decoration: InputDecoration(
-                                labelText: "Per Hr Price",
-                                contentPadding: EdgeInsets.symmetric(
-                                    vertical: 0, horizontal: 10),
-                                border: OutlineInputBorder(),
-                                filled: true,
-                                fillColor: Colors.white,
-                                hintText: 'Enter hrs',
-                              ),
-                              validator: (value) {
-                                if (value!.isEmpty || value == null) {
-                                  return 'Field empty';
-                                } else {
-                                  return null;
-                                }
-                              },
+                              items: _perHrValueList.map((option) {
+                                return DropdownMenuItem(
+                                  child: Text(
+                                    option,
+                                    style: TextStyle(
+                                        fontSize: 20, fontWeight: FontWeight.bold),
+                                  ),
+                                  value: option,
+                                );
+                              }).toList(),
                             ),
                           ),
                         ],
@@ -420,12 +459,7 @@ class _RentPageState extends State<RentPage> {
                           //     const SnackBar(content: Text('Invalid Price')),
                           //   );
                           // }
-                          else if (validatePriceandHour(
-                              _rentalPrice, _perHrsValue)) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Invalid Price')),
-                            );
-                          } else if (_formKey.currentState!.validate()) {
+                          else if (_formKey.currentState!.validate()) {
                             // If the form is valid, display a snackbar. In the real world,
                             // you'd often call a server or save the information in a database.
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -501,12 +535,5 @@ class _RentPageState extends State<RentPage> {
     return double.tryParse(value) != null;
   }
 
-  bool validatePriceandHour(String rentalPrice, String perHrsValue) {
-    if (!isNumberAndPositive(_rentalPrice) &&
-        (double.parse(_perHrsValue)) > 0) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+
 }
