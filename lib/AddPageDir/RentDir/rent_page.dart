@@ -264,29 +264,58 @@ class _RentPageState extends State<RentPage> {
                 ),
                 Row(
                   children: [
-                    TextFormField(
-                      keyboardType: TextInputType.number,
-                      onChanged: (value) {
-                        setState(() {
-                          _rentalPrice = value;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        labelText: "Rent Price",
-                        contentPadding:
-                        EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                        border: OutlineInputBorder(),
-                        filled: true,
-                        fillColor: Colors.white,
-                        hintText: 'Enter Price per 6 Hrs',
+                    Expanded(
+                      child: TextFormField(
+                        keyboardType: TextInputType.number,
+                        onChanged: (value) {
+                          setState(() {
+                            _rentalPrice = value;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          labelText: "Rent Price",
+                          contentPadding:
+                          EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                          border: OutlineInputBorder(),
+                          filled: true,
+                          fillColor: Colors.white,
+                          hintText: 'Enter Price per 6 Hrs',
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty || value == null) {
+                            return 'Price feild can\'t be empty';
+                          } else {
+                            return null;
+                          }
+                        },
                       ),
-                      validator: (value) {
-                        if (value!.isEmpty || value == null) {
-                          return 'Price feild can\'t be empty';
-                        } else {
-                          return null;
-                        }
-                      },
+                    ),
+                    SizedBox(width: 10,),
+                    Expanded(
+                      child: TextFormField(
+                        keyboardType: TextInputType.number,
+                        onChanged: (value) {
+                          setState(() {
+                            _rentalPrice = value;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          labelText: "Per Hr Price",
+                          contentPadding:
+                          EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                          border: OutlineInputBorder(),
+                          filled: true,
+                          fillColor: Colors.white,
+                          hintText: 'Enter per hrs',
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty || value == null) {
+                            return 'Price feild can\'t be empty';
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
                     ),
 
                   ],
