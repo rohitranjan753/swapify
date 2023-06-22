@@ -265,6 +265,7 @@ class _RentPageState extends State<RentPage> {
                 Row(
                   children: [
                     Expanded(
+                      flex: 2,
                       child: TextFormField(
                         keyboardType: TextInputType.number,
                         onChanged: (value) {
@@ -279,7 +280,7 @@ class _RentPageState extends State<RentPage> {
                           border: OutlineInputBorder(),
                           filled: true,
                           fillColor: Colors.white,
-                          hintText: 'Enter Price per 6 Hrs',
+                          hintText: 'Enter Price',
                         ),
                         validator: (value) {
                           if (value!.isEmpty || value == null) {
@@ -292,6 +293,7 @@ class _RentPageState extends State<RentPage> {
                     ),
                     SizedBox(width: 10,),
                     Expanded(
+                      flex: 1,
                       child: TextFormField(
                         keyboardType: TextInputType.number,
                         onChanged: (value) {
@@ -306,7 +308,7 @@ class _RentPageState extends State<RentPage> {
                           border: OutlineInputBorder(),
                           filled: true,
                           fillColor: Colors.white,
-                          hintText: 'Enter per hrs',
+                          hintText: 'Enter hrs',
                         ),
                         validator: (value) {
                           if (value!.isEmpty || value == null) {
