@@ -235,8 +235,8 @@ class ChatScreen extends StatelessWidget {
                     // Set the alignment and background color based on the message sender
                     CrossAxisAlignment alignment =
                     isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start;
-                    Color backgroundColor =
-                    isCurrentUser ? Colors.blue : Colors.grey[300]!;
+                    Color? backgroundColor =
+                    isCurrentUser ? Colors.deepPurple[200] : Colors.grey[300]!;
 
                     BorderRadius borderradius = isCurrentUser ? BorderRadius.only(
                       topLeft: Radius.circular(20),
@@ -308,7 +308,6 @@ class ChatScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: TextField(
-                    style: TextStyle(fontSize: 20),
                     maxLines: null,
                     keyboardType: TextInputType.multiline,
                     textCapitalization: TextCapitalization.sentences,
