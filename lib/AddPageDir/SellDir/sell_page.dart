@@ -219,7 +219,7 @@ class _SellPageState extends State<SellPage> {
                         ),
                         validator: (value) {
                           if (value!.isEmpty || value == null) {
-                            return 'Pleas enter valid email address';
+                            return 'Pleas enter title!';
                           } else {
                             return null;
                           }
