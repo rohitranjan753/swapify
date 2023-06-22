@@ -182,7 +182,7 @@ class _HomePageState extends State<HomePage> {
                           TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     ),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -204,64 +204,6 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: [
                       //BUY
-                      // Padding(
-                      //   padding: const EdgeInsets.all(40.0),
-                      //   child: GestureDetector(
-                      //     onTap: () {
-                      //       Navigator.push(
-                      //           context,
-                      //           MaterialPageRoute(
-                      //               builder: (context) => BuyPage()));
-                      //     },
-                      //     child: Container(
-                      //         height: myHeight * 0.4,
-                      //         // width: myWidth * 0.3,
-                      //         decoration: BoxDecoration(
-                      //           color: Colors.transparent,
-                      //           borderRadius: BorderRadius.circular(20),
-                      //           boxShadow: [
-                      //             BoxShadow(
-                      //                 color: Colors.grey.withOpacity(0.5),
-                      //                 blurRadius: 7,
-                      //                 spreadRadius: 3,
-                      //                 offset: Offset(0, 5)),
-                      //           ],
-                      //           image: DecorationImage(
-                      //               image:
-                      //                   AssetImage('assets/images/buy_new.jpg'),
-                      //               fit: BoxFit.cover),
-                      //         ),
-                      //         child: Stack(
-                      //           children: [
-                      //             Padding(
-                      //               padding: const EdgeInsets.only(
-                      //                 left: 20,
-                      //                 bottom: 30,
-                      //               ),
-                      //               child: Align(
-                      //                 alignment: Alignment.bottomLeft,
-                      //                 child: Column(
-                      //                   mainAxisAlignment:
-                      //                       MainAxisAlignment.end,
-                      //                   crossAxisAlignment:
-                      //                       CrossAxisAlignment.start,
-                      //                   children: [
-                      //                     Text(
-                      //                       'BUY',
-                      //                       style: TextStyle(
-                      //                         color: Colors.black,
-                      //                         fontSize: 25,
-                      //                       ),
-                      //                     ),
-                      //                   ],
-                      //                 ),
-                      //               ),
-                      //             ),
-                      //           ],
-                      //         )),
-                      //   ),
-                      // ),
-
                       Padding(
                         padding: const EdgeInsets.all(40.0),
                         child: GestureDetector(
@@ -271,34 +213,90 @@ class _HomePageState extends State<HomePage> {
                                 MaterialPageRoute(
                                     builder: (context) => BuyPage()));
                           },
-                          child: Card(
-                            color: Colors.white,
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            elevation: 10,
-                            child: Container(
-                              height: myHeight * 0.45,
-                              width: myWidth,
-
-                              child: Column(children: [
-                                Image.asset(
-                                  'assets/images/buy_new.jpg',
-                                  fit: BoxFit.cover,
-                                ),
-
-                                Text(
-                                  'BUY',
-                                  style: TextStyle(
-                                    fontSize: 35,
+                          child: Container(
+                              height: myHeight * 0.4,
+                              // width: myWidth * 0.3,
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                borderRadius: BorderRadius.circular(20),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      blurRadius: 7,
+                                      spreadRadius: 3,
+                                      offset: Offset(0, 5)),
+                                ],
+                                image: DecorationImage(
+                                    image:
+                                        AssetImage('assets/images/buy_new.jpg'),
+                                    fit: BoxFit.cover),
+                              ),
+                              child: Stack(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 20,
+                                      bottom: 20,
+                                    ),
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'BUY',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 25,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ]),
-                            ),
-                          )
+                                ],
+                              )),
                         ),
                       ),
+
+                      // Padding(
+                      //   padding: const EdgeInsets.all(20.0),
+                      //   child: GestureDetector(
+                      //       onTap: () {
+                      //         Navigator.push(
+                      //             context,
+                      //             MaterialPageRoute(
+                      //                 builder: (context) => BuyPage()));
+                      //       },
+                      //       child: Card(
+                      //         color: Colors.white,
+                      //         clipBehavior: Clip.antiAliasWithSaveLayer,
+                      //         shape: RoundedRectangleBorder(
+                      //           borderRadius: BorderRadius.circular(20),
+                      //         ),
+                      //         elevation: 10,
+                      //         child: Container(
+                      //           height: myHeight * 0.48,
+                      //           width: myWidth,
+                      //           child: Column(children: [
+                      //             Image.asset(
+                      //               'assets/images/buy_new.jpg',
+                      //               height: myWidth*0.7,
+                      //               width: myWidth,
+                      //             ),
+                      //             Text(
+                      //               'BUY',
+                      //               style: TextStyle(
+                      //                 fontSize: 35,
+                      //               ),
+                      //             ),
+                      //           ]),
+                      //         ),
+                      //       )),
+                      // ),
 
                       //RENT
                       Padding(
@@ -324,7 +322,8 @@ class _HomePageState extends State<HomePage> {
                                     offset: Offset(0, 5)),
                               ],
                               image: DecorationImage(
-                                  image: AssetImage('assets/images/rent_new.jpg'),
+                                  image:
+                                      AssetImage('assets/images/rent_new.jpg'),
                                   fit: BoxFit.cover),
                             ),
                             child: Stack(
