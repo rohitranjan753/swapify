@@ -9,7 +9,7 @@ class AppColors {
   static const Color tPrimaryColour = Color(0xFFFFE400);
   // static const Color tSecondaryColour = Color(0xFF272727);
   static const Color tSecondaryColour = Colors.deepPurple;
-  static const Color navBarBackgroundColour = Color(0xFFF2CCFF);
+  static const Color navBarBackgroundColour = Color(0xFFEAC8FF);
 // Define more colors here if needed
 }
 

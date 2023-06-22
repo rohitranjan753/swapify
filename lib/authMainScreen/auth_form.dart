@@ -94,11 +94,11 @@ class _AuthFormState extends State<AuthForm> {
                             height: size.height * 0.2,
                           ),
                           Text(
-                            "Welcome Back",
+                            "Welcome back",
                             style: Theme.of(context).textTheme.headline4,
                           ),
                           Text(
-                            "Make it, take it, Risk it",
+                            "Let's continue the journey",
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
                         ],
