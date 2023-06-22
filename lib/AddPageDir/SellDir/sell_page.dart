@@ -7,7 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:vbuddyproject/Constants/constant.dart';
+import 'package:vbuddyproject/Constants/color_constant.dart';
 import 'package:vbuddyproject/widget/back_btn_design.dart';
 
 class SellPage extends StatefulWidget {

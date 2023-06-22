@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:vbuddyproject/Constants/constant.dart';
+import 'package:vbuddyproject/Constants/color_constant.dart';
 import 'package:vbuddyproject/LoginSignUpT/tlogin_screen.dart';
 import 'package:vbuddyproject/LoginSignUpT/tsignup_screen.dart';
 import 'package:vbuddyproject/widget/animation_widget.dart';

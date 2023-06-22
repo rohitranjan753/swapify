@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vbuddyproject/AddPageDir/RentDir/rent_page.dart';
 import 'package:vbuddyproject/AddPageDir/SellDir/sell_page.dart';
-import 'package:vbuddyproject/Constants/constant.dart';
+import 'package:vbuddyproject/Constants/color_constant.dart';
 
 class AddPage extends StatefulWidget {
   const AddPage({Key? key}) : super(key: key);

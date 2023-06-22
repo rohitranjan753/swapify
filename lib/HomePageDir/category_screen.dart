@@ -99,7 +99,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:vbuddyproject/Constants/constant.dart';
+import 'package:vbuddyproject/Constants/color_constant.dart';
 
 import 'browse_category_screen.dart';
 
