@@ -16,7 +16,6 @@ class RentPage extends StatefulWidget {
 }
 
 class _RentPageState extends State<RentPage> {
-
   final _formKey = GlobalKey<FormState>();
   String? _selectedFirstValue;
   String? _selectedSecondValue;
@@ -30,31 +29,30 @@ class _RentPageState extends State<RentPage> {
     'Gadgets',
   ];
 
-
-
   // Define the options for the second dropdown, based on the selected value of the first dropdown
   Map<String, List<String>> _secondDropdownOptions = {
     'Notes': ['DSA', 'DBMS', 'Operating System', 'Java'],
     'Clothes': ['Formal', 'Ethnic', 'Casual'],
     'Footwear': ['Sports', 'Formal', 'Casual'],
     'Stationary': ['Notebook', 'Calculator', 'Pen'],
-    'Gadgets': ['Earphone', 'Charger', 'Speaker','Laptop','Keyboard'],
+    'Gadgets': ['Earphone', 'Charger', 'Speaker', 'Laptop', 'Keyboard'],
   };
 
   bool _isLoading = false;
   String _titleText = '';
   String _descriptionText = '';
   String _rentalPrice = '';
+  String _perHrsValue = '';
   File? _image;
 
   Future<void> _uploadToFirebase(
-      File rentImage,
-      String rentTile,
-      String rentDes,
-      String rentPrice,
-      String firstDropdownValue,
-      String secondDropdownValue,
-      ) async {
+    File rentImage,
+    String rentTile,
+    String rentDes,
+    String rentPrice,
+    String firstDropdownValue,
+    String secondDropdownValue,
+  ) async {
     rentDes = rentDes.trim();
     rentTile = rentTile.trim();
     FocusScope.of(context).unfocus();
@@ -80,10 +78,10 @@ class _RentPageState extends State<RentPage> {
 
     final Reference storageRef = FirebaseStorage.instance.ref().child('images');
     final taskSnapshot =
-    await storageRef.child('${uniqueId}' + '.jpg').putFile(rentImage);
+        await storageRef.child('${uniqueId}' + '.jpg').putFile(rentImage);
     final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
     final DocumentReference parentDocRef =
-    FirebaseFirestore.instance.collection('Users').doc(currentUser.uid);
+        FirebaseFirestore.instance.collection('Users').doc(currentUser.uid);
 
     parentDocRef.collection('rentsection').doc(uniqueId).set({
       'imageUrl': downloadUrl,
@@ -144,10 +142,8 @@ class _RentPageState extends State<RentPage> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
-
     double myHeight = MediaQuery.of(context).size.height;
     double myWidth = MediaQuery.of(context).size.width;
 
@@ -166,304 +162,313 @@ class _RentPageState extends State<RentPage> {
       body: _isLoading
           ? _buildLoadingIndicator()
           : SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    _getImage();
-                  },
-                  child: Card(
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    elevation: 15,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Container(
-                      height: myHeight * 0.3,
-                      width: myWidth * 0.7,
-                      decoration: BoxDecoration(
-                        image: _image != null
-                            ? DecorationImage(
-                          image: FileImage(_image!),
-                          fit: BoxFit.cover,
-                        )
-                            : DecorationImage(
-                          image: AssetImage(
-                              'assets/upload_icon-removebg-preview.png'),
-                          fit: BoxFit.contain,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          _getImage();
+                        },
+                        child: Card(
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          elevation: 15,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Container(
+                            height: myHeight * 0.3,
+                            width: myWidth * 0.7,
+                            decoration: BoxDecoration(
+                              image: _image != null
+                                  ? DecorationImage(
+                                      image: FileImage(_image!),
+                                      fit: BoxFit.cover,
+                                    )
+                                  : DecorationImage(
+                                      image: AssetImage(
+                                          'assets/upload_icon-removebg-preview.png'),
+                                      fit: BoxFit.contain,
+                                    ),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  textCapitalization: TextCapitalization.sentences,
-
-                  onChanged: (value) {
-                    setState(() {
-                      _titleText = value;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    labelText: "Title",
-                    contentPadding:
-                    EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-
-                    border: OutlineInputBorder(),
-                    filled: true,
-                    fillColor: Colors.white,
-                    hintText: 'Enter Title',
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty || value == null) {
-                      return 'Pleas enter valid email address';
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  maxLength: 50,
-                  maxLines: null,
-                  keyboardType: TextInputType.multiline,
-                  textCapitalization: TextCapitalization.sentences,
-                  onChanged: (value) {
-                    setState(() {
-                      _descriptionText = value;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Description',
-                    contentPadding:
-                    EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-
-                    border: OutlineInputBorder(),
-                    filled: true,
-                    fillColor: Colors.white,
-                    hintText: 'Enter Description',
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Description can\'t be empty';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: TextFormField(
-                        keyboardType: TextInputType.number,
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        textCapitalization: TextCapitalization.sentences,
                         onChanged: (value) {
                           setState(() {
-                            _rentalPrice = value;
+                            _titleText = value;
                           });
                         },
                         decoration: InputDecoration(
-                          labelText: "Rent Price",
+                          labelText: "Title",
                           contentPadding:
-                          EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                              EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                           border: OutlineInputBorder(),
                           filled: true,
                           fillColor: Colors.white,
-                          hintText: 'Enter Price',
+                          hintText: 'Enter Title',
                         ),
                         validator: (value) {
                           if (value!.isEmpty || value == null) {
-                            return 'Price feild can\'t be empty';
+                            return 'Pleas enter valid email address';
                           } else {
                             return null;
                           }
                         },
                       ),
-                    ),
-                    SizedBox(width: 10,),
-                    Expanded(
-                      flex: 1,
-                      child: TextFormField(
-                        keyboardType: TextInputType.number,
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        maxLength: 50,
+                        maxLines: null,
+                        keyboardType: TextInputType.multiline,
+                        textCapitalization: TextCapitalization.sentences,
                         onChanged: (value) {
                           setState(() {
-                            _rentalPrice = value;
+                            _descriptionText = value;
                           });
                         },
                         decoration: InputDecoration(
-                          labelText: "Per Hr Price",
-                          contentPadding:
-                          EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                          labelText: 'Description',
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
                           border: OutlineInputBorder(),
                           filled: true,
                           fillColor: Colors.white,
-                          hintText: 'Enter hrs',
+                          hintText: 'Enter Description',
                         ),
                         validator: (value) {
-                          if (value!.isEmpty || value == null) {
-                            return 'Price feild can\'t be empty';
-                          } else {
-                            return null;
+                          if (value!.isEmpty) {
+                            return 'Description can\'t be empty';
                           }
+                          return null;
                         },
                       ),
-                    ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: TextFormField(
+                              keyboardType: TextInputType.number,
+                              onChanged: (value) {
+                                setState(() {
+                                  _rentalPrice = value;
+                                });
+                              },
+                              decoration: InputDecoration(
+                                labelText: "Rent Price",
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 0, horizontal: 10),
+                                border: OutlineInputBorder(),
+                                filled: true,
+                                fillColor: Colors.white,
+                                hintText: 'Enter Price',
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty || value == null) {
+                                  return 'Price feild can\'t be empty';
+                                } else {
+                                  return null;
+                                }
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: TextFormField(
+                              keyboardType: TextInputType.number,
+                              onChanged: (value) {
+                                setState(() {
+                                  _perHrsValue = value;
+                                });
+                              },
+                              decoration: InputDecoration(
+                                labelText: "Per Hr Price",
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 0, horizontal: 10),
+                                border: OutlineInputBorder(),
+                                filled: true,
+                                fillColor: Colors.white,
+                                hintText: 'Enter hrs',
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty || value == null) {
+                                  return 'Price feild can\'t be empty';
+                                } else {
+                                  return null;
+                                }
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
 
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-
-                SizedBox(
-                  height: 20,
-                ),
-                // First Dropdown
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.grey,
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  ),
-                  child: DropdownButton<String>(
-                    icon: Icon(Icons.keyboard_arrow_down_rounded),
-                    underline: Container(
-                      height: 2,
-                      color: Colors.deepPurpleAccent,
-                    ),
-                    hint: Text(
-                      "Enter Item Category",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    value: _selectedFirstValue,
-                    onChanged: (newValue) {
-                      setState(() {
-                        _selectedFirstValue = newValue;
-
-                        // Set the selected value of the second dropdown to null, to reset it
-                        _selectedSecondValue = null;
-                      });
-                    },
-                    items: _firstDropdownOptions.map((option) {
-                      return DropdownMenuItem(
-                        child: Text(
-                          option,
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      // First Dropdown
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.grey,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
                         ),
-                        value: option,
-                      );
-                    }).toList(),
-                  ),
-                ),
-                SizedBox(height: 20),
-                // Second Dropdown, only visible when first dropdown is selected
-                if (_selectedFirstValue != null)
-                  DropdownButton<String>(
-                    icon: Icon(Icons.keyboard_arrow_down_rounded),
-                    underline: Container(
-                      height: 2,
-                      color: Colors.deepPurpleAccent,
-                    ),
-                    hint: Text(
-                      "Enter Sub Category",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    value: _selectedSecondValue,
-                    onChanged: (newValue) {
-                      setState(() {
-                        _selectedSecondValue = newValue;
-                      });
-                    },
-                    items: _secondDropdownOptions[_selectedFirstValue]!
-                        .map((option) {
-                      return DropdownMenuItem(
+                        child: DropdownButton<String>(
+                          icon: Icon(Icons.keyboard_arrow_down_rounded),
+                          underline: Container(
+                            height: 2,
+                            color: Colors.deepPurpleAccent,
+                          ),
+                          hint: Text(
+                            "Enter Item Category",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          value: _selectedFirstValue,
+                          onChanged: (newValue) {
+                            setState(() {
+                              _selectedFirstValue = newValue;
+
+                              // Set the selected value of the second dropdown to null, to reset it
+                              _selectedSecondValue = null;
+                            });
+                          },
+                          items: _firstDropdownOptions.map((option) {
+                            return DropdownMenuItem(
+                              child: Text(
+                                option,
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                              value: option,
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      // Second Dropdown, only visible when first dropdown is selected
+                      if (_selectedFirstValue != null)
+                        DropdownButton<String>(
+                          icon: Icon(Icons.keyboard_arrow_down_rounded),
+                          underline: Container(
+                            height: 2,
+                            color: Colors.deepPurpleAccent,
+                          ),
+                          hint: Text(
+                            "Enter Sub Category",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          value: _selectedSecondValue,
+                          onChanged: (newValue) {
+                            setState(() {
+                              _selectedSecondValue = newValue;
+                            });
+                          },
+                          items: _secondDropdownOptions[_selectedFirstValue]!
+                              .map((option) {
+                            return DropdownMenuItem(
+                              child: Text(
+                                option,
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.normal),
+                              ),
+                              value: option,
+                            );
+                          }).toList(),
+                        ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      MaterialButton(
+                        onPressed: () {
+                          if (_image == null) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Choose Image')),
+                            );
+                          } else if (_selectedFirstValue == null ||
+                              _selectedSecondValue == null) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Choose Category')),
+                            );
+                          } else if (!isNumberAndPositive(_rentalPrice)) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Invalid Price')),
+                            );
+                          } else if (!isNumberAndPositive(_perHrsValue)) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Invalid Price')),
+                            );
+                          } else if (_formKey.currentState!.validate()) {
+                            // If the form is valid, display a snackbar. In the real world,
+                            // you'd often call a server or save the information in a database.
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                  'Uploading! Please wait',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                backgroundColor:
+                                    AppColors.navBarBackgroundColour,
+                                behavior: SnackBarBehavior.floating,
+                                elevation: 4.0,
+                              ),
+                            );
+
+                            _uploadToFirebase(
+                                _image!,
+                                _titleText,
+                                _descriptionText,
+                                _rentalPrice,
+                                _selectedFirstValue!,
+                                _selectedSecondValue!);
+                            setState(() {
+                              _image = null;
+                              _selectedFirstValue = null;
+                              _selectedSecondValue = null;
+                            });
+                          }
+                        },
+                        minWidth: double.infinity,
+                        height: 60,
+                        color: Colors.deepPurple,
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50)),
                         child: Text(
-                          option,
+                          'SUBMIT',
                           style: TextStyle(
+                              fontWeight: FontWeight.w600,
                               fontSize: 18,
-                              fontWeight: FontWeight.normal),
+                              color: Colors.white),
                         ),
-                        value: option,
-                      );
-                    }).toList(),
-                  ),
-                SizedBox(height: 20,),
-                MaterialButton(
-                  onPressed: () {
-                    if (_image == null) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Choose Image')),
-                      );
-                    } else if (_selectedFirstValue == null ||
-                        _selectedSecondValue == null) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Choose Category')),
-                      );
-                    }
-                    else if(!isNumber(_rentalPrice)){
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Invalid Price')),
-                      );
-                    }
-                    else if (_formKey.currentState!.validate()) {
-                      // If the form is valid, display a snackbar. In the real world,
-                      // you'd often call a server or save the information in a database.
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Uploading! Please wait',style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16.0,
-                        ),),
-                          backgroundColor: AppColors.navBarBackgroundColour,
-                          behavior: SnackBarBehavior.floating,
-                          elevation: 4.0,
-                        ),
-                      );
-
-                      _uploadToFirebase(
-                          _image!,
-                          _titleText,
-                          _descriptionText,
-                          _rentalPrice,
-                          _selectedFirstValue!,
-                          _selectedSecondValue!);
-                      setState(() {
-                        _image = null;
-                        _selectedFirstValue = null;
-                        _selectedSecondValue = null;
-                      });
-                    }
-                  },
-                  minWidth: double.infinity,
-                  height: 60,
-                  color: Colors.deepPurple,
-                  elevation: 10,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50)),
-                  child: Text(
-                    'SUBMIT',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600, fontSize: 18,color: Colors.white),
+                      ),
+                    ],
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
-        ),
-      ),
     );
   }
 
@@ -478,8 +483,11 @@ class _RentPageState extends State<RentPage> {
     super.dispose();
   }
 
-  bool isNumber(String value) {
-    if(value == null) {
+  bool isNumberAndPositive(String value) {
+    if (double.tryParse(value)! > 0) {
+      return false;
+    }
+    if (value == null) {
       return false;
     }
     return double.tryParse(value) != null;
