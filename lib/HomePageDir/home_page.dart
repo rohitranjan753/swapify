@@ -236,7 +236,7 @@ class _HomePageState extends State<HomePage> {
                                   Padding(
                                     padding: const EdgeInsets.only(
                                       left: 20,
-                                      bottom: 20,
+                                      bottom: 10,
                                     ),
                                     child: Align(
                                       alignment: Alignment.center,
@@ -331,10 +331,10 @@ class _HomePageState extends State<HomePage> {
                                 Padding(
                                   padding: const EdgeInsets.only(
                                     left: 20,
-                                    bottom: 30,
+                                    bottom: 10,
                                   ),
                                   child: Align(
-                                    alignment: Alignment.bottomLeft,
+                                    alignment: Alignment.center,
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       crossAxisAlignment:
