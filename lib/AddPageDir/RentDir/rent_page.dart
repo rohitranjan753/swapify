@@ -402,7 +402,7 @@ class _RentPageState extends State<RentPage> {
                         onPressed: () {
                           if (_image == null) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Choose Image')),
+                              const SnackBar(content: Text('Choose Image'),backgroundColor: Colors.red,),
                             );
                           } else if (_selectedFirstValue == null ||
                               _selectedSecondValue == null) {
