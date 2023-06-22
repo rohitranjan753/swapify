@@ -279,7 +279,7 @@ class _RentPageState extends State<RentPage> {
                               ),
                               validator: (value) {
                                 if (value!.isEmpty || value == null) {
-                                  return 'Price feild can\'t be empty';
+                                  return 'Price field empty';
                                 } else {
                                   return null;
                                 }
@@ -309,7 +309,7 @@ class _RentPageState extends State<RentPage> {
                               ),
                               validator: (value) {
                                 if (value!.isEmpty || value == null) {
-                                  return 'Price feild can\'t be empty';
+                                  return 'Field empty';
                                 } else {
                                   return null;
                                 }
@@ -369,6 +369,7 @@ class _RentPageState extends State<RentPage> {
                       // Second Dropdown, only visible when first dropdown is selected
                       if (_selectedFirstValue != null)
                         DropdownButton<String>(
+
                           icon: Icon(Icons.keyboard_arrow_down_rounded),
                           underline: Container(
                             height: 2,
@@ -411,11 +412,13 @@ class _RentPageState extends State<RentPage> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Choose Category')),
                             );
-                          } else if (!isNumberAndPositive(_rentalPrice) && (double.parse(_perHrsValue))>0) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Invalid Price')),
-                            );
-                          }  else if (_formKey.currentState!.validate()) {
+                          }
+                          // else if (!isNumberAndPositive(_rentalPrice) && (double.parse(_perHrsValue))>0) {
+                          //   ScaffoldMessenger.of(context).showSnackBar(
+                          //     const SnackBar(content: Text('Invalid Price')),
+                          //   );
+                          // }
+                          else if (_formKey.currentState!.validate()) {
                             // If the form is valid, display a snackbar. In the real world,
                             // you'd often call a server or save the information in a database.
                             ScaffoldMessenger.of(context).showSnackBar(
