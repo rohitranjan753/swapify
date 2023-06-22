@@ -503,6 +503,7 @@ class _RentPageState extends State<RentPage> {
                               _image = null;
                               _selectedFirstValue = null;
                               _selectedSecondValue = null;
+                              _perHrValue=null;
                             });
                           }
                         },

@@ -694,7 +694,7 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
                                   style: TextStyle(fontSize: 19),
                                 )
                               : Text(
-                                  "₹${widget.item['price']} / 6Hrs",
+                                  "₹${widget.item['price']} / ${widget.item['perhourvalue']} hrs",
                                   style: TextStyle(fontSize: 19),
                                 ),
                         ),
