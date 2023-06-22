@@ -133,7 +133,7 @@ class _RentHomeScreenState extends State<RentHomeScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8, vertical: 1),
                         child: Text(
-                          "₹${data["price"]} /6hrs",
+                          "₹${data["price"]} /${data['perhourvalue']} hrs",
                           style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),
                         ),
                       ),
