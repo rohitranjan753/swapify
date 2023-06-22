@@ -333,24 +333,24 @@ class _RentPageState extends State<RentPage> {
                                 color: Colors.deepPurpleAccent,
                               ),
                               hint: Text(
-                                "Enter Item Category",
+                                "/hr value",
                                 style: TextStyle(fontSize: 20),
                               ),
                               value: _perHrValue,
-                              onChanged: (newValue) {
+                              onChanged: (hrValue) {
                                 setState(() {
-                                  _perHrValue = newValue;
+                                  _perHrValue = hrValue;
 
                                 });
                               },
-                              items: _perHrValueList.map((option) {
+                              items: _perHrValueList.map((hrOption) {
                                 return DropdownMenuItem(
                                   child: Text(
-                                    option,
+                                    hrOption,
                                     style: TextStyle(
                                         fontSize: 20, fontWeight: FontWeight.bold),
                                   ),
-                                  value: option,
+                                  value: hrOption,
                                 );
                               }).toList(),
                             ),
