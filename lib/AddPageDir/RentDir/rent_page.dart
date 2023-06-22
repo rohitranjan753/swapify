@@ -200,6 +200,7 @@ class _RentPageState extends State<RentPage> {
                         height: 20,
                       ),
                       TextFormField(
+                        key: ValueKey('_titleText'),
                         textCapitalization: TextCapitalization.sentences,
                         onChanged: (value) {
                           setState(() {
