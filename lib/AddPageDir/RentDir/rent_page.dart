@@ -203,7 +203,7 @@ class _RentPageState extends State<RentPage> {
                                     )
                                   : DecorationImage(
                                       image: AssetImage(
-                                          'assets/upload_icon-removebg-preview.png'),
+                                          'assets/upload_icon.png'),
                                       fit: BoxFit.contain,
                                     ),
                             ),

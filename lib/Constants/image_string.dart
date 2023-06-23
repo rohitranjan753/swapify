@@ -10,7 +10,9 @@ const homepageRent = 'assets/images/rent_new.jpg';
 
 
 //Add Page
-const addpageSell = 'assets/images/buy_new.jpg';
-const addpageRent = 'assets/images/buy_new.jpg';
+const addPageSell = 'assets/sell_new.png';
+const addPageRent = 'assets/rent_new.png';
+const addPageUploadSign = 'assets/rent_new.png';
+
 
 

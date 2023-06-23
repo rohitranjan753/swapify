@@ -190,7 +190,7 @@ class _SellPageState extends State<SellPage> {
                                     )
                                   : DecorationImage(
                                       image: AssetImage(
-                                          'assets/upload_icon-removebg-preview.png'),
+                                          'assets/upload_icon.png'),
                                       fit: BoxFit.contain,
                                     ),
                             ),
