@@ -301,7 +301,7 @@ class _RentPageState extends State<RentPage> {
                             ),
                           ),
                           SizedBox(
-                            width: 10,
+                            width: 5,
                           ),
                           // Expanded(
                           //   flex: 1,
@@ -332,33 +332,42 @@ class _RentPageState extends State<RentPage> {
                           // ),
                           Expanded(
                             flex: 1,
-                            child: DropdownButton<String>(
-                              icon: Icon(Icons.keyboard_arrow_down_rounded),
-                              underline: Container(
-                                height: 2,
-                                color: Colors.deepPurpleAccent,
-                              ),
-                              hint: Text(
-                                "/hr value",
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              value: _perHrValue,
-                              onChanged: (hrValue) {
-                                setState(() {
-                                  _perHrValue = hrValue;
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.grey,
 
-                                });
-                              },
-                              items: _perHrValueList.map((hrOption) {
-                                return DropdownMenuItem(
-                                  child: Text(
-                                    hrOption,
-                                    style: TextStyle(
-                                        fontSize: 20, fontWeight: FontWeight.bold),
-                                  ),
-                                  value: hrOption,
-                                );
-                              }).toList(),
+                                ),
+                                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                              ),
+                              child: DropdownButton<String>(
+                                icon: Icon(Icons.keyboard_arrow_down_rounded),
+                                underline: Container(
+                                  height: 2,
+                                  color: Colors.deepPurpleAccent,
+                                ),
+                                hint: Text(
+                                  "/hr value",
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                value: _perHrValue,
+                                onChanged: (hrValue) {
+                                  setState(() {
+                                    _perHrValue = hrValue;
+
+                                  });
+                                },
+                                items: _perHrValueList.map((hrOption) {
+                                  return DropdownMenuItem(
+                                    child: Text(
+                                      hrOption,
+                                      style: TextStyle(
+                                          fontSize: 20, fontWeight: FontWeight.bold),
+                                    ),
+                                    value: hrOption,
+                                  );
+                                }).toList(),
+                              ),
                             ),
                           ),
                         ],

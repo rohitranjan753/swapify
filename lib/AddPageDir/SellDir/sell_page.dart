@@ -180,8 +180,8 @@ class _SellPageState extends State<SellPage> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Container(
-                            height: myHeight * 0.2,
-                            width: myWidth * 0.5,
+                            height: myHeight * 0.3,
+                            width: myWidth * 0.7,
                             decoration: BoxDecoration(
                               image: _image != null
                                   ? DecorationImage(
