@@ -19,7 +19,6 @@ const primaryColour = Colors.deepPurple;
 const navBarBackgroundColour = Color(0xFFEAC8FF);
 
 
-
 const chatBubbleCurrentUserColor = Color(0xFFEAC8FF);
 
 

@@ -80,6 +80,7 @@ class _AuthFormState extends State<AuthForm> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Container(
+
             padding: const EdgeInsets.all(tDefaultSize),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -114,7 +115,7 @@ class _AuthFormState extends State<AuthForm> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Lottie.asset(
-                            'assets/signup_lottie.json',
+                            'assets/signup_gif.gif',
                             height: size.height * 0.2,
                             repeat: true,
                             reverse: true,
@@ -129,7 +130,7 @@ class _AuthFormState extends State<AuthForm> {
                             style: Theme.of(context).textTheme.headline4,
                           ),
                           Text(
-                            "Connect with us!",
+                            "Your marketplace for smart exchanges",
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
                         ],
