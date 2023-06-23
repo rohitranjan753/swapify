@@ -89,10 +89,16 @@ class _AuthFormState extends State<AuthForm> {
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Image(
-                            image: AssetImage("assets/hello_pic-removebg-preview.png"),
+                          Lottie.asset('assets/welcome_hi.json',
                             height: size.height * 0.2,
+                            repeat: true,
+                            reverse: true,
                           ),
+
+                          // Image(
+                          //   image: AssetImage("assets/hello_pic-removebg-preview.png"),
+                          //   height: size.height * 0.2,
+                          // ),
                           Text(
                             "Welcome back",
                             style: Theme.of(context).textTheme.headline4,
