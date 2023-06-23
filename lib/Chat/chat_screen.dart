@@ -195,7 +195,6 @@ class ChatScreen extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        title: Text('Chat Screen'),
       ),
       body: Column(
         children: [
@@ -211,7 +210,7 @@ class ChatScreen extends StatelessWidget {
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
+                  return LinearProgressIndicator();
                 }
                 if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
