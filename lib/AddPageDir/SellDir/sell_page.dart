@@ -9,6 +9,7 @@ import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:vbuddyproject/Constants/color_constant.dart';
 import 'package:vbuddyproject/Constants/image_string.dart';
+import 'package:vbuddyproject/Constants/sizes.dart';
 import 'package:vbuddyproject/widget/back_btn_design.dart';
 
 class SellPage extends StatefulWidget {
@@ -423,6 +424,7 @@ class _SellPageState extends State<SellPage> {
                         child: Text(
                           'SUBMIT',
                           style: TextStyle(
+                            letterSpacing: textLetterSpacingValue,
                               fontWeight: FontWeight.w600, fontSize: 18,color: Colors.white),
                         ),
                       ),
