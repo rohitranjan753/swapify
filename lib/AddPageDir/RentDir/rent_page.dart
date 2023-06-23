@@ -304,39 +304,13 @@ class _RentPageState extends State<RentPage> {
                           SizedBox(
                             width: 5,
                           ),
-                          // Expanded(
-                          //   flex: 1,
-                          //   child: TextFormField(
-                          //     keyboardType: TextInputType.number,
-                          //     onChanged: (value) {
-                          //       setState(() {
-                          //         _perHrsValue = value;
-                          //       });
-                          //     },
-                          //     decoration: InputDecoration(
-                          //       labelText: "Per Hr Price",
-                          //       contentPadding: EdgeInsets.symmetric(
-                          //           vertical: 0, horizontal: 10),
-                          //       border: OutlineInputBorder(),
-                          //       filled: true,
-                          //       fillColor: Colors.white,
-                          //       hintText: 'Enter hrs',
-                          //     ),
-                          //     validator: (value) {
-                          //       if (value!.isEmpty || value == null) {
-                          //         return 'Field empty';
-                          //       } else {
-                          //         return null;
-                          //       }
-                          //     },
-                          //   ),
-                          // ),
+
                           Expanded(
                             flex: 1,
                             child: Container(
                               decoration: BoxDecoration(
                                 border: Border.all(
-                                  color: Colors.grey,
+                                  // color: Colors.grey,
 
                                 ),
                                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
