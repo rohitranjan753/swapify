@@ -28,7 +28,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           },
         ),
         centerTitle: true,
-        title: Text("Settings"),
+        title: Text("SETTING"),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               bottomRight: Radius.circular(30),
