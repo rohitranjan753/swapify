@@ -20,7 +20,7 @@ const chatSendIcon = 'assets/send_chat1.png';
 
 //Error
 const chatNotFoundImage = 'assets/chat_error.png';
-const itemNotFoundImage = 'assets/error_not_found.png';
+const itemNotFoundImage = 'assets/item_not_found.png';
 
 
 
