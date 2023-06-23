@@ -102,7 +102,7 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
                       children: [
                         Image(
                           image: AssetImage(
-                            "assets/error_not_found-removebg-preview.png",
+                            "assets/error_not_found.png",
                           ),
                           width: myWidth * 0.5,
                         ),

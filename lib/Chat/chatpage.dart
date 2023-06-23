@@ -141,7 +141,7 @@ class ChatPage extends StatelessWidget {
                     children: [
                       Image(
                         image: AssetImage(
-                          "assets/chat_error-removebg-preview.png",
+                          "assets/chat_error.png",
                         ),
                         width: size.height * 0.3,
                       ),

@@ -14,5 +14,13 @@ const addPageSell = 'assets/sell_new.png';
 const addPageRent = 'assets/rent_new.png';
 const addPageUploadSign = 'assets/upload_icon.png';
 
+//Chat Screen
+const chatSendIcon = 'assets/send_chat1.png';
+
+
+//Error
+const chatNotFoundImage = 'assets/chat_error.png';
+const itemNotFoundImage = 'assets/error_not_found.png';
+
 
 
