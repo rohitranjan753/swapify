@@ -13,6 +13,23 @@ class AppColors {
 // Define more colors here if needed
 }
 
+//Main Colour
+const primaryColour = Colors.deepPurple;
+const navBarBackgroundColour = Color(0xFFEAC8FF);
+
+
+
+const chatBubbleCurrentUserColor = Color(0xFFEAC8FF);
+
+
+//Button Colour
+const buttonColour = Colors.deepPurple;
+const editButtonColour = Color(0xFFC45EFF);
+
+
+//button text
+const buttonTextColor = Colors.white;
+
 class categoryList{
   List majorCategoryName = ["Notes", "Clothes", "Footwear", "Stationary", "Gadgets"];
 
