@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:vbuddyproject/Constants/color_constant.dart';
 import 'package:vbuddyproject/Constants/image_string.dart';
+import 'package:vbuddyproject/Constants/sizes.dart';
 import 'package:vbuddyproject/widget/back_btn_design.dart';
 
 class RentPage extends StatefulWidget {
@@ -347,12 +348,10 @@ class _RentPageState extends State<RentPage> {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
+
 
                       SizedBox(
-                        height: 20,
+                        height: 30,
                       ),
                       // First Dropdown
                       Container(
@@ -500,6 +499,7 @@ class _RentPageState extends State<RentPage> {
                         child: Text(
                           'SUBMIT',
                           style: TextStyle(
+                            letterSpacing: textLetterSpacingValue,
                               fontWeight: FontWeight.w600,
                               fontSize: 18,
                               color: Colors.white),
