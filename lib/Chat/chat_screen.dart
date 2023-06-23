@@ -161,13 +161,10 @@ import 'package:intl/intl.dart';
 //   }
 // }
 
-
-
 class ChatScreen extends StatelessWidget {
   final String chatId;
   // final String currentUserId;
   // final String otherUserId;
-
 
   ChatScreen({required this.chatId});
 
@@ -186,7 +183,6 @@ class ChatScreen extends StatelessWidget {
       'sender': _auth.currentUser!.uid, // Add sender information
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -212,7 +208,8 @@ class ChatScreen extends StatelessWidget {
                   .collection('messages')
                   .orderBy('timestamp', descending: true)
                   .snapshots(),
-              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return CircularProgressIndicator();
                 }
@@ -225,7 +222,8 @@ class ChatScreen extends StatelessWidget {
                 // Render your chat screen UI with the loaded messages
                 return ListView(
                   reverse: true,
-                  children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                  children:
+                      snapshot.data!.docs.map((DocumentSnapshot document) {
                     String message = document['message'];
                     String sender = document['sender'];
 
@@ -233,36 +231,44 @@ class ChatScreen extends StatelessWidget {
                     bool isCurrentUser = sender == _auth.currentUser!.uid;
 
                     // Set the alignment and background color based on the message sender
-                    CrossAxisAlignment alignment =
-                    isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start;
-                    Color? backgroundColor =
-                    isCurrentUser ? Colors.deepPurple[200] : Colors.grey[300]!;
+                    CrossAxisAlignment alignment = isCurrentUser
+                        ? CrossAxisAlignment.end
+                        : CrossAxisAlignment.start;
+                    Color? backgroundColor = isCurrentUser
+                        ? Colors.deepPurple[200]
+                        : Colors.grey[300]!;
 
-                    BorderRadius borderradius = isCurrentUser ? BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                      bottomLeft: Radius.circular(20),
-                      bottomRight: Radius.circular(0),
-                    ):BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                      bottomLeft: Radius.circular(0),
-                      bottomRight: Radius.circular(20),
-                    );
+                    BorderRadius borderradius = isCurrentUser
+                        ? BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                            bottomLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(0),
+                          )
+                        : BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                            bottomLeft: Radius.circular(0),
+                            bottomRight: Radius.circular(20),
+                          );
 
                     // Set the text color based on the message sender
-                    Color textColor = isCurrentUser ? Colors.white : Colors.black;
+                    Color textColor =
+                        isCurrentUser ? Colors.white : Colors.black;
 
                     // Retrieve timestamp from document and format it
                     // Retrieve timestamp from document and format it
                     Timestamp? timestamp = document['timestamp'] as Timestamp?;
                     DateTime? dateTime = timestamp?.toDate();
                     // String formattedDateTime = DateFormat('MMM d, h:mm a').format(dateTime);
-                    String formattedTime = dateTime != null ? DateFormat.MMMd().format(dateTime) : '';
+                    String formattedTime = dateTime != null
+                        ? DateFormat.MMMd().format(dateTime)
+                        : '';
                     // Format as 'h:mm a'// Format as 'h:mm a'
 
                     return Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
                       child: Column(
                         crossAxisAlignment: alignment,
                         children: [
@@ -271,13 +277,15 @@ class ChatScreen extends StatelessWidget {
                               color: backgroundColor,
                               borderRadius: borderradius,
                             ),
-                            padding: EdgeInsets.symmetric(horizontal: 10,vertical: 13),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 13),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   message,
-                                  style: TextStyle(color: textColor, fontSize: 17),
+                                  style:
+                                      TextStyle(color: textColor, fontSize: 17),
                                 ),
                                 SizedBox(height: 4.0),
                                 Text(
@@ -318,15 +326,15 @@ class ChatScreen extends StatelessWidget {
                         hintText: 'Type your message...',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
-                        )
-                    ),
+                        )),
                   ),
                 ),
                 IconButton(
                   icon: Image(
-                    image: AssetImage('assets/send_chat1.png'),
+                    image: AssetImage(
+                      'assets/send_chat1.png',
+                    ),
                   ),
-
                   onPressed: () {
                     String message = _messageController.text.trim();
                     if (message.isNotEmpty) {
