@@ -15,8 +15,6 @@ class AppColors {
 
 //Main Colour
 const mainUiColour = Colors.deepPurple;
-
-
 const primaryColour = Colors.deepPurple;
 const navBarBackgroundColour = Color(0xFFEAC8FF);
 
