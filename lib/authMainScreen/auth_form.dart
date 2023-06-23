@@ -89,7 +89,8 @@ class _AuthFormState extends State<AuthForm> {
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Lottie.asset('assets/welcome_hi.json',
+                          Lottie.asset(
+                            'assets/welcome_hi.json',
                             height: size.height * 0.2,
                             repeat: true,
                             reverse: true,
@@ -112,11 +113,16 @@ class _AuthFormState extends State<AuthForm> {
                     : Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Image(
-                            image: AssetImage("assets/signup_boy.png"),
+                          Lottie.asset(
+                            'assets/signup_lottie.json',
                             height: size.height * 0.2,
+                            repeat: true,
+                            reverse: true,
                           ),
-
+                          // Image(
+                          //   image: AssetImage("assets/signup_boy.png"),
+                          //   height: size.height * 0.2,
+                          // ),
 
                           Text(
                             "Get On Board",
@@ -153,9 +159,7 @@ class _AuthFormState extends State<AuthForm> {
                             decoration: InputDecoration(
                               prefixIcon: Icon(Icons.person),
                               labelText: "Username",
-
-                              border: OutlineInputBorder(
-                                  ),
+                              border: OutlineInputBorder(),
                             ),
                             onSaved: (value) {
                               _userName = value!;
@@ -167,7 +171,6 @@ class _AuthFormState extends State<AuthForm> {
 
                         //Email
                         TextFormField(
-
                           key: ValueKey('email'),
                           autocorrect: false,
                           textCapitalization: TextCapitalization.none,
@@ -184,7 +187,6 @@ class _AuthFormState extends State<AuthForm> {
                             prefixIcon: Icon(Icons.email_outlined),
                             hintText: "abc@gmail.com",
                             labelText: "Email",
-
                             border: OutlineInputBorder(),
                           ),
                           onSaved: (value) {
@@ -243,38 +245,49 @@ class _AuthFormState extends State<AuthForm> {
                                 shape: RoundedRectangleBorder(),
                                 onPrimary: Colors.white,
                                 primary: AppColors.tSecondaryColour,
-                                side: BorderSide(color: AppColors.tSecondaryColour),
+                                side: BorderSide(
+                                    color: AppColors.tSecondaryColour),
                                 padding: EdgeInsets.symmetric(vertical: 15),
                               ),
                               onPressed: _trySubmit,
                               child: Text(_isLogin ? "LOGIN" : 'SIGNUP'),
                             ),
                           ),
-                        SizedBox(height: 20,),
+                        SizedBox(
+                          height: 20,
+                        ),
                         if (!widget.isLoading)
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 60),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 60),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
                                   children: [
                                     Expanded(
                                       child: const Divider(
                                         thickness: 1,
-                                        color: Colors.grey,),
+                                        color: Colors.grey,
+                                      ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                                      child: Text("OR",style: TextStyle(color: Colors.grey,fontWeight: FontWeight.bold),),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
+                                      child: Text(
+                                        "OR",
+                                        style: TextStyle(
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
-
                                     Expanded(
                                       child: const Divider(
                                         thickness: 1,
-                                        color: Colors.grey,),
+                                        color: Colors.grey,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -305,13 +318,18 @@ class _AuthFormState extends State<AuthForm> {
                                     }
                                   },
                                   icon: Padding(
-                                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10.0),
                                     child: Image(
-                                      image: AssetImage("assets/googlelogo.png"),
+                                      image:
+                                          AssetImage("assets/googlelogo.png"),
                                       width: 28.0,
                                     ),
                                   ),
-                                  label: const Text("Sign-In with Google",style: TextStyle(color: Colors.blue),),
+                                  label: const Text(
+                                    "Sign-In with Google",
+                                    style: TextStyle(color: Colors.blue),
+                                  ),
                                 ),
                               ),
                               const SizedBox(
@@ -334,7 +352,9 @@ class _AuthFormState extends State<AuthForm> {
                                               TextSpan(
                                                 text: " SignUp",
                                                 style: TextStyle(
-                                                    color: Colors.deepPurple,fontWeight: FontWeight.bold),
+                                                    color: Colors.deepPurple,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
                                             ]),
                                       )
@@ -348,7 +368,8 @@ class _AuthFormState extends State<AuthForm> {
                                             TextSpan(
                                               text: " SignIn",
                                               style: TextStyle(
-                                                  color: Colors.deepPurple,fontWeight: FontWeight.bold),
+                                                  color: Colors.deepPurple,
+                                                  fontWeight: FontWeight.bold),
                                             ),
                                           ],
                                         ),
