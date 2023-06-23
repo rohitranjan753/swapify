@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:vbuddyproject/Constants/color_constant.dart';
+import 'package:vbuddyproject/Constants/image_string.dart';
 import 'package:vbuddyproject/widget/back_btn_design.dart';
 
 class RentPage extends StatefulWidget {
@@ -203,7 +204,7 @@ class _RentPageState extends State<RentPage> {
                                     )
                                   : DecorationImage(
                                       image: AssetImage(
-                                          'assets/upload_icon.png'),
+                                          addPageUploadSign),
                                       fit: BoxFit.contain,
                                     ),
                             ),
