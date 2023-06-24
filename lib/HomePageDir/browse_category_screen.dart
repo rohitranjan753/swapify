@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:vbuddyproject/Constants/image_string.dart';
 import 'package:vbuddyproject/SearchPageDir/SearchPage.dart';
 import 'package:vbuddyproject/SearchPageDir/selected_search_page.dart';
 import 'package:vbuddyproject/widget/back_btn_design.dart';
@@ -102,7 +103,7 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
                       children: [
                         Image(
                           image: AssetImage(
-                            "assets/item_not_found.png",
+                            itemNotFoundImage,
                           ),
                           width: myWidth * 0.5,
                         ),
