@@ -252,7 +252,7 @@ class _AuthFormState extends State<AuthForm> {
                                 padding: EdgeInsets.symmetric(vertical: 15),
                               ),
                               onPressed: _trySubmit,
-                              child: Text(_isLogin ? "LOGIN" : 'SIGNUP'),
+                              child: Text(_isLogin ? "LOGIN" : 'SIGNUP',style: TextStyle(letterSpacing: textLetterSpacingValue),),
                             ),
                           ),
                         SizedBox(
@@ -330,7 +330,7 @@ class _AuthFormState extends State<AuthForm> {
                                   ),
                                   label: const Text(
                                     "Sign-In with Google",
-                                    style: TextStyle(color: Colors.blue),
+                                    style: TextStyle(color: Colors.blue,letterSpacing: textLetterSpacingValue),
                                   ),
                                 ),
                               ),
@@ -356,7 +356,7 @@ class _AuthFormState extends State<AuthForm> {
                                                 style: TextStyle(
                                                     color: Colors.deepPurple,
                                                     fontWeight:
-                                                        FontWeight.bold),
+                                                        FontWeight.bold,),
                                               ),
                                             ]),
                                       )

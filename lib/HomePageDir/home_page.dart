@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                                   builder: (context) => ChatPage()));
                         },
                         child: Icon(
-                          Icons.chat_outlined,
+                          Icons.chat,
                           color: AppColors.tSecondaryColour,
                           size: 30,
                         ),

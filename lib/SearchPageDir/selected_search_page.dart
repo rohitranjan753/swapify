@@ -402,7 +402,7 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
 
   void openChatScreen(String chatId,String currentUser,String otherUser) {
     Navigator.push(context,
-        MaterialPageRoute(builder: (contetx) => ChatScreen(chatId: chatId)));
+        MaterialPageRoute(builder: (contetx) => ChatScreen(chatId: chatId,otherUserId: otherUser,)));
   }
 
   void _sendEmail() async {

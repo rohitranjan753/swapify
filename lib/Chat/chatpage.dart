@@ -211,7 +211,7 @@ class ChatPage extends StatelessWidget {
                   // );
                   return GestureDetector(
                     onTap: () {
-                      navigateToChatScreen(context, chatId);
+                      navigateToChatScreen(context, chatId,otherUserId);
                     },
                     child: Card(
                       elevation: 5,
@@ -251,11 +251,12 @@ class ChatPage extends StatelessWidget {
   }
 
   // Function to navigate to the chat screen with the provided chat ID
-  void navigateToChatScreen(BuildContext context, String chatId) {
+  void navigateToChatScreen(BuildContext context, String chatId,String otherUserId) {
+
     // final String curUser = getCurrentUserId();
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ChatScreen(chatId: chatId)),
+      MaterialPageRoute(builder: (context) => ChatScreen(chatId: chatId, otherUserId: otherUserId,)),
     );
   }
 
