@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: mainUiColour,
 
-        textTheme: GoogleFonts.robotoSerifTextTheme(),
+        textTheme: GoogleFonts.poppinsTextTheme(),
       ),
       home: SplashScreen(),
       // home: StreamBuilder(
