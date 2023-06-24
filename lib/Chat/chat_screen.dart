@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:vbuddyproject/Constants/image_string.dart';
 
@@ -187,6 +189,7 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -210,9 +213,9 @@ class ChatScreen extends StatelessWidget {
                   .snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator(semanticsLabel: 'LOADING',));
-                }
+                // if (snapshot.connectionState == ConnectionState.waiting) {
+                //   return Center(child: CircularProgressIndicator(semanticsLabel: 'LOADING',));
+                // }
                 if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
                 }
@@ -266,42 +269,59 @@ class ChatScreen extends StatelessWidget {
                         : '';
                     // Format as 'h:mm a'// Format as 'h:mm a'
 
-                    return Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
-                      child: Column(
-                        crossAxisAlignment: alignment,
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              color: backgroundColor,
-                              borderRadius: borderradius,
+                    return GestureDetector(
+                      onLongPress: () async {
+                        // Copy the message text to the clipboard
+                        await Clipboard.setData(ClipboardData(text: message));
+
+                        // Display a toast or text indicating that the text has been copied
+                        Fluttertoast.showToast(
+                          msg: 'Text copied',
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          backgroundColor: Colors.black54,
+                          textColor: Colors.white,
+                        );
+                      },
+                      child: Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
+                        child: Column(
+                          crossAxisAlignment: alignment,
+                          children: [
+                            Container(
+
+                              decoration: BoxDecoration(
+                                color: backgroundColor,
+                                borderRadius: borderradius,
+                              ),
+                              width: size.width * 0.5,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 13),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    message,
+                                    style:
+                                        TextStyle(color: textColor, fontSize: 17),
+                                  ),
+                                  SizedBox(height: 4.0),
+                                  Text(
+                                    formattedTime, // Display formatted timestamp
+                                    style: TextStyle(fontSize: 12.0),
+                                  ),
+                                ],
+                              ),
                             ),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 13),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  message,
-                                  style:
-                                      TextStyle(color: textColor, fontSize: 17),
-                                ),
-                                SizedBox(height: 4.0),
-                                Text(
-                                  formattedTime, // Display formatted timestamp
-                                  style: TextStyle(fontSize: 12.0),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: 4.0),
-                          if (isCurrentUser)
-                            Text(
-                              'You', // Display 'You' for current user's messages
-                              style: TextStyle(fontSize: 12.0),
-                            ),
-                        ],
+                            SizedBox(height: 4.0),
+                            if (isCurrentUser)
+                              Text(
+                                'You', // Display 'You' for current user's messages
+                                style: TextStyle(fontSize: 12.0),
+                              ),
+                          ],
+                        ),
                       ),
                     );
                   }).toList(),
