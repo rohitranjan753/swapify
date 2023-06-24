@@ -3,6 +3,7 @@ import 'package:vbuddyproject/AddPageDir/RentDir/rent_page.dart';
 import 'package:vbuddyproject/AddPageDir/SellDir/sell_page.dart';
 import 'package:vbuddyproject/Constants/color_constant.dart';
 import 'package:vbuddyproject/Constants/image_string.dart';
+import 'package:vbuddyproject/Constants/sizes.dart';
 
 class AddPage extends StatefulWidget {
   const AddPage({Key? key}) : super(key: key);
@@ -30,7 +31,7 @@ class _AddPageState extends State<AddPage> {
       ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(10.0),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -55,18 +56,19 @@ class _AddPageState extends State<AddPage> {
                         width: myWidth,
                         child: Column(children: [
                           Padding(
-                            padding: const EdgeInsets.all(4.0),
+                            padding: const EdgeInsets.all(1.0),
                             child: Image.asset(
                               addPageSell,
                               width: myWidth * 0.5,
                             ),
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 8,
                           ),
                           Text(
                             'SELL',
                             style: TextStyle(
+                              letterSpacing: textLetterSpacingValue,
                               fontSize: 40,
                             ),
                           ),
@@ -133,6 +135,7 @@ class _AddPageState extends State<AddPage> {
                           Text(
                             'RENT',
                             style: TextStyle(
+                              letterSpacing: textLetterSpacingValue,
                               fontSize: 35,
                             ),
                           ),
