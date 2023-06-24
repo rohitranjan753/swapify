@@ -251,6 +251,7 @@ class _HomePageState extends State<HomePage> {
                                           Text(
                                             'BUY',
                                             style: TextStyle(
+                                              fontWeight: buttonTextWeight,
                                               letterSpacing: textLetterSpacingValue,
                                               color: Colors.black,
                                               fontSize: 25,
@@ -313,6 +314,7 @@ class _HomePageState extends State<HomePage> {
                                           'RENT',
                                           style: TextStyle(
                                             letterSpacing: textLetterSpacingValue,
+                                            fontWeight: buttonTextWeight,
                                             color: Colors.black,
                                             fontSize: 25,
                                           ),
