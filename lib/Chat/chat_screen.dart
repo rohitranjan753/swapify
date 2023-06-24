@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:vbuddyproject/Constants/image_string.dart';
 
 // class ChatScreen extends StatelessWidget {
 //   final String chatId;
@@ -216,7 +217,7 @@ class ChatScreen extends StatelessWidget {
                   return Text('Error: ${snapshot.error}');
                 }
                 if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                  return Text('No messages found');
+                  return Center(child: Text('No messages !',style: TextStyle(letterSpacing: 3),));
                 }
                 // Render your chat screen UI with the loaded messages
                 return ListView(
@@ -331,7 +332,7 @@ class ChatScreen extends StatelessWidget {
                 IconButton(
                   icon: Image(
                     image: AssetImage(
-                      'assets/send_chat1.png',
+                      chatSendIcon,
                     ),
                   ),
                   onPressed: () {
