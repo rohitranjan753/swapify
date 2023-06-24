@@ -6,6 +6,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lottie/lottie.dart';
 import 'package:vbuddyproject/Constants/color_constant.dart';
+import 'package:vbuddyproject/Constants/image_string.dart';
 import 'package:vbuddyproject/Constants/sizes.dart';
 import 'package:vbuddyproject/nav_bar.dart';
 
@@ -115,7 +116,7 @@ class _AuthFormState extends State<AuthForm> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Lottie.asset(
-                            'assets/signup_lottie.json',
+                            loginImageLottie,
                             height: size.height * 0.2,
                             repeat: true,
                             reverse: true,
