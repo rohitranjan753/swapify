@@ -727,6 +727,7 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
                         child: Text(
                           "CHAT",
                           style: TextStyle(
+                              fontWeight: buttonTextWeight,
                               letterSpacing: textLetterSpacingValue,
                               fontSize: 20,
                               color: Colors.white),

@@ -70,7 +70,7 @@ class _AddPageState extends State<AddPage> {
                             style: TextStyle(
                               fontWeight: buttonTextWeight,
                               letterSpacing: textLetterSpacingValue,
-                              fontSize: 40,
+                              fontSize: 35,
                             ),
                           ),
                         ]),
