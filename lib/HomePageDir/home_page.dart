@@ -312,6 +312,7 @@ class _HomePageState extends State<HomePage> {
                                         Text(
                                           'RENT',
                                           style: TextStyle(
+                                            letterSpacing: textLetterSpacingValue,
                                             color: Colors.black,
                                             fontSize: 25,
                                           ),
