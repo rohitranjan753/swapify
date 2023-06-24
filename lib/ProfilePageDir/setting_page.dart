@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:vbuddyproject/Constants/sizes.dart';
 import 'package:vbuddyproject/authMainScreen/auth_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -28,7 +29,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           },
         ),
         centerTitle: true,
-        title: Text("SETTING"),
+        title: Text("SETTING",style: TextStyle(letterSpacing: textLetterSpacingValue,),),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               bottomRight: Radius.circular(30),
