@@ -425,7 +425,7 @@ class _SellPageState extends State<SellPage> {
                           'SUBMIT',
                           style: TextStyle(
                             letterSpacing: textLetterSpacingValue,
-                              fontWeight: FontWeight.w600, fontSize: 18,color: Colors.white),
+                              fontWeight: buttonTextWeight, fontSize: 18,color: Colors.white),
                         ),
                       ),
                     ],
