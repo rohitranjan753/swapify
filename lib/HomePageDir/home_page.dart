@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:vbuddyproject/BuyBuilderDirectory/buy_page.dart';
 import 'package:vbuddyproject/Chat/chatpage.dart';
+import 'package:vbuddyproject/Constants/image_string.dart';
 import 'package:vbuddyproject/HomePageDir/browse_category_screen.dart';
 import 'package:vbuddyproject/HomePageDir/category_screen.dart';
 import 'package:vbuddyproject/RentSectionDirectory/rent_home_screen.dart';
@@ -228,7 +229,7 @@ class _HomePageState extends State<HomePage> {
                                 ],
                                 image: DecorationImage(
                                     image:
-                                        AssetImage('assets/images/buy_new.jpg'),
+                                        AssetImage(homepageBuy),
                                     fit: BoxFit.cover),
                               ),
                               child: Stack(
@@ -262,41 +263,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
 
-                      // Padding(
-                      //   padding: const EdgeInsets.all(20.0),
-                      //   child: GestureDetector(
-                      //       onTap: () {
-                      //         Navigator.push(
-                      //             context,
-                      //             MaterialPageRoute(
-                      //                 builder: (context) => BuyPage()));
-                      //       },
-                      //       child: Card(
-                      //         color: Colors.white,
-                      //         clipBehavior: Clip.antiAliasWithSaveLayer,
-                      //         shape: RoundedRectangleBorder(
-                      //           borderRadius: BorderRadius.circular(20),
-                      //         ),
-                      //         elevation: 10,
-                      //         child: Container(
-                      //           height: myHeight * 0.48,
-                      //           width: myWidth,
-                      //           child: Column(children: [
-                      //             Image.asset(
-                      //               'assets/images/buy_new.jpg',
-                      //               height: myWidth*0.7,
-                      //               width: myWidth,
-                      //             ),
-                      //             Text(
-                      //               'BUY',
-                      //               style: TextStyle(
-                      //                 fontSize: 35,
-                      //               ),
-                      //             ),
-                      //           ]),
-                      //         ),
-                      //       )),
-                      // ),
+
 
                       //RENT
                       Padding(
@@ -323,7 +290,7 @@ class _HomePageState extends State<HomePage> {
                               ],
                               image: DecorationImage(
                                   image:
-                                      AssetImage('assets/images/rent_new.jpg'),
+                                      AssetImage(homepageRent),
                                   fit: BoxFit.cover),
                             ),
                             child: Stack(
