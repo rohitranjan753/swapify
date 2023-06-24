@@ -68,6 +68,7 @@ class _AddPageState extends State<AddPage> {
                           Text(
                             'SELL',
                             style: TextStyle(
+                              fontWeight: buttonTextWeight,
                               letterSpacing: textLetterSpacingValue,
                               fontSize: 40,
                             ),
@@ -91,7 +92,7 @@ class _AddPageState extends State<AddPage> {
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Text(
                           'OR',
-                          style: TextStyle(fontSize: 30,color: Colors.grey),
+                          style: TextStyle(fontWeight: buttonTextWeight,fontSize: 30,color: Colors.grey),
                         ),
                       ),
                       Expanded(
@@ -135,6 +136,7 @@ class _AddPageState extends State<AddPage> {
                           Text(
                             'RENT',
                             style: TextStyle(
+                              fontWeight: buttonTextWeight,
                               letterSpacing: textLetterSpacingValue,
                               fontSize: 35,
                             ),
