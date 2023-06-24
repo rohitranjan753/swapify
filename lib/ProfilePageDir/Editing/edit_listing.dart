@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:vbuddyproject/Constants/sizes.dart';
 import 'package:vbuddyproject/widget/back_btn_design.dart';
 
 class EditListing extends StatefulWidget {
@@ -189,8 +190,8 @@ class _EditListingState extends State<EditListing> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Container(
-                    height: myHeight * 0.2,
-                    width: myWidth * 0.5,
+                    height: myHeight * 0.3,
+                    width: myWidth * 0.7,
                     decoration: BoxDecoration(
                       image: _image != null
                           ? DecorationImage(
@@ -267,7 +268,7 @@ class _EditListingState extends State<EditListing> {
                   }
                 },
               ),
-              SizedBox(height: 20,),
+              SizedBox(height: 10,),
               Align(
                   alignment: Alignment.topLeft,
                   child: Text("Price",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)),
@@ -295,12 +296,10 @@ class _EditListingState extends State<EditListing> {
                 },
               ),
               SizedBox(
-                height: 20,
+                height: 30,
               ),
 
-              SizedBox(
-                height: 20,
-              ),
+
 
               // First Dropdown
 
@@ -355,7 +354,8 @@ class _EditListingState extends State<EditListing> {
                 child: Text(
                   'SUBMIT',
                   style: TextStyle(
-                    fontWeight: FontWeight.w600,
+                    fontWeight: buttonTextWeight,
+                    letterSpacing: textLetterSpacingValue,
                     fontSize: 18,
                     color: Colors.white,
                   ),
