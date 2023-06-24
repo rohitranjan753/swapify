@@ -6,6 +6,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:vbuddyproject/BuyBuilderDirectory/buy_page.dart';
 import 'package:vbuddyproject/Chat/chatpage.dart';
 import 'package:vbuddyproject/Constants/image_string.dart';
+import 'package:vbuddyproject/Constants/sizes.dart';
 import 'package:vbuddyproject/HomePageDir/browse_category_screen.dart';
 import 'package:vbuddyproject/HomePageDir/category_screen.dart';
 import 'package:vbuddyproject/RentSectionDirectory/rent_home_screen.dart';
@@ -90,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Text(
                                 "Hello there",
-                                style: TextStyle(
+                                style: TextStyle(letterSpacing: textLetterSpacingValue-1,
                                     fontSize: 20,
                                     color: Colors.grey[600],
                                     fontWeight: FontWeight.bold),
@@ -250,6 +251,7 @@ class _HomePageState extends State<HomePage> {
                                           Text(
                                             'BUY',
                                             style: TextStyle(
+                                              letterSpacing: textLetterSpacingValue,
                                               color: Colors.black,
                                               fontSize: 25,
                                             ),
