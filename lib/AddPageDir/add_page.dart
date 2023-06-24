@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vbuddyproject/AddPageDir/RentDir/rent_page.dart';
 import 'package:vbuddyproject/AddPageDir/SellDir/sell_page.dart';
 import 'package:vbuddyproject/Constants/color_constant.dart';
+import 'package:vbuddyproject/Constants/image_string.dart';
 
 class AddPage extends StatefulWidget {
   const AddPage({Key? key}) : super(key: key);
@@ -56,7 +57,7 @@ class _AddPageState extends State<AddPage> {
                           Padding(
                             padding: const EdgeInsets.all(4.0),
                             child: Image.asset(
-                              'assets/sell_new.png',
+                              addPageSell,
                               width: myWidth * 0.5,
                             ),
                           ),
@@ -122,7 +123,7 @@ class _AddPageState extends State<AddPage> {
                           Padding(
                             padding: const EdgeInsets.all(4.0),
                             child: Image.asset(
-                              'assets/rent_new.png',
+                              addPageRent,
                               width: myWidth * 0.5,
                             ),
                           ),
