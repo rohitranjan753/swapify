@@ -92,7 +92,7 @@ class _AuthFormState extends State<AuthForm> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Lottie.asset(
-                            'assets/welcome_hi.json',
+                            loginImageLottie,
                             height: size.height * 0.2,
                             repeat: true,
                             reverse: true,
@@ -116,7 +116,7 @@ class _AuthFormState extends State<AuthForm> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Lottie.asset(
-                            loginImageLottie,
+                            signupImageLottie,
                             height: size.height * 0.2,
                             repeat: true,
                             reverse: true,
