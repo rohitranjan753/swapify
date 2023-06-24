@@ -9,6 +9,7 @@ import 'package:pinch_zoom/pinch_zoom.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:vbuddyproject/Chat/chatScreenOld.dart';
 import 'package:vbuddyproject/Chat/chat_screen.dart';
+import 'package:vbuddyproject/Constants/sizes.dart';
 import 'package:vbuddyproject/widget/back_btn_design.dart';
 
 class SelectedSearchPage extends StatefulWidget {
@@ -386,7 +387,6 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
     });
   }
 
-
   void createChatAndOpenScreen(String currentUser, String otherUser) {
     FirebaseFirestore.instance.collection('chats').add({
       'users': [currentUser, otherUser]
@@ -396,13 +396,18 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
       // (You can also store additional chat details if needed)
 
       // Open the chat screen and pass the chat ID
-      openChatScreen(chatId,currentUser,otherUser);
+      openChatScreen(chatId, currentUser, otherUser);
     });
   }
 
-  void openChatScreen(String chatId,String currentUser,String otherUser) {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (contetx) => ChatScreen(chatId: chatId,otherUserId: otherUser,)));
+  void openChatScreen(String chatId, String currentUser, String otherUser) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (contetx) => ChatScreen(
+                  chatId: chatId,
+                  otherUserId: otherUser,
+                )));
   }
 
   void _sendEmail() async {
@@ -419,6 +424,7 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
       throw 'Could not launch $url';
     }
   }
+
   String getOtherUserId(String currentUserId, Map<String, dynamic> chatData) {
     String createdById = chatData['createdby'];
     String joinedById = chatData['joinedby'];
@@ -462,10 +468,8 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Card(
-
                   elevation: 10,
                   child: Container(
-
                     height: myHeight * 0.4,
                     child: PinchZoom(
                       child: Image.network(widget.item['imageUrl']),
@@ -627,7 +631,7 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
                             : Padding(
                                 padding: const EdgeInsets.only(left: 30),
                                 child: Text(
-                                 widget.item["creatorname"],
+                                  widget.item["creatorname"],
                                   style: TextStyle(
                                     fontSize: 19,
                                   ),
@@ -680,7 +684,8 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
                                 child: Text(
                                   "Price",
                                   style: TextStyle(
-                                      fontSize: 22,fontWeight: FontWeight.bold),
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ],
@@ -721,7 +726,10 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
                             borderRadius: BorderRadius.circular(50)),
                         child: Text(
                           "CHAT",
-                          style: TextStyle(fontSize: 20,color: Colors.white),
+                          style: TextStyle(
+                              letterSpacing: textLetterSpacingValue,
+                              fontSize: 20,
+                              color: Colors.white),
                         ),
                       ),
                     ),
@@ -732,8 +740,6 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
     );
   }
 }
-
-
 
 // class _SelectedSearchPageState extends State<SelectedSearchPage> {
 //   bool _isImageZoomed = false;
@@ -1097,4 +1103,3 @@ class _SelectedSearchPageState extends State<SelectedSearchPage> {
 //     );
 //   }
 // }
-
