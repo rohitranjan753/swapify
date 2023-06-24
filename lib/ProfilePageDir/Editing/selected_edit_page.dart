@@ -309,7 +309,7 @@ class _SelectedEditPageState extends State<SelectedEditPage> {
                     },
                     minWidth: myWidth*0.4,
                     height: 50,
-                    color: Colors.cyan,
+                    color: Colors.deepPurple[200],
                     elevation: 5,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
