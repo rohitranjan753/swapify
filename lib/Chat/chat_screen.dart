@@ -211,7 +211,7 @@ class ChatScreen extends StatelessWidget {
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return LinearProgressIndicator();
+                  return Center(child: CircularProgressIndicator(semanticsLabel: 'LOADING',));
                 }
                 if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
