@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:vbuddyproject/Constants/sizes.dart';
 import 'package:vbuddyproject/widget/back_btn_design.dart';
 
 class EditprofileScreen extends StatefulWidget {
@@ -306,7 +307,8 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
                       child: Text(
                         'SUBMIT',
                         style: TextStyle(
-                            fontWeight: FontWeight.w600,
+                            letterSpacing: textLetterSpacingValue,
+                            fontWeight: buttonTextWeight,
                             fontSize: 18,
                             color: Colors.white),
                       ),

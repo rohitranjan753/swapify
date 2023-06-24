@@ -252,7 +252,7 @@ class _AuthFormState extends State<AuthForm> {
                                 padding: EdgeInsets.symmetric(vertical: 15),
                               ),
                               onPressed: _trySubmit,
-                              child: Text(_isLogin ? "LOGIN" : 'SIGNUP',style: TextStyle(letterSpacing: textLetterSpacingValue),),
+                              child: Text(_isLogin ? "LOGIN" : 'SIGNUP',style: TextStyle(letterSpacing: textLetterSpacingValue,fontWeight: buttonTextWeight),),
                             ),
                           ),
                         SizedBox(
