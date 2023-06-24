@@ -166,7 +166,7 @@ class _RentPageState extends State<RentPage> {
     return Scaffold(
       appBar: AppBar(
         leading: const backiconButtonDesign(),
-        title: Text('RENT UPLOAD SECTION'),
+        title: Text('RENT UPLOAD',style: TextStyle(letterSpacing: textLetterSpacingValue),),
         toolbarHeight: 60,
         centerTitle: true,
         shape: const RoundedRectangleBorder(

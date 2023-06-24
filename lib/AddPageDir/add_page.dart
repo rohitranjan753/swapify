@@ -20,7 +20,7 @@ class _AddPageState extends State<AddPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("ADD LISTING"),
+        title: Text("ADD LISTING",style: TextStyle(letterSpacing: textLetterSpacingValue),),
         centerTitle: true,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(

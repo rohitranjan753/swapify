@@ -196,7 +196,9 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
       appBar: AppBar(
         leading: backiconButtonDesign(),
         toolbarHeight: 60,
-        title: Text('EDIT PROFILE'),
+        title: Text('EDIT PROFILE',style: TextStyle(
+          letterSpacing: textLetterSpacingValue
+        ),),
         centerTitle: true,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(

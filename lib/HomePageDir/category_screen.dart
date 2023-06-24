@@ -100,6 +100,7 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:vbuddyproject/Constants/color_constant.dart';
+import 'package:vbuddyproject/Constants/sizes.dart';
 
 import 'browse_category_screen.dart';
 
@@ -149,6 +150,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         title: Text(
           'Categories',
           style: TextStyle(
+            letterSpacing: textLetterSpacingValue,
             fontWeight: FontWeight.normal,
             fontSize: 25,
           ),

@@ -154,7 +154,7 @@ class _SellPageState extends State<SellPage> {
       appBar: AppBar(
         toolbarHeight: 60,
         leading: backiconButtonDesign(),
-        title: Text('SELL UPLOAD SECTION'),
+        title: Text('SELL UPLOAD',style: TextStyle(letterSpacing: textLetterSpacingValue),),
         centerTitle: true,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
