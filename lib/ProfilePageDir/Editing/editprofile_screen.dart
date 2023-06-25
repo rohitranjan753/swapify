@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:vbuddyproject/Constants/sizes.dart';
 import 'package:vbuddyproject/widget/back_btn_design.dart';
@@ -135,26 +136,34 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
     });
 
     // Show a snackbar or any other notification to indicate successful update
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text(
-          'Profile updated successfully!',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 16.0,
-          ),
-        ),
-        backgroundColor: Colors.green,
-        behavior: SnackBarBehavior.floating,
-        elevation: 4.0,
-      ),
-    );
+    // ScaffoldMessenger.of(context).showSnackBar(
+    //   const SnackBar(
+    //     content: Text(
+    //       'Profile updated successfully!',
+    //       style: TextStyle(
+    //         color: Colors.white,
+    //         fontSize: 16.0,
+    //       ),
+    //     ),
+    //     backgroundColor: Colors.green,
+    //     behavior: SnackBarBehavior.floating,
+    //     elevation: 4.0,
+    //   ),
+    // );
 
     // Update the text field with the new username
     setState(() {
       _username = userName;
       _usernameController.text = _username;
     });
+
+    Fluttertoast.showToast(
+      msg: 'Uploaded',
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      backgroundColor: Colors.black54,
+      textColor: Colors.white,
+    );
 
     @override
     void dispose() {
