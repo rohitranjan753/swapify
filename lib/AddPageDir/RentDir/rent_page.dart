@@ -92,7 +92,7 @@ class _RentPageState extends State<RentPage> {
     FocusScope.of(context).unfocus();
     if (rentImage == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Upload Image')),
+        const SnackBar(content: Text('Upload Image'),backgroundColor: Colors.red,),
       );
       return;
     }
@@ -470,15 +470,16 @@ class _RentPageState extends State<RentPage> {
                           } else if (_selectedFirstValue == null ||
                               _selectedSecondValue == null) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Choose Category')),
+                              const SnackBar(content: Text('Choose Category'),
+                                backgroundColor: Colors.red,),
                             );
                           } else if (!isNumberAndPositive(_rentalPrice)) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Invalid Price')),
+                              const SnackBar(content: Text('Invalid Price'),backgroundColor: Colors.red,),
                             );
                           } else if (_perHrValue == null) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Choose per hr')),
+                              const SnackBar(content: Text('Choose per hr'),backgroundColor: Colors.red,),
                             );
                           } else if (_formKey.currentState!.validate()) {
                             // If the form is valid, display a snackbar. In the real world,

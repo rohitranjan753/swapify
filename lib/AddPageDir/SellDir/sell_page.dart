@@ -59,7 +59,7 @@ class _SellPageState extends State<SellPage> {
     FocusScope.of(context).unfocus();
     if (rentImage == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Upload Image')),
+        const SnackBar(content: Text('Upload Image'),backgroundColor: Colors.red,),
       );
       return;
     }
@@ -380,7 +380,7 @@ class _SellPageState extends State<SellPage> {
                         onPressed: () {
                           if (_image == null) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Choose Image')),
+                              const SnackBar(content: Text('Choose Image'),backgroundColor: Colors.red,),
                             );
                           } else if (_selectedFirstValue == null ||
                               _selectedSecondValue == null) {
