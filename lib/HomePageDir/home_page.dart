@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
     LineIcons.laptop,
   ];
 
-  List categoryName = ["Notes", "Clothes", "Footwear", "Stationary", "Gadgets"];
+  List categoryName = ["Notes", "Clothes", "Footwear", "Stationary", "Gadgets", "Sports","Electronics","Room Amenities"];
 
   int clicked = 0;
 
