@@ -13,6 +13,8 @@ class SearchPage extends StatefulWidget {
   State<SearchPage> createState() => _SearchPageState();
 }
 
+
+
 class _SearchPageState extends State<SearchPage> {
   final User? user = FirebaseAuth.instance.currentUser;
   String searchText = '';
@@ -217,14 +219,22 @@ class _SearchPageState extends State<SearchPage> {
                 ),
               ),
               if (hasMoreData)
-                TextButton(
-                  onPressed: () {
+                GestureDetector(
+                  onTap: () {
                     setState(() {
                       initialItemCount += loadMoreItemCount;
                     });
                   },
-                  child: Text('Load More'),
+                  child: Text('Load More',style: TextStyle(fontSize: 14),),
                 ),
+              // TextButton(
+              //   onPressed: () {
+              //     setState(() {
+              //       initialItemCount += loadMoreItemCount;
+              //     });
+              //   },
+              //   child: Text('Load More'),
+              // ),
             ],
           );
         },
@@ -425,102 +435,6 @@ class _SearchPageState extends State<SearchPage> {
 //               );
 //             },
 //           );
-//         },
-//       ),
-//     );
-//   }
-//
-//   @override
-//   void dispose() {
-//     super.dispose();
-//   }
-// }
-
-// class _SearchPageState extends State<SearchPage> {
-//   final ScrollController _scrollController = ScrollController();
-//   List<DocumentSnapshot> _cards = [];
-//   DocumentSnapshot? _lastDocument;
-//   bool _isLoading = false;
-//   final int _batchSize = 4;
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     fetchData();
-//     _scrollController.addListener(_scrollListener);
-//   }
-//
-//   void _scrollListener() {
-//     if (_scrollController.offset >= _scrollController.position.maxScrollExtent &&
-//         !_scrollController.position.outOfRange) {
-//       if (!_isLoading) {
-//         setState(() {
-//           _isLoading = true;
-//         });
-//         fetchData();
-//       }
-//     }
-//   }
-//
-//   void fetchData() async {
-//     QuerySnapshot querySnapshot;
-//
-//     if (_lastDocument == null) {
-//       querySnapshot = await FirebaseFirestore.instance
-//           .collection('all_section')
-//           .limit(_batchSize)
-//           .get();
-//     } else {
-//       querySnapshot = await FirebaseFirestore.instance
-//           .collection('all_section')
-//           .startAfterDocument(_lastDocument!)
-//           .limit(_batchSize)
-//           .get();
-//     }
-//
-//     if (querySnapshot.docs.isNotEmpty) {
-//       setState(() {
-//         _isLoading = false;
-//         _cards.addAll(querySnapshot.docs);
-//         _lastDocument = querySnapshot.docs.last;
-//       });
-//     } else {
-//       setState(() {
-//         _isLoading = false;
-//       });
-//     }
-//   }
-//
-//   final User? user = FirebaseAuth.instance.currentUser;
-//   String searchText = '';
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Card List'),
-//       ),
-//       body: GridView.builder(
-//         controller: _scrollController,
-//         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-//           crossAxisCount: 2,
-//           crossAxisSpacing: 10.0,
-//           mainAxisSpacing: 10.0,
-//           childAspectRatio: 0.75,
-//         ),
-//         itemCount: _cards.length + 1,
-//         itemBuilder: (BuildContext context, int index) {
-//           if (index < _cards.length) {
-//             // Build your card widget using _cards[index]
-//             return Card(
-//               child: ListTile(
-//                 title: Text(_cards[index]['title']),
-//                 subtitle: Text(_cards[index]['subcategory']),
-//               ),
-//             );
-//           } else {
-//             return _isLoading ? CircularProgressIndicator() : Container();
-//           }
 //         },
 //       ),
 //     );
