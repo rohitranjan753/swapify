@@ -130,7 +130,13 @@ class _SellPageState extends State<SellPage> {
     setState(() {
       _isLoading = false;
     });
-
+    Fluttertoast.showToast(
+      msg: 'Uploaded',
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      backgroundColor: Colors.black54,
+      textColor: Colors.white,
+    );
   }
 
   Future<void> _getImage() async {
