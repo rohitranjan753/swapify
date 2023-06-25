@@ -44,6 +44,7 @@ class _RentPageState extends State<RentPage> {
     'Footwear': ['Sports', 'Formal', 'Casual'],
     'Stationary': ['Notebook', 'Calculator', 'Pen'],
     'Gadgets': ['Earphone', 'Charger', 'Speaker', 'Laptop', 'Keyboard'],
+    'Sports': ['Bat', 'Ball', 'Basketball', 'Badminton', 'Volleyball'],
   };
 
   List<String> _perHrValueList = [
