@@ -247,7 +247,7 @@ class _SelectedEditPageState extends State<SelectedEditPage> {
                             "₹${widget.item['price']}",
                             style: TextStyle(fontSize: 19.0),
                           ) : Text(
-                            "₹${widget.item['price']} /${widget.item['perhourvalue']}",
+                            "₹${widget.item['price']} /${widget.item['perhourvalue']}hr",
                             style: TextStyle(fontSize: 19.0),
                           ),
                         ),
