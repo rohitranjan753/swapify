@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -328,37 +327,11 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
     );
   }
 
-  // Widget _buildLoadingIndicator() {
-  //   return Center(
-  //     child: CircularProgressIndicator(),
-  //   );
-  // }
-
   Widget _buildLoadingIndicator() {
     return Center(
-      child: AnimatedContainer(
-        duration: Duration(seconds: 1),
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: _generateRandomColor(), // Generate a random color
-        ),
-        child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(Colors.white), // Set the color of the progress indicator
-        ),
-      ),
+      child: CircularProgressIndicator(),
     );
   }
-
-  Color _generateRandomColor() {
-    final Random random = Random();
-    return Color.fromARGB(
-      255,
-      random.nextInt(256),
-      random.nextInt(256),
-      random.nextInt(256),
-    );
-  }
-
 
 
 }
