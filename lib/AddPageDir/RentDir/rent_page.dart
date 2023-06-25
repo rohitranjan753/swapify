@@ -45,6 +45,9 @@ class _RentPageState extends State<RentPage> {
     'Stationary': ['Notebook', 'Calculator', 'Pen'],
     'Gadgets': ['Earphone', 'Charger', 'Speaker', 'Laptop', 'Keyboard'],
     'Sports': ['Bat', 'Ball', 'Basketball', 'Badminton', 'Volleyball'],
+    'Electronics': ['Table lamp', 'Extension board'],
+    'Room Amenities': ['Mattress','Lock key',"Bucket","Mug","Clothes hanger","Clothes clip",],
+    "Others": ["Cycle","Umbrella","Skate Board",],
   };
 
   List<String> _perHrValueList = [
