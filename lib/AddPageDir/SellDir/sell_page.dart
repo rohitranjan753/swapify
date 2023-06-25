@@ -31,6 +31,10 @@ class _SellPageState extends State<SellPage> {
     'Footwear',
     'Stationary',
     'Gadgets',
+    "Sports",
+    "Electronics",
+    "Room Amenities",
+    "Others"
   ];
 
   // Define the options for the second dropdown, based on the selected value of the first dropdown
@@ -40,6 +44,10 @@ class _SellPageState extends State<SellPage> {
     'Footwear': ['Sports', 'Formal', 'Casual'],
     'Stationary': ['Notebook', 'Calculator', 'Pen'],
     'Gadgets': ['Earphone', 'Charger', 'Speaker', 'Laptop', 'Keyboard'],
+    'Sports': ['Bat', 'Ball', 'Basketball', 'Badminton', 'Volleyball'],
+    'Electronics': ['Table lamp', 'Extension board'],
+    'Room Amenities': ['Mattress','Lock key',"Bucket","Mug","Clothes hanger","Clothes clip",],
+    "Others": ["Cycle","Umbrella","Skate Board",],
   };
 
   bool _isLoading = false;
