@@ -42,7 +42,13 @@ class _HomePageState extends State<HomePage> {
     LineIcons.laptop,
   ];
 
-  List categoryName = ["Notes", "Clothes", "Footwear", "Stationary", "Gadgets", "Sports","Electronics","Room Amenities"];
+  List categoryName = [
+    "Notes",
+    "Clothes",
+    "Footwear",
+    "Stationary",
+    "Gadgets",
+  ];
 
   int clicked = 0;
 
@@ -91,7 +97,8 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Text(
                                 "Hello there",
-                                style: TextStyle(letterSpacing: textLetterSpacingValue-1,
+                                style: TextStyle(
+                                    letterSpacing: textLetterSpacingValue - 1,
                                     fontSize: 20,
                                     color: Colors.grey[600],
                                     fontWeight: FontWeight.bold),
@@ -229,8 +236,7 @@ class _HomePageState extends State<HomePage> {
                                       offset: Offset(0, 5)),
                                 ],
                                 image: DecorationImage(
-                                    image:
-                                        AssetImage(homepageBuy),
+                                    image: AssetImage(homepageBuy),
                                     fit: BoxFit.cover),
                               ),
                               child: Stack(
@@ -252,7 +258,8 @@ class _HomePageState extends State<HomePage> {
                                             'BUY',
                                             style: TextStyle(
                                               fontWeight: buttonTextWeight,
-                                              letterSpacing: textLetterSpacingValue,
+                                              letterSpacing:
+                                                  textLetterSpacingValue,
                                               color: Colors.black,
                                               fontSize: 25,
                                             ),
@@ -265,8 +272,6 @@ class _HomePageState extends State<HomePage> {
                               )),
                         ),
                       ),
-
-
 
                       //RENT
                       Padding(
@@ -292,8 +297,7 @@ class _HomePageState extends State<HomePage> {
                                     offset: Offset(0, 5)),
                               ],
                               image: DecorationImage(
-                                  image:
-                                      AssetImage(homepageRent),
+                                  image: AssetImage(homepageRent),
                                   fit: BoxFit.cover),
                             ),
                             child: Stack(
@@ -313,7 +317,8 @@ class _HomePageState extends State<HomePage> {
                                         Text(
                                           'RENT',
                                           style: TextStyle(
-                                            letterSpacing: textLetterSpacingValue,
+                                            letterSpacing:
+                                                textLetterSpacingValue,
                                             fontWeight: buttonTextWeight,
                                             color: Colors.black,
                                             fontSize: 25,
