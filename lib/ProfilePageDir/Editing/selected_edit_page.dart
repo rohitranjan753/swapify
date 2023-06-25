@@ -245,10 +245,10 @@ class _SelectedEditPageState extends State<SelectedEditPage> {
                           padding: const EdgeInsets.only(left: 30),
                           child: widget.item['category'].toString() == "sell" ?Text(
                             "₹${widget.item['price']}",
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 19.0),
                           ) : Text(
-                            "₹${widget.item['price']} / 12Hrs",
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            "₹${widget.item['price']} /${widget.item['perhourvalue']}",
+                            style: TextStyle(fontSize: 19.0),
                           ),
                         ),
                       ],
