@@ -29,6 +29,7 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
+
   @override
   void initState() {
     super.initState();
@@ -217,4 +218,5 @@ class ProfileMenuWidget extends StatelessWidget {
       ),
     );
   }
+
 }
