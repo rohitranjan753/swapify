@@ -551,9 +551,6 @@ class _RentPageState extends State<RentPage> {
   }
 
   bool isNumberAndPositive(String value) {
-    // if (double.tryParse(value)! > 0) {
-    //   return false;
-    // }
     if (value == null) {
       return false;
     }

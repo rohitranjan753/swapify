@@ -39,7 +39,7 @@ class _SellPageState extends State<SellPage> {
     'Clothes': ['Formal', 'Ethnic', 'Casual'],
     'Footwear': ['Sports', 'Formal', 'Casual'],
     'Stationary': ['Notebook', 'Calculator', 'Pen'],
-    'Gadgets': ['Earphone', 'Charger', 'Speaker','Laptop','Keyboard'],
+    'Gadgets': ['Earphone', 'Charger', 'Speaker', 'Laptop', 'Keyboard'],
   };
 
   bool _isLoading = false;
@@ -59,7 +59,10 @@ class _SellPageState extends State<SellPage> {
     FocusScope.of(context).unfocus();
     if (rentImage == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Upload Image'),backgroundColor: Colors.red,),
+        const SnackBar(
+          content: Text('Upload Image'),
+          backgroundColor: Colors.red,
+        ),
       );
       return;
     }
@@ -160,7 +163,10 @@ class _SellPageState extends State<SellPage> {
       appBar: AppBar(
         toolbarHeight: 60,
         leading: backiconButtonDesign(),
-        title: Text('SELL UPLOAD',style: TextStyle(letterSpacing: textLetterSpacingValue),),
+        title: Text(
+          'SELL UPLOAD',
+          style: TextStyle(letterSpacing: textLetterSpacingValue),
+        ),
         centerTitle: true,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -197,8 +203,7 @@ class _SellPageState extends State<SellPage> {
                                       fit: BoxFit.cover,
                                     )
                                   : DecorationImage(
-                                      image: AssetImage(
-                                          addPageUploadSign),
+                                      image: AssetImage(addPageUploadSign),
                                       fit: BoxFit.contain,
                                     ),
                             ),
@@ -219,7 +224,6 @@ class _SellPageState extends State<SellPage> {
                           hintText: "Enter Title",
                           contentPadding:
                               EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-
                           border: OutlineInputBorder(),
                           filled: true,
                           fillColor: Colors.white,
@@ -248,8 +252,8 @@ class _SellPageState extends State<SellPage> {
                         },
                         decoration: InputDecoration(
                           hintText: 'Enter Description',
-                          contentPadding:
-                              EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
                           border: OutlineInputBorder(),
                           // enabledBorder: OutlineInputBorder(
                           //     borderSide: BorderSide(color: Colors.grey),
@@ -298,7 +302,6 @@ class _SellPageState extends State<SellPage> {
                       SizedBox(
                         height: 10,
                       ),
-
 
                       SizedBox(
                         height: 20,
@@ -375,33 +378,47 @@ class _SellPageState extends State<SellPage> {
                             );
                           }).toList(),
                         ),
-                      SizedBox(height: 20,),
+                      SizedBox(
+                        height: 20,
+                      ),
                       MaterialButton(
                         onPressed: () {
                           if (_image == null) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Choose Image'),backgroundColor: Colors.red,),
+                              const SnackBar(
+                                content: Text('Choose Image'),
+                                backgroundColor: Colors.red,
+                              ),
                             );
                           } else if (_selectedFirstValue == null ||
                               _selectedSecondValue == null) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Choose Category')),
+                              const SnackBar(
+                                content: Text('Choose Category'),
+                                backgroundColor: Colors.red,
+                              ),
                             );
-                          }
-                          else if(!isNumber(_sellPrice)){
+                          } else if (!isNumber(_sellPrice)) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Invalid Price')),
+                              const SnackBar(
+                                content: Text('Invalid Price'),
+                                backgroundColor: Colors.red,
+                              ),
                             );
-                          }
-                          else if (_formKey.currentState!.validate()) {
+                          } else if (_formKey.currentState!.validate()) {
                             // If the form is valid, display a snackbar. In the real world,
                             // you'd often call a server or save the information in a database.
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Uploading! Please wait',style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16.0,
-                              ),),
-                                backgroundColor: AppColors.navBarBackgroundColour,
+                              const SnackBar(
+                                content: Text(
+                                  'Uploading! Please wait',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                backgroundColor:
+                                    AppColors.navBarBackgroundColour,
                                 behavior: SnackBarBehavior.floating,
                                 elevation: 4.0,
                               ),
@@ -430,8 +447,10 @@ class _SellPageState extends State<SellPage> {
                         child: Text(
                           'SUBMIT',
                           style: TextStyle(
-                            letterSpacing: textLetterSpacingValue,
-                              fontWeight: buttonTextWeight, fontSize: 18,color: Colors.white),
+                              letterSpacing: textLetterSpacingValue,
+                              fontWeight: buttonTextWeight,
+                              fontSize: 18,
+                              color: Colors.white),
                         ),
                       ),
                     ],
@@ -452,8 +471,9 @@ class _SellPageState extends State<SellPage> {
   void dispose() {
     super.dispose();
   }
+
   bool isNumber(String value) {
-    if(value == null) {
+    if (value == null) {
       return false;
     }
     return double.tryParse(value) != null;
