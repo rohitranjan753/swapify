@@ -6,4 +6,6 @@ const tButtonHeight = 15.0;
 
 const textLetterSpacingValue = 2.0;
 const buttonTextWeight = FontWeight.w600;
+
+const descriptionLimitValue = 80;
 //title, category,description,uploaded by, uploaded on, price

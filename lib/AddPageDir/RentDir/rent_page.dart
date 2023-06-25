@@ -32,11 +32,32 @@ class _RentPageState extends State<RentPage> {
     'Gadgets',
   ];
 
-  List<String> _perHrValueList = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
-    '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
-    '21', '22', '23', '24'];
-
-
+  List<String> _perHrValueList = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20',
+    '21',
+    '22',
+    '23',
+    '24'
+  ];
 
   // Define the options for the second dropdown, based on the selected value of the first dropdown
   Map<String, List<String>> _secondDropdownOptions = {
@@ -61,7 +82,7 @@ class _RentPageState extends State<RentPage> {
     String rentPrice,
     String firstDropdownValue,
     String secondDropdownValue,
-      String perHourDropdownValue,
+    String perHourDropdownValue,
   ) async {
     rentDes = rentDes.trim();
     rentTile = rentTile.trim();
@@ -103,7 +124,7 @@ class _RentPageState extends State<RentPage> {
       'rentprice': rentPrice,
       'rentmajorcategory': firstDropdownValue,
       'rentsubcategory': secondDropdownValue,
-      'perhourvalue':perHourDropdownValue,
+      'perhourvalue': perHourDropdownValue,
     });
 
     await FirebaseFirestore.instance
@@ -120,7 +141,7 @@ class _RentPageState extends State<RentPage> {
       'createdby': currentUser.uid,
       'creatorname': userName,
       'creatormail': userEmail,
-      'perhourvalue':perHourDropdownValue,
+      'perhourvalue': perHourDropdownValue,
     });
 
     await FirebaseFirestore.instance
@@ -138,7 +159,7 @@ class _RentPageState extends State<RentPage> {
       'creatorname': userName,
       'category': "rent",
       'creatormail': userEmail,
-      'perhourvalue':perHourDropdownValue,
+      'perhourvalue': perHourDropdownValue,
     });
 
     setState(() {
@@ -159,14 +180,16 @@ class _RentPageState extends State<RentPage> {
 
   @override
   Widget build(BuildContext context) {
-
     double myHeight = MediaQuery.of(context).size.height;
     double myWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(
         leading: const backiconButtonDesign(),
-        title: Text('RENT UPLOAD',style: TextStyle(letterSpacing: textLetterSpacingValue),),
+        title: Text(
+          'RENT UPLOAD',
+          style: TextStyle(letterSpacing: textLetterSpacingValue),
+        ),
         toolbarHeight: 60,
         centerTitle: true,
         shape: const RoundedRectangleBorder(
@@ -204,8 +227,7 @@ class _RentPageState extends State<RentPage> {
                                       fit: BoxFit.cover,
                                     )
                                   : DecorationImage(
-                                      image: AssetImage(
-                                          addPageUploadSign),
+                                      image: AssetImage(addPageUploadSign),
                                       fit: BoxFit.contain,
                                     ),
                             ),
@@ -245,7 +267,7 @@ class _RentPageState extends State<RentPage> {
                         height: 20,
                       ),
                       TextFormField(
-                        maxLength: 50,
+                        maxLength: descriptionLimitValue,
                         maxLines: null,
                         keyboardType: TextInputType.multiline,
                         textCapitalization: TextCapitalization.sentences,
@@ -305,16 +327,16 @@ class _RentPageState extends State<RentPage> {
                           SizedBox(
                             width: 5,
                           ),
-
                           Expanded(
                             flex: 1,
                             child: Container(
                               decoration: BoxDecoration(
                                 border: Border.all(
-                                  // color: Colors.grey,
+                                    // color: Colors.grey,
 
-                                ),
-                                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                    ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5.0)),
                               ),
                               child: DropdownButton<String>(
                                 icon: Icon(Icons.keyboard_arrow_down_rounded),
@@ -330,7 +352,6 @@ class _RentPageState extends State<RentPage> {
                                 onChanged: (hrValue) {
                                   setState(() {
                                     _perHrValue = hrValue;
-
                                   });
                                 },
                                 items: _perHrValueList.map((hrOption) {
@@ -338,7 +359,8 @@ class _RentPageState extends State<RentPage> {
                                     child: Text(
                                       hrOption,
                                       style: TextStyle(
-                                          fontSize: 20, fontWeight: FontWeight.bold),
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     value: hrOption,
                                   );
@@ -348,7 +370,6 @@ class _RentPageState extends State<RentPage> {
                           ),
                         ],
                       ),
-
 
                       SizedBox(
                         height: 30,
@@ -437,25 +458,20 @@ class _RentPageState extends State<RentPage> {
                                 backgroundColor: Colors.red,
                               ),
                             );
-                          }
-                          else if (_selectedFirstValue == null ||
+                          } else if (_selectedFirstValue == null ||
                               _selectedSecondValue == null) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Choose Category')),
                             );
-                          }
-
-                          else if (!isNumberAndPositive(_rentalPrice)) {
+                          } else if (!isNumberAndPositive(_rentalPrice)) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Invalid Price')),
                             );
-                          }
-                          else if (_perHrValue==null) {
+                          } else if (_perHrValue == null) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Choose per hr')),
                             );
-                          }
-                          else if (_formKey.currentState!.validate()) {
+                          } else if (_formKey.currentState!.validate()) {
                             // If the form is valid, display a snackbar. In the real world,
                             // you'd often call a server or save the information in a database.
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -481,12 +497,12 @@ class _RentPageState extends State<RentPage> {
                                 _rentalPrice,
                                 _selectedFirstValue!,
                                 _selectedSecondValue!,
-                            _perHrValue!);
+                                _perHrValue!);
                             setState(() {
                               _image = null;
                               _selectedFirstValue = null;
                               _selectedSecondValue = null;
-                              _perHrValue=null;
+                              _perHrValue = null;
                             });
                           }
                         },
@@ -500,8 +516,7 @@ class _RentPageState extends State<RentPage> {
                           'SUBMIT',
                           style: TextStyle(
                               fontWeight: buttonTextWeight,
-                            letterSpacing: textLetterSpacingValue,
-
+                              letterSpacing: textLetterSpacingValue,
                               fontSize: 18,
                               color: Colors.white),
                         ),
@@ -534,6 +549,4 @@ class _RentPageState extends State<RentPage> {
     }
     return double.tryParse(value) != null;
   }
-
-
 }

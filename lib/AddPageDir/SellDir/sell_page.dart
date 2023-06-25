@@ -231,7 +231,7 @@ class _SellPageState extends State<SellPage> {
                         height: 20,
                       ),
                       TextFormField(
-                        maxLength: 50,
+                        maxLength: descriptionLimitValue,
                         maxLines: null,
                         keyboardType: TextInputType.multiline,
                         textCapitalization: TextCapitalization.sentences,

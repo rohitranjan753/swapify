@@ -163,7 +163,7 @@ class ChatPage extends StatelessWidget {
           }
           // Render the chat list UI with all the chats
           return ListView(
-            padding: EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(10.0),
             children: snapshot.data!.docs.map((DocumentSnapshot document) {
               String chatId = document.id;
               List<dynamic> users = document['users'];
@@ -214,7 +214,7 @@ class ChatPage extends StatelessWidget {
                       navigateToChatScreen(context, chatId,otherUserId);
                     },
                     child: Card(
-                      elevation: 5,
+                      elevation: 3,
                       child: Container(
                         height: size.height * 0.09,
                         child: Row(
