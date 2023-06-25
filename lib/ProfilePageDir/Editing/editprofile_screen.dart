@@ -315,7 +315,7 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
                           }
                         }
                       },
-                      minWidth: double.infinity,
+                      minWidth: myWidth*0.7,
                       height: 60,
                       color: Colors.deepPurple,
                       elevation: 10,
