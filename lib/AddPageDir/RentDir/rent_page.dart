@@ -46,7 +46,7 @@ class _RentPageState extends State<RentPage> {
     'Gadgets': ['Earphone', 'Charger', 'Speaker', 'Laptop', 'Keyboard','Others'],
     'Sports': ['Bat', 'Ball', 'Basketball', 'Badminton', 'Volleyball','Others'],
     'Electronics': ['Table lamp', 'Extension board','Others'],
-    'Room Amenities': ['Mattress','Lock key',"Bucket","Mug","Clothes hanger","Clothes clip",'Others'],
+    'Room Amenities': ['Mattress','Lock key',"Bucket","Mug","Clothes hanger","Clothes clip",'Bottle','Others'],
     'Music': ['Guitar','Electric Guitar','Piano Keyboard','Drum','Others'],
     "Others": ["Cycle","Umbrella","Skate Board",'Others'],
   };

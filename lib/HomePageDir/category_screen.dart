@@ -118,18 +118,23 @@ class _CategoryScreenState extends State<CategoryScreen> {
     LineIcons.shoePrints,
     LineIcons.pencilRuler,
     LineIcons.laptop,
+    LineIcons.footballBall,
+    LineIcons.wiredNetwork,
     LineIcons.bed,
     LineIcons.guitar
   ];
 
   List categoryName = [
-    "Notes",
-    "Clothes",
-    "Footwear",
-    "Stationary",
-    "Gadgets",
-    "Mattress",
-    "Instrument"
+    'Notes',
+    'Clothes',
+    'Footwear',
+    'Stationary',
+    'Gadgets',
+    "Sports",
+    "Electronics",
+    "Room Amenities",
+    "Music",
+    "Others"
   ];
   int clicked = 0;
 
@@ -163,7 +168,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
             crossAxisCount: 2,
             crossAxisSpacing: 5,
             mainAxisSpacing: 5,
-
           ),
           itemCount: categoryIcon.length,
           scrollDirection: Axis.vertical,

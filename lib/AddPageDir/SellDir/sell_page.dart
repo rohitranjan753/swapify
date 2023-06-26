@@ -76,6 +76,7 @@ class _SellPageState extends State<SellPage> {
       "Mug",
       "Clothes hanger",
       "Clothes clip",
+      'Bottle',
       'Others'
     ],
     'Music': ['Guitar', 'Electric Guitar', 'Piano Keyboard', 'Drum', 'Others'],
