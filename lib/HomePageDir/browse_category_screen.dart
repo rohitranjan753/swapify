@@ -1,16 +1,10 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:vbuddyproject/Constants/image_string.dart';
-import 'package:vbuddyproject/SearchPageDir/SearchPage.dart';
 import 'package:vbuddyproject/SearchPageDir/selected_search_page.dart';
 import 'package:vbuddyproject/widget/back_btn_design.dart';
-
-import '../Model/search_item_model.dart';
-import '../Model/search_item_widget.dart';
 
 String getVal = '';
 final CollectionReference allsection = FirebaseFirestore.instance
@@ -179,24 +173,6 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
                           ),
                         ),
                       ),
-                      // user!.uid == data["createdby"] ?
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
-                      //   child: Text(
-                      //     'Uploaded By: YOU',
-                      //     style: TextStyle(
-                      //         fontSize: 12,fontWeight: FontWeight.bold
-                      //     ),
-                      //   ),
-                      // ): Padding(
-                      //   padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
-                      //   child: Text(
-                      //     "Uploaded By: ${data["creatorname"]}",
-                      //     style: TextStyle(
-                      //       fontSize: 12,
-                      //     ),
-                      //   ),
-                      // ),
                       data["category"].toString() == "sell"
                           ? Padding(
                               padding:
