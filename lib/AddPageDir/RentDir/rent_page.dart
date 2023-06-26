@@ -39,7 +39,7 @@ class _RentPageState extends State<RentPage> {
 
   // Define the options for the second dropdown, based on the selected value of the first dropdown
   Map<String, List<String>> _secondDropdownOptions = {
-    'Notes': ['DSA', 'DBMS', 'Operating System', 'Java'],
+    'Notes': ['DSA', 'DBMS', 'Operating System', 'Java','TOC', 'Data mining','Others'],
     'Clothes': ['Formal', 'Ethnic', 'Casual'],
     'Footwear': ['Sports', 'Formal', 'Casual'],
     'Stationary': ['Notebook', 'Calculator', 'Pen'],
