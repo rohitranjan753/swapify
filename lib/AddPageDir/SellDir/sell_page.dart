@@ -34,20 +34,52 @@ class _SellPageState extends State<SellPage> {
     "Sports",
     "Electronics",
     "Room Amenities",
+    "Music",
     "Others"
   ];
 
   // Define the options for the second dropdown, based on the selected value of the first dropdown
   Map<String, List<String>> _secondDropdownOptions = {
-    'Notes': ['DSA', 'DBMS', 'Operating System', 'Java','TOC', 'Data mining','Others'],
-    'Clothes': ['Formal', 'Ethnic', 'Casual'],
-    'Footwear': ['Sports', 'Formal', 'Casual'],
-    'Stationary': ['Notebook', 'Calculator', 'Pen'],
-    'Gadgets': ['Earphone', 'Charger', 'Speaker', 'Laptop', 'Keyboard'],
-    'Sports': ['Bat', 'Ball', 'Basketball', 'Badminton', 'Volleyball'],
-    'Electronics': ['Table lamp', 'Extension board'],
-    'Room Amenities': ['Mattress','Lock key',"Bucket","Mug","Clothes hanger","Clothes clip",],
-    "Others": ["Cycle","Umbrella","Skate Board",],
+    'Notes': [
+      'DSA',
+      'DBMS',
+      'Operating System',
+      'Java',
+      'TOC',
+      'Data mining',
+      'Others'
+    ],
+    'Clothes': ['Formal', 'Ethnic', 'Casual', 'Others'],
+    'Footwear': ['Sports', 'Formal', 'Casual', 'Others'],
+    'Stationary': ['Notebook', 'Calculator', 'Pen', 'Others'],
+    'Gadgets': [
+      'Earphone',
+      'Charger',
+      'Speaker',
+      'Laptop',
+      'Keyboard',
+      'Others'
+    ],
+    'Sports': [
+      'Bat',
+      'Ball',
+      'Basketball',
+      'Badminton',
+      'Volleyball',
+      'Others'
+    ],
+    'Electronics': ['Table lamp', 'Extension board', 'Others'],
+    'Room Amenities': [
+      'Mattress',
+      'Lock key',
+      "Bucket",
+      "Mug",
+      "Clothes hanger",
+      "Clothes clip",
+      'Others'
+    ],
+    'Music': ['Guitar', 'Electric Guitar', 'Piano Keyboard', 'Drum', 'Others'],
+    "Others": ["Cycle", "Umbrella", "Skate Board", 'Others'],
   };
 
   bool _isLoading = false;
