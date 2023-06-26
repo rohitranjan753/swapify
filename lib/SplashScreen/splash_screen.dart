@@ -1,9 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:vbuddyproject/Constants/sizes.dart';
-import 'package:vbuddyproject/welcome_screen.dart';
 import 'package:vbuddyproject/widget/animation_widget.dart';
 import 'package:vbuddyproject/widget/fade_in_animation_model.dart';
 import 'package:vbuddyproject/widget/fade_in_controller.dart';

@@ -4,11 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vbuddyproject/Constants/color_constant.dart';
-import 'package:vbuddyproject/LoginSignUpT/tlogin_screen.dart';
 import 'package:vbuddyproject/SplashScreen/splash_screen.dart';
 import 'package:vbuddyproject/authMainScreen/auth_screen.dart';
 import 'package:vbuddyproject/nav_bar.dart';
-import 'package:vbuddyproject/welcome_screen.dart';
 
 
 void main() async {

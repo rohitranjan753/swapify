@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vbuddyproject/authMainScreen/auth_screen.dart';
 import 'package:vbuddyproject/nav_bar.dart';
-import 'package:vbuddyproject/welcome_screen.dart';
 
 class FadeInAnimationController extends GetxController{
   static FadeInAnimationController get find => Get.find();
