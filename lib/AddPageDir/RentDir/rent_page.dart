@@ -26,29 +26,61 @@ class _RentPageState extends State<RentPage> {
 
   // List of items in our dropdown menu
   List<String> _firstDropdownOptions = [
-    'Notes',
     'Clothes',
-    'Footwear',
-    'Stationary',
-    'Gadgets',
-    "Sports",
     "Electronics",
-    "Room Amenities","Music",
+    'Footwear',
+    'Gadgets',
+    'Notes',
+    "Room Amenities",
+    "Music",
+    'Stationary',
+    "Sports",
     "Others"
   ];
 
   // Define the options for the second dropdown, based on the selected value of the first dropdown
   Map<String, List<String>> _secondDropdownOptions = {
-    'Notes': ['DSA', 'DBMS', 'Operating System', 'Java','TOC', 'Data mining','Others'],
-    'Clothes': ['Formal', 'Ethnic', 'Casual','Others'],
-    'Footwear': ['Sports', 'Formal', 'Casual','Others'],
-    'Stationary': ['Notebook', 'Calculator', 'Pen','Others'],
-    'Gadgets': ['Earphone', 'Charger', 'Speaker', 'Laptop', 'Keyboard','Others'],
-    'Sports': ['Bat', 'Ball', 'Basketball', 'Badminton', 'Volleyball','Others'],
-    'Electronics': ['Table lamp', 'Extension board','Others'],
-    'Room Amenities': ['Mattress','Lock key',"Bucket","Mug","Clothes hanger","Clothes clip",'Bottle','Others'],
-    'Music': ['Guitar','Electric Guitar','Piano Keyboard','Drum','Others'],
-    "Others": ["Cycle","Umbrella","Skate Board",'Others'],
+    'Clothes': ['Formal', 'Ethnic', 'Casual', 'Others'],
+    'Electronics': ['Table lamp', 'Extension board', 'Others'],
+    'Footwear': ['Sports', 'Formal', 'Casual', 'Others'],
+    'Gadgets': [
+      'Earphone',
+      'Charger',
+      'Speaker',
+      'Laptop',
+      'Keyboard',
+      'Others'
+    ],
+    'Notes': [
+      'DSA',
+      'DBMS',
+      'Operating System',
+      'Java',
+      'TOC',
+      'Data mining',
+      'Others'
+    ],
+    'Room Amenities': [
+      'Mattress',
+      'Lock key',
+      "Bucket",
+      "Mug",
+      "Clothes hanger",
+      "Clothes clip",
+      'Bottle',
+      'Others'
+    ],
+    'Stationary': ['Notebook', 'Calculator', 'Pen', 'Others'],
+    'Sports': [
+      'Bat',
+      'Ball',
+      'Basketball',
+      'Badminton',
+      'Volleyball',
+      'Others'
+    ],
+    'Music': ['Guitar', 'Electric Guitar', 'Piano Keyboard', 'Drum', 'Others'],
+    "Others": ["Cycle", "Umbrella", "Skate Board", 'Others'],
   };
 
   List<String> _perHrValueList = [
@@ -77,8 +109,6 @@ class _RentPageState extends State<RentPage> {
     '23',
     '24'
   ];
-
-
 
   bool _isLoading = false;
   String _titleText = '';
