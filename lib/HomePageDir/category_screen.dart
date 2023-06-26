@@ -121,7 +121,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
     LineIcons.footballBall,
     LineIcons.wiredNetwork,
     LineIcons.bed,
-    LineIcons.guitar
+    LineIcons.guitar,
+    LineIcons.questionCircleAlt,
   ];
 
   List categoryName = [
@@ -132,7 +133,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
     'Gadgets',
     "Sports",
     "Electronics",
-    "Utilities",
+    "Room Utility",
     "Music",
     "Others"
   ];

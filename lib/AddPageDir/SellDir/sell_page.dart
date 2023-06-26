@@ -69,7 +69,7 @@ class _SellPageState extends State<SellPage> {
       'Others'
     ],
     'Electronics': ['Table lamp', 'Extension board', 'Others'],
-    'Utilies': [
+    'Room Utility': [
       'Mattress',
       'Lock key',
       "Bucket",
