@@ -12,7 +12,7 @@ import 'package:vbuddyproject/widget/back_btn_design.dart';
 import '../Model/search_item_model.dart';
 import '../Model/search_item_widget.dart';
 
-String getVal='';
+String getVal = '';
 final CollectionReference allsection = FirebaseFirestore.instance
     .collection('all_section')
     .where('majorcategory', isEqualTo: getVal) as CollectionReference<Object?>;
@@ -52,16 +52,13 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
               border: Border.all(
                 color: Colors.white,
               ),
-              borderRadius: BorderRadius.circular(15)
-          ),
-          height: myHeight*0.05,
-          width: myWidth*0.7,
+              borderRadius: BorderRadius.circular(15)),
+          height: myHeight * 0.05,
+          width: myWidth * 0.7,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: TextField(
-              style: TextStyle(
-                  fontSize: 18
-              ),
+              style: TextStyle(fontSize: 18),
               onChanged: (value) {
                 setState(() {
                   searchText = value;
@@ -71,7 +68,6 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
                 border: InputBorder.none,
                 suffixIcon: Icon(
                   Icons.search,
-
                 ),
                 hintText: 'Search...',
               ),
@@ -81,7 +77,8 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
-            .collection('all_section').where('majorcategory', isEqualTo: getVal)
+            .collection('all_section')
+            .where('majorcategory', isEqualTo: getVal)
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -112,7 +109,8 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
                         ),
                         Text(
                           'No item found!',
-                          style: TextStyle(fontSize: 30,color: Colors.deepPurple),
+                          style:
+                              TextStyle(fontSize: 30, color: Colors.deepPurple),
                         ),
                       ],
                     ),
@@ -121,8 +119,10 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
               ),
             );
           }
-          final documents = snapshot.data!.docs.where((doc) =>
-              doc['title'].toString().toLowerCase().contains(searchText.toLowerCase()));
+          final documents = snapshot.data!.docs.where((doc) => doc['title']
+              .toString()
+              .toLowerCase()
+              .contains(searchText.toLowerCase()));
           return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
@@ -134,11 +134,12 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
             itemBuilder: (context, index) {
               final data = documents.elementAt(index);
               return GestureDetector(
-                onTap: (){
+                onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => SelectedSearchPage(item: data)));
+                          builder: (context) =>
+                              SelectedSearchPage(item: data)));
                 },
                 child: Card(
                   elevation: 2,
@@ -148,7 +149,7 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.all(2.0),
-                          child:  Image.network(
+                          child: Image.network(
                             data['imageUrl'],
                             fit: BoxFit.cover,
                             loadingBuilder: (BuildContext context, Widget child,
@@ -156,9 +157,10 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
                               if (loadingProgress == null) return child;
                               return Center(
                                 child: CircularProgressIndicator(
-                                  value: loadingProgress.expectedTotalBytes != null
+                                  value: loadingProgress.expectedTotalBytes !=
+                                          null
                                       ? loadingProgress.cumulativeBytesLoaded /
-                                      loadingProgress.expectedTotalBytes!
+                                          loadingProgress.expectedTotalBytes!
                                       : null,
                                 ),
                               );
@@ -167,7 +169,8 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 1),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 1),
                         child: Text(
                           data['title'],
                           style: TextStyle(
@@ -196,19 +199,21 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
                       // ),
                       data["category"].toString() == "sell"
                           ? Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text(
-                          "₹${data["price"]}",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      )
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Text(
+                                "₹${data["price"]}",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            )
                           : Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text(
-                          "₹ ${data["price"]} /12Hrs",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Text(
+                                "₹ ${data["price"]} /${data["perhourvalue"]}hrs",
+                                style: TextStyle(fontSize: 16.0),
+                              ),
+                            ),
                     ],
                   ),
                 ),
