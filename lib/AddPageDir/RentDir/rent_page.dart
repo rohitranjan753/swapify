@@ -30,9 +30,9 @@ class _RentPageState extends State<RentPage> {
     "Electronics",
     'Footwear',
     'Gadgets',
-    'Notes',
-    "Room Amenities",
     "Music",
+    'Notes',
+    "Room Utility",
     'Stationary',
     "Sports",
     "Others"
@@ -51,6 +51,7 @@ class _RentPageState extends State<RentPage> {
       'Keyboard',
       'Others'
     ],
+    'Music': ['Guitar', 'Electric Guitar', 'Piano Keyboard', 'Drum', 'Others'],
     'Notes': [
       'DSA',
       'DBMS',
@@ -60,7 +61,7 @@ class _RentPageState extends State<RentPage> {
       'Data mining',
       'Others'
     ],
-    'Room Amenities': [
+    'Room Utility': [
       'Mattress',
       'Lock key',
       "Bucket",
@@ -79,7 +80,6 @@ class _RentPageState extends State<RentPage> {
       'Volleyball',
       'Others'
     ],
-    'Music': ['Guitar', 'Electric Guitar', 'Piano Keyboard', 'Drum', 'Others'],
     "Others": ["Cycle", "Umbrella", "Skate Board", 'Others'],
   };
 
