@@ -132,7 +132,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
     'Gadgets',
     "Sports",
     "Electronics",
-    "Room Amenities",
+    "Utilities",
     "Music",
     "Others"
   ];
