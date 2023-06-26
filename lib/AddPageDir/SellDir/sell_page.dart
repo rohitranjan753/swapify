@@ -26,20 +26,32 @@ class _SellPageState extends State<SellPage> {
 
   // List of items in our dropdown menu
   List<String> _firstDropdownOptions = [
-    'Notes',
     'Clothes',
-    'Footwear',
-    'Stationary',
-    'Gadgets',
-    "Sports",
     "Electronics",
-    "Room Amenities",
+    'Footwear',
+    'Gadgets',
     "Music",
+    'Notes',
+    "Room Utility",
+    'Stationary',
+    "Sports",
     "Others"
   ];
 
   // Define the options for the second dropdown, based on the selected value of the first dropdown
   Map<String, List<String>> _secondDropdownOptions = {
+    'Clothes': ['Formal', 'Ethnic', 'Casual', 'Others'],
+    'Electronics': ['Table lamp', 'Extension board', 'Others'],
+    'Footwear': ['Sports', 'Formal', 'Casual', 'Others'],
+    'Gadgets': [
+      'Earphone',
+      'Charger',
+      'Speaker',
+      'Laptop',
+      'Keyboard',
+      'Others'
+    ],
+    'Music': ['Guitar', 'Electric Guitar', 'Piano Keyboard', 'Drum', 'Others'],
     'Notes': [
       'DSA',
       'DBMS',
@@ -49,26 +61,6 @@ class _SellPageState extends State<SellPage> {
       'Data mining',
       'Others'
     ],
-    'Clothes': ['Formal', 'Ethnic', 'Casual', 'Others'],
-    'Footwear': ['Sports', 'Formal', 'Casual', 'Others'],
-    'Stationary': ['Notebook', 'Calculator', 'Pen', 'Others'],
-    'Gadgets': [
-      'Earphone',
-      'Charger',
-      'Speaker',
-      'Laptop',
-      'Keyboard',
-      'Others'
-    ],
-    'Sports': [
-      'Bat',
-      'Ball',
-      'Basketball',
-      'Badminton',
-      'Volleyball',
-      'Others'
-    ],
-    'Electronics': ['Table lamp', 'Extension board', 'Others'],
     'Room Utility': [
       'Mattress',
       'Lock key',
@@ -79,7 +71,15 @@ class _SellPageState extends State<SellPage> {
       'Bottle',
       'Others'
     ],
-    'Music': ['Guitar', 'Electric Guitar', 'Piano Keyboard', 'Drum', 'Others'],
+    'Stationary': ['Notebook', 'Calculator', 'Pen', 'Others'],
+    'Sports': [
+      'Bat',
+      'Ball',
+      'Basketball',
+      'Badminton',
+      'Volleyball',
+      'Others'
+    ],
     "Others": ["Cycle", "Umbrella", "Skate Board", 'Others'],
   };
 
