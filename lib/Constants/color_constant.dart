@@ -1,17 +1,5 @@
 import 'package:flutter/material.dart';
 
-class AppColors {
-  static const Color primaryColor = Color.fromARGB(255, 147, 207, 255);
-  static const Color secondaryColor = Color(0xFFFF4081);
-  static const Color appbarColor = Color(0xaa837afb);
-  static const Color buttonColor = Color(0xaaa69f74);
-  static const Color backgroundColor = Color(0xFFF6F1F1);
-  static const Color tPrimaryColour = Color(0xFFFFE400);
-  // static const Color tSecondaryColour = Color(0xFF272727);
-
-
-// Define more colors here if needed
-}
 
 //Main Colour
 const mainUiColour = Colors.deepPurple;
