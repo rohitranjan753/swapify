@@ -31,7 +31,7 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
         content: Text(
           'Uploading! Please wait',
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.black,
             fontSize: 16.0,
           ),
         ),
@@ -60,21 +60,28 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
     });
 
     // Show a snackbar or any other notification to indicate successful update
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text(
-          'Profile updated successfully!',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 16.0,
-          ),
-        ),
-        backgroundColor: Colors.green,
-        behavior: SnackBarBehavior.floating,
-        elevation: 4.0,
-      ),
-    );
+    // ScaffoldMessenger.of(context).showSnackBar(
+    //   const SnackBar(
+    //     content: Text(
+    //       'Profile updated successfully!',
+    //       style: TextStyle(
+    //         color: Colors.white,
+    //         fontSize: 16.0,
+    //       ),
+    //     ),
+    //     backgroundColor: Colors.green,
+    //     behavior: SnackBarBehavior.floating,
+    //     elevation: 4.0,
+    //   ),
+    // );
 
+    Fluttertoast.showToast(
+      msg: 'Information updated successfully!',
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      backgroundColor: Colors.black54,
+      textColor: Colors.white,
+    );
     // Update the text field with the new username
     setState(() {
       _username = newUsername;
@@ -82,19 +89,17 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
     });
   }
 
-
-
   Future<void> _uploadToFirebase(File? userImage, String userName) async {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text(
           'Updating! Please wait',
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.black,
             fontSize: 16.0,
           ),
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: navBarBackgroundColour,
         behavior: SnackBarBehavior.floating,
         elevation: 4.0,
       ),
@@ -111,10 +116,9 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
       String? uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
 
       final Reference storageRef =
-      FirebaseStorage.instance.ref().child('images');
-      final taskSnapshot = await storageRef
-          .child('${uniqueId}' + '.jpg')
-          .putFile(userImage);
+          FirebaseStorage.instance.ref().child('images');
+      final taskSnapshot =
+          await storageRef.child('${uniqueId}' + '.jpg').putFile(userImage);
       final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
 
       await FirebaseFirestore.instance
@@ -159,7 +163,7 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
     });
 
     Fluttertoast.showToast(
-      msg: 'Uploaded',
+      msg: 'Profile Updated!',
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
       backgroundColor: Colors.black54,
@@ -171,7 +175,6 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
       super.dispose();
     }
   }
-
 
   Future<void> _getImage() async {
     final imagePicker = ImagePicker();
@@ -211,9 +214,10 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
       appBar: AppBar(
         leading: backiconButtonDesign(),
         toolbarHeight: 60,
-        title: Text('EDIT PROFILE',style: TextStyle(
-          letterSpacing: textLetterSpacingValue
-        ),),
+        title: Text(
+          'EDIT PROFILE',
+          style: TextStyle(letterSpacing: textLetterSpacingValue),
+        ),
         centerTitle: true,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -232,26 +236,20 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
                       onTap: () {
                         _getImage();
                       },
-                      child: Card(
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        elevation: 15,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                        child: Container(
-                          height: myHeight * 0.15,
-                          width: myWidth * 0.31,
-                          decoration: BoxDecoration(
-                            image: _image != null
-                                ? DecorationImage(
-                                    image: FileImage(_image!),
-                                    fit: BoxFit.cover,
-                                  )
-                                : DecorationImage(
-                                    image: NetworkImage(_userimage),
-                                    fit: BoxFit.cover,
-                                  ),
-                          ),
+                      child: Container(
+                        height: myHeight * 0.20,
+                        width: myWidth * 0.40,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: _image != null
+                              ? DecorationImage(
+                                  image: FileImage(_image!),
+                                  fit: BoxFit.cover,
+                                )
+                              : DecorationImage(
+                                  image: NetworkImage(_userimage),
+                                  fit: BoxFit.cover,
+                                ),
                         ),
                       ),
                     ),
@@ -308,14 +306,15 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
                         } else {
                           if (_image != null && _image!.path != _userimage) {
                             // Image has changed, update the image
-                            await _uploadToFirebase(_image, _usernameController.text);
-                          }  else {
+                            await _uploadToFirebase(
+                                _image, _usernameController.text);
+                          } else {
                             // Username has not changed, update only the username
                             await _updateUsernameOnly(_usernameController.text);
                           }
                         }
                       },
-                      minWidth: myWidth*0.7,
+                      minWidth: myWidth * 0.7,
                       height: 60,
                       color: Colors.deepPurple,
                       elevation: 10,
@@ -342,6 +341,4 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
       child: CircularProgressIndicator(),
     );
   }
-
-
 }

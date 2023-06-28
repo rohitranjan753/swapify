@@ -78,19 +78,24 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Row(
                         children: [
-                          Container(
-                            height: myHeight * 0.08,
-                            width: myWidth * 0.14,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              image: DecorationImage(
-                                  image: NetworkImage(userImage),
-                                  fit: BoxFit.cover),
-                            ),
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius:40,
+                            backgroundImage: NetworkImage(userImage),
                           ),
-                          SizedBox(
-                            width: myWidth * 0.05,
-                          ),
+                          // Container(
+                          //   height: myHeight * 0.08,
+                          //   width: myWidth * 0.14,
+                          //   decoration: BoxDecoration(
+                          //     borderRadius: BorderRadius.circular(100),
+                          //     image: DecorationImage(
+                          //         image: NetworkImage(userImage),
+                          //         fit: BoxFit.cover),
+                          //   ),
+                          // ),
+                          // SizedBox(
+                          //   width: myWidth * 0.05,
+                          // ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,

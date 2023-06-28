@@ -8,7 +8,6 @@ import 'package:vbuddyproject/SplashScreen/splash_screen.dart';
 import 'package:vbuddyproject/authMainScreen/auth_screen.dart';
 import 'package:vbuddyproject/nav_bar.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -23,13 +22,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     Color myAppBarColor = Color(0x76000000);
     return GetMaterialApp(
-
       debugShowCheckedModeBanner: false,
 
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: mainUiColour,
-
         textTheme: GoogleFonts.poppinsTextTheme(),
       ),
       home: SplashScreen(),
@@ -50,4 +47,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

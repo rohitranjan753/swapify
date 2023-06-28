@@ -4,7 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:vbuddyproject/Constants/color_constant.dart';
 import 'package:vbuddyproject/Constants/sizes.dart';
 import 'package:vbuddyproject/widget/back_btn_design.dart';
 
@@ -42,11 +44,11 @@ class _EditListingState extends State<EditListing> {
         content: Text(
           'Updating! Please wait',
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.black,
             fontSize: 16.0,
           ),
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: navBarBackgroundColour,
         behavior: SnackBarBehavior.floating,
         elevation: 4.0,
       ),
@@ -91,20 +93,8 @@ class _EditListingState extends State<EditListing> {
       _isLoading = false;
     });
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text(
-          'Information updated successfully!',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 16.0,
-          ),
-        ),
-        backgroundColor: Colors.green,
-        behavior: SnackBarBehavior.floating,
-        elevation: 4.0,
-      ),
-    );
+
+
 
     // Update the text fields with the new values
     setState(() {
@@ -121,6 +111,14 @@ class _EditListingState extends State<EditListing> {
       _itemPrice = itemPrice;
       _itemPriceController.text = _itemPrice;
     });
+
+    Fluttertoast.showToast(
+      msg: 'Information updated successfully!',
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      backgroundColor: Colors.black54,
+      textColor: Colors.white,
+    );
   }
 
 
