@@ -75,18 +75,19 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
     //   ),
     // );
 
-    Fluttertoast.showToast(
-      msg: 'Information updated successfully!',
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      backgroundColor: Colors.black54,
-      textColor: Colors.white,
-    );
+
     // Update the text field with the new username
     setState(() {
       _username = newUsername;
       _usernameController.text = _username;
     });
+    Fluttertoast.showToast(
+      msg: 'Profile Updated!',
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      backgroundColor: Colors.black54,
+      textColor: Colors.white,
+    );
   }
 
   Future<void> _uploadToFirebase(File? userImage, String userName) async {
