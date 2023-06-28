@@ -240,7 +240,7 @@ class _EditListingState extends State<EditListing> {
                   alignment: Alignment.topLeft,
                   child: Text("Description",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)),
               TextFormField(
-                maxLength: 50,
+                maxLength: descriptionLimitValue,
                 maxLines: null,
                 keyboardType: TextInputType.multiline,
                 textCapitalization: TextCapitalization.sentences,
