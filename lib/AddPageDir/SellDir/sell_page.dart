@@ -459,7 +459,7 @@ class _SellPageState extends State<SellPage> {
                                   ),
                                 ),
                                 backgroundColor:
-                                    AppColors.navBarBackgroundColour,
+                                    navBarBackgroundColour,
                                 behavior: SnackBarBehavior.floating,
                                 elevation: 4.0,
                               ),

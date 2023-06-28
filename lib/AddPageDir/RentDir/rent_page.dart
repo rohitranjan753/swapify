@@ -546,7 +546,7 @@ class _RentPageState extends State<RentPage> {
                                   ),
                                 ),
                                 backgroundColor:
-                                    AppColors.navBarBackgroundColour,
+                                    navBarBackgroundColour,
                                 behavior: SnackBarBehavior.floating,
                                 elevation: 4.0,
                               ),

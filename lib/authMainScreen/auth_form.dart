@@ -246,9 +246,9 @@ class _AuthFormState extends State<AuthForm> {
                                 elevation: 0,
                                 shape: RoundedRectangleBorder(),
                                 onPrimary: Colors.white,
-                                primary: AppColors.tSecondaryColour,
+                                primary: mainUiColour,
                                 side: BorderSide(
-                                    color: AppColors.tSecondaryColour),
+                                    color: mainUiColour),
                                 padding: EdgeInsets.symmetric(vertical: 15),
                               ),
                               onPressed: _trySubmit,

@@ -201,7 +201,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             padding: const EdgeInsets.all(8.0),
             child: Icon(
               categoryIcon[index],
-              color: AppColors.tSecondaryColour,
+              color: mainUiColour,
               size: 100,
             ),
           ),

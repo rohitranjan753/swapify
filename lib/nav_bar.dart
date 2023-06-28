@@ -70,7 +70,7 @@ class _NavBarState extends State<NavBar> {
               iconSize: 24,
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               duration: Duration(milliseconds: 400),
-              tabBackgroundColor: AppColors.navBarBackgroundColour,
+              tabBackgroundColor: navBarBackgroundColour,
               color: Colors.black,
               tabs: [
                 GButton(
