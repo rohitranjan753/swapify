@@ -28,6 +28,7 @@ class _SearchPageState extends State<SearchPage> {
     double myWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(
             icon: Icon(

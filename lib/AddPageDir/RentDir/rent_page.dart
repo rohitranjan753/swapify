@@ -385,8 +385,8 @@ class _RentPageState extends State<RentPage> {
                             child: Container(
                               decoration: BoxDecoration(
                                 border: Border.all(
-                                    // color: Colors.grey,
-
+                                    color: Colors.grey,
+                                    width: 1.0
                                     ),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(5.0)),
