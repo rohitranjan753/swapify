@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:vbuddyproject/Constants/sizes.dart';
 import 'package:vbuddyproject/authMainScreen/auth_screen.dart';
@@ -46,7 +44,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Navigator.pop(context);
                 GoogleSignIn().signOut();
                 FirebaseAuth.instance.signOut();
-                Get.offAll(() => AuthScreen());
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => AuthScreen()),
+                );
+                // Get.offAll(() => AuthScreen());
               },
                 elevation: 20,
                 minWidth: myWidth*0.6,

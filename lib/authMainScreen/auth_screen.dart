@@ -2,9 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:vbuddyproject/authMainScreen/auth_form.dart';
 import 'package:vbuddyproject/nav_bar.dart';
 
@@ -48,7 +46,8 @@ class _AuthScreenState extends State<AuthScreen> {
           // 'image_url': url,
         });
       }
-      Get.offAll(() => NavBar());
+      // Navigator.push(context, MaterialPageRoute(builder: (context)=>NavBar()));
+      // Get.offAll(() => NavBar());
     } on FirebaseAuthException catch (e) {
       String? message = "An error occured, Check credential";
       if (e.message != null) {
@@ -71,6 +70,8 @@ class _AuthScreenState extends State<AuthScreen> {
       });
     }
   }
+
+
 
   @override
   Widget build(BuildContext context) {

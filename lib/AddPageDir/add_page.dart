@@ -53,7 +53,7 @@ class _AddPageState extends State<AddPage> {
                       ),
                       elevation: 10,
                       child: Container(
-                        height: myHeight * 0.32,
+                        height: myHeight * 0.34,
                         width: myWidth,
                         child: Column(children: [
                           Padding(
@@ -74,6 +74,7 @@ class _AddPageState extends State<AddPage> {
                               fontSize: 35,
                             ),
                           ),
+
                         ]),
                       ),
                     ),
@@ -121,7 +122,7 @@ class _AddPageState extends State<AddPage> {
                       ),
                       elevation: 10,
                       child: Container(
-                        height: myHeight * 0.32,
+                        height: myHeight * 0.34,
                         width: myWidth,
                         child: Column(children: [
                           Padding(

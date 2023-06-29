@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lottie/lottie.dart';
 import 'package:vbuddyproject/Constants/color_constant.dart';
@@ -305,7 +303,8 @@ class _AuthFormState extends State<AuthForm> {
                                         await _signInWithGoogle();
                                     if (userCredential != null) {
                                       // Google Sign-In successful, navigate to the next screen
-                                      Get.offAll(() => NavBar());
+                                      // Get.offAll(() => NavBar());
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>NavBar()));
                                     } else {
                                       // Google Sign-In failed
                                       ScaffoldMessenger.of(context)

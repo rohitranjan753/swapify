@@ -50,7 +50,6 @@ class _HomePageState extends State<HomePage> {
     "Gadgets",
   ];
 
-  int clicked = 0;
 
   @override
   void initState() {
@@ -70,7 +69,8 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               Container(
-                height: myHeight * 0.1,
+                height: myHeight * 0.11,
+                // height: 100,
                 child: Padding(
                   padding: const EdgeInsets.all(15),
                   child: Row(
@@ -84,18 +84,18 @@ class _HomePageState extends State<HomePage> {
                             backgroundImage: NetworkImage(userImage),
                           ),
                           // Container(
-                          //   height: myHeight * 0.08,
-                          //   width: myWidth * 0.14,
+                          //   height: 100.0,
+                          //   width: 55.0,
                           //   decoration: BoxDecoration(
-                          //     borderRadius: BorderRadius.circular(100),
+                          //     borderRadius: BorderRadius.circular(500),
                           //     image: DecorationImage(
                           //         image: NetworkImage(userImage),
                           //         fit: BoxFit.cover),
                           //   ),
                           // ),
-                          // SizedBox(
-                          //   width: myWidth * 0.05,
-                          // ),
+                          SizedBox(
+                            width: myWidth * 0.05,
+                          ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -133,13 +133,13 @@ class _HomePageState extends State<HomePage> {
                           color: mainUiColour,
                           size: 30,
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -166,7 +166,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Container(
-                height: myHeight * 0.1,
+                height: myHeight * 0.12,
                 width: myWidth,
                 child: ListView.builder(
                     itemCount: categoryIcon.length,
@@ -186,7 +186,7 @@ class _HomePageState extends State<HomePage> {
                     }),
               ),
               Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

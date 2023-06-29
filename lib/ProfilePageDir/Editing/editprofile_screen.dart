@@ -238,10 +238,11 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
                         _getImage();
                       },
                       child: Container(
-                        height: myHeight * 0.20,
-                        width: myWidth * 0.40,
+                        height: 150.0,
+                        width: 150.0,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: Colors.grey,width: 3.0,style: BorderStyle.solid),
+                          borderRadius: BorderRadius.circular(100),
                           image: _image != null
                               ? DecorationImage(
                                   image: FileImage(_image!),
@@ -254,9 +255,9 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
+                    // SizedBox(
+                    //   height: 20,
+                    // ),
                     TextFormField(
                       controller: _usernameController,
                       // initialValue: _username,
