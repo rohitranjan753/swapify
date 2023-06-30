@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:line_icons/line_icon.dart';
+import 'package:vbuddyproject/Aboutus/AboutUsScreen.dart';
 import 'package:vbuddyproject/ProfilePageDir/Editing/all_listing.dart';
 import 'package:vbuddyproject/ProfilePageDir/Editing/editprofile_screen.dart';
 import 'package:vbuddyproject/ProfilePageDir/setting_page.dart';
@@ -133,7 +134,7 @@ class _ProfilePageState extends State<ProfilePage> {
               title: "About Us",
               icon: Icons.info,
               onPress: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>AllListing()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>AboutusScreen()));
               },
               textColor: Colors.black,
             ),
