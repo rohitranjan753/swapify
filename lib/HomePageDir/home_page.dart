@@ -139,7 +139,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -166,7 +166,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Container(
-                height: myHeight * 0.12,
+                height: myHeight * 0.11,
                 width: myWidth,
                 child: ListView.builder(
                     itemCount: categoryIcon.length,
