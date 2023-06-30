@@ -228,14 +228,6 @@ class _SearchPageState extends State<SearchPage> {
                   },
                   child: Text('Load More',style: TextStyle(fontSize: 14),),
                 ),
-              // TextButton(
-              //   onPressed: () {
-              //     setState(() {
-              //       initialItemCount += loadMoreItemCount;
-              //     });
-              //   },
-              //   child: Text('Load More'),
-              // ),
             ],
           );
         },
