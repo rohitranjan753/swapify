@@ -190,7 +190,7 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
                         const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Text(
                           "₹${data["price"]}",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold),
                         ),
                       )
                           : Padding(
@@ -198,7 +198,7 @@ class _BrowseCategoryScreenState extends State<BrowseCategoryScreen> {
                         const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Text(
                           "₹ ${data["price"]} /${data["perhourvalue"]}hrs",
-                          style: TextStyle(fontSize: 16.0),
+                          style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],
