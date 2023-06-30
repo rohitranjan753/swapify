@@ -85,12 +85,9 @@ class _ProfilePageState extends State<ProfilePage> {
               username,
               style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
             ),
-            SizedBox(
-              height: 10,
-            ),
             Text(
               email,
-              style: TextStyle(fontSize: 25, color: Colors.grey),
+              style: TextStyle(fontSize: 20, color: Colors.grey),
             ),
             SizedBox(
               height: 40,
@@ -127,6 +124,14 @@ class _ProfilePageState extends State<ProfilePage> {
             ProfileMenuWidget(
               title: "Edit Listing",
               icon: Icons.edit,
+              onPress: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>AllListing()));
+              },
+              textColor: Colors.black,
+            ),
+            ProfileMenuWidget(
+              title: "About Us",
+              icon: Icons.info,
               onPress: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>AllListing()));
               },
@@ -184,7 +189,7 @@ class ProfileMenuWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onPress,
       child: Container(
-        width: 300,
+        width: 320,
         child: ListTile(
           leading: Container(
             width: 40,

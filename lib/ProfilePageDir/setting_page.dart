@@ -44,6 +44,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Navigator.pop(context);
                 GoogleSignIn().signOut();
                 FirebaseAuth.instance.signOut();
+
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => AuthScreen()),

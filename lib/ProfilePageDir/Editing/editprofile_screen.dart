@@ -241,7 +241,7 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
                         height: 150.0,
                         width: 150.0,
                         decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey,width: 3.0,style: BorderStyle.solid),
+                          border: Border.all(color: Colors.deepPurple,width: 2.0,style: BorderStyle.solid),
                           borderRadius: BorderRadius.circular(100),
                           image: _image != null
                               ? DecorationImage(
@@ -255,9 +255,9 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
                         ),
                       ),
                     ),
-                    // SizedBox(
-                    //   height: 20,
-                    // ),
+                    SizedBox(
+                      height: 20,
+                    ),
                     TextFormField(
                       controller: _usernameController,
                       // initialValue: _username,

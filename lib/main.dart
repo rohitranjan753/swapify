@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     Color myAppBarColor = Color(0x76000000);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Swapify',
       theme: ThemeData(
         primarySwatch: mainUiColour,
         textTheme: GoogleFonts.poppinsTextTheme(),
@@ -37,6 +37,7 @@ class MyApp extends StatelessWidget {
                 return SplashScreen();
               } else {
                 return StreamBuilder(
+                  key: UniqueKey(), // Add a unique key here
                   stream: FirebaseAuth.instance.authStateChanges(),
                   builder: (BuildContext context, snapshot) {
                     if (snapshot.hasData) {
@@ -52,20 +53,6 @@ class MyApp extends StatelessWidget {
         },
       ),
 
-      // home: StreamBuilder(
-      //   stream: FirebaseAuth.instance.authStateChanges(),
-      //   builder: (BuildContext context, snapshot) {
-      //     // if (snapshot.connectionState == ConnectionState.waiting) {
-      //     //   return SplashScreen();
-      //     // }
-      //     if (snapshot.hasData) {
-      //       // return NavBar();
-      //         return NavBar();
-      //     } else {
-      //       return AuthScreen();
-      //     }
-      //   },
-      // ),
     );
   }
 }

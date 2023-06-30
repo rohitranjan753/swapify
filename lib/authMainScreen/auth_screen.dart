@@ -46,6 +46,11 @@ class _AuthScreenState extends State<AuthScreen> {
           // 'image_url': url,
         });
       }
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => NavBar()),
+            (Route<dynamic> route) => false,
+      );
       // Navigator.push(context, MaterialPageRoute(builder: (context)=>NavBar()));
       // Get.offAll(() => NavBar());
     } on FirebaseAuthException catch (e) {
