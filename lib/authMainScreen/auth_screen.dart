@@ -21,7 +21,6 @@ class _AuthScreenState extends State<AuthScreen> {
   void _submitAuthForm(String email, String password, String username, bool isLogin, BuildContext ctx) async {
     UserCredential authResult;
 
-
     try {
       setState(() {
         _isLoading = true;
@@ -34,8 +33,6 @@ class _AuthScreenState extends State<AuthScreen> {
       } else {
         authResult = await _auth.createUserWithEmailAndPassword(
           email: email, password: password,);
-
-
         await FirebaseFirestore.instance
             .collection('Users')
             .doc(authResult.user!.uid)
@@ -89,3 +86,5 @@ class _AuthScreenState extends State<AuthScreen> {
     );
   }
 }
+
+

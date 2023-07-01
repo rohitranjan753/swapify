@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 //Main Colour
 const mainUiColour = Colors.deepPurple;
 const primaryColour = Colors.deepPurple;
-const navBarBackgroundColour = Color(0xFFEAC8FF);
+const navBarBackgroundColour = Color(0xFFF4DAFF);
 
 
 const chatBubbleCurrentUserColor = Color(0xFFEAC8FF);

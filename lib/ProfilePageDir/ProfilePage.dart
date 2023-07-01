@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:vbuddyproject/Aboutus/AboutUsScreen.dart';
+import 'package:vbuddyproject/Constants/color_constant.dart';
 import 'package:vbuddyproject/ProfilePageDir/Editing/all_listing.dart';
 import 'package:vbuddyproject/ProfilePageDir/Editing/editprofile_screen.dart';
 import 'package:vbuddyproject/ProfilePageDir/setting_page.dart';
@@ -197,7 +198,7 @@ class ProfileMenuWidget extends StatelessWidget {
             height: 40,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
-              color: Colors.indigoAccent.withOpacity(0.2),
+              color: navBarBackgroundColour,
             ),
             child: Icon(
               icon,

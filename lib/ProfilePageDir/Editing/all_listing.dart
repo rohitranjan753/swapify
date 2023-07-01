@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:vbuddyproject/Constants/image_string.dart';
 import 'package:vbuddyproject/ProfilePageDir/Editing/selected_edit_page.dart';
 import 'package:vbuddyproject/widget/back_btn_design.dart';
 
@@ -19,6 +20,7 @@ class _AllListingState extends State<AllListing> {
   String searchText = '';
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     double myHeight = MediaQuery.of(context).size.height;
     double myWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -68,8 +70,36 @@ class _AllListingState extends State<AllListing> {
             .collection('all_section').where('createdby', isEqualTo: currentUser!.uid)
             .snapshots(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return CircularProgressIndicator();
+          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            return Align(
+              alignment: Alignment.center,
+              child: Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                elevation: 20,
+                child: Container(
+                  height: size.height * 0.45,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image(
+                        image: AssetImage(
+                          noListingItem,
+                        ),
+                        width: size.height * 0.3,
+                      ),
+                      SizedBox(
+                        height: size.height * 0.02,
+                      ),
+                      Text(
+                        'No listing!',
+                        style: TextStyle(fontSize: 30),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
           }
           final documents = snapshot.data!.docs.where((doc) =>
               doc['title'].toString().toLowerCase().contains(searchText.toLowerCase()));

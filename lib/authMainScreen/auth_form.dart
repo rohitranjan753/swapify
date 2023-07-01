@@ -38,11 +38,6 @@ class _AuthFormState extends State<AuthForm> {
   var _userEmail = '';
   var _userName = '';
   var _userPass = '';
-  // var _userImageFile;
-
-  // void _pickedImage(File image) {
-  //   _userImageFile = image;
-  // }
 
   void _trySubmit() {
     final isValid = _formKey.currentState!.validate();
@@ -50,13 +45,6 @@ class _AuthFormState extends State<AuthForm> {
     //for keyboard lec 325
     FocusScope.of(context).unfocus();
 
-    // if (_userImageFile == null && !_isLogin) {
-    //   Scaffold.of(context).showSnackBar(SnackBar(
-    //     content: Text("Please pick an image."),
-    //     backgroundColor: Theme.of(context).errorColor,
-    //   ));
-    //   return;
-    // }
 
     if (isValid) {
       _formKey.currentState!.save();
@@ -68,7 +56,6 @@ class _AuthFormState extends State<AuthForm> {
           _isLogin,
           context);
 
-      //use valeu to save data
     }
   }
 
@@ -448,8 +435,7 @@ class _AuthFormState extends State<AuthForm> {
   }
 
   void hideCircularProgressIndicator() {
-    // Update the UI to hide the circular progress indicator
-    // For example, you can set a boolean flag to control its visibility
+
     setState(() {
       isLoadingIndicator = false;
     });

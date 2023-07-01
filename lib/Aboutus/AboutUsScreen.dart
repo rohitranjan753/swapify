@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:vbuddyproject/Constants/image_string.dart';
 import 'package:vbuddyproject/Constants/sizes.dart';
 import 'package:vbuddyproject/Constants/text_string.dart';
 import 'package:vbuddyproject/widget/back_btn_design.dart';
@@ -48,7 +49,7 @@ class AboutusScreen extends StatelessWidget {
               width: 200,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/swapify_full_logo.png'),
+                  image: AssetImage(swapifyLogo),
                 ),
               ),
             ),

@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
   ];
 
   List categoryName = [
-    "Notes",
+    "Books",
     "Clothes",
     "Footwear",
     "Stationary",

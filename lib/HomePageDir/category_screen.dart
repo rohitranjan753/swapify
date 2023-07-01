@@ -113,12 +113,12 @@ class CategoryScreen extends StatefulWidget {
 
 class _CategoryScreenState extends State<CategoryScreen> {
   List categoryIcon = [
+    LineIcons.book,
     LineIcons.tShirt,
-    LineIcons.wiredNetwork,
+    Icons.lightbulb_outline,
     LineIcons.shoePrints,
     LineIcons.laptop,
     LineIcons.guitar,
-    LineIcons.book,
     LineIcons.bed,
     LineIcons.pencilRuler,
     LineIcons.footballBall,
@@ -126,12 +126,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
   ];
 
   List categoryName = [
+    'Books',
     'Clothes',
     "Electronics",
     'Footwear',
     'Gadgets',
     "Music",
-    'Notes',
     "Room Utility",
     'Stationary',
     "Sports",

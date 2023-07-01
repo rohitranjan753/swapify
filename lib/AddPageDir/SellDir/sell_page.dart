@@ -26,12 +26,12 @@ class _SellPageState extends State<SellPage> {
 
   // List of items in our dropdown menu
   List<String> _firstDropdownOptions = [
+    'Books',
     'Clothes',
     "Electronics",
     'Footwear',
     'Gadgets',
     "Music",
-    'Notes',
     "Room Utility",
     'Stationary',
     "Sports",
@@ -40,6 +40,15 @@ class _SellPageState extends State<SellPage> {
 
   // Define the options for the second dropdown, based on the selected value of the first dropdown
   Map<String, List<String>> _secondDropdownOptions = {
+    'Books': [
+      'DSA',
+      'DBMS',
+      'Operating System',
+      'Java',
+      'TOC',
+      'Data mining',
+      'Others'
+    ],
     'Clothes': ['Formal', 'Ethnic', 'Casual', 'Others'],
     'Electronics': ['Table lamp', 'Extension board', 'Others'],
     'Footwear': ['Sports', 'Formal', 'Casual', 'Others'],
@@ -52,15 +61,7 @@ class _SellPageState extends State<SellPage> {
       'Others'
     ],
     'Music': ['Guitar', 'Electric Guitar', 'Piano Keyboard', 'Drum', 'Others'],
-    'Notes': [
-      'DSA',
-      'DBMS',
-      'Operating System',
-      'Java',
-      'TOC',
-      'Data mining',
-      'Others'
-    ],
+
     'Room Utility': [
       'Mattress',
       'Lock key',

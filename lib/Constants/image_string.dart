@@ -1,3 +1,6 @@
+//logo
+const swapifyLogo = 'assets/swapify_full_logo.png';
+
 //Login and Signup
 const loginImageLottie = 'assets/welcome_hi.json';
 const loginImageStatic = 'assets/login_welcome.png';
@@ -21,6 +24,7 @@ const chatSendIcon = 'assets/send_chat1.png';
 //Error
 const chatNotFoundImage = 'assets/chat_error.png';
 const itemNotFoundImage = 'assets/item_not_found.png';
+const noListingItem = 'assets/no_item_sign.png';
 
 
 
