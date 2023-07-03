@@ -35,4 +35,4 @@ const categoryMenu = "All Category";
 //About Us
 const aboutUsText = "Swapify is a marketplace designed for VIT, Bhopal where users can hassle-free sell, buy, or rent their belongings. The inbuilt chat feature allows users to interact with buyers or item renters in real time. Minimal UI design enhances user experience and provides easy navigation.";
 const versionText = "1.0.0";
-const contactEmail = "rohitranjan0753@gmail.com";
+const contactEmail = "rohit.techhive@gmail.com";
