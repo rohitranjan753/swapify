@@ -61,65 +61,168 @@ class _EditListingState extends State<EditListing> {
 
     final currentUser = FirebaseAuth.instance.currentUser;
 
-    if (userImage != null) {
-      String uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
+    try {
+      if (userImage != null) {
+        String uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
 
-      final Reference storageRef =
-      FirebaseStorage.instance.ref().child('images');
-      final taskSnapshot =
-      await storageRef.child('${uniqueId}.jpg').putFile(userImage);
-      final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+        final Reference storageRef =
+        FirebaseStorage.instance.ref().child('images');
+        final taskSnapshot =
+        await storageRef.child('${uniqueId}.jpg').putFile(userImage);
+        final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+
+        await FirebaseFirestore.instance
+            .collection('all_section')
+            .doc(widget.item.id)
+            .update({
+          'imageUrl': downloadUrl,
+        });
+      }
+
+      await Future.delayed(Duration(seconds: 2)); // Adding a 2-second delay
 
       await FirebaseFirestore.instance
           .collection('all_section')
           .doc(widget.item.id)
           .update({
-        'imageUrl': downloadUrl,
+        'title': itemTitle,
+        'description': itemDescription,
+        'price': itemPrice,
       });
+
+      setState(() {
+        _isLoading = false;
+      });
+
+      setState(() {
+        _itemTitle = itemTitle;
+        _itemTitleController.text = _itemTitle;
+      });
+
+      setState(() {
+        _itemDescription = itemDescription;
+        _itemDescriptionController.text = _itemDescription;
+      });
+
+      setState(() {
+        _itemPrice = itemPrice;
+        _itemPriceController.text = _itemPrice;
+      });
+
+      Fluttertoast.showToast(
+        msg: 'Information updated successfully!',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.black54,
+        textColor: Colors.white,
+      );
+    } catch (error) {
+      setState(() {
+        _isLoading = false;
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Failed to update information. Please try again.',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 16.0,
+            ),
+          ),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+          elevation: 4.0,
+        ),
+      );
     }
-
-    await Future.delayed(Duration(seconds: 2)); // Adding a 2-second delay
-
-    await FirebaseFirestore.instance
-        .collection('all_section')
-        .doc(widget.item.id)
-        .update({
-      'title': itemTitle,
-      'description': itemDescription,
-      'price': itemPrice,
-    });
-
-    setState(() {
-      _isLoading = false;
-    });
-
-
-
-
-    // Update the text fields with the new values
-    setState(() {
-      _itemTitle = itemTitle;
-      _itemTitleController.text = _itemTitle;
-    });
-
-    setState(() {
-      _itemDescription = itemDescription;
-      _itemDescriptionController.text = _itemDescription;
-    });
-
-    setState(() {
-      _itemPrice = itemPrice;
-      _itemPriceController.text = _itemPrice;
-    });
-
-    Fluttertoast.showToast(
-      msg: 'Information updated successfully!',
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      backgroundColor: Colors.black54,
-      textColor: Colors.white,
-    );
   }
+
+
+  // Future<void> _uploadToFirebase(
+  //     File? userImage,
+  //     String itemTitle,
+  //     String itemDescription,
+  //     String itemPrice,
+  //     ) async {
+  //   ScaffoldMessenger.of(context).showSnackBar(
+  //     const SnackBar(
+  //       content: Text(
+  //         'Updating! Please wait',
+  //         style: TextStyle(
+  //           color: Colors.black,
+  //           fontSize: 16.0,
+  //         ),
+  //       ),
+  //       backgroundColor: navBarBackgroundColour,
+  //       behavior: SnackBarBehavior.floating,
+  //       elevation: 4.0,
+  //     ),
+  //   );
+  //   FocusScope.of(context).unfocus();
+  //
+  //   setState(() {
+  //     _isLoading = true;
+  //   });
+  //
+  //   final currentUser = FirebaseAuth.instance.currentUser;
+  //
+  //   if (userImage != null) {
+  //     String uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
+  //
+  //     final Reference storageRef =
+  //     FirebaseStorage.instance.ref().child('images');
+  //     final taskSnapshot =
+  //     await storageRef.child('${uniqueId}.jpg').putFile(userImage);
+  //     final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+  //
+  //     await FirebaseFirestore.instance
+  //         .collection('all_section')
+  //         .doc(widget.item.id)
+  //         .update({
+  //       'imageUrl': downloadUrl,
+  //     });
+  //   }
+  //
+  //   await Future.delayed(Duration(seconds: 2)); // Adding a 2-second delay
+  //
+  //   await FirebaseFirestore.instance
+  //       .collection('all_section')
+  //       .doc(widget.item.id)
+  //       .update({
+  //     'title': itemTitle,
+  //     'description': itemDescription,
+  //     'price': itemPrice,
+  //   });
+  //
+  //   setState(() {
+  //     _isLoading = false;
+  //   });
+  //
+  //
+  //   setState(() {
+  //     _itemTitle = itemTitle;
+  //     _itemTitleController.text = _itemTitle;
+  //   });
+  //
+  //   setState(() {
+  //     _itemDescription = itemDescription;
+  //     _itemDescriptionController.text = _itemDescription;
+  //   });
+  //
+  //   setState(() {
+  //     _itemPrice = itemPrice;
+  //     _itemPriceController.text = _itemPrice;
+  //   });
+  //
+  //   Fluttertoast.showToast(
+  //     msg: 'Information updated successfully!',
+  //     toastLength: Toast.LENGTH_SHORT,
+  //     gravity: ToastGravity.BOTTOM,
+  //     backgroundColor: Colors.black54,
+  //     textColor: Colors.white,
+  //   );
+  // }
 
 
   Future<void> _getImage() async {

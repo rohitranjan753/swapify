@@ -116,16 +116,15 @@ class _RentPageState extends State<RentPage> {
   String _rentalPrice = '';
 
   File? _image;
-
   Future<void> _uploadToFirebase(
-    File rentImage,
-    String rentTile,
-    String rentDes,
-    String rentPrice,
-    String firstDropdownValue,
-    String secondDropdownValue,
-    String perHourDropdownValue,
-  ) async {
+      File rentImage,
+      String rentTile,
+      String rentDes,
+      String rentPrice,
+      String firstDropdownValue,
+      String secondDropdownValue,
+      String perHourDropdownValue,
+      ) async {
     rentDes = rentDes.trim();
     rentTile = rentTile.trim();
     rentPrice = rentPrice.trim();
@@ -144,81 +143,195 @@ class _RentPageState extends State<RentPage> {
     setState(() {
       _isLoading = true;
     });
-    final currentUser = FirebaseAuth.instance.currentUser;
-    final userData = await FirebaseFirestore.instance
-        .collection('Users')
-        .doc(currentUser!.uid)
-        .get();
 
-    String? uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
-    String userName = userData.get('username');
-    String userEmail = userData.get('email');
+    try {
+      final currentUser = FirebaseAuth.instance.currentUser;
+      final userData = await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(currentUser!.uid)
+          .get();
 
-    final Reference storageRef = FirebaseStorage.instance.ref().child('images');
-    final taskSnapshot =
-        await storageRef.child('${uniqueId}' + '.jpg').putFile(rentImage);
-    final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
-    final DocumentReference parentDocRef =
-        FirebaseFirestore.instance.collection('Users').doc(currentUser.uid);
+      String? uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
+      String userName = userData.get('username');
+      String userEmail = userData.get('email');
 
-    parentDocRef.collection('rentsection').doc(uniqueId).set({
-      'imageUrl': downloadUrl,
-      'createdAt': FieldValue.serverTimestamp(),
-      'renttitle': rentTile,
-      'rentdescription': rentDes,
-      'rentprice': rentPrice,
-      'rentmajorcategory': firstDropdownValue,
-      'rentsubcategory': secondDropdownValue,
-      'perhourvalue': perHourDropdownValue,
-    });
+      final Reference storageRef = FirebaseStorage.instance.ref().child('images');
+      final taskSnapshot =
+      await storageRef.child('${uniqueId}' + '.jpg').putFile(rentImage);
+      final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+      final DocumentReference parentDocRef =
+      FirebaseFirestore.instance.collection('Users').doc(currentUser.uid);
 
-    await FirebaseFirestore.instance
-        .collection('rent_major_section')
-        .doc(uniqueId)
-        .set({
-      'imageUrl': downloadUrl,
-      'createdAt': FieldValue.serverTimestamp(),
-      'renttitle': rentTile,
-      'rentdescription': rentDes,
-      'rentprice': rentPrice,
-      'rentmajorcategory': firstDropdownValue,
-      'rentsubcategory': secondDropdownValue,
-      'createdby': currentUser.uid,
-      'creatorname': userName,
-      'creatormail': userEmail,
-      'perhourvalue': perHourDropdownValue,
-    });
+      parentDocRef.collection('rentsection').doc(uniqueId).set({
+        'imageUrl': downloadUrl,
+        'createdAt': FieldValue.serverTimestamp(),
+        'renttitle': rentTile,
+        'rentdescription': rentDes,
+        'rentprice': rentPrice,
+        'rentmajorcategory': firstDropdownValue,
+        'rentsubcategory': secondDropdownValue,
+        'perhourvalue': perHourDropdownValue,
+      });
 
-    await FirebaseFirestore.instance
-        .collection('all_section')
-        .doc(uniqueId)
-        .set({
-      'imageUrl': downloadUrl,
-      'createdAt': FieldValue.serverTimestamp(),
-      'title': rentTile,
-      'description': rentDes,
-      'price': rentPrice,
-      'majorcategory': firstDropdownValue,
-      'subcategory': secondDropdownValue,
-      'createdby': currentUser.uid,
-      'creatorname': userName,
-      'category': "rent",
-      'creatormail': userEmail,
-      'perhourvalue': perHourDropdownValue,
-    });
+      await FirebaseFirestore.instance
+          .collection('rent_major_section')
+          .doc(uniqueId)
+          .set({
+        'imageUrl': downloadUrl,
+        'createdAt': FieldValue.serverTimestamp(),
+        'renttitle': rentTile,
+        'rentdescription': rentDes,
+        'rentprice': rentPrice,
+        'rentmajorcategory': firstDropdownValue,
+        'rentsubcategory': secondDropdownValue,
+        'createdby': currentUser.uid,
+        'creatorname': userName,
+        'creatormail': userEmail,
+        'perhourvalue': perHourDropdownValue,
+      });
 
-    setState(() {
-      _isLoading = false;
-    });
+      await FirebaseFirestore.instance
+          .collection('all_section')
+          .doc(uniqueId)
+          .set({
+        'imageUrl': downloadUrl,
+        'createdAt': FieldValue.serverTimestamp(),
+        'title': rentTile,
+        'description': rentDes,
+        'price': rentPrice,
+        'majorcategory': firstDropdownValue,
+        'subcategory': secondDropdownValue,
+        'createdby': currentUser.uid,
+        'creatorname': userName,
+        'category': "rent",
+        'creatormail': userEmail,
+        'perhourvalue': perHourDropdownValue,
+      });
 
-    Fluttertoast.showToast(
-      msg: 'Uploaded',
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      backgroundColor: Colors.black54,
-      textColor: Colors.white,
-    );
+      Fluttertoast.showToast(
+        msg: 'Uploaded',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.black54,
+        textColor: Colors.white,
+      );
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error: $error'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
+
+
+  // Future<void> _uploadToFirebase(
+  //   File rentImage,
+  //   String rentTile,
+  //   String rentDes,
+  //   String rentPrice,
+  //   String firstDropdownValue,
+  //   String secondDropdownValue,
+  //   String perHourDropdownValue,
+  // ) async {
+  //   rentDes = rentDes.trim();
+  //   rentTile = rentTile.trim();
+  //   rentPrice = rentPrice.trim();
+  //
+  //   FocusScope.of(context).unfocus();
+  //   if (rentImage == null) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(
+  //         content: Text('Upload Image'),
+  //         backgroundColor: Colors.red,
+  //       ),
+  //     );
+  //     return;
+  //   }
+  //
+  //   setState(() {
+  //     _isLoading = true;
+  //   });
+  //   final currentUser = FirebaseAuth.instance.currentUser;
+  //   final userData = await FirebaseFirestore.instance
+  //       .collection('Users')
+  //       .doc(currentUser!.uid)
+  //       .get();
+  //
+  //   String? uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
+  //   String userName = userData.get('username');
+  //   String userEmail = userData.get('email');
+  //
+  //   final Reference storageRef = FirebaseStorage.instance.ref().child('images');
+  //   final taskSnapshot =
+  //       await storageRef.child('${uniqueId}' + '.jpg').putFile(rentImage);
+  //   final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+  //   final DocumentReference parentDocRef =
+  //       FirebaseFirestore.instance.collection('Users').doc(currentUser.uid);
+  //
+  //   parentDocRef.collection('rentsection').doc(uniqueId).set({
+  //     'imageUrl': downloadUrl,
+  //     'createdAt': FieldValue.serverTimestamp(),
+  //     'renttitle': rentTile,
+  //     'rentdescription': rentDes,
+  //     'rentprice': rentPrice,
+  //     'rentmajorcategory': firstDropdownValue,
+  //     'rentsubcategory': secondDropdownValue,
+  //     'perhourvalue': perHourDropdownValue,
+  //   });
+  //
+  //   await FirebaseFirestore.instance
+  //       .collection('rent_major_section')
+  //       .doc(uniqueId)
+  //       .set({
+  //     'imageUrl': downloadUrl,
+  //     'createdAt': FieldValue.serverTimestamp(),
+  //     'renttitle': rentTile,
+  //     'rentdescription': rentDes,
+  //     'rentprice': rentPrice,
+  //     'rentmajorcategory': firstDropdownValue,
+  //     'rentsubcategory': secondDropdownValue,
+  //     'createdby': currentUser.uid,
+  //     'creatorname': userName,
+  //     'creatormail': userEmail,
+  //     'perhourvalue': perHourDropdownValue,
+  //   });
+  //
+  //   await FirebaseFirestore.instance
+  //       .collection('all_section')
+  //       .doc(uniqueId)
+  //       .set({
+  //     'imageUrl': downloadUrl,
+  //     'createdAt': FieldValue.serverTimestamp(),
+  //     'title': rentTile,
+  //     'description': rentDes,
+  //     'price': rentPrice,
+  //     'majorcategory': firstDropdownValue,
+  //     'subcategory': secondDropdownValue,
+  //     'createdby': currentUser.uid,
+  //     'creatorname': userName,
+  //     'category': "rent",
+  //     'creatormail': userEmail,
+  //     'perhourvalue': perHourDropdownValue,
+  //   });
+  //
+  //   setState(() {
+  //     _isLoading = false;
+  //   });
+  //
+  //   Fluttertoast.showToast(
+  //     msg: 'Uploaded',
+  //     toastLength: Toast.LENGTH_SHORT,
+  //     gravity: ToastGravity.BOTTOM,
+  //     backgroundColor: Colors.black54,
+  //     textColor: Colors.white,
+  //   );
+  // }
 
   Future<void> _getImage() async {
     final imagePicker = ImagePicker();

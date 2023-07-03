@@ -148,7 +148,7 @@ class ChatScreen extends StatelessWidget {
                                   Text(
                                     message,
                                     style:
-                                        TextStyle(color: textColor, fontSize: 17),
+                                        TextStyle(color: textColor, fontSize: 15),
                                   ),
                                   SizedBox(height: 4.0),
                                   Text(

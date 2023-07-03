@@ -61,7 +61,6 @@ class _SellPageState extends State<SellPage> {
       'Others'
     ],
     'Music': ['Guitar', 'Electric Guitar', 'Piano Keyboard', 'Drum', 'Others'],
-
     'Room Utility': [
       'Mattress',
       'Lock key',
@@ -112,76 +111,90 @@ class _SellPageState extends State<SellPage> {
     setState(() {
       _isLoading = true;
     });
-    final currentUser = FirebaseAuth.instance.currentUser;
-    final userData = await FirebaseFirestore.instance
-        .collection('Users')
-        .doc(currentUser!.uid)
-        .get();
+    try {
+      final currentUser = FirebaseAuth.instance.currentUser;
+      final userData = await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(currentUser!.uid)
+          .get();
 
-    String? uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
-    String userName = userData.get('username');
-    String userEmail = userData.get('email');
+      String? uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
+      String userName = userData.get('username');
+      String userEmail = userData.get('email');
 
-    final Reference storageRef = FirebaseStorage.instance.ref().child('images');
-    final taskSnapshot =
-        await storageRef.child('${uniqueId}' + '.jpg').putFile(rentImage);
-    final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
-    final DocumentReference parentDocRef =
-        FirebaseFirestore.instance.collection('Users').doc(currentUser.uid);
+      final Reference storageRef =
+          FirebaseStorage.instance.ref().child('images');
+      final taskSnapshot =
+          await storageRef.child('${uniqueId}' + '.jpg').putFile(rentImage);
+      final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+      final DocumentReference parentDocRef =
+          FirebaseFirestore.instance.collection('Users').doc(currentUser.uid);
 
-    parentDocRef.collection('sellsection').doc(uniqueId).set({
-      'imageUrl': downloadUrl,
-      'createdAt': FieldValue.serverTimestamp(),
-      'selltitle': rentTile,
-      'selldescription': rentDes,
-      'sellprice': rentPrice,
-      'majorcategory': firstDropdownValue,
-      'subcategory': secondDropdownValue,
-    });
+      parentDocRef.collection('sellsection').doc(uniqueId).set({
+        'imageUrl': downloadUrl,
+        'createdAt': FieldValue.serverTimestamp(),
+        'selltitle': rentTile,
+        'selldescription': rentDes,
+        'sellprice': rentPrice,
+        'majorcategory': firstDropdownValue,
+        'subcategory': secondDropdownValue,
+      });
 
-    await FirebaseFirestore.instance
-        .collection('sell_major_section')
-        .doc(uniqueId)
-        .set({
-      'imageUrl': downloadUrl,
-      'createdAt': FieldValue.serverTimestamp(),
-      'selltitle': rentTile,
-      'selldescription': rentDes,
-      'sellprice': rentPrice,
-      'majorcategory': firstDropdownValue,
-      'subcategory': secondDropdownValue,
-      'createdby': currentUser.uid,
-      'creatorname': userName,
-      'creatormail': userEmail,
-    });
+      await FirebaseFirestore.instance
+          .collection('sell_major_section')
+          .doc(uniqueId)
+          .set({
+        'imageUrl': downloadUrl,
+        'createdAt': FieldValue.serverTimestamp(),
+        'selltitle': rentTile,
+        'selldescription': rentDes,
+        'sellprice': rentPrice,
+        'majorcategory': firstDropdownValue,
+        'subcategory': secondDropdownValue,
+        'createdby': currentUser.uid,
+        'creatorname': userName,
+        'creatormail': userEmail,
+      });
 
-    await FirebaseFirestore.instance
-        .collection('all_section')
-        .doc(uniqueId)
-        .set({
-      'imageUrl': downloadUrl,
-      'createdAt': FieldValue.serverTimestamp(),
-      'title': rentTile,
-      'description': rentDes,
-      'price': rentPrice,
-      'majorcategory': firstDropdownValue,
-      'subcategory': secondDropdownValue,
-      'createdby': currentUser.uid,
-      'creatorname': userName,
-      'category': "sell",
-      'creatormail': userEmail,
-    });
+      await FirebaseFirestore.instance
+          .collection('all_section')
+          .doc(uniqueId)
+          .set({
+        'imageUrl': downloadUrl,
+        'createdAt': FieldValue.serverTimestamp(),
+        'title': rentTile,
+        'description': rentDes,
+        'price': rentPrice,
+        'majorcategory': firstDropdownValue,
+        'subcategory': secondDropdownValue,
+        'createdby': currentUser.uid,
+        'creatorname': userName,
+        'category': "sell",
+        'creatormail': userEmail,
+      });
 
-    setState(() {
-      _isLoading = false;
-    });
-    Fluttertoast.showToast(
-      msg: 'Uploaded',
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      backgroundColor: Colors.black54,
-      textColor: Colors.white,
-    );
+      setState(() {
+        _isLoading = false;
+      });
+      Fluttertoast.showToast(
+        msg: 'Uploaded',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.black54,
+        textColor: Colors.white,
+      );
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error: $error'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
 
   Future<void> _getImage() async {
@@ -459,8 +472,7 @@ class _SellPageState extends State<SellPage> {
                                     fontSize: 16.0,
                                   ),
                                 ),
-                                backgroundColor:
-                                    navBarBackgroundColour,
+                                backgroundColor: navBarBackgroundColour,
                                 behavior: SnackBarBehavior.floating,
                                 elevation: 4.0,
                               ),

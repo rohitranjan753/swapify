@@ -48,46 +48,51 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
 
     final currentUser = FirebaseAuth.instance.currentUser;
 
-    await FirebaseFirestore.instance
-        .collection('Users')
-        .doc(currentUser!.uid)
-        .update({
-      'username': newUsername,
-    });
+    try {
+      await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(currentUser!.uid)
+          .update({
+        'username': newUsername,
+      });
 
-    setState(() {
-      _isLoading = false;
-    });
+      setState(() {
+        _isLoading = false;
+      });
 
-    // Show a snackbar or any other notification to indicate successful update
-    // ScaffoldMessenger.of(context).showSnackBar(
-    //   const SnackBar(
-    //     content: Text(
-    //       'Profile updated successfully!',
-    //       style: TextStyle(
-    //         color: Colors.white,
-    //         fontSize: 16.0,
-    //       ),
-    //     ),
-    //     backgroundColor: Colors.green,
-    //     behavior: SnackBarBehavior.floating,
-    //     elevation: 4.0,
-    //   ),
-    // );
+      // Update the text field with the new username
+      setState(() {
+        _username = newUsername;
+        _usernameController.text = _username;
+      });
 
+      Fluttertoast.showToast(
+        msg: 'Profile Updated!',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.black54,
+        textColor: Colors.white,
+      );
+    } catch (error) {
+      setState(() {
+        _isLoading = false;
+      });
 
-    // Update the text field with the new username
-    setState(() {
-      _username = newUsername;
-      _usernameController.text = _username;
-    });
-    Fluttertoast.showToast(
-      msg: 'Profile Updated!',
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      backgroundColor: Colors.black54,
-      textColor: Colors.white,
-    );
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Failed to update username. Please try again.',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 16.0,
+            ),
+          ),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+          elevation: 4.0,
+        ),
+      );
+    }
   }
 
   Future<void> _uploadToFirebase(File? userImage, String userName) async {
@@ -113,69 +118,189 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
 
     final currentUser = FirebaseAuth.instance.currentUser;
 
-    if (userImage != null) {
-      String? uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
+    try {
+      if (userImage != null) {
+        String? uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
 
-      final Reference storageRef =
-          FirebaseStorage.instance.ref().child('images');
-      final taskSnapshot =
-          await storageRef.child('${uniqueId}' + '.jpg').putFile(userImage);
-      final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+        final Reference storageRef =
+        FirebaseStorage.instance.ref().child('images');
+        final taskSnapshot =
+        await storageRef.child('${uniqueId}' + '.jpg').putFile(userImage);
+        final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+
+        await FirebaseFirestore.instance
+            .collection('Users')
+            .doc(currentUser!.uid)
+            .update({
+          'userimage': downloadUrl,
+        });
+      }
 
       await FirebaseFirestore.instance
           .collection('Users')
           .doc(currentUser!.uid)
           .update({
-        'userimage': downloadUrl,
+        'username': userName,
       });
-    }
 
-    await FirebaseFirestore.instance
-        .collection('Users')
-        .doc(currentUser!.uid)
-        .update({
-      'username': userName,
-    });
+      setState(() {
+        _isLoading = false;
+      });
 
-    setState(() {
-      _isLoading = false;
-    });
+      // Update the text field with the new username
+      setState(() {
+        _username = userName;
+        _usernameController.text = _username;
+      });
 
-    // Show a snackbar or any other notification to indicate successful update
-    // ScaffoldMessenger.of(context).showSnackBar(
-    //   const SnackBar(
-    //     content: Text(
-    //       'Profile updated successfully!',
-    //       style: TextStyle(
-    //         color: Colors.white,
-    //         fontSize: 16.0,
-    //       ),
-    //     ),
-    //     backgroundColor: Colors.green,
-    //     behavior: SnackBarBehavior.floating,
-    //     elevation: 4.0,
-    //   ),
-    // );
+      Fluttertoast.showToast(
+        msg: 'Profile Updated!',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.black54,
+        textColor: Colors.white,
+      );
+    } catch (error) {
+      setState(() {
+        _isLoading = false;
+      });
 
-    // Update the text field with the new username
-    setState(() {
-      _username = userName;
-      _usernameController.text = _username;
-    });
-
-    Fluttertoast.showToast(
-      msg: 'Profile Updated!',
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      backgroundColor: Colors.black54,
-      textColor: Colors.white,
-    );
-
-    @override
-    void dispose() {
-      super.dispose();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Failed to update profile. Please try again.',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 16.0,
+            ),
+          ),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+          elevation: 4.0,
+        ),
+      );
     }
   }
+
+
+  // Future<void> _updateUsernameOnly(String newUsername) async {
+  //   ScaffoldMessenger.of(context).showSnackBar(
+  //     const SnackBar(
+  //       content: Text(
+  //         'Uploading! Please wait',
+  //         style: TextStyle(
+  //           color: Colors.black,
+  //           fontSize: 16.0,
+  //         ),
+  //       ),
+  //       backgroundColor: navBarBackgroundColour,
+  //       behavior: SnackBarBehavior.floating,
+  //       elevation: 4.0,
+  //     ),
+  //   );
+  //   FocusScope.of(context).unfocus();
+  //
+  //   setState(() {
+  //     _isLoading = true;
+  //   });
+  //
+  //   final currentUser = FirebaseAuth.instance.currentUser;
+  //
+  //   await FirebaseFirestore.instance
+  //       .collection('Users')
+  //       .doc(currentUser!.uid)
+  //       .update({
+  //     'username': newUsername,
+  //   });
+  //
+  //   setState(() {
+  //     _isLoading = false;
+  //   });
+  //
+  //   // Update the text field with the new username
+  //   setState(() {
+  //     _username = newUsername;
+  //     _usernameController.text = _username;
+  //   });
+  //   Fluttertoast.showToast(
+  //     msg: 'Profile Updated!',
+  //     toastLength: Toast.LENGTH_SHORT,
+  //     gravity: ToastGravity.BOTTOM,
+  //     backgroundColor: Colors.black54,
+  //     textColor: Colors.white,
+  //   );
+  // }
+  //
+  // Future<void> _uploadToFirebase(File? userImage, String userName) async {
+  //   ScaffoldMessenger.of(context).showSnackBar(
+  //     const SnackBar(
+  //       content: Text(
+  //         'Updating! Please wait',
+  //         style: TextStyle(
+  //           color: Colors.black,
+  //           fontSize: 16.0,
+  //         ),
+  //       ),
+  //       backgroundColor: navBarBackgroundColour,
+  //       behavior: SnackBarBehavior.floating,
+  //       elevation: 4.0,
+  //     ),
+  //   );
+  //   FocusScope.of(context).unfocus();
+  //
+  //   setState(() {
+  //     _isLoading = true;
+  //   });
+  //
+  //   final currentUser = FirebaseAuth.instance.currentUser;
+  //
+  //   if (userImage != null) {
+  //     String? uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
+  //
+  //     final Reference storageRef =
+  //         FirebaseStorage.instance.ref().child('images');
+  //     final taskSnapshot =
+  //         await storageRef.child('${uniqueId}' + '.jpg').putFile(userImage);
+  //     final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+  //
+  //     await FirebaseFirestore.instance
+  //         .collection('Users')
+  //         .doc(currentUser!.uid)
+  //         .update({
+  //       'userimage': downloadUrl,
+  //     });
+  //   }
+  //
+  //   await FirebaseFirestore.instance
+  //       .collection('Users')
+  //       .doc(currentUser!.uid)
+  //       .update({
+  //     'username': userName,
+  //   });
+  //
+  //   setState(() {
+  //     _isLoading = false;
+  //   });
+  //
+  //   // Update the text field with the new username
+  //   setState(() {
+  //     _username = userName;
+  //     _usernameController.text = _username;
+  //   });
+  //
+  //   Fluttertoast.showToast(
+  //     msg: 'Profile Updated!',
+  //     toastLength: Toast.LENGTH_SHORT,
+  //     gravity: ToastGravity.BOTTOM,
+  //     backgroundColor: Colors.black54,
+  //     textColor: Colors.white,
+  //   );
+  //
+  //   @override
+  //   void dispose() {
+  //     super.dispose();
+  //   }
+  // }
 
   Future<void> _getImage() async {
     final imagePicker = ImagePicker();
@@ -241,7 +366,10 @@ class _EditprofileScreenState extends State<EditprofileScreen> {
                         height: 150.0,
                         width: 150.0,
                         decoration: BoxDecoration(
-                          border: Border.all(color: Colors.deepPurple,width: 2.0,style: BorderStyle.solid),
+                          border: Border.all(
+                              color: Colors.deepPurple,
+                              width: 2.0,
+                              style: BorderStyle.solid),
                           borderRadius: BorderRadius.circular(100),
                           image: _image != null
                               ? DecorationImage(
