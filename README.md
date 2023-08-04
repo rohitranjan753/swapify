@@ -1,6 +1,10 @@
-# vBuddy
+# Swapify
+## Your smart marketplace
 
 Developing a platform for students of Vellore Institute of Technology, Bhopal where they can sell, buy or rent stuffs. The project is being developed using Flutter and Firebase technology. And also chat feature will enable the users to interact with the item seller or renter.
+
+### PlayStore Link:
+    - [PlayStore](https://play.google.com/store/apps/details?id=com.techhive.swapify)
 
 ## Tech Stack
     - Flutter
